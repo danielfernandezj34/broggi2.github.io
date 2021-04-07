@@ -1,0 +1,147 @@
+html{
+    font-family: 'poppins';
+}
+body[data-tipo='administratiu'] {
+    background-color: #e0f0f5;
+}
+i[data-atras='administratiu'] {
+    color: #fccc0b;
+}
+i[data-atras='administratiu']:hover{
+    color: #ac8c0d;
+}
+body[data-tipo='administrador'] {
+    background-color: #fcf2cc;
+}
+i[data-atras='administrador']{
+    color: #f70c74;
+}
+i[data-atras='administrador']:hover{
+    color: #9f0047;
+}
+body[data-tipo='recurs'] {
+    background-color: #f8e8f0;
+}
+i[data-atras='recurs']{
+    color: #0ab4cc;
+}
+i[data-atras='recurs']:hover{
+    color: #0a7e8e;
+}
+#body_login{
+    background-color: #e0f0f5;
+    font-family: 'poppins';
+}
+#login{
+    padding-left: 25%;
+}
+#linies_colors{
+    float: right;
+    margin-right: 5%;
+}
+#logo_login{
+    margin-left: 47%;
+    margin-top: 4%;
+}
+#acceptar_login{
+    margin-right: 11%;
+    background-color: #fccc0b;
+    border: solid;
+    border-width: 2px;
+}
+
+#atras{
+    position: fixed;
+    bottom: 5%;
+    left: 2%;
+}
+#boto_buscar {
+    color:#0ab4cc !important;
+    border-color:#0ab4cc !important;
+}
+#boto_buscar:hover{
+    background-color:#0ab4cc !important;
+    color: white !important;
+}
+#id_primercamp{
+    margin-left: 25%;
+}
+#titul_incidencia{
+    color: white;
+    text-align: center;
+}
+.dropdown-menu{
+    left: -70%;
+}
+#botoCrear{
+    position: fixed;
+    bottom: 5%;
+    right: 2%;
+    color: #0ab4cc;
+}
+#botoCrear:hover{
+    color: #047887;
+}
+.form-inline{
+    margin-left:35%;
+}
+#titol_usuaris{
+    margin-left:35%;
+}
+.boto_enviar{
+    position: fixed;
+    bottom: 5%;
+    right: 2%;
+}
+#card{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+#boto_admin_recurs{
+    width:250px;
+    height:250px;
+}
+#botodiv_admin_recurs{
+    margin-top: 10% ;
+    text-align: center;
+}
+.btn-outline-warning{
+    border-color: #fccc0b;
+    color: #fccc0b;
+}
+.btn-outline-warning:hover{
+    background-color: #fccc0b;
+}
+.btn-outline-azul{
+    border-color: #0ab4cc;
+    color: #0ab4cc;
+}
+.btn-outline-azul:hover{
+    background-color: #0a7e8e;
+    color: white;
+}
+#boto_administrador:hover{
+    background-color: #0a7e8e;
+    color: white;
+}
+#boto_administrador{
+    border-color: #0ab4cc;
+    color: #0ab4cc;
+    width:250px;
+    height:150px;
+}
+#botodiv_administrador{
+    margin-top: 5% ;
+    text-align: center;
+}
+#titol_alertant{
+    margin-left: 40%;
+}
+#titol_editar_incidencia{
+    text-align: center;
+}
+#editar_incidencia{
+    position: fixed;
+    bottom: 5%;
+    right: 2%;
+}
