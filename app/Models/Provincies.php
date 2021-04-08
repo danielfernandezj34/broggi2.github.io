@@ -11,4 +11,9 @@ class Provincies extends Model
 
     protected $table = 'provincies';
     public $timestamps = false;
+
+    public function comarques()
+    {
+        return $this->hasMany(Comarques::class, 'provincies_id');
+    }
 }
