@@ -14,6 +14,6 @@ class Provincies extends Model
 
     public function comarques()
     {
-        return $this->hasMany(provincies::class,"provincies_id");
+        return $this->hasMany(Comarques::class, 'provincies_id');
     }
 }
