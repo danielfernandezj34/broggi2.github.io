@@ -16,4 +16,9 @@ class Afectats extends Model
     {
         return $this->belongsTo(Sexes::class, 'sexes_id');
     }
+
+    public function incidencies()
+    {
+        return $this->hasMany(Incidencies::class, 'incidencies_has_afectats', 'afectats_id', 'incidencies_id');
+    }
 }
