@@ -11,4 +11,20 @@ class Municipis extends Model
 
     protected $table = 'municipis';
     public $timestamps = false;
+
+
+    public function alertants()
+    {
+        return $this->hasMany(Alertants::class, 'municipis_id');
+    }
+
+    public function comarques()
+    {
+        return $this->belongsTo(Comarques::class, 'comarques_id');
+    }
+
+    public function incidencies()
+    {
+        return $this->hasMany(Incidencies::class, 'municipis_id');
+    }
 }

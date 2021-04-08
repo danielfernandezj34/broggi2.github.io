@@ -11,4 +11,9 @@ class Rols extends Model
 
     protected $table = 'rols';
     public $timestamps = false;
+
+    public function usuaris()
+    {
+        return $this->hasMany(Usuaris::class, 'rols_id');
+    }
 }
