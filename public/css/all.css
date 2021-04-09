@@ -89,9 +89,15 @@ i[data-atras='recurs']:hover{
     margin-left:35%;
 }
 .boto_enviar{
+    background-color: #fb0474;
+    border-color: #c2045a;
     position: fixed;
     bottom: 5%;
     right: 2%;
+}
+.boto_enviar:hover{
+    background-color: #c2045a;
+    border-color: #fb0474;
 }
 #card{
     padding-left: 0px;
