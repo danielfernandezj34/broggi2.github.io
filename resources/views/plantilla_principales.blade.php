@@ -24,7 +24,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @yield('incidencies')
-                        <a class="dropdown-item" href="{{ url('/')}}">Tancar Sessió</a>
+                        <a class="dropdown-item" href="{{ url('/logout')}}">Tancar Sessió</a>
                     </div>
                 </li>
             </ul>

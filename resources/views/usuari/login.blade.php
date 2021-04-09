@@ -9,10 +9,11 @@
     <link rel="icon" href="{{ asset('img/favicon.png') }}">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Poppins">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <title>IES BROGGI</title>
+    <title>IES BROGGI - Login</title>
 </head>
 <body id="body_login">
     <div class="container mt-5">
+        @include('extra.missatges')
         <div class="d-flex justify-content-center">
             <div class="mt-2 col-sm-6 col-8 d-flex justify-content-center">
                 <img src="{{ asset('img/logo.png') }}" alt=""height="50" id="logo_login">
@@ -21,7 +22,7 @@
         <div class="d-flex justify-content-center">
             <div class="card mt-2 col-sm-6 col-8">
                 <div class="card-body">
-                    <form action="{{ action([App\Http\Controllers\UsuarisController::class, 'login']) }}" method="POST">
+                    <form action="{{ action([App\Http\Controllers\UsuarisController::class, 'login']) }}" method="">
                         @csrf
                         <div class="container">
                             <div class="row">

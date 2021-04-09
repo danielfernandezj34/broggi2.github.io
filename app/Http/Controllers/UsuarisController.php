@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 use App\Models\Rols;
 use App\Models\Usuaris;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarisController extends Controller
 {
+
+    public function mostrarLogin(){
+        return view('usuari.login');
+    }
+
     public function login(Request $request)
     {
         $nomuser = $request->input('usuari');
@@ -25,9 +32,9 @@ class UsuarisController extends Controller
             }
         }else{
             $request->session()->flash('error', 'Usuari o contrasenya incorrectes');
-            $response = redirect('/')->withInput();
+            $resposta = redirect('/')->withInput();
         }
-        return $response;
+        return $resposta;
     }
 
     public function logout()
@@ -35,7 +42,6 @@ class UsuarisController extends Controller
         Auth::logout();
         return redirect('/');
     }
-
 
     /**
      * Display a listing of the resource.
