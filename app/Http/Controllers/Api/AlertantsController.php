@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Alertants;
 use Illuminate\Http\Request;
+use App\Http\Resources\AlertantsResource;
 
 class AlertantsController extends Controller
 {
@@ -15,7 +16,9 @@ class AlertantsController extends Controller
      */
     public function index()
     {
-        //
+        $alertants = Alertants::all();
+
+        return AlertantsResource::collection($alertants);
     }
 
     /**

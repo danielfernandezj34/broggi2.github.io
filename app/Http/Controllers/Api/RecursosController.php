@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Recursos;
 use Illuminate\Http\Request;
+use App\Http\Resources\RecursosResource;
 
 class RecursosController extends Controller
 {
@@ -15,7 +16,9 @@ class RecursosController extends Controller
      */
     public function index()
     {
-        //
+        $recursos = Recursos::all();
+
+        return RecursosResource::collection($recursos);
     }
 
     /**

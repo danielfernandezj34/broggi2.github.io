@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Provincies;
 use Illuminate\Http\Request;
+use App\Http\Resources\ProvinciesResource;
 
 class ProvinciesController extends Controller
 {
@@ -15,7 +16,9 @@ class ProvinciesController extends Controller
      */
     public function index()
     {
-        //
+        $provincies = Provincies::all();
+
+        return ProvinciesResource::collection($provincies);
     }
 
     /**
