@@ -4,39 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="icon" href="{{ asset('img/favicon.png') }}">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Poppins">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <title>IES BROGGI</title>
 </head>
 <body id="body_login">
-<img src="{{ asset('img/logo.png') }}" alt=""height="50" id="logo_login">
-<div class="container" id="login">
-<div class="card mt-2 col-sm-8">
-    <div class="card-body">
-        <form>
-            <img src="{{ asset('img/lineas_colores.PNG') }}" alt="" height="250" id="linies_colors">
-        <div class="form-group">
-          <label for="usuari" class="col-sm-10 col-form-label"> Usuari</label>
-          <div class="col-sm-10">
-          <input type="text" class="form-control" id="usuari">
-          </div>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center">
+            <div class="mt-2 col-sm-6 col-8 d-flex justify-content-center">
+                <img src="{{ asset('img/logo.png') }}" alt=""height="50" id="logo_login">
+            </div>
         </div>
-        <div class="form-group">
-          <label for="contrasenya" class="col-sm-10 col-form-label">Contrasenya</label>
-          <div class="col-sm-10">
-          <input type="password" class="form-control" id="contrasenya">
-          </div>
+        <div class="d-flex justify-content-center">
+            <div class="card mt-2 col-sm-6 col-8">
+
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-10 col-sm-10 col-md-10">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-12 form-group">
+                                            <label for="usuari" class="col-form-label"> Usuari</label>
+                                            <input type="text" class="form-control" id="usuari">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-12 form-group">
+                                            <label for="contrasenya" class="col-form-label">Contrasenya</label>
+                                            <input type="password" class="form-control" id="contrasenya">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-12 form-group">
+                                            <button type="submit" class="btn mb-3 float-right" id="acceptar_login">Iniciar Sessió</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-2 col-sm-2 col-md-2">
+                                <img src="{{ asset('img/lineas_colores.PNG') }}" alt="" height="250" id="linies_colors">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-        <button type="submit" class="btn mb-3 float-right" id="acceptar_login">Iniciar Sessió</button>
-      </form>
     </div>
-  </div>
-</div>
 
 </body>
 <script src="{{ asset('js/app.js') }}"></script>

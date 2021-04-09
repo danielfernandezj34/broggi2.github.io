@@ -32,19 +32,13 @@ i[data-atras='recurs']:hover{
     background-color: #e0f0f5;
     font-family: 'poppins';
 }
-#login{
-    padding-left: 25%;
-}
+
 #linies_colors{
     float: right;
     margin-right: 5%;
 }
-#logo_login{
-    margin-left: 47%;
-    margin-top: 4%;
-}
+
 #acceptar_login{
-    margin-right: 11%;
     background-color: #fccc0b;
     border: solid;
     border-width: 2px;
