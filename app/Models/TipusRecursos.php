@@ -11,4 +11,10 @@ class TipusRecursos extends Model
 
     protected $table = 'tipus_recursos';
     public $timestamps = false;
+
+
+    public function recursos()
+    {
+        return $this->hasMany(Recursos::class, 'tipus_recursos_id');
+    }
 }

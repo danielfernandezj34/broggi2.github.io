@@ -14,11 +14,11 @@ class Comarques extends Model
 
     public function provincia()
     {
-        return $this->belongsTo(comarques::class, 'provincies_id');
+        return $this->belongsTo(Provincies::class, 'provincies_id');
     }
 
     public function municipis()
     {
-        return $this->hasMany(comarques::class,"comarques_id");
+        return $this->hasMany(Municipis::class, 'comarques_id');
     }
 }
