@@ -119,10 +119,13 @@ i[data-atras='recurs']:hover{
     color: white;
 }
 #boto_administrador{
+    background-color: #e0f0f5;
     border-color: #0ab4cc;
+    border-width: 3px;
     color: #0ab4cc;
     width:250px;
     height:150px;
+    font-size: larger;
 }
 #botodiv_administrador{
     margin-top: 5% ;
