@@ -1,12 +1,42 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Rols;
 use App\Models\Usuaris;
 use Illuminate\Http\Request;
 
 class UsuarisController extends Controller
 {
+    public function login(Request $request)
+    {
+        $nomuser = $request->input('usuari');
+        $contrasenya = $request->input('contrasenya');
+
+        $usuari = Usuaris::where('username', $nomuser)->first();
+
+        if($usuari != null && Hash::check($contrasenya, $usuari->contrasenya)){
+            Auth::login($usuari);
+            if($usuari->rols_id == 1){
+                $resposta = redirect('./principal_administrador');
+            }else if ($usuari->rols_id == 2){
+                $resposta = redirect('./principal_administratiu');
+            }else if($usuari->rols_id == 3){
+                $resposta = redirect('./principal_recursos');
+            }
+        }else{
+            $request->session()->flash('error', 'Usuari o contrasenya incorrectes');
+            $response = redirect('/')->withInput();
+        }
+        return $response;
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
