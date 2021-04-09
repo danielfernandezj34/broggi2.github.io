@@ -8,7 +8,8 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "pwa-chrome",
-            "url": "http://localhost:80/broggi.github.io/public/",
+
+            "url": "http://localhost:80/broggi/public",
             "webRoot": "${workspaceFolder}"
         },
         {

@@ -11,4 +11,19 @@ class Usuaris extends Model
 
     protected $table = 'usuaris';
     public $timestamps = false;
+
+    public function incidencies()
+    {
+        return $this->hasMany(Incidencies::class, 'usuaris_id');
+    }
+
+    public function recursos()
+    {
+        return $this->belongsToMany(Recursos::class, 'recursos_id');
+    }
+
+    public function rols()
+    {
+        return $this->belongsToMany(Rols::class, 'rols_id');
+    }
 }

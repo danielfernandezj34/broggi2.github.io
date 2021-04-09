@@ -11,4 +11,10 @@ class TipusAlertants extends Model
 
     protected $table = 'tipus_alertants';
     public $timestamps = false;
+
+
+    public function alertants()
+    {
+        return $this->hasMany(Alertants::class, 'tipus_alertants_id');
+    }
 }
