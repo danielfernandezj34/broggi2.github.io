@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\TipusRecursos;
 use Illuminate\Http\Request;
+use App\Http\Resources\TipusRecursosResource;
 
 class TipusRecursosController extends Controller
 {
@@ -15,7 +16,9 @@ class TipusRecursosController extends Controller
      */
     public function index()
     {
-        //
+        $tipus_recursos = TipusRecursos::all();
+
+        return TipusRecursosResource::collection($tipus_recursos);
     }
 
     /**
