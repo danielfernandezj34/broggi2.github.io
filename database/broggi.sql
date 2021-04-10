@@ -1517,3 +1517,35 @@ INSERT INTO `broggi`.`sexes` (`id`, `sexe`) VALUES (2, 'Dona');
 
 COMMIT;
 
+START TRANSACTION;
+USE `broggi`;
+INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VALUES (1, 1, true, 1);
+
+COMMIT;
+
+START TRANSACTION;
+USE `broggi`;
+INSERT INTO `broggi`.`usuaris` (`id`, `username`, `contrasenya`, `email`, `nom`, `cognoms`, `rols_id`, `recursos_id`) VALUES (1, 'admin', 'admin', 'admin@cepnet.net', 'AdminBroggi', 'Apellidos', 1, 1);
+INSERT INTO `broggi`.`usuaris` (`id`, `username`, `contrasenya`, `email`, `nom`, `cognoms`, `rols_id`, `recursos_id`) VALUES (2, 'cecos', 'cecos', 'cecos@cepnet.net', 'CecosBroggi', 'Apellidos', 2, 1);
+INSERT INTO `broggi`.`usuaris` (`id`, `username`, `contrasenya`, `email`, `nom`, `cognoms`, `rols_id`, `recursos_id`) VALUES (3, 'recurs', 'recurs', 'recurs@cepnet.net', 'RecursBroggi', 'Apellidos', 3, 1);
+
+COMMIT;
+
+START TRANSACTION;
+USE `broggi`;
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (1, "Quin tipud d'alertat ets, VIP, centre medic, alertat accidental, l'entorn de l'afectat o el propi afectat?", "What kind of informant are you, a VIP informant, a health center, an accidental informant, of the affected person's environment or the affected by himself?");
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (2, 'Quin és el seu nom?', 'What is your name?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (3, 'Quin és el seu cognom?', 'What is your surname?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (4, 'Quin és el seu numero de telefon?', 'What is your phone number?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (5, 'Quina és la seva provincia?', 'In which province are you?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (6, 'Quin es el seu municipi?', 'In which municipality are you?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (7, 'Quina es la teva adreça?', 'What is your address?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (8, 'Tens una adreça complementaria?', 'Do you have a complementary address?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (9, 'Quin és el seu DNI o TS/NSS', 'What is your DNI or TS/NSS?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (10, 'Quina edat tens?', 'How old are you?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (11, 'Ets home o dona?', 'Are you a man or a woman?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (12, "Quin és el tipus d'accident?", 'What is the type of accident or incident?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (13, "Quin és el numero de l'afectat?", 'What is the number of affected?');
+INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (14, 'Pots descriure que ha pasat?', 'Can you describe what happened?');
+
+COMMIT;
