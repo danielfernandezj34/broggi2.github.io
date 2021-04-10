@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Provincies extends Model
+class TipusIncidencies extends Model
 {
     use HasFactory;
-
-    protected $table = 'provincies';
+    protected $table = 'tipus_incidencies';
     public $timestamps = false;
 
-    public function comarques()
+    public function incidencies()
     {
-        return $this->hasMany(Comarques::class, 'provincies_id');
+        return $this->hasMany(Incidencies::class, 'tipus_incidencies_id');
     }
 }
