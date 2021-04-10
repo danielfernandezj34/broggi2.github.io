@@ -22,7 +22,7 @@
         <div class="d-flex justify-content-center">
             <div class="card mt-2 col-sm-6 col-8">
                 <div class="card-body">
-                    <form action="{{ action([App\Http\Controllers\UsuarisController::class, 'login']) }}" method="">
+                    <form action="{{ action([App\Http\Controllers\UsuarisController::class, 'login']) }}" method="POST">
                         @csrf
                         <div class="container">
                             <div class="row">
