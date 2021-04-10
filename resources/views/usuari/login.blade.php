@@ -31,7 +31,7 @@
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-12 form-group">
                                                 <label for="usuari" class="col-form-label">Usuari</label>
-                                                <input type="text" class="form-control" id="usuari" name="usuari" placeholder="Nom d'usuari" value="{{ old('usuari') }}">
+                                                <input type="text" class="form-control" id="usuari" name="usuari" placeholder="Nom d'usuari" value="{{ old('usuari') }}" autofocus>
                                             </div>
                                         </div>
                                         <div class="row">
