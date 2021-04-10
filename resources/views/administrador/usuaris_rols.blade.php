@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('titulo', 'Administrador Usuaris i Rols')
+@section('titulo', 'SEMS - Administrador Usuaris i Rols')
 @section('color_fons', "administrador")
 @section('color-atras', 'administrador')
 @section('boto_atras', './principal_administrador')
@@ -43,6 +43,6 @@
         </tbody>
         </table>
     </div>
-    <a href="" id="botoCrear"><i class="far fa-plus-circle fa-3x"></i></a>
+    <a href="{{ route('crearu') }}" id="botoCrear"><i class="far fa-plus-circle fa-3x"></i></a>
 </div>
 @endsection
