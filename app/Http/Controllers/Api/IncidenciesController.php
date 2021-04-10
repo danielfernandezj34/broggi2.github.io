@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Afectats;
 use App\Http\Controllers\Controller;
+use App\Models\Incidencies;
 use Illuminate\Http\Request;
-use App\Http\Resources\AfectatsResource;
+use App\Http\Resources\IncidenciesResource;
 
-class AfectatsController extends Controller
+class IncidenciesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class AfectatsController extends Controller
      */
     public function index()
     {
-        $afectats = Afectats::all();
+        $incidencies = Incidencies::all();
 
-        return AfectatsResource::collection($afectats);
+        return IncidenciesResource::collection($incidencies);
     }
 
     /**
@@ -35,10 +35,10 @@ class AfectatsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Afectats  $afectats
+     * @param  \App\Models\Incidencies  $incidencies
      * @return \Illuminate\Http\Response
      */
-    public function show(Afectats $afectats)
+    public function show(Incidencies $incidencies)
     {
         //
     }
@@ -47,10 +47,10 @@ class AfectatsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Afectats  $afectats
+     * @param  \App\Models\Incidencies  $incidencies
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Afectats $afectats)
+    public function update(Request $request, Incidencies $incidencies)
     {
         //
     }
@@ -58,10 +58,10 @@ class AfectatsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Afectats  $afectats
+     * @param  \App\Models\Incidencies  $incidencies
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Afectats $afectats)
+    public function destroy(Incidencies $incidencies)
     {
         //
     }
