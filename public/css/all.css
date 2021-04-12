@@ -89,15 +89,9 @@ i[data-atras='recurs']:hover{
     margin-left:35%;
 }
 .boto_enviar{
-    background-color: #fb0474;
-    border-color: #c2045a;
     position: fixed;
     bottom: 5%;
     right: 2%;
-}
-.boto_enviar:hover{
-    background-color: #c2045a;
-    border-color: #fb0474;
 }
 #card{
     padding-left: 0px;
@@ -126,116 +120,16 @@ i[data-atras='recurs']:hover{
     background-color: #0a7e8e;
     color: white;
 }
-
-#boto_administrador_users:hover{
-    background-size: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../img/usuariosBoton.png);
+#boto_administrador:hover{
     background-color: #0a7e8e;
     color: white;
 }
-#boto_administrador_users{
-
-    background-color: #e0f0f5;
+#boto_administrador{
     border-color: #0ab4cc;
-    border-width: 3px;
     color: #0ab4cc;
     width:250px;
     height:150px;
-    font-size: larger;
 }
-#boto_administrador_alertants:hover{
-    background-size: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../img/alertantsBoton.png);
-    background-color: #0a7e8e;
-    color: white;
-}
-#boto_administrador_alertants{
-
-    background-color: #e0f0f5;
-    border-color: #0ab4cc;
-    border-width: 3px;
-    color: #0ab4cc;
-    width:250px;
-    height:150px;
-    font-size: larger;
-}
-#boto_administrador_recursos:hover{
-    background-size: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../img/recursosBoton.png);
-    background-color: #0a7e8e;
-    color: white;
-}
-#boto_administrador_recursos{
-
-    background-color: #e0f0f5;
-    border-color: #0ab4cc;
-    border-width: 3px;
-    color: #0ab4cc;
-    width:250px;
-    height:150px;
-    font-size: larger;
-}
-#boto_administrador_helpbox:hover{
-    background-size: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../img/helpboxBoton.png);
-    background-color: #0a7e8e;
-    color: white;
-}
-#boto_administrador_helpbox{
-
-    background-color: #e0f0f5;
-    border-color: #0ab4cc;
-    border-width: 3px;
-    color: #0ab4cc;
-    width:250px;
-    height:150px;
-    font-size: larger;
-}
-#boto_administrador_incidencies:hover{
-    background-size: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../img/incidenciasBoton.png);
-    background-color: #0a7e8e;
-    color: white;
-}
-#boto_administrador_incidencies{
-
-    background-color: #e0f0f5;
-    border-color: #0ab4cc;
-    border-width: 3px;
-    color: #0ab4cc;
-    width:250px;
-    height:150px;
-    font-size: larger;
-}
-#boto_administrador_estadistiques:hover{
-    background-size: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../img/estadisticasBoton.png);
-    background-color: #0a7e8e;
-    color: white;
-}
-#boto_administrador_estadistiques{
-
-    background-color: #e0f0f5;
-    border-color: #0ab4cc;
-    border-width: 3px;
-    color: #0ab4cc;
-    width:250px;
-    height:150px;
-    font-size: larger;
-}
-
 #botodiv_administrador{
     margin-top: 5% ;
     text-align: center;
