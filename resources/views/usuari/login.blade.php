@@ -9,7 +9,7 @@
     <link rel="icon" href="{{ asset('img/favicon.png') }}">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Poppins">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <title>IES BROGGI - Login</title>
+    <title>SEMS - Login</title>
 </head>
 <body id="body_login">
     <div class="container mt-5">
@@ -31,13 +31,15 @@
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-12 form-group">
                                                 <label for="usuari" class="col-form-label">Usuari</label>
-                                                <input type="text" class="form-control" id="usuari" name="usuari" placeholder="Nom d'usuari" value="{{ old('usuari') }}">
+                                                <input type="text" class="form-control" id="usuari" name="usuari" placeholder="Nom d'usuari" value="{{ old('usuari') }}" autofocus>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-12 form-group">
                                                 <label for="contrasenya" class="col-form-label">Contrasenya</label>
-                                                <input type="password" class="form-control" id="contrasenya" name="contrasenya" value="{{ old('contrasenya') }}">
+                                                    <input type="password" class="form-control contrasenya" id="contrasenya" name="contrasenya" value="{{ old('contrasenya') }}">
+                                                    <span class="fa fa-fw fa-eye password-icon show-password"></span>
+                                                </label>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -60,6 +62,7 @@
 
 </body>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/mostrarpass.js')}}"></script>
 {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script> --}}

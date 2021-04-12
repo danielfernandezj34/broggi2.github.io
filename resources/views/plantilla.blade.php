@@ -20,7 +20,7 @@
             <ul class="navbar-nav ml-auto mr-5">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ Auth::$usuari()->nom}} {{ Auth::$usuari()->cognom }}
+                        {{ Auth::user()->nom}} {{ Auth::user()->cognoms }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @yield('incidencies')
@@ -30,7 +30,7 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid" id="app">
         @yield('container')
     </div>
     <a href="@yield('boto_atras')"><i class="far fa-arrow-alt-circle-left fa-3x" data-atras="@yield('color-atras')" id="atras"></i></a>

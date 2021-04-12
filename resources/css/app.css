@@ -145,3 +145,10 @@ i[data-atras='recurs']:hover{
     bottom: 5%;
     right: 2%;
 }
+
+.password-icon{
+    float: right;
+    position: relative;
+    cursor:pointer;
+    margin: -25px 10px 0 0;
+}
