@@ -96,10 +96,33 @@ i[data-atras='recurs']:hover{
     padding-left: 0px;
     padding-right: 0px;
 }
-#boto_admin_recurs{
+#boto_admin_recurs_formacio{
+    width:250px;
+    height:250px;
+    background-color: #e0f0f5 ;
+    border: 2px solid #0ab4cc;
+    color: #0ab4cc;
+}
+
+#boto_admin_recurs_formacio:hover{
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://img.icons8.com/?id=8eYononD9Coq&size=2x&color=000000')
+}
+
+#boto_admin_recurs_trucada{
     width:250px;
     height:250px;
 }
+
+#boto_admin_recurs_trucada:hover{
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://img.icons8.com/?id=8eYononD9Coq&size=2x&color=000000');
+}
+
 #botodiv_admin_recurs{
     margin-top: 10% ;
     text-align: center;
@@ -150,4 +173,137 @@ i[data-atras='recurs']:hover{
     position: relative;
     cursor:pointer;
     margin: -25px 10px 0 0;
+
+}
+
+
+#boto_administrador_users:hover{
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://img.icons8.com/?id=urZ6Luep28rI&size=2x&color=000000');
+    background-color: #0bb3c9;
+    color: white;
+    border-color: #0a7e8e;
+}
+
+#boto_administrador_users{
+
+    background-color: #e0f0f5;
+    border-color: #0ab4cc;
+    border-width: 3px;
+    color: #0ab4cc;
+    width:250px;
+    height:150px;
+    font-size: larger;
+}
+
+#boto_administrador_alertants:hover{
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://img.icons8.com/?id=oxDAcCe2eKSU&size=9x&color=000000');
+    background-color: #0bb3c9;
+    color: white;
+    border-color: #0a7e8e;
+}
+
+#boto_administrador_alertants{
+
+    background-color: #e0f0f5;
+    border-color: #0ab4cc;
+    border-width: 3px;
+    color: #0ab4cc;
+    width:250px;
+    height:150px;
+    font-size: larger;
+}
+
+#boto_administrador_recursos:hover{
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://img.icons8.com/?id=Zxyd6wIo7Moq&size=9x&color=000000');
+    background-color: #0bb3c9;
+    color: white;
+    border-color: #0a7e8e;
+}
+
+#boto_administrador_recursos{
+
+    background-color: #e0f0f5;
+    border-color: #0ab4cc;
+    border-width: 3px;
+    color: #0ab4cc;
+    width:250px;
+    height:150px;
+    font-size: larger;
+}
+
+#boto_administrador_helpbox:hover{
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://img.icons8.com/?id=cdf7ICka6j7r&size=9x&color=000000');
+    background-color: #0bb3c9;
+    color: white;
+    border-color: #0a7e8e;
+}
+
+#boto_administrador_helpbox{
+
+    background-color: #e0f0f5;
+    border-color: #0ab4cc;
+    border-width: 3px;
+    color: #0ab4cc;
+    width:250px;
+    height:150px;
+    font-size: larger;
+}
+
+#boto_administrador_incidencies:hover{
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://img.icons8.com/?id=VL43tyVqORRJ&size=9x&color=000000');
+    background-color: #0bb3c9;
+    color: white;
+    border-color: #0a7e8e;
+}
+
+#boto_administrador_incidencies{
+
+    background-color: #e0f0f5;
+    border-color: #0ab4cc;
+    border-width: 3px;
+    color: #0ab4cc;
+    width:250px;
+    height:150px;
+    font-size: larger;
+}
+
+#boto_administrador_estadistiques:hover{
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('https://img.icons8.com/?id=sXekVf8qEHzE&size=2x&color=000000');
+    background-color: #0bb3c9;
+    color: white;
+    border-color: #0a7e8e;
+}
+
+#boto_administrador_estadistiques{
+
+    background-color: #e0f0f5;
+    border-color: #0ab4cc;
+    border-width: 3px;
+    color: #0ab4cc;
+    width:250px;
+    height:150px;
+    font-size: larger;
+}
+
+#botodiv_administrador{
+    margin-top: 5% ;
+    text-align: center;
 }
