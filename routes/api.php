@@ -39,7 +39,7 @@ Route::apiResource('municipis', MunicipisController::class);
 Route::apiResource('provincies', ProvinciesController::class);
 Route::apiResource('recursos', RecursosController::class);
 Route::apiResource('rols', RolsController::class);
-Route::apiResource('Sexes', SexesController::class);
+Route::apiResource('sexes', SexesController::class);
 Route::apiResource('tipusAlertants', TipusAlertantsController::class);
 Route::apiResource('tipusIncidencies', TipusIncidenciesController::class);
 Route::apiResource('tipusRecursos', TipusRecursosController::class);
