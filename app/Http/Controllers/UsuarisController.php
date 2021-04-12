@@ -11,6 +11,21 @@ class UsuarisController extends Controller
 {
 
     public function mostrarLogin(){
+
+        // $usuari = new Usuaris();
+
+        // $usuari->id = 2;
+        // $usuari->username = "administratiu";
+        // $usuari->contrasenya = \bcrypt('administratiu');
+        // $usuari->email = 'administratiu@cepnet.net';
+        // $usuari->nom = 'AdministratiuBroggi';
+        // $usuari->cognoms = 'Apellidos';
+        // $usuari->rols_id = 2;
+        // $usuari->recursos_id = 1;
+
+        // $usuari->save();
+
+
         return view('usuari.login');
     }
 
