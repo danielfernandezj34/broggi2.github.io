@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('titulo', 'Administrador Incidencies Editar')
+@section('titulo', 'SEMS - Administrador Incidencies Editar')
 @section('container')
 @section('color_fons', "administrador")
 @section('color-atras', 'administrador')

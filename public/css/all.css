@@ -32,13 +32,19 @@ i[data-atras='recurs']:hover{
     background-color: #e0f0f5;
     font-family: 'poppins';
 }
-
+#login{
+    padding-left: 25%;
+}
 #linies_colors{
     float: right;
     margin-right: 5%;
 }
-
+#logo_login{
+    margin-left: 47%;
+    margin-top: 4%;
+}
 #acceptar_login{
+    margin-right: 11%;
     background-color: #fccc0b;
     border: solid;
     border-width: 2px;
@@ -83,9 +89,15 @@ i[data-atras='recurs']:hover{
     margin-left:35%;
 }
 .boto_enviar{
+    background-color: #fb0474;
+    border-color: #c2045a;
     position: fixed;
     bottom: 5%;
     right: 2%;
+}
+.boto_enviar:hover{
+    background-color: #c2045a;
+    border-color: #fb0474;
 }
 #card{
     padding-left: 0px;
@@ -124,7 +136,7 @@ i[data-atras='recurs']:hover{
     color: white;
 }
 #boto_administrador_users{
-   
+
     background-color: #e0f0f5;
     border-color: #0ab4cc;
     border-width: 3px;
@@ -142,7 +154,7 @@ i[data-atras='recurs']:hover{
     color: white;
 }
 #boto_administrador_alertants{
-   
+
     background-color: #e0f0f5;
     border-color: #0ab4cc;
     border-width: 3px;
@@ -160,7 +172,7 @@ i[data-atras='recurs']:hover{
     color: white;
 }
 #boto_administrador_recursos{
-   
+
     background-color: #e0f0f5;
     border-color: #0ab4cc;
     border-width: 3px;
@@ -178,7 +190,7 @@ i[data-atras='recurs']:hover{
     color: white;
 }
 #boto_administrador_helpbox{
-   
+
     background-color: #e0f0f5;
     border-color: #0ab4cc;
     border-width: 3px;
@@ -196,7 +208,7 @@ i[data-atras='recurs']:hover{
     color: white;
 }
 #boto_administrador_incidencies{
-   
+
     background-color: #e0f0f5;
     border-color: #0ab4cc;
     border-width: 3px;
@@ -214,7 +226,7 @@ i[data-atras='recurs']:hover{
     color: white;
 }
 #boto_administrador_estadistiques{
-   
+
     background-color: #e0f0f5;
     border-color: #0ab4cc;
     border-width: 3px;
@@ -238,5 +250,12 @@ i[data-atras='recurs']:hover{
     position: fixed;
     bottom: 5%;
     right: 2%;
+}
+
+.password-icon{
+    float: right;
+    position: relative;
+    cursor:pointer;
+    margin: -25px 10px 0 0;
 }
 

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Afectats;
 use App\Http\Controllers\Controller;
+use App\Models\Municipis;
 use Illuminate\Http\Request;
-use App\Http\Resources\AfectatsResource;
+use App\Http\Resources\MunicipisResource;
 
-class AfectatsController extends Controller
+class MunicipisController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class AfectatsController extends Controller
      */
     public function index()
     {
-        $afectats = Afectats::all();
+        $municipis = Municipis::all();
 
-        return AfectatsResource::collection($afectats);
+        return MunicipisResource::collection($municipis);
     }
 
     /**
@@ -35,10 +35,10 @@ class AfectatsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Afectats  $afectats
+     * @param  \App\Models\Municipis  $municipis
      * @return \Illuminate\Http\Response
      */
-    public function show(Afectats $afectats)
+    public function show(Municipis $municipis)
     {
         //
     }
@@ -47,10 +47,10 @@ class AfectatsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Afectats  $afectats
+     * @param  \App\Models\Municipis  $municipis
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Afectats $afectats)
+    public function update(Request $request, Municipis $municipis)
     {
         //
     }
@@ -58,10 +58,10 @@ class AfectatsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Afectats  $afectats
+     * @param  \App\Models\Municipis  $municipis
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Afectats $afectats)
+    public function destroy(Municipis $municipis)
     {
         //
     }

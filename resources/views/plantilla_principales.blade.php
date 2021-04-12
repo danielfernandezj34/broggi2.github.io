@@ -18,12 +18,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent" id="navbarColor01">
             <ul class="navbar-nav ml-auto mr-5">
                 <li class="nav-item dropdown">
+
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Usuari
+                        {{ Auth::user()->nom}} {{ Auth::user()->cognoms }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @yield('incidencies')
-                        <a class="dropdown-item" href="registre_en.php">Tancar Sessió</a>
+                        <a class="dropdown-item" href="{{ url('/logout')}}">Tancar Sessió</a>
                     </div>
                 </li>
             </ul>
