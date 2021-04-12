@@ -1,10 +1,10 @@
 <template>
     <div>
         <div :id="div_admin_recurs" class="float-sm-left col-md-6 col-sm-12">
-            <button :id="boto_admin_recurs_for" type="button" class="btn btn-outline-success float-md-right mr-sm-1 mr-md-3 mr-lg-5" ><strong><h4>Activar Formació</h4></strong></button>
+            <button :id="boto_admin_recurs_for" type="button" class="btn btn-outline-success float-md-right mr-sm-1 mr-md-3 mr-lg-5" ><h2><strong>Activar Formació</strong></h2></button>
         </div>
         <div :id="div_admin_recurs" class="float-sm-right col-md-6 col-sm-12">
-            <a href="./trucada"><button :id="boto_admin_recurs_tru" type="button" class="btn btn-outline-warning float-md-left ml-sm-1 ml-md-3 ml-lg-5" ><strong><h4>Gestionar Trucades</h4></strong></button></a>
+            <a href="./trucada"><button :id="boto_admin_recurs_tru" type="button" class="btn btn-outline-warning float-md-left ml-sm-1 ml-md-3 ml-lg-5" ><h2><strong>Gestionar Trucades</strong></h2></button></a>
         </div>
     </div>
 </template>
