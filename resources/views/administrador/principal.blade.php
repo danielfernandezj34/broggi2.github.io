@@ -1,5 +1,5 @@
 @extends('plantilla_principales')
-@section('titulo', 'Administrador Página Principal')
+@section('titulo', 'SEMS - Administrador Página Principal')
 @section('color_fons', "administrador")
 @section('incidencies')
     <a class="dropdown-item" href="./incidencies">Consultar incidencies</a>
@@ -23,7 +23,7 @@
 </div>
 <div id="botodiv_administrador" class="float-sm-left col-md-4 col-sm-12">
     <button id="boto_administrador_estadistiques" type="button" class="btn btn-outline-dark mr-lg-5" ><strong>Estadistiques</strong></button>
-    
+
 </div>
 
 @endsection

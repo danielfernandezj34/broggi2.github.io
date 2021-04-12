@@ -11,6 +11,21 @@ class UsuarisController extends Controller
 {
 
     public function mostrarLogin(){
+
+        // $usuari = new Usuaris();
+
+        // $usuari->id = 3;
+        // $usuari->username = "recurs";
+        // $usuari->contrasenya = \bcrypt('recurs');
+        // $usuari->email = 'recurs@cepnet.net';
+        // $usuari->nom = 'RecursBroggi';
+        // $usuari->cognoms = 'Apellidos';
+        // $usuari->rols_id = 3;
+        // $usuari->recursos_id = 1;
+
+        // $usuari->save();
+
+
         return view('usuari.login');
     }
 
