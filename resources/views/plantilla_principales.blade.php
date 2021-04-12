@@ -30,7 +30,7 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid" id="app">
         @yield('container')
     </div>
 </body>
