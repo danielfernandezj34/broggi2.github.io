@@ -75,6 +75,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/alertant_detall', function () {
         return view('administrador.alertant_detall');
     });
+
+    Route::get('/usuaris/crear', function(){
+        return view('administrador.crear-user');
+    })->name('crearu');
     ///////////
 
     //RUTA LOGOUT
