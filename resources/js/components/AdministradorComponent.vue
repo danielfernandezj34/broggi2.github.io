@@ -31,8 +31,7 @@
                 boto_h : 'boto_administrador_helpbox',
                 boto_i : 'boto_administrador_incidencies',
                 boto_e : 'boto_administrador_estadistiques',
-                div_a  : 'botodiv_administrador',
-                // imatge_u : '/public/img/usuariosBoton.png'
+                div_a  : 'botodiv_administrador'
             }
         },
         mounted() {
