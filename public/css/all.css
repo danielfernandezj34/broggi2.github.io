@@ -44,7 +44,6 @@ i[data-atras='recurs']:hover{
     margin-top: 4%;
 }
 #acceptar_login{
-    margin-right: 11%;
     background-color: #fccc0b;
     border: solid;
     border-width: 2px;
@@ -224,6 +223,12 @@ i[data-atras='recurs']:hover{
     cursor:pointer;
     margin: -25px 10px 0 0;
 }
+<<<<<<< HEAD
+=======
+
+}
+
+>>>>>>> a38170113d723e2acd876b9b564a9358b9f37914
 
 #boto_administrador_users:hover{
     background-size: 50%;
@@ -355,4 +360,3 @@ i[data-atras='recurs']:hover{
     margin-top: 5% ;
     text-align: center;
 }
-

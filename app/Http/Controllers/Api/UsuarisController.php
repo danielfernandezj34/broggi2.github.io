@@ -19,6 +19,7 @@ class UsuarisController extends Controller
         $usuaris = Usuaris::all();
 
         return UsuarisResource::collection($usuaris);
+
     }
 
     /**

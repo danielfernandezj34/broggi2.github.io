@@ -1525,12 +1525,6 @@ COMMIT;
 
 START TRANSACTION;
 USE `broggi`;
-
-
-COMMIT;
-
-START TRANSACTION;
-USE `broggi`;
 INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (1, "Quin tipud d'alertat ets, VIP, centre medic, alertat accidental, l'entorn de l'afectat o el propi afectat?", "What kind of informant are you, a VIP informant, a health center, an accidental informant, of the affected person's environment or the affected by himself?");
 INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (2, 'Quin és el seu nom?', 'What is your name?');
 INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (3, 'Quin és el seu cognom?', 'What is your surname?');
