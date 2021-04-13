@@ -44,6 +44,7 @@ i[data-atras='recurs']:hover{
     margin-top: 4%;
 }
 #acceptar_login{
+    margin-right: 11%;
     background-color: #fccc0b;
     border: solid;
     border-width: 2px;
@@ -147,7 +148,7 @@ i[data-atras='recurs']:hover{
     background-size: 50%;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url('https://img.icons8.com/plumpy/72/checked-laptop.png');
+    background-image: url('https://img.icons8.com/plumpy/120/checked-laptop.png');
     color: transparent;
     background-color: #0bb3c9;
     border: 4px solid #027281;
@@ -223,12 +224,6 @@ i[data-atras='recurs']:hover{
     cursor:pointer;
     margin: -25px 10px 0 0;
 }
-<<<<<<< HEAD
-=======
-
-}
-
->>>>>>> a38170113d723e2acd876b9b564a9358b9f37914
 
 #boto_administrador_users:hover{
     background-size: 50%;
@@ -360,3 +355,4 @@ i[data-atras='recurs']:hover{
     margin-top: 5% ;
     text-align: center;
 }
+
