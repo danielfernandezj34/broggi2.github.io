@@ -15,8 +15,8 @@
     <div class="container mt-5">
         @include('extra.missatges')
         <div class="d-flex justify-content-center">
-            <div class="mt-2 col-sm-6 col-8 d-flex justify-content-center">
-                <img src="{{ asset('img/logo.png') }}" alt=""height="50" id="logo_login">
+            <div class="mt-2 mb-3 col-sm-6 col-8 d-flex justify-content-center">
+                <img src="{{ asset('img/sems-logo.png') }}" alt=""height="100" >
             </div>
         </div>
         <div class="d-flex justify-content-center">
@@ -44,7 +44,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-12 form-group">
-                                                <button type="submit" class="btn mb-3 float-right" id="acceptar_login">Iniciar Sessió</button>
+                                                <button type="submit" class="btn mb-3 float-right d-flex justify-content-right" id="acceptar_login">Iniciar Sessió</button>
                                             </div>
                                         </div>
                                     </form>

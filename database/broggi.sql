@@ -1525,14 +1525,6 @@ COMMIT;
 
 START TRANSACTION;
 USE `broggi`;
-INSERT INTO `broggi`.`usuaris` (`id`, `username`, `contrasenya`, `email`, `nom`, `cognoms`, `rols_id`, `recursos_id`) VALUES (1, 'admin', 'admin', 'admin@cepnet.net', 'AdminBroggi', 'Apellidos', 1, 1);
-INSERT INTO `broggi`.`usuaris` (`id`, `username`, `contrasenya`, `email`, `nom`, `cognoms`, `rols_id`, `recursos_id`) VALUES (2, 'cecos', 'cecos', 'cecos@cepnet.net', 'CecosBroggi', 'Apellidos', 2, 1);
-INSERT INTO `broggi`.`usuaris` (`id`, `username`, `contrasenya`, `email`, `nom`, `cognoms`, `rols_id`, `recursos_id`) VALUES (3, 'recurs', 'recurs', 'recurs@cepnet.net', 'RecursBroggi', 'Apellidos', 3, 1);
-
-COMMIT;
-
-START TRANSACTION;
-USE `broggi`;
 INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (1, "Quin tipud d'alertat ets, VIP, centre medic, alertat accidental, l'entorn de l'afectat o el propi afectat?", "What kind of informant are you, a VIP informant, a health center, an accidental informant, of the affected person's environment or the affected by himself?");
 INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (2, 'Quin és el seu nom?', 'What is your name?');
 INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (3, 'Quin és el seu cognom?', 'What is your surname?');

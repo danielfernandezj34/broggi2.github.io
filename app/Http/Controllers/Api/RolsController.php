@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Usuaris;
+use App\Http\Resources\RolsResource;
+use App\Models\Rols;
 use Illuminate\Http\Request;
-use App\Http\Resources\UsuarisResource;
 
-class UsuarisController extends Controller
+class RolsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,9 @@ class UsuarisController extends Controller
      */
     public function index()
     {
-        $usuaris = Usuaris::all();
+        $rols = Rols::all();
 
-        return UsuarisResource::collection($usuaris);
-
+        return RolsResource::collection($rols);
     }
 
     /**
@@ -36,10 +35,10 @@ class UsuarisController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Usuaris  $usuaris
+     * @param  \App\Models\Rols  $rols
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuaris $usuaris)
+    public function show(Rols $rols)
     {
         //
     }
@@ -48,10 +47,10 @@ class UsuarisController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Usuaris  $usuaris
+     * @param  \App\Models\Rols  $rols
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuaris $usuaris)
+    public function update(Request $request, Rols $rols)
     {
         //
     }
@@ -59,10 +58,10 @@ class UsuarisController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Usuaris  $usuaris
+     * @param  \App\Models\Rols  $rols
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuaris $usuaris)
+    public function destroy(Rols $rols)
     {
         //
     }

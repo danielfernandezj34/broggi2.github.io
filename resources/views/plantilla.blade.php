@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('js/popper.js') }}">
     <title>@yield('titulo')</title>
-    <link rel="icon" href="{{ asset('img/favicon.png') }}">
+    <link rel="icon" href="{{ asset('img/sems-logo.png') }}">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <body data-tipo="@yield('color_fons')">
@@ -20,7 +20,7 @@
             <ul class="navbar-nav ml-auto mr-5">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ Auth::user()->nom}} {{ Auth::user()->cognoms }}
+                        {{-- {{ Auth::user()->nom}} {{ Auth::user()->cognoms }} --}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @yield('incidencies')
