@@ -1,1543 +1,565 @@
--- MySQL Workbench Forward Engineering
-DROP DATABASE IF EXISTS `broggi`;
-CREATE DATABASE `broggi`;
+-- MariaDB dump 10.18  Distrib 10.4.17-MariaDB, for Win64 (AMD64)
+--
+-- Host: 127.0.0.1    Database: broggi
+-- ------------------------------------------------------
+-- Server version	10.4.17-MariaDB
 
-USE `broggi`;
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- -----------------------------------------------------
--- Schema broggi
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `broggi` ;
+--
+-- Table structure for table `afectats`
+--
 
--- -----------------------------------------------------
--- Schema broggi
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `broggi` DEFAULT CHARACTER SET utf8 ;
-USE `broggi` ;
-
--- -----------------------------------------------------
--- Table `broggi`.`tipus_incidencies`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`tipus_incidencies` ;
-
-CREATE TABLE IF NOT EXISTS `broggi`.`tipus_incidencies` (
-  `id` INT NOT NULL,
-  `tipus` VARCHAR(45) NOT NULL,
-  `video` VARCHAR(255) NOT NULL,
+DROP TABLE IF EXISTS `afectats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `afectats` (
+  `id` int(11) NOT NULL,
+  `telefon` int(10) NOT NULL,
+  `cip` varchar(45) DEFAULT NULL,
+  `nom` varchar(45) DEFAULT NULL,
+  `cognoms` varchar(45) DEFAULT NULL,
+  `edat` varchar(45) DEFAULT NULL,
+  `te_cip` tinyint(4) DEFAULT NULL,
+  `sexes_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `tipus_UNIQUE` (`tipus` ASC))
-ENGINE = InnoDB;
+  KEY `fk_afectats_sexes1_idx` (`sexes_id`),
+  CONSTRAINT `fk_afectats_sexes1` FOREIGN KEY (`sexes_id`) REFERENCES `sexes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-DROP TABLE IF EXISTS `broggi`.`helpbox` ;
+--
+-- Dumping data for table `afectats`
+--
 
-CREATE TABLE IF NOT EXISTS `broggi`.`helpbox` (
-  `id` INT NOT NULL,
-  `preguntaES` VARCHAR(100) NOT NULL,
-  `preguntaEN` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`))
-  ENGINE = InnoDB;
--- -----------------------------------------------------
--- Table `broggi`.`tipus_alertants`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`tipus_alertants` ;
+LOCK TABLES `afectats` WRITE;
+/*!40000 ALTER TABLE `afectats` DISABLE KEYS */;
+/*!40000 ALTER TABLE `afectats` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`tipus_alertants` (
-  `id` INT NOT NULL,
-  `tipus` VARCHAR(45) NOT NULL,
+--
+-- Table structure for table `alertants`
+--
+
+DROP TABLE IF EXISTS `alertants`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alertants` (
+  `id` int(11) NOT NULL,
+  `telefon` int(10) NOT NULL,
+  `nom` varchar(150) DEFAULT NULL,
+  `cognoms` varchar(150) DEFAULT NULL,
+  `adreca` varchar(150) DEFAULT NULL,
+  `municipis_id` int(11) DEFAULT NULL,
+  `tipus_alertants_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `tipus_UNIQUE` (`tipus` ASC))
-ENGINE = InnoDB;
+  KEY `fk_alertants_tipus_alertants1_idx` (`tipus_alertants_id`),
+  KEY `fk_alertants_municipis1_idx` (`municipis_id`),
+  CONSTRAINT `fk_alertants_municipis1` FOREIGN KEY (`municipis_id`) REFERENCES `municipis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_alertants_tipus_alertants1` FOREIGN KEY (`tipus_alertants_id`) REFERENCES `tipus_alertants` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `alertants`
+--
 
--- -----------------------------------------------------
--- Table `broggi`.`provincies`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`provincies` ;
+LOCK TABLES `alertants` WRITE;
+/*!40000 ALTER TABLE `alertants` DISABLE KEYS */;
+INSERT INTO `alertants` VALUES (1,973350050,'Fundació Sant Hospital','','Pg. de Joan Brudieu, 8',782,1),(2,972880150,'Hospital de Puigcerdà','','Pl. de Santa Maria, 1',592,1),(3,973652255,'Hospital Comarcal del Pallars','','Pau Casals, 5',851,1),(4,973640004,'Espitau Val d\'Aran','','Espitau, 8',891,1),(5,973232943,'Clínica de Ponent','','Prat de la Riba, 79',386,1),(6,973727222,'Hospital Santa Maria','','Av. Alcalde Rovira Roure, 44',386,1),(7,973248100,'Hospital Universitari Arnau de Vilanova de Lleida','','Av. Alcalde Rovira Roure, 80',386,1),(8,977613000,'Pius Hospital de Valls','','Pl. Sant Francesc, s/n',877,1),(9,977010800,'Centre Mèdic Quirúrgic Reus','','Antoni Gaudí, 26',610,1),(10,977337303,'Hospital Sant Joan de Reus','','Josep Laporte, s/n',610,1),(11,977257900,'Hospital del Vendrell','','Carretera de Barcelona, s/n',883,1),(12,977259900,'Hospital Sant Pau i Santa Tecla','','Rambla Vella, 14',807,1),(13,977295800,'Hospital Universitari Joan XXIII de Tarragona','','Dr. Mallafré i Guasch, 4',807,1),(14,977519100,'Hospital Verge de la Cinta de Tortosa','','Esplanetes, 44-58',848,1),(15,977588200,'Clínica Terres de l\'Ebre','','Pl. Joaquim Bau, 6-8',848,1),(16,977700050,'Hospital Comarcal d\'Amposta','','Jacint Verdaguer, 11',52,1),(17,977401674,'Hospital Comarcal Móra d\'Ebre','','Benet i Messeguer, s/n',472,1),(18,972501400,'Hospital de Figueres','','Ronda del Rector Arolas, s/n',290,1),(19,972600160,'Hospital de Palamós','','Hospital, 36',515,1),(20,972261800,'Hospital Sant Jaume d\'Olot','','Mulleras, 15',498,1),(21,972204500,'Clínica Girona','','Joan Maragall, 26',330,1),(22,972225833,'ICO Girona','','Av. de França, s/n',330,1),(23,972940200,'Hospital Universitari Doctor Josep Trueta de Girona','','Av. de França, s/n',330,1),(24,972182500,'Hospital Santa Caterina','','Dr. Castany, s/n (Parc Hospitalari Martí i Julià)',651,1),(25,937690201,'Hospital Comarcal Sant Jaume de Calella','','Sant Jaume, 209',161,1),(26,972570208,'Clínica Salus Infirmorum','','Av. Mossèn Lluís Constans, 130',87,1),(27,972730013,'Hospital de Campdevànol','','Ctra. de Gombrèn, 20',170,1),(28,972353264,'Hospital Comarcal de Blanes','','Accés cala Sant Francesc, 5',125,1),(29,938075500,'Hospital d\'Igualada','','Av. Catalunya, 11',360,1),(30,938732550,'Centre Hospitalari','','Av. de les Bases de Manresa, 6-8',410,1),(31,938742112,'Hospital Sant Joan de Déu','','Dr. Joan Soler, s/n',410,1),(32,938243400,'Hospital Comarcal Sant Bernabé','','Ctra. de Ribes, s/n',114,1),(33,938891111,'Hospital General de Vic','','Francesc Pla El Vigatà, 1',888,1),(34,938180440,'Hospital Comarcal de l\'Alt Penedès','','Espirall, s/n',903,1),(35,937742020,'Hospital Sant Joan de Déu','','Av. Mancomunitats Comarcals, 1',414,1),(36,936615208,'Hospital General. Parc Sanitari Sant Joan de Déu','','Camí Vell de la Colònia, 25',661,1),(37,936590111,'Hospital de Viladecans','','Av. de Gavà, 38',898,1),(38,932532100,'Hospital Sant Joan de Déu','','Pg. de Sant Joan de Déu, 2',270,1),(39,935531200,'Hospital de Sant Joan Despí Moisès Broggi','','Jacint Verdaguer, 90',695,1),(40,932483000,'Hospital del Mar','','Pg. Marítim, 25-29',91,1),(41,933069900,'Hospital Plató','','Plató, 21',91,1),(42,933674100,'Hospital de l\'Esperança','','Sant Josep de la Muntanya, 12',91,1),(43,934169700,'Fundació Puigvert / Iuna','','Cartagena, 340',91,1),(44,935072700,'Hospital Dos de Maig','','Dos de Maig, 301',91,1),(45,932275600,'Hospital Casa Maternitat','','Sabino de Arana, 1',91,1),(46,933221111,'Hospital Universitari Sagrat Cor','','Viladomat, 288',91,1),(47,934893000,'Hospital Universitari General de la Vall d\'Hebron','','Pg. de la Vall d\'Hebron, 119-129',91,1),(48,932112508,'Hospital Sant Rafael','','Pg. de la Vall d\'Hebron, 107',91,1),(49,934893000,'Hospital Universitari Maternoinfantil de la Vall d\'Hebron','','Pg. de la Vall d\'Hebron, 119-129',91,1),(50,934893000,'Hospital Universitari de Traumatologia i Rehabilitació de la Vall d\'Hebron','','Pg. de la Vall d\'Hebron, 119-129',91,1),(51,932275400,'Hospital Clínic i Provincial de Barcelona','','Villarroel, 170',91,1),(52,935537160,'Hospital de la Santa Creu i Sant Pau','','Sant Quintí, 89',91,1),(53,934407500,'Hospital General de l\'Hospitalet','','Josep Molins, 29',357,1),(54,932607733,'ICO L\'Hospitalet','','Av. de la Granvia, s/n km 2,7 (Hospital Duran i Reynals)',357,1),(55,932607500,'Hospital Universitari de Bellvitge','','Feixa Llarga, s/n',357,1),(56,934648300,'Hospital Municipal Badalona','','Via Augusta, 9-13',79,1),(57,934977700,'Institut Guttmann','','Camí de Can Ruti, s/n',79,1),(58,934978710,'ICO Badalona','','Ctra. de Canyet, s/n',79,1),(59,934651200,'Hospital Universitari Germans Trias i Pujol de Badalona','','Ctra. de Canyet, s/n',79,1),(60,933860202,'Fundació Hospital de l\'Esperit Sant','','Av. de Mossèn Josep Pons i Robadà, s/n',743,1),(61,938931616,'Fundació Hospital Comarcal Sant Antoni Abat','','Rambla de Sant Josep, 21',926,1),(62,938960025,'Fundació Hospital Residència Sant Camil','','Ctra. de Puigmoltó, km 0,8',720,1),(63,937417700,'Hospital de Mataró','','Ctra. de Cirera, s/n',431,1),(64,937231010,'Hospital de Sabadell','','Parc Taulí, s/n',643,1),(65,937365050,'Hospital Mútua Terrassa','','Pl. Dr. Robert, 5',816,1),(66,937310007,'Hospital de Terrassa','','Ctra. de Torrebonica, s/n',816,1),(67,935760300,'Fundació Privada Hospital de Mollet','','Sant Llorenç, 39',444,1),(68,938425000,'Hospital General de Granollers','','Av. de Francesc Ribas, s/n',341,1),(69,938670617,'Hospital de Sant Celoni','','Av. de l\'Hospital, 19',665,1);
+/*!40000 ALTER TABLE `alertants` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`provincies` (
-  `id` INT NOT NULL,
-  `nom` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+--
+-- Table structure for table `comarques`
+--
 
-
--- -----------------------------------------------------
--- Table `broggi`.`comarques`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`comarques` ;
-
-CREATE TABLE IF NOT EXISTS `broggi`.`comarques` (
-  `id` INT NOT NULL,
-  `nom` VARCHAR(45) NULL,
-  `provincies_id` INT NOT NULL,
+DROP TABLE IF EXISTS `comarques`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comarques` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(45) DEFAULT NULL,
+  `provincies_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_comarques_provincies1_idx` (`provincies_id` ASC),
-  CONSTRAINT `fk_comarques_provincies1`
-    FOREIGN KEY (`provincies_id`)
-    REFERENCES `broggi`.`provincies` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  KEY `fk_comarques_provincies1_idx` (`provincies_id`),
+  CONSTRAINT `fk_comarques_provincies1` FOREIGN KEY (`provincies_id`) REFERENCES `provincies` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `comarques`
+--
 
--- -----------------------------------------------------
--- Table `broggi`.`municipis`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`municipis` ;
+LOCK TABLES `comarques` WRITE;
+/*!40000 ALTER TABLE `comarques` DISABLE KEYS */;
+INSERT INTO `comarques` VALUES (1,'Alt Camp',4),(2,'Alt Empordà',2),(3,'Alt Penedès',1),(4,'Alt Urgell',3),(5,'Alta Ribagorça',3),(6,'Anoia',1),(7,'Aran',3),(8,'Bages',1),(9,'Baix Camp',4),(10,'Baix Ebre',4),(11,'Baix Empordà',2),(12,'Baix Llobregat',1),(13,'Baix Penedès',4),(14,'Barcelonès',1),(16,'Berguedà',1),(17,'Cerdanya',2),(18,'Cerdanya',3),(19,'Conca de Barberà',4),(20,'Garraf',1),(21,'Garrigues',3),(22,'Garrotxa',2),(23,'Gironès',2),(24,'Maresme',1),(25,'Moianès',1),(26,'Montsià',4),(27,'Noguera',3),(28,'Osona',1),(29,'Osona',2),(30,'Pallars Jussà',3),(31,'Pla de l\'Estany',2),(32,'Pla d\'Urgell',3),(33,'Priorat',4),(34,'Ribera d\'Ebre',4),(35,'Ripollès',2),(36,'Segarra',3),(37,'Segrià',3),(38,'Selva',2),(39,'Solsonès',3),(40,'Tarragonès',4),(41,'Terra Alta',4),(42,'Urgell',3),(43,'Vallès Occidental',1),(44,'Vallès Oriental',1),(45,'Pallars Sobirà',3);
+/*!40000 ALTER TABLE `comarques` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`municipis` (
-  `id` INT NOT NULL,
-  `nom` VARCHAR(45) NULL,
-  `comarques_id` INT NOT NULL,
+--
+-- Table structure for table `failed_jobs`
+--
+
+DROP TABLE IF EXISTS `failed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
-  INDEX `fk_municipis_comarques1_idx` (`comarques_id` ASC),
-  CONSTRAINT `fk_municipis_comarques1`
-    FOREIGN KEY (`comarques_id`)
-    REFERENCES `broggi`.`comarques` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `failed_jobs`
+--
 
--- -----------------------------------------------------
--- Table `broggi`.`alertants`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`alertants` ;
+LOCK TABLES `failed_jobs` WRITE;
+/*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`alertants` (
-  `id` INT NOT NULL,
-  `telefon` INT(10) NOT NULL,
-  `nom` VARCHAR(150) NULL,
-  `cognoms` VARCHAR(150) NULL,
-  `adreca` VARCHAR(150) NULL,
-  `municipis_id` INT NULL,
-  `tipus_alertants_id` INT NOT NULL,
+--
+-- Table structure for table `helpbox`
+--
+
+DROP TABLE IF EXISTS `helpbox`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `helpbox` (
+  `id` int(11) NOT NULL,
+  `preguntaES` varchar(100) NOT NULL,
+  `preguntaEN` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `helpbox`
+--
+
+LOCK TABLES `helpbox` WRITE;
+/*!40000 ALTER TABLE `helpbox` DISABLE KEYS */;
+INSERT INTO `helpbox` VALUES (1,'Quin tipud d\'alertat ets, VIP, centre medic, alertat accidental, l\'entorn de l\'afectat o el propi af','What kind of informant are you, a VIP informant, a health center, an accidental informant, of the af'),(2,'Quin és el seu nom?','What is your name?'),(3,'Quin és el seu cognom?','What is your surname?'),(4,'Quin és el seu numero de telefon?','What is your phone number?'),(5,'Quina és la seva provincia?','In which province are you?'),(6,'Quin es el seu municipi?','In which municipality are you?'),(7,'Quina es la teva adreça?','What is your address?'),(8,'Tens una adreça complementaria?','Do you have a complementary address?'),(9,'Quin és el seu DNI o TS/NSS','What is your DNI or TS/NSS?'),(10,'Quina edat tens?','How old are you?'),(11,'Ets home o dona?','Are you a man or a woman?'),(12,'Quin és el tipus d\'accident?','What is the type of accident or incident?'),(13,'Quin és el numero de l\'afectat?','What is the number of affected?'),(14,'Pots descriure que ha pasat?','Can you describe what happened?');
+/*!40000 ALTER TABLE `helpbox` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `incidencies`
+--
+
+DROP TABLE IF EXISTS `incidencies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `incidencies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `num_incident` int(11) NOT NULL,
+  `data` date NOT NULL,
+  `hora` time NOT NULL,
+  `telefon_alertant` int(10) NOT NULL,
+  `adreca` varchar(150) NOT NULL,
+  `adreca_complement` varchar(150) DEFAULT NULL,
+  `descripcio` varchar(256) NOT NULL,
+  `nom_metge` varchar(45) DEFAULT NULL,
+  `tipus_incidencies_id` int(11) NOT NULL,
+  `alertants_id` int(11) NOT NULL,
+  `municipis_id` int(11) NOT NULL,
+  `usuaris_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_alertants_tipus_alertants1_idx` (`tipus_alertants_id` ASC),
-  INDEX `fk_alertants_municipis1_idx` (`municipis_id` ASC),
-  CONSTRAINT `fk_alertants_tipus_alertants1`
-    FOREIGN KEY (`tipus_alertants_id`)
-    REFERENCES `broggi`.`tipus_alertants` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_alertants_municipis1`
-    FOREIGN KEY (`municipis_id`)
-    REFERENCES `broggi`.`municipis` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  UNIQUE KEY `num_incident_UNIQUE` (`num_incident`),
+  KEY `fk_incidencies_tipus_incidents1_idx` (`tipus_incidencies_id`),
+  KEY `fk_incidencies_alertants1_idx` (`alertants_id`),
+  KEY `fk_incidencies_municipis1_idx` (`municipis_id`),
+  KEY `fk_incidencies_usuaris1_idx` (`usuaris_id`),
+  CONSTRAINT `fk_incidencies_alertants1` FOREIGN KEY (`alertants_id`) REFERENCES `alertants` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incidencies_municipis1` FOREIGN KEY (`municipis_id`) REFERENCES `municipis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incidencies_tipus_incidents1` FOREIGN KEY (`tipus_incidencies_id`) REFERENCES `tipus_incidencies` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incidencies_usuaris1` FOREIGN KEY (`usuaris_id`) REFERENCES `usuaris` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `incidencies`
+--
 
--- -----------------------------------------------------
--- Table `broggi`.`rols`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`rols` ;
+LOCK TABLES `incidencies` WRITE;
+/*!40000 ALTER TABLE `incidencies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `incidencies` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`rols` (
-  `id` INT NOT NULL,
-  `nom` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+--
+-- Table structure for table `incidencies_has_afectats`
+--
 
+DROP TABLE IF EXISTS `incidencies_has_afectats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `incidencies_has_afectats` (
+  `incidencies_id` int(11) NOT NULL,
+  `afectats_id` int(11) NOT NULL,
+  PRIMARY KEY (`incidencies_id`,`afectats_id`),
+  KEY `fk_incidencies_has_afectats_afectats1_idx` (`afectats_id`),
+  KEY `fk_incidencies_has_afectats_incidencies_idx` (`incidencies_id`),
+  CONSTRAINT `fk_incidencies_has_afectats_afectats1` FOREIGN KEY (`afectats_id`) REFERENCES `afectats` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incidencies_has_afectats_incidencies` FOREIGN KEY (`incidencies_id`) REFERENCES `incidencies` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- -----------------------------------------------------
--- Table `broggi`.`tipus_recursos`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`tipus_recursos` ;
+--
+-- Dumping data for table `incidencies_has_afectats`
+--
 
-CREATE TABLE IF NOT EXISTS `broggi`.`tipus_recursos` (
-  `id` INT NOT NULL,
-  `tipus` VARCHAR(45) NOT NULL,
+LOCK TABLES `incidencies_has_afectats` WRITE;
+/*!40000 ALTER TABLE `incidencies_has_afectats` DISABLE KEYS */;
+/*!40000 ALTER TABLE `incidencies_has_afectats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `incidencies_has_recursos`
+--
+
+DROP TABLE IF EXISTS `incidencies_has_recursos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `incidencies_has_recursos` (
+  `incidencies_id` int(11) NOT NULL,
+  `recursos_id` int(11) NOT NULL,
+  `hora_activacio` datetime DEFAULT NULL,
+  `hora_mobilitzacio` datetime DEFAULT NULL,
+  `hora_assistencia` datetime DEFAULT NULL,
+  `hora_transport` datetime DEFAULT NULL,
+  `hora_arribada_hospital` datetime DEFAULT NULL,
+  `hora_transferencia` datetime DEFAULT NULL,
+  `hora_finalitzacio` datetime DEFAULT NULL,
+  `prioritat` int(11) DEFAULT NULL,
+  `desti` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`incidencies_id`,`recursos_id`),
+  KEY `fk_incidencies_has_recursos_recursos1_idx` (`recursos_id`),
+  KEY `fk_incidencies_has_recursos_incidencies1_idx` (`incidencies_id`),
+  CONSTRAINT `fk_incidencies_has_recursos_incidencies1` FOREIGN KEY (`incidencies_id`) REFERENCES `incidencies` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_incidencies_has_recursos_recursos1` FOREIGN KEY (`recursos_id`) REFERENCES `recursos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='	';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `incidencies_has_recursos`
+--
+
+LOCK TABLES `incidencies_has_recursos` WRITE;
+/*!40000 ALTER TABLE `incidencies_has_recursos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `incidencies_has_recursos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `municipis`
+--
+
+DROP TABLE IF EXISTS `municipis`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `municipis` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(45) DEFAULT NULL,
+  `comarques_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `tipus_UNIQUE` (`tipus` ASC))
-ENGINE = InnoDB;
+  KEY `fk_municipis_comarques1_idx` (`comarques_id`),
+  CONSTRAINT `fk_municipis_comarques1` FOREIGN KEY (`comarques_id`) REFERENCES `comarques` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `municipis`
+--
 
--- -----------------------------------------------------
--- Table `broggi`.`recursos`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`recursos` ;
+LOCK TABLES `municipis` WRITE;
+/*!40000 ALTER TABLE `municipis` DISABLE KEYS */;
+INSERT INTO `municipis` VALUES (1,'Abella de la Conca',30),(2,'Abrera',12),(3,'Àger',27),(4,'Agramunt',42),(5,'Aguilar de Segarra',8),(6,'Agullana',2),(7,'Aiguafreda',44),(8,'Aiguamúrcia',1),(9,'Aiguaviva',23),(10,'Aitona',37),(11,'Els Alamús',37),(12,'Alàs i Cerc',4),(13,'L\'Albagés',21),(14,'Albanyà',2),(15,'Albatàrrec',37),(16,'Albesa',27),(17,'L\'Albi',21),(18,'Albinyana',13),(19,'L\'Albiol',9),(20,'Albons',11),(21,'Alcanar',26),(22,'Alcanó',37),(23,'Alcarràs',37),(24,'Alcoletge',37),(25,'Alcover',1),(26,'L\'Aldea',10),(27,'Aldover',10),(28,'L\'Aleixar',9),(29,'Alella',24),(30,'Alfara de Carles',10),(31,'Alfarràs',37),(32,'Alfés',37),(33,'Alforja',9),(34,'Algerri',27),(35,'Alguaire',37),(36,'Alins',45),(37,'Alió',1),(38,'Almacelles',37),(39,'Almatret',37),(40,'Almenar',37),(41,'Almoster',9),(42,'Alòs de Balaguer',27),(43,'Alp',17),(44,'Alpens',28),(45,'Alpicat',37),(46,'Alt Àneu',45),(47,'Altafulla',40),(48,'Amer',38),(49,'L\'Ametlla de Mar',10),(50,'L\'Ametlla del Vallès',44),(51,'L\'Ampolla',10),(52,'Amposta',26),(53,'Anglès',38),(54,'Anglesola',42),(55,'Arbeca',21),(56,'L\'Arboç',13),(57,'Arbolí',9),(58,'Arbúcies',38),(59,'Arenys de Mar',24),(60,'Arenys de Munt',24),(61,'Argelaguer',22),(62,'Argençola',6),(63,'L\'Argentera',9),(64,'Argentona',24),(65,'L\'Armentera',2),(66,'Arnes',41),(67,'Arres',7),(68,'Arsèguel',4),(69,'Artés',8),(70,'Artesa de Lleida',37),(71,'Artesa de Segre',27),(72,'Ascó',34),(73,'Aspa',37),(74,'Les Avellanes i Santa Linya',27),(75,'Avià',16),(76,'Avinyó',8),(77,'Avinyonet de Puigventós',2),(78,'Avinyonet del Penedès',3),(79,'Badalona',14),(80,'Badia del Vallès',43),(81,'Bagà',16),(82,'Baix Pallars',45),(83,'Balaguer',27),(84,'Balenyà',28),(85,'Balsareny',8),(86,'Banyeres del Penedès',13),(87,'Banyoles',31),(88,'Barbens',32),(89,'Barberà de la Conca',19),(90,'Barberà del Vallès',43),(91,'Barcelona',14),(92,'La Baronia de Rialb',27),(93,'Bàscara',2),(94,'Bassella',4),(95,'Batea',41),(96,'Bausen',7),(97,'Begues',12),(98,'Begur',11),(99,'Belianes',42),(100,'Bellaguarda',21),(101,'Bellcaire d\'Empordà',11),(102,'Bellcaire d\'Urgell',27),(103,'Bell-lloc d\'Urgell',32),(104,'Bellmunt del Priorat',33),(105,'Bellmunt d\'Urgell',27),(106,'Bellprat',6),(107,'Bellpuig',42),(108,'Bellvei',13),(109,'Bellver de Cerdanya',18),(110,'Bellvís',32),(111,'Benavent de Segrià',37),(112,'Benifallet',10),(113,'Benissanet',34),(114,'Berga',16),(115,'Besalú',22),(116,'Bescanó',23),(117,'Beuda',22),(118,'Bigues i Riells',44),(119,'Biosca',36),(120,'La Bisbal de Falset',33),(121,'La Bisbal del Penedès',13),(122,'La Bisbal d\'Empordà',11),(123,'Biure',2),(124,'Blancafort',19),(125,'Blanes',38),(126,'Boadella i les Escaules',2),(127,'Bolvir',17),(128,'Bonastre',13),(129,'Es Bòrdes',7),(130,'Bordils',23),(131,'Les Borges Blanques',21),(132,'Les Borges del Camp',9),(133,'Borrassà',2),(134,'Borredà',16),(135,'Bossòst',7),(136,'Bot',41),(137,'Botarell',9),(138,'Bovera',21),(139,'Bràfim',1),(140,'Breda',38),(141,'El Bruc',6),(142,'El Brull',28),(143,'Brunyola i Sant Martí Sapresa',38),(144,'Cabacés',33),(145,'Cabanabona',27),(146,'Cabanelles',2),(147,'Cabanes',2),(148,'Les Cabanyes',3),(149,'Cabó',4),(150,'Cabra del Camp',1),(151,'Cabrera d\'Anoia',6),(152,'Cabrera de Mar',24),(153,'Cabrils',24),(154,'Cadaqués',2),(155,'Calaf',6),(156,'Calafell',13),(157,'Calders',25),(158,'Caldes de Malavella',38),(159,'Caldes de Montbui',44),(160,'Caldes d\'Estrac',24),(161,'Calella',24),(162,'Calldetenes',28),(163,'Callús',8),(164,'Calonge de Segarra',6),(165,'Calonge i Sant Antoni',11),(166,'Camarasa',27),(167,'Camarles',10),(168,'Cambrils',9),(169,'Camós',31),(170,'Campdevànol',35),(171,'Campelles',35),(172,'Campins',44),(173,'Campllong',23),(174,'Camprodon',35),(175,'Canejan',7),(176,'Canet d\'Adri',23),(177,'Canet de Mar',24),(178,'La Canonja',40),(179,'Canovelles',44),(180,'Cànoves i Samalús',44),(181,'Cantallops',2),(182,'Canyelles',20),(183,'Capafonts',9),(184,'Capçanes',33),(185,'Capellades',6),(186,'Capmany',2),(187,'Capolat',16),(188,'Cardedeu',44),(189,'Cardona',8),(190,'Carme',6),(191,'Caseres',41),(192,'Cassà de la Selva',23),(193,'Casserres',16),(194,'Castell de l\'Areny',16),(195,'Castell de Mur',30),(196,'Castellar de la Ribera',39),(197,'Castellar de n\'Hug',16),(198,'Castellar del Riu',16),(199,'Castellar del Vallès',43),(200,'Castellbell i el Vilar',8),(201,'Castellbisbal',43),(202,'Castellcir',25),(203,'Castelldans',21),(204,'Castelldefels',12),(205,'Castellet i la Gornal',3),(206,'Castellfollit de la Roca',22),(207,'Castellfollit de Riubregós',6),(208,'Castellfollit del Boix',8),(209,'Castellgalí',8),(210,'Castellnou de Bages',8),(211,'Castellnou de Seana',32),(212,'Castelló de Farfanya',27),(213,'Castelló d\'Empúries',2),(214,'Castellolí',6),(215,'Castell-Platja d\'Aro',11),(216,'Castellserà',42),(217,'Castellterçol',25),(218,'Castellvell del Camp',9),(219,'Castellví de la Marca',3),(220,'Castellví de Rosanes',12),(221,'El Catllar',40),(222,'Cava',4),(223,'La Cellera de Ter',38),(224,'Celrà',23),(225,'Centelles',28),(226,'Cercs',16),(227,'Cerdanyola del Vallès',43),(228,'Cervelló',12),(229,'Cervera',36),(230,'Cervià de les Garrigues',21),(231,'Cervià de Ter',23),(232,'Cistella',2),(233,'Ciutadilla',42),(234,'Clariana de Cardener',39),(235,'El Cogul',21),(236,'Colera',2),(237,'Coll de Nargó',4),(238,'Collbató',12),(239,'Colldejou',9),(240,'Collsuspina',25),(241,'Colomers',11),(242,'La Coma i la Pedra',39),(243,'Conca de Dalt',30),(244,'Conesa',19),(245,'Constantí',40),(246,'Copons',6),(247,'Corbera de Llobregat',12),(248,'Corbera d\'Ebre',41),(249,'Corbins',37),(250,'Corçà',11),(251,'Cornellà de Llobregat',12),(252,'Cornellà del Terri',31),(253,'Cornudella de Montsant',33),(254,'Creixell',40),(255,'Crespià',31),(256,'Cruïlles, Monells i Sant Sadurní de l\'Heura',11),(257,'Cubelles',20),(258,'Cubells',27),(259,'Cunit',13),(260,'Darnius',2),(261,'Das',17),(262,'Deltebre',10),(263,'Dosrius',24),(264,'Duesaigües',9),(265,'L\'Escala',2),(266,'Esparreguera',12),(267,'Espinelves',29),(268,'L\'Espluga Calba',21),(269,'L\'Espluga de Francolí',19),(270,'Esplugues de Llobregat',12),(271,'Espolla',2),(272,'Esponellà',31),(273,'Espot',45),(274,'L\'Espunyola',16),(275,'L\'Esquirol',28),(276,'Estamariu',4),(277,'L\'Estany',25),(278,'Estaràs',36),(279,'Esterri d\'Àneu',45),(280,'Esterri de Cardós',45),(281,'Falset',33),(282,'El Far d\'Empordà',2),(283,'Farrera',45),(284,'La Fatarella',41),(285,'La Febró',9),(286,'Figaró-Montmany',44),(287,'Fígols',16),(288,'Fígols i Alinyà',4),(289,'La Figuera',33),(290,'Figueres',2),(291,'Figuerola del Camp',1),(292,'Flaçà',23),(293,'Flix',34),(294,'La Floresta',21),(295,'Fogars de la Selva',38),(296,'Fogars de Montclús',44),(297,'Foixà',11),(298,'Folgueroles',28),(299,'Fondarella',32),(300,'Fonollosa',8),(301,'Fontanals de Cerdanya',17),(302,'Fontanilles',11),(303,'Fontcoberta',31),(304,'Font-rubí',3),(305,'Foradada',27),(306,'Forallac',11),(307,'Forès',19),(308,'Fornells de la Selva',23),(309,'Fortià',2),(310,'Les Franqueses del Vallès',44),(311,'Freginals',26),(312,'La Fuliola',42),(313,'Fulleda',21),(314,'Gaià',8),(315,'La Galera',26),(316,'Gallifa',43),(317,'Gandesa',41),(318,'Garcia',34),(319,'Els Garidells',1),(320,'La Garriga',44),(321,'Garrigàs',2),(322,'Garrigoles',11),(323,'Garriguella',2),(324,'Gavà',12),(325,'Gavet de la Conca',30),(326,'Gelida',3),(327,'Ger',17),(328,'Gimenells i el Pla de la Font',37),(329,'Ginestar',34),(330,'Girona',23),(331,'Gironella',16),(332,'Gisclareny',16),(333,'Godall',26),(334,'Golmés',32),(335,'Gombrèn',35),(336,'Gósol',16),(337,'La Granada',3),(338,'La Granadella',21),(339,'Granera',25),(340,'La Granja d\'Escarp',37),(341,'Granollers',44),(342,'Granyanella',36),(343,'Granyena de les Garrigues',21),(344,'Granyena de Segarra',36),(345,'Gratallops',33),(346,'Gualba',44),(347,'Gualta',11),(348,'Guardiola de Berguedà',16),(349,'Els Guiamets',33),(350,'Guils de Cerdanya',17),(351,'Guimerà',42),(352,'La Guingueta d\'Àneu',45),(353,'Guissona',36),(354,'Guixers',39),(355,'Gurb',28),(356,'Horta de Sant Joan',41),(357,'L\'Hospitalet de Llobregat',14),(358,'Els Hostalets de Pierola',6),(359,'Hostalric',38),(360,'Igualada',6),(361,'Isona i Conca Dellà',30),(362,'Isòvol',17),(363,'Ivars de Noguera',27),(364,'Ivars d\'Urgell',32),(365,'Ivorra',36),(366,'Jafre',11),(367,'La Jonquera',2),(368,'Jorba',6),(369,'Josa i Tuixén',4),(370,'Juià',23),(371,'Juncosa',21),(372,'Juneda',21),(373,'Les',7),(374,'Linyola',32),(375,'La Llacuna',6),(376,'Lladó',2),(377,'Lladorre',45),(378,'Lladurs',39),(379,'La Llagosta',44),(380,'Llagostera',23),(381,'Llambilles',23),(382,'Llanars',35),(383,'Llançà',2),(384,'Llardecans',37),(385,'Llavorsí',45),(386,'Lleida',37),(387,'Llers',2),(388,'Lles de Cerdanya',18),(389,'Lliçà d\'Amunt',44),(390,'Lliçà de Vall',44),(391,'Llimiana',30),(392,'Llinars del Vallès',44),(393,'Llívia',17),(394,'El Lloar',33),(395,'Llobera',39),(396,'Llorac',19),(397,'Llorenç del Penedès',13),(398,'Lloret de Mar',38),(399,'Les Llosses',35),(400,'Lluçà',28),(401,'Maçanet de Cabrenys',2),(402,'Maçanet de la Selva',38),(403,'Madremanya',23),(404,'Maià de Montcal',22),(405,'Maials',37),(406,'Maldà',42),(407,'Malgrat de Mar',24),(408,'Malla',28),(409,'Manlleu',28),(410,'Manresa',8),(411,'Marçà',33),(412,'Margalef',33),(413,'Marganell',8),(414,'Martorell',12),(415,'Martorelles',44),(416,'Mas de Barberans',26),(417,'Masarac',2),(418,'Masdenverge',26),(419,'Les Masies de Roda',28),(420,'Les Masies de Voltregà',28),(421,'Masllorenç',13),(422,'El Masnou',24),(423,'La Masó',1),(424,'Maspujols',9),(425,'Masquefa',6),(426,'El Masroig',33),(427,'Massalcoreig',37),(428,'Massanes',38),(429,'Massoteres',36),(430,'Matadepera',43),(431,'Mataró',24),(432,'Mediona',3),(433,'Menàrguens',27),(434,'Meranges',17),(435,'Mieres',22),(436,'El Milà',1),(437,'Miralcamp',32),(438,'Miravet',34),(439,'Moià',25),(440,'El Molar',33),(441,'Molins de Rei',12),(442,'Mollerussa',32),(443,'Mollet de Peralada',2),(444,'Mollet del Vallès',44),(445,'Molló',35),(446,'La Molsosa',39),(447,'Monistrol de Calders',25),(448,'Monistrol de Montserrat',8),(449,'Montagut i Oix',22),(450,'Montblanc',19),(451,'Montbrió del Camp',9),(452,'Montcada i Reixac',43),(453,'Montclar',16),(454,'Montellà i Martinet',18),(455,'Montesquiu',28),(456,'Montferrer i Castellbò',4),(457,'Montferri',1),(458,'Montgai',27),(459,'Montgat',24),(460,'Montmajor',16),(461,'Montmaneu',6),(462,'El Montmell',13),(463,'Montmeló',44),(464,'Montoliu de Lleida',37),(465,'Montoliu de Segarra',36),(466,'Montornès de Segarra',36),(467,'Montornès del Vallès',44),(468,'Mont-ral',1),(469,'Mont-ras',11),(470,'Mont-roig del Camp',9),(471,'Montseny',44),(472,'Móra d\'Ebre',34),(473,'Móra la Nova',34),(474,'El Morell',40),(475,'La Morera de Montsant',33),(476,'Muntanyola',28),(477,'Mura',8),(478,'Nalec',42),(479,'Naut Aran',7),(480,'Navarcles',8),(481,'Navàs',8),(482,'Navata',2),(483,'Navès',39),(484,'La Nou de Berguedà',16),(485,'La Nou de Gaià',40),(486,'Nulles',1),(487,'Odèn',39),(488,'Òdena',6),(489,'Ogassa',35),(490,'Olèrdola',3),(491,'Olesa de Bonesvalls',3),(492,'Olesa de Montserrat',12),(493,'Oliana',4),(494,'Oliola',27),(495,'Olius',39),(496,'Olivella',20),(497,'Olost',28),(498,'Olot',22),(499,'Les Oluges',36),(500,'Olvan',16),(501,'Els Omellons',21),(502,'Els Omells de na Gaia',42),(503,'Ordis',2),(504,'Organyà',4),(505,'Orís',28),(506,'Oristà',28),(507,'Orpí',6),(508,'Òrrius',24),(509,'Os de Balaguer',27),(510,'Osor',38),(511,'Ossó de Sió',42),(512,'Pacs del Penedès',3),(513,'Palafolls',24),(514,'Palafrugell',11),(515,'Palamós',11),(516,'El Palau d\'Anglesola',32),(517,'Palau de Santa Eulàlia',2),(518,'Palau-sator',11),(519,'Palau-saverdera',2),(520,'Palau-solità i Plegamans',43),(521,'Els Pallaresos',40),(522,'Pallejà',12),(523,'La Palma de Cervelló',12),(524,'La Palma d\'Ebre',34),(525,'Palol de Revardit',31),(526,'Pals',11),(527,'El Papiol',12),(528,'Pardines',35),(529,'Parets del Vallès',44),(530,'Parlavà',11),(531,'Passanant i Belltall',19),(532,'Pau',2),(533,'Paüls',10),(534,'Pedret i Marzà',2),(535,'Penelles',27),(536,'La Pera',11),(537,'Perafita',28),(538,'Perafort',40),(539,'Peralada',2),(540,'Peramola',4),(541,'El Perelló',10),(542,'Piera',6),(543,'Les Piles',19),(544,'Pineda de Mar',24),(545,'El Pinell de Brai',41),(546,'Pinell de Solsonès',39),(547,'Pinós',39),(548,'Pira',19),(549,'El Pla de Santa Maria',1),(550,'El Pla del Penedès',3),(551,'Les Planes d\'Hostoles',22),(552,'Planoles',35),(553,'Els Plans de Sió',36),(554,'El Poal',32),(555,'La Pobla de Cérvoles',21),(556,'La Pobla de Claramunt',6),(557,'La Pobla de Lillet',16),(558,'La Pobla de Mafumet',40),(559,'La Pobla de Massaluca',41),(560,'La Pobla de Montornès',40),(561,'La Pobla de Segur',30),(562,'Poboleda',33),(563,'Polinyà',43),(564,'El Pont d\'Armentera',1),(565,'El Pont de Bar',4),(566,'Pont de Molins',2),(567,'El Pont de Suert',5),(568,'El Pont de Vilomara i Rocafort',8),(569,'Pontils',19),(570,'Pontons',3),(571,'Pontós',2),(572,'Ponts',27),(573,'Porqueres',31),(574,'Porrera',33),(575,'El Port de la Selva',2),(576,'Portbou',2),(577,'La Portella',37),(578,'Pradell de la Teixeta',33),(579,'Prades',9),(580,'Prat de Comte',41),(581,'El Prat de Llobregat',12),(582,'Pratdip',9),(583,'Prats de Lluçanès',28),(584,'Els Prats de Rei',6),(585,'Prats i Sansor',18),(586,'Preixana',42),(587,'Preixens',27),(588,'Premià de Dalt',24),(589,'Premià de Mar',24),(590,'Les Preses',22),(591,'Prullans',18),(592,'Puigcerdà',17),(593,'Puigdàlber',3),(594,'Puiggròs',21),(595,'Puigpelat',1),(596,'Puig-reig',16),(597,'Puigverd d\'Agramunt',42),(598,'Puigverd de Lleida',37),(599,'Pujalt',6),(600,'La Quar',16),(601,'Quart',23),(602,'Queralbs',35),(603,'Querol',1),(604,'Rabós',2),(605,'Rajadell',8),(606,'Rasquera',34),(607,'Regencós',11),(608,'Rellinars',43),(609,'Renau',40),(610,'Reus',9),(611,'Rialp',45),(612,'La Riba',1),(613,'Riba-roja d\'Ebre',34),(614,'Ribera d\'Ondara',36),(615,'Ribera d\'Urgellet',4),(616,'Ribes de Freser',35),(617,'Riells i Viabrea',38),(618,'La Riera de Gaià',40),(619,'Riner',39),(620,'Ripoll',35),(621,'Ripollet',43),(622,'Riu de Cerdanya',18),(623,'Riudarenes',38),(624,'Riudaura',22),(625,'Riudecanyes',9),(626,'Riudecols',9),(627,'Riudellots de la Selva',38),(628,'Riudoms',9),(629,'Riumors',2),(630,'La Roca del Vallès',44),(631,'Rocafort de Queralt',19),(632,'Roda de Berà',40),(633,'Roda de Ter',28),(634,'Rodonyà',1),(635,'Roquetes',10),(636,'Roses',2),(637,'Rosselló',37),(638,'El Rourell',1),(639,'Rubí',43),(640,'Rubió',6),(641,'Rupià',11),(642,'Rupit i Pruit',28),(643,'Sabadell',43),(644,'Sagàs',16),(645,'Salàs de Pallars',30),(646,'Saldes',16),(647,'Sales de Llierca',22),(648,'Sallent',8),(649,'Salomó',40),(650,'Salou',40),(651,'Salt',23),(652,'Sanaüja',36),(653,'Sant Adrià de Besòs',14),(654,'Sant Agustí de Lluçanès',28),(655,'Sant Andreu de la Barca',12),(656,'Sant Andreu de Llavaneres',24),(657,'Sant Andreu Salou',23),(658,'Sant Aniol de Finestres',22),(659,'Sant Antoni de Vilamajor',44),(660,'Sant Bartomeu del Grau',28),(661,'Sant Boi de Llobregat',12),(662,'Sant Boi de Lluçanès',28),(663,'Sant Carles de la Ràpita',26),(664,'Sant Cebrià de Vallalta',24),(665,'Sant Celoni',44),(666,'Sant Climent de Llobregat',12),(667,'Sant Climent Sescebes',2),(668,'Sant Cugat del Vallès',43),(669,'Sant Cugat Sesgarrigues',3),(670,'Sant Esteve de la Sarga',30),(671,'Sant Esteve de Palautordera',44),(672,'Sant Esteve Sesrovires',12),(673,'Sant Feliu de Buixalleu',38),(674,'Sant Feliu de Codines',44),(675,'Sant Feliu de Guíxols',11),(676,'Sant Feliu de Llobregat',12),(677,'Sant Feliu de Pallerols',22),(678,'Sant Feliu Sasserra',8),(679,'Sant Ferriol',22),(680,'Sant Fost de Campsentelles',44),(681,'Sant Fruitós de Bages',8),(682,'Sant Gregori',23),(683,'Sant Guim de Freixenet',36),(684,'Sant Guim de la Plana',36),(685,'Sant Hilari Sacalm',38),(686,'Sant Hipòlit de Voltregà',28),(687,'Sant Iscle de Vallalta',24),(688,'Sant Jaume de Frontanyà',16),(689,'Sant Jaume de Llierca',22),(690,'Sant Jaume dels Domenys',13),(691,'Sant Jaume d\'Enveja',26),(692,'Sant Joan de les Abadesses',35),(693,'Sant Joan de Mollet',23),(694,'Sant Joan de Vilatorrada',8),(695,'Sant Joan Despí',12),(696,'Sant Joan les Fonts',22),(697,'Sant Jordi Desvalls',23),(698,'Sant Julià de Cerdanyola',16),(699,'Sant Julià de Ramis',23),(700,'Sant Julià de Vilatorta',28),(701,'Sant Julià del Llor i Bonmatí',38),(702,'Sant Just Desvern',12),(703,'Sant Llorenç de la Muga',2),(704,'Sant Llorenç de Morunys',39),(705,'Sant Llorenç d\'Hortons',3),(706,'Sant Llorenç Savall',43),(707,'Sant Martí d\'Albars',28),(708,'Sant Martí de Centelles',28),(709,'Sant Martí de Llémena',23),(710,'Sant Martí de Riucorb',42),(711,'Sant Martí de Tous',6),(712,'Sant Martí Sarroca',3),(713,'Sant Martí Sesgueioles',6),(714,'Sant Martí Vell',23),(715,'Sant Mateu de Bages',8),(716,'Sant Miquel de Campmajor',31),(717,'Sant Miquel de Fluvià',2),(718,'Sant Mori',2),(719,'Sant Pau de Segúries',35),(720,'Sant Pere de Ribes',20),(721,'Sant Pere de Riudebitlles',3),(722,'Sant Pere de Torelló',28),(723,'Sant Pere de Vilamajor',44),(724,'Sant Pere Pescador',2),(725,'Sant Pere Sallavinera',6),(726,'Sant Pol de Mar',24),(727,'Sant Quintí de Mediona',3),(728,'Sant Quirze de Besora',28),(729,'Sant Quirze del Vallès',43),(730,'Sant Quirze Safaja',25),(731,'Sant Ramon',36),(732,'Sant Sadurní d\'Anoia',3),(733,'Sant Sadurní d\'Osormort',28),(734,'Sant Salvador de Guardiola',8),(735,'Sant Vicenç de Castellet',8),(736,'Sant Vicenç de Montalt',24),(737,'Sant Vicenç de Torelló',28),(738,'Sant Vicenç dels Horts',12),(739,'Santa Bàrbara',26),(740,'Santa Cecília de Voltregà',28),(741,'Santa Coloma de Cervelló',12),(742,'Santa Coloma de Farners',38),(743,'Santa Coloma de Gramenet',14),(744,'Santa Coloma de Queralt',19),(745,'Santa Cristina d\'Aro',11),(746,'Santa Eugènia de Berga',28),(747,'Santa Eulàlia de Riuprimer',28),(748,'Santa Eulàlia de Ronçana',44),(749,'Santa Fe del Penedès',3),(750,'Santa Llogaia d\'Àlguema',2),(751,'Santa Margarida de Montbui',6),(752,'Santa Margarida i els Monjos',3),(753,'Santa Maria de Besora',28),(754,'Santa Maria de Martorelles',44),(755,'Santa Maria de Merlès',16),(756,'Santa Maria de Miralles',6),(757,'Santa Maria de Palautordera',44),(758,'Santa Maria d\'Oló',25),(759,'Santa Oliva',13),(760,'Santa Pau',22),(761,'Santa Perpètua de Mogoda',43),(762,'Santa Susanna',24),(763,'Santpedor',8),(764,'Sarral',19),(765,'Sarrià de Ter',23),(766,'Sarroca de Bellera',30),(767,'Sarroca de Lleida',37),(768,'Saus, Camallera i Llampaies',2),(769,'Savallà del Comtat',19),(770,'La Secuita',40),(771,'La Selva de Mar',2),(772,'La Selva del Camp',9),(773,'Senan',19),(774,'La Sénia',26),(775,'Senterada',30),(776,'La Sentiu de Sió',27),(777,'Sentmenat',43),(778,'Serinyà',31),(779,'Seròs',37),(780,'Serra de Daró',11),(781,'Setcases',35),(782,'La Seu d\'Urgell',4),(783,'Seva',28),(784,'Sidamon',32),(785,'Sils',38),(786,'Sitges',20),(787,'Siurana',2),(788,'Sobremunt',28),(789,'El Soleràs',21),(790,'Solivella',19),(791,'Solsona',39),(792,'Sora',28),(793,'Soriguera',45),(794,'Sort',45),(795,'Soses',37),(796,'Subirats',3),(797,'Sudanell',37),(798,'Sunyer',37),(799,'Súria',8),(800,'Susqueda',38),(801,'Tagamanent',44),(802,'Talamanca',8),(803,'Talarn',30),(804,'Talavera',36),(805,'La Tallada d\'Empordà',11),(806,'Taradell',28),(807,'Tarragona',40),(808,'Tàrrega',42),(809,'Tarrés',21),(810,'Tarroja de Segarra',36),(811,'Tavèrnoles',28),(812,'Tavertet',28),(813,'Teià',24),(814,'Térmens',27),(815,'Terrades',2),(816,'Terrassa',43),(817,'Tiana',24),(818,'Tírvia',45),(819,'Tiurana',27),(820,'Tivenys',10),(821,'Tivissa',34),(822,'Tona',28),(823,'Torà',36),(824,'Tordera',24),(825,'Torelló',28),(826,'Els Torms',21),(827,'Tornabous',42),(828,'La Torre de Cabdella',30),(829,'La Torre de Claramunt',6),(830,'La Torre de Fontaubella',33),(831,'La Torre de l\'Espanyol',34),(832,'Torrebesses',37),(833,'Torredembarra',40),(834,'Torrefarrera',37),(835,'Torrefeta i Florejacs',36),(836,'Torregrossa',32),(837,'Torrelameu',27),(838,'Torrelavit',3),(839,'Torrelles de Foix',3),(840,'Torrelles de Llobregat',12),(841,'Torrent',11),(842,'Torres de Segre',37),(843,'Torre-serona',37),(844,'Torroella de Fluvià',2),(845,'Torroella de Montgrí',11),(846,'Torroja del Priorat',33),(847,'Tortellà',22),(848,'Tortosa',10),(849,'Toses',35),(850,'Tossa de Mar',38),(851,'Tremp',30),(852,'Ullà',11),(853,'Ullastrell',43),(854,'Ullastret',11),(855,'Ulldecona',26),(856,'Ulldemolins',33),(857,'Ultramort',11),(858,'Urús',17),(859,'Vacarisses',43),(860,'La Vajol',2),(861,'La Vall de Bianya',22),(862,'La Vall de Boí',5),(863,'Vall de Cardós',45),(864,'La Vall d\'en Bas',22),(865,'Vallbona d\'Anoia',6),(866,'Vallbona de les Monges',42),(867,'Vallcebre',16),(868,'Vallclara',19),(869,'Vallfogona de Balaguer',27),(870,'Vallfogona de Ripollès',35),(871,'Vallfogona de Riucorb',19),(872,'Vallgorguina',44),(873,'Vallirana',12),(874,'Vall-llobrega',11),(875,'Vallmoll',1),(876,'Vallromanes',44),(877,'Valls',1),(878,'Les Valls d\'Aguilar',4),(879,'Les Valls de Valira',4),(880,'Vandellòs i l\'Hospitalet de l\'Infant',9),(881,'La Vansa i Fórnols',4),(882,'Veciana',6),(883,'El Vendrell',13),(884,'Ventalló',2),(885,'Verdú',42),(886,'Verges',11),(887,'Vespella de Gaià',40),(888,'Vic',28),(889,'Vidrà',29),(890,'Vidreres',38),(891,'Vielha e Mijaran',7),(892,'Vilabella',1),(893,'Vilabertran',2),(894,'Vilablareix',23),(895,'Vilada',16),(896,'Viladamat',2),(897,'Viladasens',23),(898,'Viladecans',12),(899,'Viladecavalls',43),(900,'Vilademuls',31),(901,'Viladrau',29),(902,'Vilafant',2),(903,'Vilafranca del Penedès',3),(904,'Vilagrassa',42),(905,'Vilajuïga',2),(906,'Vilalba dels Arcs',41),(907,'Vilalba Sasserra',44),(908,'Vilaller',5),(909,'Vilallonga de Ter',35),(910,'Vilallonga del Camp',40),(911,'Vilamacolum',2),(912,'Vilamalla',2),(913,'Vilamaniscle',2),(914,'Vilamòs',7),(915,'Vilanant',2),(916,'Vilanova de Bellpuig',32),(917,'Vilanova de la Barca',37),(918,'Vilanova de l\'Aguda',27),(919,'Vilanova de Meià',27),(920,'Vilanova de Prades',19),(921,'Vilanova de Sau',28),(922,'Vilanova de Segrià',37),(923,'Vilanova del Camí',6),(924,'Vilanova del Vallès',44),(925,'Vilanova d\'Escornalbou',9),(926,'Vilanova i la Geltrú',20),(927,'Vilaplana',9),(928,'Vila-rodona',1),(929,'Vila-sacra',2),(930,'Vila-sana',32),(931,'Vila-seca',40),(932,'Vilassar de Dalt',24),(933,'Vilassar de Mar',24),(934,'Vilaür',2),(935,'Vilaverd',19),(936,'La Vilella Alta',33),(937,'La Vilella Baixa',33),(938,'Vilobí del Penedès',3),(939,'Vilobí d\'Onyar',38),(940,'Vilopriu',11),(941,'El Vilosell',21),(942,'Vimbodí i Poblet',19),(943,'Vinaixa',21),(944,'Vinebre',34),(945,'Vinyols i els Arcs',9),(946,'Viver i Serrateix',16),(947,'Xerta',10);
+/*!40000 ALTER TABLE `municipis` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`recursos` (
-  `id` INT NOT NULL,
-  `codi` VARCHAR(45) NOT NULL,
-  `actiu` TINYINT NOT NULL,
-  `tipus_recursos_id` INT NOT NULL,
+--
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `provincies`
+--
+
+DROP TABLE IF EXISTS `provincies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `provincies` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `provincies`
+--
+
+LOCK TABLES `provincies` WRITE;
+/*!40000 ALTER TABLE `provincies` DISABLE KEYS */;
+INSERT INTO `provincies` VALUES (1,'Barcelona'),(2,'Girona'),(3,'Lleida'),(4,'Tarragona');
+/*!40000 ALTER TABLE `provincies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `recursos`
+--
+
+DROP TABLE IF EXISTS `recursos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `recursos` (
+  `id` int(11) NOT NULL,
+  `codi` varchar(45) NOT NULL,
+  `actiu` tinyint(4) NOT NULL,
+  `tipus_recursos_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_recursos_tipus_recursos1_idx` (`tipus_recursos_id` ASC),
-  CONSTRAINT `fk_recursos_tipus_recursos1`
-    FOREIGN KEY (`tipus_recursos_id`)
-    REFERENCES `broggi`.`tipus_recursos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  KEY `fk_recursos_tipus_recursos1_idx` (`tipus_recursos_id`),
+  CONSTRAINT `fk_recursos_tipus_recursos1` FOREIGN KEY (`tipus_recursos_id`) REFERENCES `tipus_recursos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `recursos`
+--
 
--- -----------------------------------------------------
--- Table `broggi`.`usuaris`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`usuaris` ;
+LOCK TABLES `recursos` WRITE;
+/*!40000 ALTER TABLE `recursos` DISABLE KEYS */;
+INSERT INTO `recursos` VALUES (1,'1',1,1);
+/*!40000 ALTER TABLE `recursos` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`usuaris` (
-  `id` INT NOT NULL,
-  `username` VARCHAR(45) NOT NULL,
-  `contrasenya` VARCHAR(256) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `nom` VARCHAR(45) NOT NULL,
-  `cognoms` VARCHAR(45) NOT NULL,
-  `rols_id` INT NOT NULL,
-  `recursos_id` INT NOT NULL,
+--
+-- Table structure for table `rols`
+--
+
+DROP TABLE IF EXISTS `rols`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rols` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rols`
+--
+
+LOCK TABLES `rols` WRITE;
+/*!40000 ALTER TABLE `rols` DISABLE KEYS */;
+INSERT INTO `rols` VALUES (1,'Administrador'),(2,'CECOS'),(3,'Recurs');
+/*!40000 ALTER TABLE `rols` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sexes`
+--
+
+DROP TABLE IF EXISTS `sexes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sexes` (
+  `id` int(11) NOT NULL,
+  `sexe` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_usuaris_rols1_idx` (`rols_id` ASC),
-  INDEX `fk_usuaris_recursos1_idx` (`recursos_id` ASC),
-  CONSTRAINT `fk_usuaris_rols1`
-    FOREIGN KEY (`rols_id`)
-    REFERENCES `broggi`.`rols` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuaris_recursos1`
-    FOREIGN KEY (`recursos_id`)
-    REFERENCES `broggi`.`recursos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  UNIQUE KEY `sexe_UNIQUE` (`sexe`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `sexes`
+--
 
--- -----------------------------------------------------
--- Table `broggi`.`incidencies`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`incidencies` ;
+LOCK TABLES `sexes` WRITE;
+/*!40000 ALTER TABLE `sexes` DISABLE KEYS */;
+INSERT INTO `sexes` VALUES (2,'Dona'),(1,'Home');
+/*!40000 ALTER TABLE `sexes` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`incidencies` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `num_incident` INT NOT NULL,
-  `data` DATE NOT NULL,
-  `hora` TIME NOT NULL,
-  `telefon_alertant` INT(10) NOT NULL,
-  `adreca` VARCHAR(150) NOT NULL,
-  `adreca_complement` VARCHAR(150) NULL,
-  `descripcio` VARCHAR(256) NOT NULL,
-  `nom_metge` VARCHAR(45) NULL,
-  `tipus_incidencies_id` INT NOT NULL,
-  `alertants_id` INT NOT NULL,
-  `municipis_id` INT NOT NULL,
-  `usuaris_id` INT NOT NULL,
+--
+-- Table structure for table `tipus_alertants`
+--
+
+DROP TABLE IF EXISTS `tipus_alertants`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipus_alertants` (
+  `id` int(11) NOT NULL,
+  `tipus` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `num_incident_UNIQUE` (`num_incident` ASC),
-  INDEX `fk_incidencies_tipus_incidents1_idx` (`tipus_incidencies_id` ASC),
-  INDEX `fk_incidencies_alertants1_idx` (`alertants_id` ASC),
-  INDEX `fk_incidencies_municipis1_idx` (`municipis_id` ASC),
-  INDEX `fk_incidencies_usuaris1_idx` (`usuaris_id` ASC),
-  CONSTRAINT `fk_incidencies_tipus_incidents1`
-    FOREIGN KEY (`tipus_incidencies_id`)
-    REFERENCES `broggi`.`tipus_incidencies` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_incidencies_alertants1`
-    FOREIGN KEY (`alertants_id`)
-    REFERENCES `broggi`.`alertants` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_incidencies_municipis1`
-    FOREIGN KEY (`municipis_id`)
-    REFERENCES `broggi`.`municipis` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_incidencies_usuaris1`
-    FOREIGN KEY (`usuaris_id`)
-    REFERENCES `broggi`.`usuaris` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  UNIQUE KEY `tipus_UNIQUE` (`tipus`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `tipus_alertants`
+--
 
--- -----------------------------------------------------
--- Table `broggi`.`sexes`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`sexes` ;
+LOCK TABLES `tipus_alertants` WRITE;
+/*!40000 ALTER TABLE `tipus_alertants` DISABLE KEYS */;
+INSERT INTO `tipus_alertants` VALUES (5,'Accidental'),(2,'Afectat'),(1,'Centre sanitari'),(3,'Entorn afectat'),(4,'VIP');
+/*!40000 ALTER TABLE `tipus_alertants` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`sexes` (
-  `id` INT NOT NULL,
-  `sexe` VARCHAR(45) NOT NULL,
+--
+-- Table structure for table `tipus_incidencies`
+--
+
+DROP TABLE IF EXISTS `tipus_incidencies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipus_incidencies` (
+  `id` int(11) NOT NULL,
+  `tipus` varchar(45) NOT NULL,
+  `video` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `sexe_UNIQUE` (`sexe` ASC))
-ENGINE = InnoDB;
+  UNIQUE KEY `tipus_UNIQUE` (`tipus`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `tipus_incidencies`
+--
 
--- -----------------------------------------------------
--- Table `broggi`.`afectats`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`afectats` ;
+LOCK TABLES `tipus_incidencies` WRITE;
+/*!40000 ALTER TABLE `tipus_incidencies` DISABLE KEYS */;
+INSERT INTO `tipus_incidencies` VALUES (1,'Accident',''),(2,'Traumatisme',''),(3,'Malaltia lloc públic',''),(4,'Malaltia domicili',''),(5,'Consulta mèdica',''),(6,'Transport sanitari','');
+/*!40000 ALTER TABLE `tipus_incidencies` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`afectats` (
-  `id` INT NOT NULL,
-  `telefon` INT(10) NOT NULL,
-  `cip` VARCHAR(45) NULL,
-  `nom` VARCHAR(45) NULL,
-  `cognoms` VARCHAR(45) NULL,
-  `edat` VARCHAR(45) NULL,
-  `te_cip` TINYINT NULL,
-  `sexes_id` INT NOT NULL,
+--
+-- Table structure for table `tipus_recursos`
+--
+
+DROP TABLE IF EXISTS `tipus_recursos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipus_recursos` (
+  `id` int(11) NOT NULL,
+  `tipus` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_afectats_sexes1_idx` (`sexes_id` ASC),
-  CONSTRAINT `fk_afectats_sexes1`
-    FOREIGN KEY (`sexes_id`)
-    REFERENCES `broggi`.`sexes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  UNIQUE KEY `tipus_UNIQUE` (`tipus`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `tipus_recursos`
+--
 
--- -----------------------------------------------------
--- Table `broggi`.`incidencies_has_afectats`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`incidencies_has_afectats` ;
+LOCK TABLES `tipus_recursos` WRITE;
+/*!40000 ALTER TABLE `tipus_recursos` DISABLE KEYS */;
+INSERT INTO `tipus_recursos` VALUES (3,'Amb. Assitencial-Tango'),(1,'Amb. Medicalitzada-Mike'),(2,'Amb. Sanitaritzada-India'),(4,'Helicopter medicalitzat');
+/*!40000 ALTER TABLE `tipus_recursos` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_afectats` (
-  `incidencies_id` INT NOT NULL,
-  `afectats_id` INT NOT NULL,
-  PRIMARY KEY (`incidencies_id`, `afectats_id`),
-  INDEX `fk_incidencies_has_afectats_afectats1_idx` (`afectats_id` ASC),
-  INDEX `fk_incidencies_has_afectats_incidencies_idx` (`incidencies_id` ASC),
-  CONSTRAINT `fk_incidencies_has_afectats_incidencies`
-    FOREIGN KEY (`incidencies_id`)
-    REFERENCES `broggi`.`incidencies` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_incidencies_has_afectats_afectats1`
-    FOREIGN KEY (`afectats_id`)
-    REFERENCES `broggi`.`afectats` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Table structure for table `usuaris`
+--
 
+DROP TABLE IF EXISTS `usuaris`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuaris` (
+  `id` int(11) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `contrasenya` varchar(256) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `nom` varchar(45) NOT NULL,
+  `cognoms` varchar(45) NOT NULL,
+  `rols_id` int(11) NOT NULL,
+  `recursos_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_usuaris_rols1_idx` (`rols_id`),
+  KEY `fk_usuaris_recursos1_idx` (`recursos_id`),
+  CONSTRAINT `fk_usuaris_recursos1` FOREIGN KEY (`recursos_id`) REFERENCES `recursos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuaris_rols1` FOREIGN KEY (`rols_id`) REFERENCES `rols` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- -----------------------------------------------------
--- Table `broggi`.`incidencies_has_recursos`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `broggi`.`incidencies_has_recursos` ;
+--
+-- Dumping data for table `usuaris`
+--
 
-CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_recursos` (
-  `incidencies_id` INT NOT NULL,
-  `recursos_id` INT NOT NULL,
-  `hora_activacio` DATETIME NULL,
-  `hora_mobilitzacio` DATETIME NULL,
-  `hora_assistencia` DATETIME NULL,
-  `hora_transport` DATETIME NULL,
-  `hora_arribada_hospital` DATETIME NULL,
-  `hora_transferencia` DATETIME NULL,
-  `hora_finalitzacio` DATETIME NULL,
-  `prioritat` INT NULL,
-  `desti` VARCHAR(100) NULL,
-  PRIMARY KEY (`incidencies_id`, `recursos_id`),
-  INDEX `fk_incidencies_has_recursos_recursos1_idx` (`recursos_id` ASC),
-  INDEX `fk_incidencies_has_recursos_incidencies1_idx` (`incidencies_id` ASC),
-  CONSTRAINT `fk_incidencies_has_recursos_incidencies1`
-    FOREIGN KEY (`incidencies_id`)
-    REFERENCES `broggi`.`incidencies` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_incidencies_has_recursos_recursos1`
-    FOREIGN KEY (`recursos_id`)
-    REFERENCES `broggi`.`recursos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = '	';
+LOCK TABLES `usuaris` WRITE;
+/*!40000 ALTER TABLE `usuaris` DISABLE KEYS */;
+INSERT INTO `usuaris` VALUES (1,'admin','$2y$10$WzJGSzjr45.84Fx5.j0xmeDGlIC67pN40hGmk/lkEftppqbYO1.dO','admin@cepnet.net','AdminBroggi','Apellidos',1,1),(2,'administratiu','$2y$10$wqSPLw6BSZ.Q6rrBfvr2Ve1YqSgaxAoPqVOQVFIrvOMrFz98ijExe','administratiu@cepnet.net','AdministratiuBroggi','Apellidos',2,1),(3,'recurs','$2y$10$Waq/ZF4v82AxoJndfWnCA.IO9g61g2nrasZjuo9/naoMvXuHhvCJ6','recurs@cepnet.net','RecursBroggi','Apellidos',3,1);
+/*!40000 ALTER TABLE `usuaris` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
--- -----------------------------------------------------
--- Data for table `broggi`.`tipus_incidencies`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (1, 'Accident', DEFAULT);
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (2, 'Traumatisme', DEFAULT);
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (3, 'Malaltia lloc públic', DEFAULT);
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (4, 'Malaltia domicili', DEFAULT);
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (5, 'Consulta mèdica', DEFAULT);
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (6, 'Transport sanitari', DEFAULT);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `broggi`.`tipus_alertants`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`tipus_alertants` (`id`, `tipus`) VALUES (1, 'Centre sanitari');
-INSERT INTO `broggi`.`tipus_alertants` (`id`, `tipus`) VALUES (2, 'Afectat');
-INSERT INTO `broggi`.`tipus_alertants` (`id`, `tipus`) VALUES (3, 'Entorn afectat');
-INSERT INTO `broggi`.`tipus_alertants` (`id`, `tipus`) VALUES (4, 'VIP');
-INSERT INTO `broggi`.`tipus_alertants` (`id`, `tipus`) VALUES (5, 'Accidental');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `broggi`.`provincies`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`provincies` (`id`, `nom`) VALUES (1, 'Barcelona');
-INSERT INTO `broggi`.`provincies` (`id`, `nom`) VALUES (2, 'Girona');
-INSERT INTO `broggi`.`provincies` (`id`, `nom`) VALUES (3, 'Lleida');
-INSERT INTO `broggi`.`provincies` (`id`, `nom`) VALUES (4, 'Tarragona');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `broggi`.`comarques`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (1, 'Alt Camp', 4);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (2, 'Alt Empordà', 2);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (3, 'Alt Penedès', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (4, 'Alt Urgell', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (5, 'Alta Ribagorça', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (6, 'Anoia', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (7, 'Aran', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (8, 'Bages', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (9, 'Baix Camp', 4);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (10, 'Baix Ebre', 4);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (11, 'Baix Empordà', 2);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (12, 'Baix Llobregat', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (13, 'Baix Penedès', 4);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (14, 'Barcelonès', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (16, 'Berguedà', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (17, 'Cerdanya', 2);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (18, 'Cerdanya', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (19, 'Conca de Barberà', 4);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (20, 'Garraf', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (21, 'Garrigues', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (22, 'Garrotxa', 2);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (23, 'Gironès', 2);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (24, 'Maresme', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (25, 'Moianès', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (26, 'Montsià', 4);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (27, 'Noguera', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (28, 'Osona', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (29, 'Osona', 2);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (30, 'Pallars Jussà', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (31, 'Pla de l\'Estany', 2);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (32, 'Pla d\'Urgell', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (33, 'Priorat', 4);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (34, 'Ribera d\'Ebre', 4);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (35, 'Ripollès', 2);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (36, 'Segarra', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (37, 'Segrià', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (38, 'Selva', 2);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (39, 'Solsonès', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (40, 'Tarragonès', 4);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (41, 'Terra Alta', 4);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (42, 'Urgell', 3);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (43, 'Vallès Occidental', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (44, 'Vallès Oriental', 1);
-INSERT INTO `broggi`.`comarques` (`id`, `nom`, `provincies_id`) VALUES (45, 'Pallars Sobirà', 3);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `broggi`.`municipis`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (1, 'Abella de la Conca', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (2, 'Abrera', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (3, 'Àger', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (4, 'Agramunt', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (5, 'Aguilar de Segarra', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (6, 'Agullana', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (7, 'Aiguafreda', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (8, 'Aiguamúrcia', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (9, 'Aiguaviva', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (10, 'Aitona', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (11, 'Els Alamús', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (12, 'Alàs i Cerc', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (13, 'L\'Albagés', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (14, 'Albanyà', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (15, 'Albatàrrec', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (16, 'Albesa', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (17, 'L\'Albi', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (18, 'Albinyana', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (19, 'L\'Albiol', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (20, 'Albons', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (21, 'Alcanar', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (22, 'Alcanó', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (23, 'Alcarràs', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (24, 'Alcoletge', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (25, 'Alcover', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (26, 'L\'Aldea', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (27, 'Aldover', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (28, 'L\'Aleixar', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (29, 'Alella', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (30, 'Alfara de Carles', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (31, 'Alfarràs', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (32, 'Alfés', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (33, 'Alforja', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (34, 'Algerri', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (35, 'Alguaire', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (36, 'Alins', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (37, 'Alió', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (38, 'Almacelles', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (39, 'Almatret', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (40, 'Almenar', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (41, 'Almoster', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (42, 'Alòs de Balaguer', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (43, 'Alp', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (44, 'Alpens', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (45, 'Alpicat', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (46, 'Alt Àneu', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (47, 'Altafulla', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (48, 'Amer', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (49, 'L\'Ametlla de Mar', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (50, 'L\'Ametlla del Vallès', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (51, 'L\'Ampolla', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (52, 'Amposta', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (53, 'Anglès', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (54, 'Anglesola', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (55, 'Arbeca', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (56, 'L\'Arboç', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (57, 'Arbolí', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (58, 'Arbúcies', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (59, 'Arenys de Mar', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (60, 'Arenys de Munt', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (61, 'Argelaguer', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (62, 'Argençola', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (63, 'L\'Argentera', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (64, 'Argentona', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (65, 'L\'Armentera', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (66, 'Arnes', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (67, 'Arres', 7);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (68, 'Arsèguel', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (69, 'Artés', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (70, 'Artesa de Lleida', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (71, 'Artesa de Segre', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (72, 'Ascó', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (73, 'Aspa', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (74, 'Les Avellanes i Santa Linya', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (75, 'Avià', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (76, 'Avinyó', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (77, 'Avinyonet de Puigventós', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (78, 'Avinyonet del Penedès', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (79, 'Badalona', 14);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (80, 'Badia del Vallès', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (81, 'Bagà', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (82, 'Baix Pallars', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (83, 'Balaguer', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (84, 'Balenyà', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (85, 'Balsareny', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (86, 'Banyeres del Penedès', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (87, 'Banyoles', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (88, 'Barbens', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (89, 'Barberà de la Conca', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (90, 'Barberà del Vallès', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (91, 'Barcelona', 14);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (92, 'La Baronia de Rialb', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (93, 'Bàscara', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (94, 'Bassella', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (95, 'Batea', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (96, 'Bausen', 7);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (97, 'Begues', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (98, 'Begur', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (99, 'Belianes', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (100, 'Bellaguarda', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (101, 'Bellcaire d\'Empordà', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (102, 'Bellcaire d\'Urgell', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (103, 'Bell-lloc d\'Urgell', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (104, 'Bellmunt del Priorat', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (105, 'Bellmunt d\'Urgell', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (106, 'Bellprat', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (107, 'Bellpuig', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (108, 'Bellvei', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (109, 'Bellver de Cerdanya', 18);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (110, 'Bellvís', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (111, 'Benavent de Segrià', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (112, 'Benifallet', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (113, 'Benissanet', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (114, 'Berga', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (115, 'Besalú', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (116, 'Bescanó', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (117, 'Beuda', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (118, 'Bigues i Riells', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (119, 'Biosca', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (120, 'La Bisbal de Falset', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (121, 'La Bisbal del Penedès', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (122, 'La Bisbal d\'Empordà', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (123, 'Biure', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (124, 'Blancafort', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (125, 'Blanes', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (126, 'Boadella i les Escaules', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (127, 'Bolvir', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (128, 'Bonastre', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (129, 'Es Bòrdes', 7);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (130, 'Bordils', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (131, 'Les Borges Blanques', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (132, 'Les Borges del Camp', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (133, 'Borrassà', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (134, 'Borredà', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (135, 'Bossòst', 7);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (136, 'Bot', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (137, 'Botarell', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (138, 'Bovera', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (139, 'Bràfim', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (140, 'Breda', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (141, 'El Bruc', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (142, 'El Brull', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (143, 'Brunyola i Sant Martí Sapresa', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (144, 'Cabacés', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (145, 'Cabanabona', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (146, 'Cabanelles', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (147, 'Cabanes', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (148, 'Les Cabanyes', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (149, 'Cabó', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (150, 'Cabra del Camp', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (151, 'Cabrera d\'Anoia', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (152, 'Cabrera de Mar', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (153, 'Cabrils', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (154, 'Cadaqués', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (155, 'Calaf', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (156, 'Calafell', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (157, 'Calders', 25);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (158, 'Caldes de Malavella', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (159, 'Caldes de Montbui', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (160, 'Caldes d\'Estrac', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (161, 'Calella', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (162, 'Calldetenes', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (163, 'Callús', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (164, 'Calonge de Segarra', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (165, 'Calonge i Sant Antoni', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (166, 'Camarasa', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (167, 'Camarles', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (168, 'Cambrils', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (169, 'Camós', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (170, 'Campdevànol', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (171, 'Campelles', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (172, 'Campins', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (173, 'Campllong', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (174, 'Camprodon', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (175, 'Canejan', 7);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (176, 'Canet d\'Adri', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (177, 'Canet de Mar', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (178, 'La Canonja', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (179, 'Canovelles', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (180, 'Cànoves i Samalús', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (181, 'Cantallops', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (182, 'Canyelles', 20);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (183, 'Capafonts', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (184, 'Capçanes', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (185, 'Capellades', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (186, 'Capmany', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (187, 'Capolat', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (188, 'Cardedeu', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (189, 'Cardona', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (190, 'Carme', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (191, 'Caseres', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (192, 'Cassà de la Selva', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (193, 'Casserres', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (194, 'Castell de l\'Areny', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (195, 'Castell de Mur', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (196, 'Castellar de la Ribera', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (197, 'Castellar de n\'Hug', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (198, 'Castellar del Riu', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (199, 'Castellar del Vallès', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (200, 'Castellbell i el Vilar', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (201, 'Castellbisbal', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (202, 'Castellcir', 25);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (203, 'Castelldans', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (204, 'Castelldefels', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (205, 'Castellet i la Gornal', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (206, 'Castellfollit de la Roca', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (207, 'Castellfollit de Riubregós', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (208, 'Castellfollit del Boix', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (209, 'Castellgalí', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (210, 'Castellnou de Bages', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (211, 'Castellnou de Seana', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (212, 'Castelló de Farfanya', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (213, 'Castelló d\'Empúries', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (214, 'Castellolí', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (215, 'Castell-Platja d\'Aro', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (216, 'Castellserà', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (217, 'Castellterçol', 25);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (218, 'Castellvell del Camp', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (219, 'Castellví de la Marca', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (220, 'Castellví de Rosanes', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (221, 'El Catllar', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (222, 'Cava', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (223, 'La Cellera de Ter', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (224, 'Celrà', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (225, 'Centelles', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (226, 'Cercs', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (227, 'Cerdanyola del Vallès', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (228, 'Cervelló', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (229, 'Cervera', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (230, 'Cervià de les Garrigues', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (231, 'Cervià de Ter', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (232, 'Cistella', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (233, 'Ciutadilla', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (234, 'Clariana de Cardener', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (235, 'El Cogul', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (236, 'Colera', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (237, 'Coll de Nargó', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (238, 'Collbató', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (239, 'Colldejou', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (240, 'Collsuspina', 25);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (241, 'Colomers', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (242, 'La Coma i la Pedra', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (243, 'Conca de Dalt', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (244, 'Conesa', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (245, 'Constantí', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (246, 'Copons', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (247, 'Corbera de Llobregat', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (248, 'Corbera d\'Ebre', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (249, 'Corbins', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (250, 'Corçà', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (251, 'Cornellà de Llobregat', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (252, 'Cornellà del Terri', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (253, 'Cornudella de Montsant', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (254, 'Creixell', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (255, 'Crespià', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (256, 'Cruïlles, Monells i Sant Sadurní de l\'Heura', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (257, 'Cubelles', 20);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (258, 'Cubells', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (259, 'Cunit', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (260, 'Darnius', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (261, 'Das', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (262, 'Deltebre', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (263, 'Dosrius', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (264, 'Duesaigües', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (265, 'L\'Escala', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (266, 'Esparreguera', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (267, 'Espinelves', 29);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (268, 'L\'Espluga Calba', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (269, 'L\'Espluga de Francolí', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (270, 'Esplugues de Llobregat', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (271, 'Espolla', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (272, 'Esponellà', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (273, 'Espot', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (274, 'L\'Espunyola', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (275, 'L\'Esquirol', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (276, 'Estamariu', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (277, 'L\'Estany', 25);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (278, 'Estaràs', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (279, 'Esterri d\'Àneu', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (280, 'Esterri de Cardós', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (281, 'Falset', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (282, 'El Far d\'Empordà', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (283, 'Farrera', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (284, 'La Fatarella', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (285, 'La Febró', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (286, 'Figaró-Montmany', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (287, 'Fígols', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (288, 'Fígols i Alinyà', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (289, 'La Figuera', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (290, 'Figueres', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (291, 'Figuerola del Camp', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (292, 'Flaçà', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (293, 'Flix', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (294, 'La Floresta', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (295, 'Fogars de la Selva', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (296, 'Fogars de Montclús', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (297, 'Foixà', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (298, 'Folgueroles', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (299, 'Fondarella', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (300, 'Fonollosa', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (301, 'Fontanals de Cerdanya', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (302, 'Fontanilles', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (303, 'Fontcoberta', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (304, 'Font-rubí', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (305, 'Foradada', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (306, 'Forallac', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (307, 'Forès', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (308, 'Fornells de la Selva', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (309, 'Fortià', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (310, 'Les Franqueses del Vallès', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (311, 'Freginals', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (312, 'La Fuliola', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (313, 'Fulleda', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (314, 'Gaià', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (315, 'La Galera', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (316, 'Gallifa', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (317, 'Gandesa', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (318, 'Garcia', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (319, 'Els Garidells', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (320, 'La Garriga', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (321, 'Garrigàs', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (322, 'Garrigoles', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (323, 'Garriguella', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (324, 'Gavà', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (325, 'Gavet de la Conca', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (326, 'Gelida', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (327, 'Ger', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (328, 'Gimenells i el Pla de la Font', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (329, 'Ginestar', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (330, 'Girona', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (331, 'Gironella', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (332, 'Gisclareny', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (333, 'Godall', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (334, 'Golmés', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (335, 'Gombrèn', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (336, 'Gósol', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (337, 'La Granada', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (338, 'La Granadella', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (339, 'Granera', 25);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (340, 'La Granja d\'Escarp', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (341, 'Granollers', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (342, 'Granyanella', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (343, 'Granyena de les Garrigues', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (344, 'Granyena de Segarra', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (345, 'Gratallops', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (346, 'Gualba', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (347, 'Gualta', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (348, 'Guardiola de Berguedà', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (349, 'Els Guiamets', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (350, 'Guils de Cerdanya', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (351, 'Guimerà', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (352, 'La Guingueta d\'Àneu', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (353, 'Guissona', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (354, 'Guixers', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (355, 'Gurb', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (356, 'Horta de Sant Joan', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (357, 'L\'Hospitalet de Llobregat', 14);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (358, 'Els Hostalets de Pierola', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (359, 'Hostalric', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (360, 'Igualada', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (361, 'Isona i Conca Dellà', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (362, 'Isòvol', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (363, 'Ivars de Noguera', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (364, 'Ivars d\'Urgell', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (365, 'Ivorra', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (366, 'Jafre', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (367, 'La Jonquera', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (368, 'Jorba', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (369, 'Josa i Tuixén', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (370, 'Juià', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (371, 'Juncosa', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (372, 'Juneda', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (373, 'Les', 7);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (374, 'Linyola', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (375, 'La Llacuna', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (376, 'Lladó', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (377, 'Lladorre', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (378, 'Lladurs', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (379, 'La Llagosta', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (380, 'Llagostera', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (381, 'Llambilles', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (382, 'Llanars', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (383, 'Llançà', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (384, 'Llardecans', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (385, 'Llavorsí', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (386, 'Lleida', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (387, 'Llers', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (388, 'Lles de Cerdanya', 18);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (389, 'Lliçà d\'Amunt', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (390, 'Lliçà de Vall', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (391, 'Llimiana', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (392, 'Llinars del Vallès', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (393, 'Llívia', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (394, 'El Lloar', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (395, 'Llobera', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (396, 'Llorac', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (397, 'Llorenç del Penedès', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (398, 'Lloret de Mar', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (399, 'Les Llosses', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (400, 'Lluçà', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (401, 'Maçanet de Cabrenys', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (402, 'Maçanet de la Selva', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (403, 'Madremanya', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (404, 'Maià de Montcal', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (405, 'Maials', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (406, 'Maldà', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (407, 'Malgrat de Mar', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (408, 'Malla', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (409, 'Manlleu', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (410, 'Manresa', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (411, 'Marçà', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (412, 'Margalef', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (413, 'Marganell', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (414, 'Martorell', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (415, 'Martorelles', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (416, 'Mas de Barberans', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (417, 'Masarac', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (418, 'Masdenverge', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (419, 'Les Masies de Roda', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (420, 'Les Masies de Voltregà', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (421, 'Masllorenç', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (422, 'El Masnou', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (423, 'La Masó', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (424, 'Maspujols', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (425, 'Masquefa', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (426, 'El Masroig', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (427, 'Massalcoreig', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (428, 'Massanes', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (429, 'Massoteres', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (430, 'Matadepera', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (431, 'Mataró', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (432, 'Mediona', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (433, 'Menàrguens', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (434, 'Meranges', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (435, 'Mieres', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (436, 'El Milà', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (437, 'Miralcamp', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (438, 'Miravet', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (439, 'Moià', 25);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (440, 'El Molar', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (441, 'Molins de Rei', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (442, 'Mollerussa', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (443, 'Mollet de Peralada', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (444, 'Mollet del Vallès', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (445, 'Molló', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (446, 'La Molsosa', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (447, 'Monistrol de Calders', 25);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (448, 'Monistrol de Montserrat', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (449, 'Montagut i Oix', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (450, 'Montblanc', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (451, 'Montbrió del Camp', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (452, 'Montcada i Reixac', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (453, 'Montclar', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (454, 'Montellà i Martinet', 18);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (455, 'Montesquiu', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (456, 'Montferrer i Castellbò', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (457, 'Montferri', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (458, 'Montgai', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (459, 'Montgat', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (460, 'Montmajor', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (461, 'Montmaneu', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (462, 'El Montmell', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (463, 'Montmeló', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (464, 'Montoliu de Lleida', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (465, 'Montoliu de Segarra', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (466, 'Montornès de Segarra', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (467, 'Montornès del Vallès', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (468, 'Mont-ral', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (469, 'Mont-ras', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (470, 'Mont-roig del Camp', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (471, 'Montseny', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (472, 'Móra d\'Ebre', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (473, 'Móra la Nova', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (474, 'El Morell', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (475, 'La Morera de Montsant', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (476, 'Muntanyola', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (477, 'Mura', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (478, 'Nalec', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (479, 'Naut Aran', 7);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (480, 'Navarcles', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (481, 'Navàs', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (482, 'Navata', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (483, 'Navès', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (484, 'La Nou de Berguedà', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (485, 'La Nou de Gaià', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (486, 'Nulles', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (487, 'Odèn', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (488, 'Òdena', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (489, 'Ogassa', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (490, 'Olèrdola', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (491, 'Olesa de Bonesvalls', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (492, 'Olesa de Montserrat', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (493, 'Oliana', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (494, 'Oliola', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (495, 'Olius', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (496, 'Olivella', 20);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (497, 'Olost', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (498, 'Olot', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (499, 'Les Oluges', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (500, 'Olvan', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (501, 'Els Omellons', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (502, 'Els Omells de na Gaia', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (503, 'Ordis', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (504, 'Organyà', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (505, 'Orís', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (506, 'Oristà', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (507, 'Orpí', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (508, 'Òrrius', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (509, 'Os de Balaguer', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (510, 'Osor', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (511, 'Ossó de Sió', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (512, 'Pacs del Penedès', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (513, 'Palafolls', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (514, 'Palafrugell', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (515, 'Palamós', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (516, 'El Palau d\'Anglesola', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (517, 'Palau de Santa Eulàlia', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (518, 'Palau-sator', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (519, 'Palau-saverdera', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (520, 'Palau-solità i Plegamans', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (521, 'Els Pallaresos', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (522, 'Pallejà', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (523, 'La Palma de Cervelló', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (524, 'La Palma d\'Ebre', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (525, 'Palol de Revardit', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (526, 'Pals', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (527, 'El Papiol', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (528, 'Pardines', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (529, 'Parets del Vallès', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (530, 'Parlavà', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (531, 'Passanant i Belltall', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (532, 'Pau', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (533, 'Paüls', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (534, 'Pedret i Marzà', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (535, 'Penelles', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (536, 'La Pera', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (537, 'Perafita', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (538, 'Perafort', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (539, 'Peralada', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (540, 'Peramola', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (541, 'El Perelló', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (542, 'Piera', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (543, 'Les Piles', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (544, 'Pineda de Mar', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (545, 'El Pinell de Brai', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (546, 'Pinell de Solsonès', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (547, 'Pinós', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (548, 'Pira', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (549, 'El Pla de Santa Maria', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (550, 'El Pla del Penedès', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (551, 'Les Planes d\'Hostoles', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (552, 'Planoles', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (553, 'Els Plans de Sió', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (554, 'El Poal', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (555, 'La Pobla de Cérvoles', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (556, 'La Pobla de Claramunt', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (557, 'La Pobla de Lillet', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (558, 'La Pobla de Mafumet', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (559, 'La Pobla de Massaluca', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (560, 'La Pobla de Montornès', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (561, 'La Pobla de Segur', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (562, 'Poboleda', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (563, 'Polinyà', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (564, 'El Pont d\'Armentera', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (565, 'El Pont de Bar', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (566, 'Pont de Molins', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (567, 'El Pont de Suert', 5);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (568, 'El Pont de Vilomara i Rocafort', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (569, 'Pontils', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (570, 'Pontons', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (571, 'Pontós', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (572, 'Ponts', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (573, 'Porqueres', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (574, 'Porrera', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (575, 'El Port de la Selva', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (576, 'Portbou', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (577, 'La Portella', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (578, 'Pradell de la Teixeta', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (579, 'Prades', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (580, 'Prat de Comte', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (581, 'El Prat de Llobregat', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (582, 'Pratdip', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (583, 'Prats de Lluçanès', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (584, 'Els Prats de Rei', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (585, 'Prats i Sansor', 18);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (586, 'Preixana', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (587, 'Preixens', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (588, 'Premià de Dalt', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (589, 'Premià de Mar', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (590, 'Les Preses', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (591, 'Prullans', 18);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (592, 'Puigcerdà', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (593, 'Puigdàlber', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (594, 'Puiggròs', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (595, 'Puigpelat', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (596, 'Puig-reig', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (597, 'Puigverd d\'Agramunt', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (598, 'Puigverd de Lleida', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (599, 'Pujalt', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (600, 'La Quar', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (601, 'Quart', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (602, 'Queralbs', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (603, 'Querol', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (604, 'Rabós', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (605, 'Rajadell', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (606, 'Rasquera', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (607, 'Regencós', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (608, 'Rellinars', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (609, 'Renau', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (610, 'Reus', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (611, 'Rialp', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (612, 'La Riba', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (613, 'Riba-roja d\'Ebre', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (614, 'Ribera d\'Ondara', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (615, 'Ribera d\'Urgellet', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (616, 'Ribes de Freser', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (617, 'Riells i Viabrea', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (618, 'La Riera de Gaià', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (619, 'Riner', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (620, 'Ripoll', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (621, 'Ripollet', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (622, 'Riu de Cerdanya', 18);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (623, 'Riudarenes', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (624, 'Riudaura', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (625, 'Riudecanyes', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (626, 'Riudecols', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (627, 'Riudellots de la Selva', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (628, 'Riudoms', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (629, 'Riumors', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (630, 'La Roca del Vallès', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (631, 'Rocafort de Queralt', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (632, 'Roda de Berà', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (633, 'Roda de Ter', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (634, 'Rodonyà', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (635, 'Roquetes', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (636, 'Roses', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (637, 'Rosselló', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (638, 'El Rourell', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (639, 'Rubí', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (640, 'Rubió', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (641, 'Rupià', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (642, 'Rupit i Pruit', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (643, 'Sabadell', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (644, 'Sagàs', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (645, 'Salàs de Pallars', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (646, 'Saldes', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (647, 'Sales de Llierca', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (648, 'Sallent', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (649, 'Salomó', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (650, 'Salou', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (651, 'Salt', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (652, 'Sanaüja', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (653, 'Sant Adrià de Besòs', 14);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (654, 'Sant Agustí de Lluçanès', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (655, 'Sant Andreu de la Barca', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (656, 'Sant Andreu de Llavaneres', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (657, 'Sant Andreu Salou', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (658, 'Sant Aniol de Finestres', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (659, 'Sant Antoni de Vilamajor', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (660, 'Sant Bartomeu del Grau', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (661, 'Sant Boi de Llobregat', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (662, 'Sant Boi de Lluçanès', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (663, 'Sant Carles de la Ràpita', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (664, 'Sant Cebrià de Vallalta', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (665, 'Sant Celoni', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (666, 'Sant Climent de Llobregat', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (667, 'Sant Climent Sescebes', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (668, 'Sant Cugat del Vallès', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (669, 'Sant Cugat Sesgarrigues', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (670, 'Sant Esteve de la Sarga', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (671, 'Sant Esteve de Palautordera', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (672, 'Sant Esteve Sesrovires', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (673, 'Sant Feliu de Buixalleu', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (674, 'Sant Feliu de Codines', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (675, 'Sant Feliu de Guíxols', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (676, 'Sant Feliu de Llobregat', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (677, 'Sant Feliu de Pallerols', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (678, 'Sant Feliu Sasserra', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (679, 'Sant Ferriol', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (680, 'Sant Fost de Campsentelles', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (681, 'Sant Fruitós de Bages', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (682, 'Sant Gregori', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (683, 'Sant Guim de Freixenet', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (684, 'Sant Guim de la Plana', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (685, 'Sant Hilari Sacalm', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (686, 'Sant Hipòlit de Voltregà', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (687, 'Sant Iscle de Vallalta', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (688, 'Sant Jaume de Frontanyà', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (689, 'Sant Jaume de Llierca', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (690, 'Sant Jaume dels Domenys', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (691, 'Sant Jaume d\'Enveja', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (692, 'Sant Joan de les Abadesses', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (693, 'Sant Joan de Mollet', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (694, 'Sant Joan de Vilatorrada', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (695, 'Sant Joan Despí', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (696, 'Sant Joan les Fonts', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (697, 'Sant Jordi Desvalls', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (698, 'Sant Julià de Cerdanyola', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (699, 'Sant Julià de Ramis', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (700, 'Sant Julià de Vilatorta', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (701, 'Sant Julià del Llor i Bonmatí', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (702, 'Sant Just Desvern', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (703, 'Sant Llorenç de la Muga', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (704, 'Sant Llorenç de Morunys', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (705, 'Sant Llorenç d\'Hortons', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (706, 'Sant Llorenç Savall', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (707, 'Sant Martí d\'Albars', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (708, 'Sant Martí de Centelles', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (709, 'Sant Martí de Llémena', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (710, 'Sant Martí de Riucorb', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (711, 'Sant Martí de Tous', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (712, 'Sant Martí Sarroca', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (713, 'Sant Martí Sesgueioles', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (714, 'Sant Martí Vell', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (715, 'Sant Mateu de Bages', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (716, 'Sant Miquel de Campmajor', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (717, 'Sant Miquel de Fluvià', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (718, 'Sant Mori', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (719, 'Sant Pau de Segúries', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (720, 'Sant Pere de Ribes', 20);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (721, 'Sant Pere de Riudebitlles', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (722, 'Sant Pere de Torelló', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (723, 'Sant Pere de Vilamajor', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (724, 'Sant Pere Pescador', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (725, 'Sant Pere Sallavinera', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (726, 'Sant Pol de Mar', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (727, 'Sant Quintí de Mediona', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (728, 'Sant Quirze de Besora', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (729, 'Sant Quirze del Vallès', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (730, 'Sant Quirze Safaja', 25);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (731, 'Sant Ramon', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (732, 'Sant Sadurní d\'Anoia', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (733, 'Sant Sadurní d\'Osormort', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (734, 'Sant Salvador de Guardiola', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (735, 'Sant Vicenç de Castellet', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (736, 'Sant Vicenç de Montalt', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (737, 'Sant Vicenç de Torelló', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (738, 'Sant Vicenç dels Horts', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (739, 'Santa Bàrbara', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (740, 'Santa Cecília de Voltregà', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (741, 'Santa Coloma de Cervelló', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (742, 'Santa Coloma de Farners', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (743, 'Santa Coloma de Gramenet', 14);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (744, 'Santa Coloma de Queralt', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (745, 'Santa Cristina d\'Aro', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (746, 'Santa Eugènia de Berga', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (747, 'Santa Eulàlia de Riuprimer', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (748, 'Santa Eulàlia de Ronçana', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (749, 'Santa Fe del Penedès', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (750, 'Santa Llogaia d\'Àlguema', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (751, 'Santa Margarida de Montbui', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (752, 'Santa Margarida i els Monjos', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (753, 'Santa Maria de Besora', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (754, 'Santa Maria de Martorelles', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (755, 'Santa Maria de Merlès', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (756, 'Santa Maria de Miralles', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (757, 'Santa Maria de Palautordera', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (758, 'Santa Maria d\'Oló', 25);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (759, 'Santa Oliva', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (760, 'Santa Pau', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (761, 'Santa Perpètua de Mogoda', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (762, 'Santa Susanna', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (763, 'Santpedor', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (764, 'Sarral', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (765, 'Sarrià de Ter', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (766, 'Sarroca de Bellera', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (767, 'Sarroca de Lleida', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (768, 'Saus, Camallera i Llampaies', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (769, 'Savallà del Comtat', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (770, 'La Secuita', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (771, 'La Selva de Mar', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (772, 'La Selva del Camp', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (773, 'Senan', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (774, 'La Sénia', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (775, 'Senterada', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (776, 'La Sentiu de Sió', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (777, 'Sentmenat', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (778, 'Serinyà', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (779, 'Seròs', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (780, 'Serra de Daró', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (781, 'Setcases', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (782, 'La Seu d\'Urgell', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (783, 'Seva', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (784, 'Sidamon', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (785, 'Sils', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (786, 'Sitges', 20);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (787, 'Siurana', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (788, 'Sobremunt', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (789, 'El Soleràs', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (790, 'Solivella', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (791, 'Solsona', 39);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (792, 'Sora', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (793, 'Soriguera', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (794, 'Sort', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (795, 'Soses', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (796, 'Subirats', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (797, 'Sudanell', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (798, 'Sunyer', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (799, 'Súria', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (800, 'Susqueda', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (801, 'Tagamanent', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (802, 'Talamanca', 8);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (803, 'Talarn', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (804, 'Talavera', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (805, 'La Tallada d\'Empordà', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (806, 'Taradell', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (807, 'Tarragona', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (808, 'Tàrrega', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (809, 'Tarrés', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (810, 'Tarroja de Segarra', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (811, 'Tavèrnoles', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (812, 'Tavertet', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (813, 'Teià', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (814, 'Térmens', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (815, 'Terrades', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (816, 'Terrassa', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (817, 'Tiana', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (818, 'Tírvia', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (819, 'Tiurana', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (820, 'Tivenys', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (821, 'Tivissa', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (822, 'Tona', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (823, 'Torà', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (824, 'Tordera', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (825, 'Torelló', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (826, 'Els Torms', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (827, 'Tornabous', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (828, 'La Torre de Cabdella', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (829, 'La Torre de Claramunt', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (830, 'La Torre de Fontaubella', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (831, 'La Torre de l\'Espanyol', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (832, 'Torrebesses', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (833, 'Torredembarra', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (834, 'Torrefarrera', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (835, 'Torrefeta i Florejacs', 36);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (836, 'Torregrossa', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (837, 'Torrelameu', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (838, 'Torrelavit', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (839, 'Torrelles de Foix', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (840, 'Torrelles de Llobregat', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (841, 'Torrent', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (842, 'Torres de Segre', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (843, 'Torre-serona', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (844, 'Torroella de Fluvià', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (845, 'Torroella de Montgrí', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (846, 'Torroja del Priorat', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (847, 'Tortellà', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (848, 'Tortosa', 10);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (849, 'Toses', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (850, 'Tossa de Mar', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (851, 'Tremp', 30);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (852, 'Ullà', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (853, 'Ullastrell', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (854, 'Ullastret', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (855, 'Ulldecona', 26);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (856, 'Ulldemolins', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (857, 'Ultramort', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (858, 'Urús', 17);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (859, 'Vacarisses', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (860, 'La Vajol', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (861, 'La Vall de Bianya', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (862, 'La Vall de Boí', 5);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (863, 'Vall de Cardós', 45);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (864, 'La Vall d\'en Bas', 22);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (865, 'Vallbona d\'Anoia', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (866, 'Vallbona de les Monges', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (867, 'Vallcebre', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (868, 'Vallclara', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (869, 'Vallfogona de Balaguer', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (870, 'Vallfogona de Ripollès', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (871, 'Vallfogona de Riucorb', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (872, 'Vallgorguina', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (873, 'Vallirana', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (874, 'Vall-llobrega', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (875, 'Vallmoll', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (876, 'Vallromanes', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (877, 'Valls', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (878, 'Les Valls d\'Aguilar', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (879, 'Les Valls de Valira', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (880, 'Vandellòs i l\'Hospitalet de l\'Infant', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (881, 'La Vansa i Fórnols', 4);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (882, 'Veciana', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (883, 'El Vendrell', 13);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (884, 'Ventalló', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (885, 'Verdú', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (886, 'Verges', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (887, 'Vespella de Gaià', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (888, 'Vic', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (889, 'Vidrà', 29);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (890, 'Vidreres', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (891, 'Vielha e Mijaran', 7);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (892, 'Vilabella', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (893, 'Vilabertran', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (894, 'Vilablareix', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (895, 'Vilada', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (896, 'Viladamat', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (897, 'Viladasens', 23);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (898, 'Viladecans', 12);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (899, 'Viladecavalls', 43);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (900, 'Vilademuls', 31);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (901, 'Viladrau', 29);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (902, 'Vilafant', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (903, 'Vilafranca del Penedès', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (904, 'Vilagrassa', 42);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (905, 'Vilajuïga', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (906, 'Vilalba dels Arcs', 41);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (907, 'Vilalba Sasserra', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (908, 'Vilaller', 5);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (909, 'Vilallonga de Ter', 35);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (910, 'Vilallonga del Camp', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (911, 'Vilamacolum', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (912, 'Vilamalla', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (913, 'Vilamaniscle', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (914, 'Vilamòs', 7);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (915, 'Vilanant', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (916, 'Vilanova de Bellpuig', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (917, 'Vilanova de la Barca', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (918, 'Vilanova de l\'Aguda', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (919, 'Vilanova de Meià', 27);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (920, 'Vilanova de Prades', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (921, 'Vilanova de Sau', 28);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (922, 'Vilanova de Segrià', 37);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (923, 'Vilanova del Camí', 6);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (924, 'Vilanova del Vallès', 44);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (925, 'Vilanova d\'Escornalbou', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (926, 'Vilanova i la Geltrú', 20);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (927, 'Vilaplana', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (928, 'Vila-rodona', 1);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (929, 'Vila-sacra', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (930, 'Vila-sana', 32);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (931, 'Vila-seca', 40);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (932, 'Vilassar de Dalt', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (933, 'Vilassar de Mar', 24);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (934, 'Vilaür', 2);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (935, 'Vilaverd', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (936, 'La Vilella Alta', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (937, 'La Vilella Baixa', 33);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (938, 'Vilobí del Penedès', 3);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (939, 'Vilobí d\'Onyar', 38);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (940, 'Vilopriu', 11);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (941, 'El Vilosell', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (942, 'Vimbodí i Poblet', 19);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (943, 'Vinaixa', 21);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (944, 'Vinebre', 34);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (945, 'Vinyols i els Arcs', 9);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (946, 'Viver i Serrateix', 16);
-INSERT INTO `broggi`.`municipis` (`id`, `nom`, `comarques_id`) VALUES (947, 'Xerta', 10);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `broggi`.`alertants`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (1, 973350050, 'Fundació Sant Hospital', '', 'Pg. de Joan Brudieu, 8', 782, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (2, 972880150, 'Hospital de Puigcerdà', '', 'Pl. de Santa Maria, 1', 592, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (3, 973652255, 'Hospital Comarcal del Pallars', '', 'Pau Casals, 5', 851, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (4, 973640004, 'Espitau Val d\'Aran', '', 'Espitau, 8', 891, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (5, 973232943, 'Clínica de Ponent', '', 'Prat de la Riba, 79', 386, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (6, 973727222, 'Hospital Santa Maria', '', 'Av. Alcalde Rovira Roure, 44', 386, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (7, 973248100, 'Hospital Universitari Arnau de Vilanova de Lleida', '', 'Av. Alcalde Rovira Roure, 80', 386, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (8, 977613000, 'Pius Hospital de Valls', '', 'Pl. Sant Francesc, s/n', 877, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (9, 977010800, 'Centre Mèdic Quirúrgic Reus', '', 'Antoni Gaudí, 26', 610, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (10, 977337303, 'Hospital Sant Joan de Reus', '', 'Josep Laporte, s/n', 610, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (11, 977257900, 'Hospital del Vendrell', '', 'Carretera de Barcelona, s/n', 883, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (12, 977259900, 'Hospital Sant Pau i Santa Tecla', '', 'Rambla Vella, 14', 807, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (13, 977295800, 'Hospital Universitari Joan XXIII de Tarragona', '', 'Dr. Mallafré i Guasch, 4', 807, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (14, 977519100, 'Hospital Verge de la Cinta de Tortosa', '', 'Esplanetes, 44-58', 848, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (15, 977588200, 'Clínica Terres de l\'Ebre', '', 'Pl. Joaquim Bau, 6-8', 848, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (16, 977700050, 'Hospital Comarcal d\'Amposta', '', 'Jacint Verdaguer, 11', 52, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (17, 977401674, 'Hospital Comarcal Móra d\'Ebre', '', 'Benet i Messeguer, s/n', 472, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (18, 972501400, 'Hospital de Figueres', '', 'Ronda del Rector Arolas, s/n', 290, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (19, 972600160, 'Hospital de Palamós', '', 'Hospital, 36', 515, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (20, 972261800, 'Hospital Sant Jaume d\'Olot', '', 'Mulleras, 15', 498, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (21, 972204500, 'Clínica Girona', '', 'Joan Maragall, 26', 330, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (22, 972225833, 'ICO Girona', '', 'Av. de França, s/n', 330, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (23, 972940200, 'Hospital Universitari Doctor Josep Trueta de Girona', '', 'Av. de França, s/n', 330, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (24, 972182500, 'Hospital Santa Caterina', '', 'Dr. Castany, s/n (Parc Hospitalari Martí i Julià)', 651, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (25, 937690201, 'Hospital Comarcal Sant Jaume de Calella', '', 'Sant Jaume, 209', 161, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (26, 972570208, 'Clínica Salus Infirmorum', '', 'Av. Mossèn Lluís Constans, 130', 87, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (27, 972730013, 'Hospital de Campdevànol', '', 'Ctra. de Gombrèn, 20', 170, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (28, 972353264, 'Hospital Comarcal de Blanes', '', 'Accés cala Sant Francesc, 5', 125, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (29, 938075500, 'Hospital d\'Igualada', '', 'Av. Catalunya, 11', 360, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (30, 938732550, 'Centre Hospitalari', '', 'Av. de les Bases de Manresa, 6-8', 410, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (31, 938742112, 'Hospital Sant Joan de Déu', '', 'Dr. Joan Soler, s/n', 410, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (32, 938243400, 'Hospital Comarcal Sant Bernabé', '', 'Ctra. de Ribes, s/n', 114, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (33, 938891111, 'Hospital General de Vic', '', 'Francesc Pla El Vigatà, 1', 888, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (34, 938180440, 'Hospital Comarcal de l\'Alt Penedès', '', 'Espirall, s/n', 903, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (35, 937742020, 'Hospital Sant Joan de Déu', '', 'Av. Mancomunitats Comarcals, 1', 414, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (36, 936615208, 'Hospital General. Parc Sanitari Sant Joan de Déu', '', 'Camí Vell de la Colònia, 25', 661, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (37, 936590111, 'Hospital de Viladecans', '', 'Av. de Gavà, 38', 898, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (38, 932532100, 'Hospital Sant Joan de Déu', '', 'Pg. de Sant Joan de Déu, 2', 270, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (39, 935531200, 'Hospital de Sant Joan Despí Moisès Broggi', '', 'Jacint Verdaguer, 90', 695, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (40, 932483000, 'Hospital del Mar', '', 'Pg. Marítim, 25-29', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (41, 933069900, 'Hospital Plató', '', 'Plató, 21', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (42, 933674100, 'Hospital de l\'Esperança', '', 'Sant Josep de la Muntanya, 12', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (43, 934169700, 'Fundació Puigvert / Iuna', '', 'Cartagena, 340', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (44, 935072700, 'Hospital Dos de Maig', '', 'Dos de Maig, 301', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (45, 932275600, 'Hospital Casa Maternitat', '', 'Sabino de Arana, 1', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (46, 933221111, 'Hospital Universitari Sagrat Cor', '', 'Viladomat, 288', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (47, 934893000, 'Hospital Universitari General de la Vall d\'Hebron', '', 'Pg. de la Vall d\'Hebron, 119-129', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (48, 932112508, 'Hospital Sant Rafael', '', 'Pg. de la Vall d\'Hebron, 107', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (49, 934893000, 'Hospital Universitari Maternoinfantil de la Vall d\'Hebron', '', 'Pg. de la Vall d\'Hebron, 119-129', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (50, 934893000, 'Hospital Universitari de Traumatologia i Rehabilitació de la Vall d\'Hebron', '', 'Pg. de la Vall d\'Hebron, 119-129', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (51, 932275400, 'Hospital Clínic i Provincial de Barcelona', '', 'Villarroel, 170', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (52, 935537160, 'Hospital de la Santa Creu i Sant Pau', '', 'Sant Quintí, 89', 91, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (53, 934407500, 'Hospital General de l\'Hospitalet', '', 'Josep Molins, 29', 357, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (54, 932607733, 'ICO L\'Hospitalet', '', 'Av. de la Granvia, s/n km 2,7 (Hospital Duran i Reynals)', 357, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (55, 932607500, 'Hospital Universitari de Bellvitge', '', 'Feixa Llarga, s/n', 357, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (56, 934648300, 'Hospital Municipal Badalona', '', 'Via Augusta, 9-13', 79, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (57, 934977700, 'Institut Guttmann', '', 'Camí de Can Ruti, s/n', 79, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (58, 934978710, 'ICO Badalona', '', 'Ctra. de Canyet, s/n', 79, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (59, 934651200, 'Hospital Universitari Germans Trias i Pujol de Badalona', '', 'Ctra. de Canyet, s/n', 79, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (60, 933860202, 'Fundació Hospital de l\'Esperit Sant', '', 'Av. de Mossèn Josep Pons i Robadà, s/n', 743, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (61, 938931616, 'Fundació Hospital Comarcal Sant Antoni Abat', '', 'Rambla de Sant Josep, 21', 926, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (62, 938960025, 'Fundació Hospital Residència Sant Camil', '', 'Ctra. de Puigmoltó, km 0,8', 720, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (63, 937417700, 'Hospital de Mataró', '', 'Ctra. de Cirera, s/n', 431, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (64, 937231010, 'Hospital de Sabadell', '', 'Parc Taulí, s/n', 643, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (65, 937365050, 'Hospital Mútua Terrassa', '', 'Pl. Dr. Robert, 5', 816, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (66, 937310007, 'Hospital de Terrassa', '', 'Ctra. de Torrebonica, s/n', 816, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (67, 935760300, 'Fundació Privada Hospital de Mollet', '', 'Sant Llorenç, 39', 444, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (68, 938425000, 'Hospital General de Granollers', '', 'Av. de Francesc Ribas, s/n', 341, 1);
-INSERT INTO `broggi`.`alertants` (`id`, `telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (69, 938670617, 'Hospital de Sant Celoni', '', 'Av. de l\'Hospital, 19', 665, 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `broggi`.`rols`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`rols` (`id`, `nom`) VALUES (1, 'Administrador');
-INSERT INTO `broggi`.`rols` (`id`, `nom`) VALUES (2, 'CECOS');
-INSERT INTO `broggi`.`rols` (`id`, `nom`) VALUES (3, 'Recurs');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `broggi`.`tipus_recursos`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`tipus_recursos` (`id`, `tipus`) VALUES (1, 'Amb. Medicalitzada-Mike');
-INSERT INTO `broggi`.`tipus_recursos` (`id`, `tipus`) VALUES (2, 'Amb. Sanitaritzada-India');
-INSERT INTO `broggi`.`tipus_recursos` (`id`, `tipus`) VALUES (3, 'Amb. Assitencial-Tango');
-INSERT INTO `broggi`.`tipus_recursos` (`id`, `tipus`) VALUES (4, 'Helicopter medicalitzat');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `broggi`.`sexes`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`sexes` (`id`, `sexe`) VALUES (1, 'Home');
-INSERT INTO `broggi`.`sexes` (`id`, `sexe`) VALUES (2, 'Dona');
-
-COMMIT;
-
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VALUES (1, 1, true, 1);
-
-COMMIT;
-
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (1, "Quin tipud d'alertat ets, VIP, centre medic, alertat accidental, l'entorn de l'afectat o el propi afectat?", "What kind of informant are you, a VIP informant, a health center, an accidental informant, of the affected person's environment or the affected by himself?");
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (2, 'Quin és el seu nom?', 'What is your name?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (3, 'Quin és el seu cognom?', 'What is your surname?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (4, 'Quin és el seu numero de telefon?', 'What is your phone number?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (5, 'Quina és la seva provincia?', 'In which province are you?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (6, 'Quin es el seu municipi?', 'In which municipality are you?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (7, 'Quina es la teva adreça?', 'What is your address?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (8, 'Tens una adreça complementaria?', 'Do you have a complementary address?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (9, 'Quin és el seu DNI o TS/NSS', 'What is your DNI or TS/NSS?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (10, 'Quina edat tens?', 'How old are you?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (11, 'Ets home o dona?', 'Are you a man or a woman?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (12, "Quin és el tipus d'accident?", 'What is the type of accident or incident?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (13, "Quin és el numero de l'afectat?", 'What is the number of affected?');
-INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (14, 'Pots descriure que ha pasat?', 'Can you describe what happened?');
-
-COMMIT;
+-- Dump completed on 2021-04-13 12:24:35

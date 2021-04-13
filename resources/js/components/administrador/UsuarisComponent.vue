@@ -36,12 +36,12 @@
             <a @click="insertUsuari()" id="botoCrear"><i class="far fa-plus-circle fa-3x"></i></a>
         </div>
 
-        <!-- Modal Insert/Update
-        <div class="modal fade" id="modalCurs" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
+        <!-- Modal Insert/Update -->
+        <div class="modal fade" id="modalUsuari" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Curs</h5>
+                        <h5 class="modal-title" id="UsuariModalLabel">Usuari</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </main>
 </template>
 
