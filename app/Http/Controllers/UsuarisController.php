@@ -14,13 +14,13 @@ class UsuarisController extends Controller
 
         // $usuari = new Usuaris();
 
-        // $usuari->id = 2;
-        // $usuari->username = "administratiu";
-        // $usuari->contrasenya = \bcrypt('administratiu');
-        // $usuari->email = 'administratiu@cepnet.net';
-        // $usuari->nom = 'AdministratiuBroggi';
+        // $usuari->id = 3;
+        // $usuari->username = "recurs";
+        // $usuari->contrasenya = \bcrypt('recurs');
+        // $usuari->email = 'recurs@cepnet.net';
+        // $usuari->nom = 'RecursBroggi';
         // $usuari->cognoms = 'Apellidos';
-        // $usuari->rols_id = 2;
+        // $usuari->rols_id = 3;
         // $usuari->recursos_id = 1;
 
         // $usuari->save();
