@@ -22,6 +22,7 @@ window.Vue = require('vue').default;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('administrador-principal', require('./components/AdministradorComponent.vue').default);
 Vue.component('administratiu-principal', require('./components/AdministratiuComponent.vue').default);
+Vue.component('usuari-component', require('./components/administrador/UsuarisComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
