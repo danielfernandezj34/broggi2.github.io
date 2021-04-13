@@ -1523,7 +1523,6 @@ INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VAL
 
 COMMIT;
 
-
 START TRANSACTION;
 USE `broggi`;
 INSERT INTO `broggi`. `helpbox` (`id`, `preguntaES`, `preguntaEN`) VALUES (1, "Quin tipud d'alertat ets, VIP, centre medic, alertat accidental, l'entorn de l'afectat o el propi afectat?", "What kind of informant are you, a VIP informant, a health center, an accidental informant, of the affected person's environment or the affected by himself?");

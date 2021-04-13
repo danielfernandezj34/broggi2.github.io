@@ -65,7 +65,7 @@ class UsuarisController extends Controller
      */
     public function index()
     {
-        //
+        return view('administrador.usuaris_rols');
     }
 
     /**
