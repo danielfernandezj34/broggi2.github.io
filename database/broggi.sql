@@ -1523,13 +1523,6 @@ INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VAL
 
 COMMIT;
 
-START TRANSACTION;
-USE `broggi`;
-INSERT INTO `broggi`.`usuaris` (`id`, `username`, `contrasenya`, `email`, `nom`, `cognoms`, `rols_id`, `recursos_id`) VALUES (1, 'admin', 'admin', 'admin@cepnet.net', 'AdminBroggi', 'Apellidos', 1, 1);
-INSERT INTO `broggi`.`usuaris` (`id`, `username`, `contrasenya`, `email`, `nom`, `cognoms`, `rols_id`, `recursos_id`) VALUES (2, 'cecos', 'cecos', 'cecos@cepnet.net', 'CecosBroggi', 'Apellidos', 2, 1);
-INSERT INTO `broggi`.`usuaris` (`id`, `username`, `contrasenya`, `email`, `nom`, `cognoms`, `rols_id`, `recursos_id`) VALUES (3, 'recurs', 'recurs', 'recurs@cepnet.net', 'RecursBroggi', 'Apellidos', 3, 1);
-
-COMMIT;
 
 START TRANSACTION;
 USE `broggi`;
