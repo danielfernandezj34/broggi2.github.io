@@ -24,6 +24,10 @@ Vue.component('administrador-principal', require('./components/AdministradorComp
 Vue.component('administratiu-principal', require('./components/AdministratiuComponent.vue').default);
 Vue.component('usuari-component', require('./components/administrador/UsuarisComponent.vue').default);
 Vue.component('recurs-principal', require('./components/RecursComponent.vue').default);
+Vue.component('mostrar-incidencies', require('./components/administratiu/IncidenciesComponent.vue').default);
+Vue.component('formulari-administratiu', require('./components/administratiu/FormulariComponent.vue').default);
+
+
 
 
 Vue.component('alertants-component', require('./components/administrador/AlertantComponent.vue').default);
