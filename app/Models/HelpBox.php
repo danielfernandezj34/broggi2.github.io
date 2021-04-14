@@ -11,6 +11,6 @@ class HelpBox extends Model
 
     protected $table = 'helpbox';
     protected $primaryKey = 'id';
-    public $incrementing = true;
+    public $incrementing = false;
     public $timestamps = false;
 }

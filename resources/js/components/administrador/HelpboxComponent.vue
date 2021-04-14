@@ -32,7 +32,7 @@
 
         </div>
 
-        <a @click="crearPregunta()" id="botoCrear"><i class="far fa-plus-circle fa-3x"></i></a>
+        <button @click="crearPregunta()" id="botoCrear"><i class="far fa-plus-circle fa-3x"></i></button>
 
         <!-- Modal Borrar-->
         <div class="modal fade" id="modalBorrar" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
@@ -71,7 +71,7 @@
                             <label for="preguntaES" class="col-sm-4 col-form-label">Pregunta en Espanyol</label>
                             <div class="form-group row">
                                 <div class="col-sm-12">
-                                    <input v-if="insert" type="text" id="preguntaES" name="preguntaES" class="form-control">
+                                    <input v-if="insert" type="text" id="preguntaES" name="preguntaES" class="form-control" v-model="pregunta.preguntaES">
                                     <input v-else type="text" name="preguntaES" id="preguntaES" class="form-control" v-model="pregunta.preguntaES">
                                 </div>
 
@@ -80,7 +80,7 @@
                             <label for="preguntaEN" class="col-sm-4 col-form-label">Pregunta en Anglés</label>
                             <div class="form-group row">
                                 <div class="col-sm-12">
-                                    <input v-if="insert" type="text" id="preguntaEN" name="preguntaEN" class="form-control">
+                                    <input v-if="insert" type="text" id="preguntaEN" name="preguntaEN" class="form-control" v-model="pregunta.preguntaEN">
                                     <input v-else type="text" name="preguntaEN" id="preguntaEN" class="form-control" v-model="pregunta.preguntaEN">
                                 </div>
                             </div>
@@ -103,8 +103,9 @@
             return{
                 helpbox: [],
                 pregunta: {
+                    id: '',
                     preguntaES: '',
-                    preguntaEN: '',
+                    preguntaEN: ''
                 },
                 insert: false
             }

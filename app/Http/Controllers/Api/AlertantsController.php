@@ -33,10 +33,12 @@ class AlertantsController extends Controller
     {
         $alertant = new Alertants();
 
-        // $alertant->sigles = $request->input('sigles');
-        // $alertant->nom = $request->input('nom');
-        // $alertant->cicles_id = $request->input('cicles_id');
-        // $alertant->actiu = ($request->input('actiu') == 'actiu');
+        $alertant->nom = $request->input('nom');
+        $alertant->cognoms = $request->input('cognoms');
+        $alertant->telefon = $request->input('telefon_alertant');
+        $alertant->adreca = $request->input('adreca');
+        $alertant->tipus_alertants_id = $request->input('tipus_alertant');
+        $alertant->municipis_id = $request->input('municipi');
 
         try {
             $alertant->save();
@@ -70,9 +72,28 @@ class AlertantsController extends Controller
      * @param  \App\Models\Alertants  $alertants
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alertants $alertants)
+    public function update(Request $request, Alertants $alertant)
     {
-        //
+        $alertant->nom = $request->input('nom');
+        $alertant->cognoms = $request->input('cognoms');
+        $alertant->telefon = $request->input('telefon_alertant');
+        $alertant->adreca = $request->input('adreca');
+        $alertant->tipus_alertants_id = $request->input('tipus_alertant');
+        $alertant->municipis_id = $request->input('municipi');
+
+
+        try {
+            $alertant->save();
+            $response = (new AlertantsResource($alertant))
+                        ->response()
+                        ->setStatusCode(201);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -81,8 +102,17 @@ class AlertantsController extends Controller
      * @param  \App\Models\Alertants  $alertants
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alertants $alertants)
+    public function destroy(Alertants $alertant)
     {
-        //
+        try {
+            $alertant->delete();
+            $response = \response()
+                    ->json(['error' => "Registre esborrat correctament"], 200);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+        return $response;
     }
 }

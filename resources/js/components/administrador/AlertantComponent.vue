@@ -78,20 +78,20 @@
                             <div class="form-group row">
                                 <label for="nom" class="col-sm-3 col-form-label" >Nom</label>
                                 <div class="col-sm-9">
-                                    <input v-if="insert" type="text" name="nom" class="form-control" id="nom" placeholder="Nom">
+                                    <input v-if="insert" type="text" name="nom" class="form-control" id="nom" placeholder="Nom" v-model="alertant.nom">
                                     <input v-else type="text" name="nom" class="form-control" id="nom"  v-model="alertant.nom">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="cognoms" class="col-sm-3 col-form-label" >Cognoms</label>
                                 <div class="col-sm-3">
-                                    <input v-if="insert" type="nom" name="cognoms" class="form-control" id="cognoms" placeholder="Cognoms">
+                                    <input v-if="insert" type="nom" name="cognoms" class="form-control" id="cognoms" placeholder="Cognoms" v-model="alertant.cognoms">
                                     <input v-else type="nom" name="cognoms" class="form-control" id="cognoms" v-model="alertant.cognoms">
                                 </div>
 
                                 <label for="telefon_alertant" class="col-sm-3 col-form-label" >Telefon de l'Alertant</label>
                                 <div class="col-sm-3">
-                                    <input v-if="insert" type="tel" name="telefon_alertant" class="form-control" id="telefon_alertant" placeholder="Exemple: 612345678" maxlength="9" pattern="[0-9]{9}">
+                                    <input v-if="insert" type="tel" name="telefon_alertant" class="form-control" id="telefon_alertant" v-model="alertant.telefon" placeholder="Exemple: 612345678" maxlength="9" pattern="[0-9]{9}">
                                     <input v-else type="tel" name="telefon_alertant" class="form-control" id="telefon_alertant" v-model="alertant.telefon" maxlength="9" pattern="[0-9]{9}">
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                             <div class="form-group row">
                                 <label for="adreca" class="col-sm-3 col-form-label" >Adreça</label>
                                 <div class="col-sm-9">
-                                    <input v-if="insert" type="text" name="adreca" class="form-control" id="adreca" placeholder="Exemple, 201">
+                                    <input v-if="insert" type="text" name="adreca" class="form-control" id="adreca" placeholder="Exemple, 201" v-model="alertant.adreca">
                                     <input v-else type="text" name="adreca" class="form-control" id="adreca" v-model="alertant.adreca">
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                             <div class="form-group row">
                                 <label for="tipus_alertant" class="col-sm-3 col-form-label" >Tipus d'Alertant</label>
                                 <div class="col-sm-9" v-if="insert">
-                                    <select class="form-control" id="tipus_alertant" name="tipus_alertant">
+                                    <select class="form-control" id="tipus_alertant" name="tipus_alertant" v-model="alertant.tipus_alertants_id">
                                         <option v-if="insert" selected disabled>Seleccionar...</option>
                                         <option v-for="tipus_alertant in tipus_alertants" :key="tipus_alertant.id" v-bind:value="tipus_alertant.id">{{ tipus_alertant.tipus   }}</option>
                                     </select>
@@ -122,7 +122,7 @@
                             <div class="form-group row">
                                 <label for="municipi" class="col-sm-3 col-form-label" >Municipi</label>
                                 <div class="col-sm-9" v-if="insert">
-                                    <select class="form-control" id="municipi" name="municipi">
+                                    <select class="form-control" id="municipi" name="municipi" v-model="alertant.municipis_id">
                                         <option v-if="insert" selected disabled>Seleccionar...</option>
                                         <option v-for="municipi in municipis" :key="municipi.id" v-bind:value="municipi.id">{{ municipi.nom   }}</option>
                                     </select>
@@ -222,6 +222,7 @@
             return{
                 alertants: [],
                 alertant:{
+                    id: '',
                     telefon: '',
                     nom: '',
                     cognoms: '',
@@ -231,10 +232,7 @@
                 },
                 tipus_alertants: [],
                 municipis: [],
-                insert: false,
-                currentPage: 1,
-                perPage: 2,
-                total: 20
+                insert: false
             }
 
         },

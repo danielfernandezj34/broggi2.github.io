@@ -2231,6 +2231,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       alertants: [],
       alertant: {
+        id: '',
         telefon: '',
         nom: '',
         cognoms: '',
@@ -2240,10 +2241,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       tipus_alertants: [],
       municipis: [],
-      insert: false,
-      currentPage: 1,
-      perPage: 2,
-      total: 20
+      insert: false
     };
   },
   methods: {
@@ -2453,6 +2451,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       helpbox: [],
       pregunta: {
+        id: '',
         preguntaES: '',
         preguntaEN: ''
       },
@@ -3185,7 +3184,7 @@ __webpack_require__.r(__webpack_exports__);
       });
       var me3 = this;
       axios.get('/usuaris').then(function (response) {
-        me3.incidencies = response.data;
+        me3.usuaris = response.data;
       })["catch"](function (error) {
         console.log(error);
         _this.errored = true;
@@ -3195,7 +3194,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    selectIncidencies();
+    this.selectIncidencies();
   }
 });
 
@@ -39919,12 +39918,33 @@ var render = function() {
                     _c("div", { staticClass: "col-sm-9" }, [
                       _vm.insert
                         ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.nom,
+                                expression: "alertant.nom"
+                              }
+                            ],
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
                               name: "nom",
                               id: "nom",
                               placeholder: "Nom"
+                            },
+                            domProps: { value: _vm.alertant.nom },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "nom",
+                                  $event.target.value
+                                )
+                              }
                             }
                           })
                         : _c("input", {
@@ -39968,12 +39988,33 @@ var render = function() {
                     _c("div", { staticClass: "col-sm-3" }, [
                       _vm.insert
                         ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.cognoms,
+                                expression: "alertant.cognoms"
+                              }
+                            ],
                             staticClass: "form-control",
                             attrs: {
                               type: "nom",
                               name: "cognoms",
                               id: "cognoms",
                               placeholder: "Cognoms"
+                            },
+                            domProps: { value: _vm.alertant.cognoms },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "cognoms",
+                                  $event.target.value
+                                )
+                              }
                             }
                           })
                         : _c("input", {
@@ -40019,6 +40060,14 @@ var render = function() {
                     _c("div", { staticClass: "col-sm-3" }, [
                       _vm.insert
                         ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.telefon,
+                                expression: "alertant.telefon"
+                              }
+                            ],
                             staticClass: "form-control",
                             attrs: {
                               type: "tel",
@@ -40027,6 +40076,19 @@ var render = function() {
                               placeholder: "Exemple: 612345678",
                               maxlength: "9",
                               pattern: "[0-9]{9}"
+                            },
+                            domProps: { value: _vm.alertant.telefon },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "telefon",
+                                  $event.target.value
+                                )
+                              }
                             }
                           })
                         : _c("input", {
@@ -40076,12 +40138,33 @@ var render = function() {
                     _c("div", { staticClass: "col-sm-9" }, [
                       _vm.insert
                         ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.adreca,
+                                expression: "alertant.adreca"
+                              }
+                            ],
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
                               name: "adreca",
                               id: "adreca",
                               placeholder: "Exemple, 201"
+                            },
+                            domProps: { value: _vm.alertant.adreca },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.alertant,
+                                  "adreca",
+                                  $event.target.value
+                                )
+                              }
                             }
                           })
                         : _c("input", {
@@ -40131,10 +40214,38 @@ var render = function() {
                           _c(
                             "select",
                             {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.alertant.tipus_alertants_id,
+                                  expression: "alertant.tipus_alertants_id"
+                                }
+                              ],
                               staticClass: "form-control",
                               attrs: {
                                 id: "tipus_alertant",
                                 name: "tipus_alertant"
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.alertant,
+                                    "tipus_alertants_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
                               }
                             },
                             [
@@ -40232,8 +40343,36 @@ var render = function() {
                           _c(
                             "select",
                             {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.alertant.municipis_id,
+                                  expression: "alertant.municipis_id"
+                                }
+                              ],
                               staticClass: "form-control",
-                              attrs: { id: "municipi", name: "municipi" }
+                              attrs: { id: "municipi", name: "municipi" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.alertant,
+                                    "municipis_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
                             },
                             [
                               _vm.insert
@@ -40892,7 +41031,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c(
-      "a",
+      "button",
       {
         attrs: { id: "botoCrear" },
         on: {
@@ -41015,11 +41154,32 @@ var render = function() {
                     _c("div", { staticClass: "col-sm-12" }, [
                       _vm.insert
                         ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pregunta.preguntaES,
+                                expression: "pregunta.preguntaES"
+                              }
+                            ],
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
                               id: "preguntaES",
                               name: "preguntaES"
+                            },
+                            domProps: { value: _vm.pregunta.preguntaES },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pregunta,
+                                  "preguntaES",
+                                  $event.target.value
+                                )
+                              }
                             }
                           })
                         : _c("input", {
@@ -41067,11 +41227,32 @@ var render = function() {
                     _c("div", { staticClass: "col-sm-12" }, [
                       _vm.insert
                         ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pregunta.preguntaEN,
+                                expression: "pregunta.preguntaEN"
+                              }
+                            ],
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
                               id: "preguntaEN",
                               name: "preguntaEN"
+                            },
+                            domProps: { value: _vm.pregunta.preguntaEN },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pregunta,
+                                  "preguntaEN",
+                                  $event.target.value
+                                )
+                              }
                             }
                           })
                         : _c("input", {
@@ -43063,7 +43244,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card mt-3" }, [
     _c("div", { staticClass: "card-body mt-1" }, [
-      _c("h5", { staticClass: "card-title", attrs: { id: "titol_usuaris" } }, [
+      _c("h5", { staticClass: "card-title", attrs: { id: "titol_form" } }, [
         _vm._v("Taula d'Incidencies")
       ]),
       _vm._v(" "),
