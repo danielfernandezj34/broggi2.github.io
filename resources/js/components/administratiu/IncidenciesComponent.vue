@@ -1,7 +1,7 @@
 <template>
     <div class="card mt-3">
         <div class="card-body mt-1">
-            <h5 class="card-title" id="titol_usuaris">Taula d'Incidencies</h5>
+            <h5 class="card-title" id="titol_form">Taula d'Incidencies</h5>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Número de la incidència" aria-label="Buscar ID incidència">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="boto_buscar"><i class="fal fa-search"> Buscar</i></button>
@@ -77,7 +77,7 @@ export default ({
             axios
             .get('/usuaris')
             .then(response => {
-                me3.incidencies = response.data;
+                me3.usuaris = response.data;
              })
                 .catch(error => {
                 console.log(error)
@@ -87,8 +87,7 @@ export default ({
         }
     },
     created(){
-       selectIncidencies()
-
+       this.selectIncidencies();
     }
 })
 </script>

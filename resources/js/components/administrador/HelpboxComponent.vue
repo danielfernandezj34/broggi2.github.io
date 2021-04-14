@@ -32,7 +32,7 @@
 
         </div>
 
-        <a @click="crearPregunta()" id="botoCrear"><i class="far fa-plus-circle fa-3x"></i></a>
+        <button @click="crearPregunta()" id="botoCrear"><i class="far fa-plus-circle fa-3x"></i></button>
 
         <!-- Modal Borrar-->
         <div class="modal fade" id="modalBorrar" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
@@ -68,20 +68,20 @@
                     </div>
                     <div class="modal-body">
                         <form>
+                            <label for="preguntaES" class="col-sm-4 col-form-label">Pregunta en Espanyol</label>
                             <div class="form-group row">
-                                <label for="preguntaES" class="col-sm-2 col-form-label">Pregunta en Espanyol</label>
-                                <div class="col-sm-10">
-                                    <textarea v-if="insert" id="preguntaES" name="preguntaES" rows="4" cols="50"></textarea>
-                                    <textarea v-else id="preguntaES" name="preguntaES" rows="4" cols="50" v-model="pregunta.preguntaES"></textarea>
+                                <div class="col-sm-12">
+                                    <input v-if="insert" type="text" id="preguntaES" name="preguntaES" class="form-control" v-model="pregunta.preguntaES">
+                                    <input v-else type="text" name="preguntaES" id="preguntaES" class="form-control" v-model="pregunta.preguntaES">
                                 </div>
 
                             </div>
 
+                            <label for="preguntaEN" class="col-sm-4 col-form-label">Pregunta en Anglés</label>
                             <div class="form-group row">
-                                <label for="preguntaEN" class="col-sm-2 col-form-label">Pregunta en Anglés</label>
-                                <div class="col-sm-10">
-                                    <textarea v-if="insert" id="preguntaEN" name="preguntaEN" rows="4" cols="50"></textarea>
-                                    <textarea v-else id="preguntaEN" name="preguntaEN" rows="4" cols="50" v-model="pregunta.preguntaEN"></textarea>
+                                <div class="col-sm-12">
+                                    <input v-if="insert" type="text" id="preguntaEN" name="preguntaEN" class="form-control" v-model="pregunta.preguntaEN">
+                                    <input v-else type="text" name="preguntaEN" id="preguntaEN" class="form-control" v-model="pregunta.preguntaEN">
                                 </div>
                             </div>
                         </form>
@@ -103,8 +103,9 @@
             return{
                 helpbox: [],
                 pregunta: {
+                    id: '',
                     preguntaES: '',
-                    preguntaEN: '',
+                    preguntaEN: ''
                 },
                 insert: false
             }

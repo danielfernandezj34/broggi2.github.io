@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\HelpBox;
 use Illuminate\Http\Request;
+use App\Http\Resources\HelpboxResource;
+use Illuminate\Database\QueryException;
+use App\Clases\Utilitat;
 
 class HelpBoxController extends Controller
 {
@@ -35,7 +38,23 @@ class HelpBoxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pregunta = new Helpbox();
+
+        $pregunta->preguntaES = $request->input('preguntaES');
+        $pregunta->preguntaEN = $request->input('preguntaEN');
+
+        try {
+            $pregunta->save();
+            $response = (new HelpboxResource($pregunta))
+                        ->response()
+                        ->setStatusCode(201);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
