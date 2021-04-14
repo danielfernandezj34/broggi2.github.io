@@ -31,7 +31,7 @@
                             </div>
                             <td>
                                 <button type="submit" class="btn btn-secondary btn-sm" @click="editUsuari(usuari)"><i class="far fa-edit"></i> Editar</button>
-                                <button type="submit" id="botones" class="btn btn-danger btn-sm ml-1 float-right" @click="confirmarDelete(usuari)"><i class="far fa-trash-alt"></i> Esborrar</button>
+                                <button type="submit" id="botones" class="btn btn-danger btn-sm ml-1" @click="confirmarDelete(usuari)"><i class="far fa-trash-alt"></i> Esborrar</button>
                             </td>
                         </tr>
                     </tbody>
