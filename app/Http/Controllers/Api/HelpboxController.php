@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\HelpboxResource;
 use App\Models\Helpbox;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+use App\Clases\Utilitat;
 
 class HelpboxController extends Controller
 {
@@ -29,7 +31,23 @@ class HelpboxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $helpbox = new Helpbox();
+
+        $helpbox->preguntaES = $request->input('preguntaES');
+        $helpbox->preguntaEN = $request->input('preguntaEN');
+
+        try {
+            $helpbox->save();
+            $response = (new HelpboxResource($helpbox))
+                        ->response()
+                        ->setStatusCode(201);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -52,7 +70,21 @@ class HelpboxController extends Controller
      */
     public function update(Request $request, Helpbox $helpbox)
     {
-        //
+        $helpbox->preguntaES = $request->input('preguntaES');
+        $helpbox->preguntaEN = $request->input('preguntaEN');
+
+        try {
+            $helpbox->save();
+            $response = (new HelpboxResource($helpbox))
+                        ->response()
+                        ->setStatusCode(201);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -63,6 +95,15 @@ class HelpboxController extends Controller
      */
     public function destroy(Helpbox $helpbox)
     {
-        //
+        try {
+            $helpbox->delete();
+            $response = \response()
+                    ->json(['error' => "Registre esborrat correctament"], 200);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+        return $response;
     }
 }

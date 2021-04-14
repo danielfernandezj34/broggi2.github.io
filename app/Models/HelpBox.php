@@ -10,5 +10,7 @@ class HelpBox extends Model
     use HasFactory;
 
     protected $table = 'helpbox';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
     public $timestamps = false;
 }

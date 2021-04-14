@@ -41002,27 +41002,27 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("form", [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-4 col-form-label",
+                      attrs: { for: "preguntaES" }
+                    },
+                    [_vm._v("Pregunta en Espanyol")]
+                  ),
+                  _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "preguntaES" }
-                      },
-                      [_vm._v("Pregunta en Espanyol")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-10" }, [
+                    _c("div", { staticClass: "col-sm-12" }, [
                       _vm.insert
-                        ? _c("textarea", {
+                        ? _c("input", {
+                            staticClass: "form-control",
                             attrs: {
+                              type: "text",
                               id: "preguntaES",
-                              name: "preguntaES",
-                              rows: "4",
-                              cols: "50"
+                              name: "preguntaES"
                             }
                           })
-                        : _c("textarea", {
+                        : _c("input", {
                             directives: [
                               {
                                 name: "model",
@@ -41031,11 +41031,11 @@ var render = function() {
                                 expression: "pregunta.preguntaES"
                               }
                             ],
+                            staticClass: "form-control",
                             attrs: {
-                              id: "preguntaES",
+                              type: "text",
                               name: "preguntaES",
-                              rows: "4",
-                              cols: "50"
+                              id: "preguntaES"
                             },
                             domProps: { value: _vm.pregunta.preguntaES },
                             on: {
@@ -41054,27 +41054,27 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-4 col-form-label",
+                      attrs: { for: "preguntaEN" }
+                    },
+                    [_vm._v("Pregunta en Anglés")]
+                  ),
+                  _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-sm-2 col-form-label",
-                        attrs: { for: "preguntaEN" }
-                      },
-                      [_vm._v("Pregunta en Anglés")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-10" }, [
+                    _c("div", { staticClass: "col-sm-12" }, [
                       _vm.insert
-                        ? _c("textarea", {
+                        ? _c("input", {
+                            staticClass: "form-control",
                             attrs: {
+                              type: "text",
                               id: "preguntaEN",
-                              name: "preguntaEN",
-                              rows: "4",
-                              cols: "50"
+                              name: "preguntaEN"
                             }
                           })
-                        : _c("textarea", {
+                        : _c("input", {
                             directives: [
                               {
                                 name: "model",
@@ -41083,11 +41083,11 @@ var render = function() {
                                 expression: "pregunta.preguntaEN"
                               }
                             ],
+                            staticClass: "form-control",
                             attrs: {
-                              id: "preguntaEN",
+                              type: "text",
                               name: "preguntaEN",
-                              rows: "4",
-                              cols: "50"
+                              id: "preguntaEN"
                             },
                             domProps: { value: _vm.pregunta.preguntaEN },
                             on: {

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Alertants;
 use Illuminate\Http\Request;
 use App\Http\Resources\AlertantsResource;
+use Illuminate\Database\QueryException;
+use App\Clases\Utilitat;
 
 class AlertantsController extends Controller
 {
@@ -29,7 +31,25 @@ class AlertantsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alertant = new Alertants();
+
+        // $alertant->sigles = $request->input('sigles');
+        // $alertant->nom = $request->input('nom');
+        // $alertant->cicles_id = $request->input('cicles_id');
+        // $alertant->actiu = ($request->input('actiu') == 'actiu');
+
+        try {
+            $alertant->save();
+            $response = (new AlertantsResource($alertant))
+                        ->response()
+                        ->setStatusCode(201);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
