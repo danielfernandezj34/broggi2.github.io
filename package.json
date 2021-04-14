@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@ocrv/vue-tailwind-pagination": "0.0.4",
         "bootswatch": "^4.6.0"
     }
 }

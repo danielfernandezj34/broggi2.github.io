@@ -21,7 +21,7 @@ Route::post('/login', [UsuarisController::class, 'login'])->name('login');
 
 
 //RUTA PARA QUE NO SE PUEDA ACCEDER A OTRAS PAGINAS DE LA WEB SIN EL LOGIN
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
 
     //RUTAS RECURSOS
     Route::get('/consultar', function () {
@@ -76,6 +76,10 @@ Route::middleware(['auth'])->group(function () {
         return view('administrador.alertant_detall');
     });
 
+    Route::get('/helpbox', function () {
+        return view('administrador.helpbox');
+    });
+
     Route::get('/usuaris/crear', function(){
         return view('administrador.crear-user');
     })->name('crearu');
@@ -85,7 +89,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [UsuarisController::class, 'logout']);
     ///////////
 
-});
+// });
 
 
 

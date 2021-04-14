@@ -2,7 +2,7 @@
     <main>
         <div class="card mt-3">
             <div class="card-body mt-1">
-                <h5 class="card-title" id="titol_usuaris">Taula d'Alertants</h5>
+                <h5 class="card-title" id="titol_form">Taula d'Alertants</h5>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Número d'incidència" aria-label="Buscar ID incidència">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="boto_buscar"><i class="fal fa-search"> Buscar</i></button>
@@ -217,6 +217,7 @@
 
 <script>
     export default {
+
         data() {
             return{
                 alertants: [],
@@ -230,7 +231,10 @@
                 },
                 tipus_alertants: [],
                 municipis: [],
-                insert: false
+                insert: false,
+                currentPage: 1,
+                perPage: 2,
+                total: 20
             }
 
         },

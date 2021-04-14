@@ -2,7 +2,7 @@
     <main>
         <div class="card mt-3">
             <div class="card-body mt-1">
-                <h5 class="card-title" id="titol_usuaris">Usuaris</h5>
+                <h5 class="card-title" id="titol_form">Usuaris</h5>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar Usuari" aria-label="Buscar Usuari">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fal fa-search"> Buscar</i></button>
@@ -77,18 +77,6 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-2 col-form-label">Username</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="username" id="username" class="form-control" v-model="usuari.username" autofocus>
-                                </div>
-
-                                <label for="email" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="email" id="email" class="form-control" v-model="usuari.email">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="nom" class="col-sm-2 col-form-label">Nom</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="nom" id="nom" class="form-control" v-model="usuari.nom">
@@ -99,25 +87,41 @@
                                     <input type="text" name="cognom" id="cognom" class="form-control" v-model="usuari.cognoms">
                                 </div>
                             </div>
+
                             <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="email" id="email" class="form-control" v-model="usuari.email">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="username" class="col-sm-2 col-form-label">Username</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="username" id="username" class="form-control" v-model="usuari.username" autofocus>
+                                </div>
 
                                 <label for="contrasenya" class="col-sm-2 col-form-label">Contrasenya</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="contrasenya" id="contrasenya" class="form-control" v-model="usuari.contrasenya">
                                 </div>
+                            </div>
 
-                                <label for="recurs" class="col-sm-3 col-form-label">Tipus de Recurs</label>
-                                <div class="col-sm-3">
-                                    <!-- <select class="custom-select" id="recurs" v-model="usuari.recursos_id">
-                                        <option v-for="cicle in cicles" :key="cicle.id" v-bind:value="cicle.id"> {{ cicle.nom   }}</option>
-                                    </select> -->
+
+                            <div class="form-group row">
+
+                                <label for="recurs" class="col-sm-2 col-form-label">Tipus de Recurs</label>
+                                <div class="col-sm-7 mt-2">
+                                    <select class="form-control" id="recurs" name="recurs" v-model="usuari.recursos_id">
+                                        <option v-for="tipusRecurs in tipusRecursos" :key="tipusRecurs.id" v-bind:value="tipusRecurs.id">{{ tipusRecurs.tipus   }}</option>
+                                    </select>
                                 </div>
 
                             </div>
 
                             <div class="form-group row">
-                                <label for="rol" class="col-sm-3 col-form-label">Tipus de Rol</label>
-                                <div class="form-check form-check-inline" v-for="rol in rols" :key="rol.id">
+                                <label for="rol" class="col-sm-2 col-form-label">Tipus de Rol</label>
+                                <div class="form-check form-check-inline ml-3" v-for="rol in rols" :key="rol.id">
                                     <input class="form-check-input" type="radio" name="rol" :id="rol.id" :value="rol.id" v-model="usuari.rols_id">
                                     <label class="form-check-label" :for="rol.id">
                                         {{ rol.nom }}
@@ -153,6 +157,7 @@
                     rols_id: '',
                     recursos_id: ''
                 },
+                tipusRecursos: [],
                 insert: false
             }
 
@@ -180,6 +185,19 @@
                         console.log(error)
                         this.errored = true;
                     })
+            },
+            selectTipusRecursos(){
+                let me = this;
+                axios
+                    .get('/tipusRecursos')
+                    .then(response => {
+                        me.tipusRecursos = response.data;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
             },
             crearUsuari(){
                 this.insert = true;
@@ -232,6 +250,7 @@
         },
         created(){
             this.selectUsuaris();
+            this.selectTipusRecursos();
         },
         mounted() {
             console.log('Component mounted.')
