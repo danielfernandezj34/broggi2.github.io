@@ -24,6 +24,8 @@ Vue.component('administrador-principal', require('./components/AdministradorComp
 Vue.component('administratiu-principal', require('./components/AdministratiuComponent.vue').default);
 Vue.component('usuari-component', require('./components/administrador/UsuarisComponent.vue').default);
 Vue.component('recurs-principal', require('./components/RecursComponent.vue').default);
+
+
 Vue.component('alertants-component', require('./components/administrador/AlertantComponent.vue').default);
 
 /**
