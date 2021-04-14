@@ -18,6 +18,7 @@
 --
 -- Table structure for table `afectats`
 --
+use broggi ;
 
 DROP TABLE IF EXISTS `afectats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
