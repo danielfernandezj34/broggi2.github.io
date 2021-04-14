@@ -145,8 +145,8 @@ DROP TABLE IF EXISTS `helpbox`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `helpbox` (
   `id` int(11) NOT NULL,
-  `preguntaES` varchar(100) NOT NULL,
-  `preguntaEN` varchar(100) NOT NULL,
+  `preguntaES` varchar(300) NOT NULL,
+  `preguntaEN` varchar(300) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -157,7 +157,7 @@ CREATE TABLE `helpbox` (
 
 LOCK TABLES `helpbox` WRITE;
 /*!40000 ALTER TABLE `helpbox` DISABLE KEYS */;
-INSERT INTO `helpbox` VALUES (1,'Quin tipud d\'alertat ets, VIP, centre medic, alertat accidental, l\'entorn de l\'afectat o el propi af','What kind of informant are you, a VIP informant, a health center, an accidental informant, of the af'),(2,'Quin és el seu nom?','What is your name?'),(3,'Quin és el seu cognom?','What is your surname?'),(4,'Quin és el seu numero de telefon?','What is your phone number?'),(5,'Quina és la seva provincia?','In which province are you?'),(6,'Quin es el seu municipi?','In which municipality are you?'),(7,'Quina es la teva adreça?','What is your address?'),(8,'Tens una adreça complementaria?','Do you have a complementary address?'),(9,'Quin és el seu DNI o TS/NSS','What is your DNI or TS/NSS?'),(10,'Quina edat tens?','How old are you?'),(11,'Ets home o dona?','Are you a man or a woman?'),(12,'Quin és el tipus d\'accident?','What is the type of accident or incident?'),(13,'Quin és el numero de l\'afectat?','What is the number of affected?'),(14,'Pots descriure que ha pasat?','Can you describe what happened?');
+INSERT INTO `helpbox` VALUES (1,'Quin tipus d\'alertat ets, VIP, centre medic, alertat accidental, l\'entorn de l\'afectat o el propi afectat?','What kind of informant are you, a VIP informant, a health center, an accidental informant, of the affected?'),(2,'Quin és el seu nom?','What is your name?'),(3,'Quin és el seu cognom?','What is your surname?'),(4,'Quin és el seu numero de telefon?','What is your phone number?'),(5,'Quina és la seva provincia?','In which province are you?'),(6,'Quin es el seu municipi?','In which municipality are you?'),(7,'Quina es la teva adreça?','What is your address?'),(8,'Tens una adreça complementaria?','Do you have a complementary address?'),(9,'Quin és el seu DNI o TS/NSS','What is your DNI or TS/NSS?'),(10,'Quina edat tens?','How old are you?'),(11,'Ets home o dona?','Are you a man or a woman?'),(12,'Quin és el tipus d\'accident?','What is the type of accident or incident?'),(13,'Quin és el numero de l\'afectat?','What is the number of affected?'),(14,'Pots descriure que ha pasat?','Can you describe what happened?');
 /*!40000 ALTER TABLE `helpbox` ENABLE KEYS */;
 UNLOCK TABLES;
 

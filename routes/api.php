@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\TipusAlertantsController;
 use App\Http\Controllers\Api\TipusIncidenciesController;
 use App\Http\Controllers\Api\TipusRecursosController;
 use App\Http\Controllers\Api\UsuarisController;
+use App\Http\Controllers\Api\HelpboxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,4 @@ Route::apiResource('tipusAlertants', TipusAlertantsController::class);
 Route::apiResource('tipusIncidencies', TipusIncidenciesController::class);
 Route::apiResource('tipusRecursos', TipusRecursosController::class);
 Route::apiResource('usuaris', UsuarisController::class);
+Route::apiResource('helpbox', HelpboxController::class);
