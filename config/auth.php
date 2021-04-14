@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Usuaris::class,
         ],
 
         // 'users' => [
@@ -115,3 +115,4 @@ return [
     'password_timeout' => 10800,
 
 ];
+

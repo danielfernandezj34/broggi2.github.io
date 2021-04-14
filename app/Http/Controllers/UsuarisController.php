@@ -1,12 +1,63 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Rols;
 use App\Models\Usuaris;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarisController extends Controller
 {
+
+    public function mostrarLogin(){
+
+        // $usuari = new Usuaris();
+
+        // $usuari->id = 2;
+        // $usuari->username = "administratiu";
+        // $usuari->contrasenya = \bcrypt('administratiu');
+        // $usuari->email = 'administratiu@cepnet.net';
+        // $usuari->nom = 'AdministratiuBroggi';
+        // $usuari->cognoms = 'Apellidos';
+        // $usuari->rols_id = 2;
+        // $usuari->recursos_id = 1;
+
+        // $usuari->save();
+
+
+        return view('usuari.login');
+    }
+
+    public function login(Request $request)
+    {
+        $nomuser = $request->input('usuari');
+        $contrasenya = $request->input('contrasenya');
+
+        $usuari = Usuaris::where('username', $nomuser)->first();
+
+        if($usuari != null && Hash::check($contrasenya, $usuari->contrasenya)){
+            Auth::login($usuari);
+            if($usuari->rols_id == 1){
+                $resposta = redirect('./principal_administrador');
+            }else if ($usuari->rols_id == 2){
+                $resposta = redirect('./principal_administratiu');
+            }else if($usuari->rols_id == 3){
+                $resposta = redirect('./principal_recursos');
+            }
+        }else{
+            $request->session()->flash('error', 'Usuari o contrasenya incorrectes');
+            $resposta = redirect('/')->withInput();
+        }
+        return $resposta;
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +65,7 @@ class UsuarisController extends Controller
      */
     public function index()
     {
-        //
+        return view('administrador.usuaris_rols');
     }
 
     /**
