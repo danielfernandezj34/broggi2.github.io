@@ -20,11 +20,11 @@
                     <tr v-for="incidencia in incidencies" :key="incidencia.id">
                         <td>{{ incidencia.num_incident }}</td>
                         <td>{{ incidencia.nom_metge }}</td>
-                        <div v-for="tipusIncidencia in tipusIncidencies" :key="tipusIncidencia.id">
-                            <td v-if="tipusIncidencia.id == incidencia.tipus_incidencies_id">
+                        <td v-for="tipusIncidencia in tipusIncidencies" :key="tipusIncidencia.id">
+                            <div v-if="tipusIncidencia.id == incidencia.tipus_incidencies_id">
                                 {{ tipusIncidencia.tipus }}
-                            </td>
-                        </div>
+                            </div>
+                        </td>
                         <div v-for="usuari in usuaris" :key="usuari.id">
                             <td v-if="usuari.id == incidencia.usuaris_id">
                                 {{ usuari.nom }} {{ usuari.cognoms }}

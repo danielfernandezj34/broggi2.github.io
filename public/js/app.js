@@ -39624,7 +39624,7 @@ var render = function() {
         attrs: { id: _vm.botodiv_admin_recurs }
       },
       [
-        _c("a", { attrs: { href: "./consultar" } }, [
+        _c("a", { attrs: { href: "./incidencies" } }, [
           _c(
             "button",
             {
@@ -39645,7 +39645,7 @@ var render = function() {
         attrs: { id: _vm.botodiv_admin_recurs }
       },
       [
-        _c("a", { attrs: { href: "./consultar" } }, [
+        _c("a", { attrs: { href: "./incidencies" } }, [
           _c(
             "button",
             {
@@ -43265,9 +43265,9 @@ var render = function() {
                 _c("td", [_vm._v(_vm._s(incidencia.nom_metge))]),
                 _vm._v(" "),
                 _vm._l(_vm.tipusIncidencies, function(tipusIncidencia) {
-                  return _c("div", { key: tipusIncidencia.id }, [
+                  return _c("td", { key: tipusIncidencia.id }, [
                     tipusIncidencia.id == incidencia.tipus_incidencies_id
-                      ? _c("td", [
+                      ? _c("div", [
                           _vm._v(
                             "\n                            " +
                               _vm._s(tipusIncidencia.tipus) +
