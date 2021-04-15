@@ -454,19 +454,6 @@ export default ({
              })
                 .finally(() => this.loading = false)
         },
-        selectMunicipis(){
-            let me= this;
-            axios
-            .get('/municipis')
-            .then(response => {
-                me.municipis = response.data;
-             })
-                .catch(error => {
-                console.log(error)
-                this.errored = true;
-             })
-                .finally(() => this.loading = false)
-        },
         editIncidencia(incidencia){
                 this.incidencia = incidencia;
                 this.recursosIncidencia = incidencia.recursos;
@@ -510,7 +497,6 @@ export default ({
     },
     created(){
        this.selectIncidencies();
-      // this.selectMunicipis();
     }
 })
 </script>
