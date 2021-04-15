@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
 
+
 class IncidenciesController extends Controller
 {
     /**
@@ -14,9 +15,7 @@ class IncidenciesController extends Controller
      */
     public function index()
     {
-        $incidencies = Incidencies::with('recursos', 'afectats')->get();
-
-        return IncidenciesResource::collection($incidencies);
+        //
     }
 
     /**
