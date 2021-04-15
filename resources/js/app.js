@@ -32,6 +32,7 @@ Vue.component('formulari-administratiu', require('./components/administratiu/For
 
 Vue.component('alertants-component', require('./components/administrador/AlertantComponent.vue').default);
 Vue.component('helpbox-component', require('./components/administrador/HelpboxComponent.vue').default);
+Vue.component('recursos-component', require('./components/administrador/RecursosComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

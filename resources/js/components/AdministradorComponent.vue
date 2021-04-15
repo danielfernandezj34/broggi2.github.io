@@ -4,10 +4,10 @@
             <a href="./usuaris"><button :id="boto_u" type="button" class="btn btn-primary ml-lg-5" ><strong>Usuaris i rols</strong></button></a>
         </div>
         <div :id="div_a" class="float-sm-left col-md-4 col-sm-12">
-            <a href="./alertants"><button :id="boto_a" type="button" class="btn btn-outline-secondary" ><strong>Alertants</strong></button></a>
+            <a href="./alertant"><button :id="boto_a" type="button" class="btn btn-outline-secondary" ><strong>Alertants</strong></button></a>
         </div>
         <div :id="div_a" class="float-sm-left col-md-4 col-sm-12">
-            <button :id="boto_r" type="button" class="btn btn-outline-warning mr-lg-5" ><strong>Recursos</strong></button>
+            <a href="./recurs"><button :id="boto_r" type="button" class="btn btn-outline-warning mr-lg-5" ><strong>Recursos</strong></button></a>
         </div>
         <div :id="div_a" class="float-sm-left col-md-4 col-sm-12">
             <a href="./helpbox"><button :id="boto_h" type="button" class="btn btn-outline-danger ml-lg-5" ><strong>Helpbox</strong></button></a>
