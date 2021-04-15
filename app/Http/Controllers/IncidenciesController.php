@@ -14,7 +14,9 @@ class IncidenciesController extends Controller
      */
     public function index()
     {
-        //
+        $incidencies = Incidencies::with('recursos', 'afectats')->get();
+
+        return IncidenciesResource::collection($incidencies);
     }
 
     /**
