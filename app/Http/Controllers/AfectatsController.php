@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Afectats;
 use Illuminate\Http\Request;
+use App\Http\Resources\AfectatsResource;
 
 class AfectatsController extends Controller
 {

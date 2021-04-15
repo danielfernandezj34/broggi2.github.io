@@ -11,19 +11,24 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <body data-tipo="@yield('color_fons')">
-    <nav class="navbar navbar-expand navbar-expand-xs navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <img src="{{ asset('img/sems-logo.png') }}" alt=""height="50">
-        <ul class="navbar-nav ml-auto mr-2">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ Auth::user()->nom}} {{ Auth::user()->cognoms }}
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @yield('incidencies')
-                    <a class="dropdown-item" href="{{ url('/logout')}}">Tancar Sessió</a>
-                </div>
-            </li>
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" id="navbarColor01">
+            <ul class="navbar-nav ml-auto mr-5">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->nom}} {{ Auth::user()->cognoms }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @yield('incidencies')
+                        <a class="dropdown-item" href="{{ url('/logout')}}">Tancar Sessió</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
     <div class="container-fluid" id="app">
         @yield('container')

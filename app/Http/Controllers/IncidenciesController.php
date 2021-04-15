@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
 
+
 class IncidenciesController extends Controller
 {
     /**
