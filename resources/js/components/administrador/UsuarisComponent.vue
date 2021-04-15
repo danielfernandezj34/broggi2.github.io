@@ -82,9 +82,9 @@
                                     <input type="text" name="nom" id="nom" class="form-control" v-model="usuari.nom">
                                 </div>
 
-                                <label for="cognom" class="col-sm-2 col-form-label">Cognoms</label>
+                                <label for="cognoms" class="col-sm-2 col-form-label">Cognoms</label>
                                 <div class="col-sm-4">
-                                    <input type="text" name="cognom" id="cognom" class="form-control" v-model="usuari.cognoms">
+                                    <input type="text" name="cognoms" id="cognoms" class="form-control" v-model="usuari.cognoms">
                                 </div>
                             </div>
 
@@ -149,6 +149,17 @@
                 usuaris: [],
                 rols: [],
                 usuari: {
+                    id: '',
+                    username: '',
+                    contrasenya: '',
+                    email: '',
+                    nom: '',
+                    cognoms: '',
+                    rols_id: '',
+                    recursos_id: ''
+                },
+                usuariVacio: {
+                    id: '',
                     username: '',
                     contrasenya: '',
                     email: '',
@@ -201,6 +212,7 @@
             },
             crearUsuari(){
                 this.insert = true;
+                this.usuari = this.usuariVacio;
                 $('#modalUsuari').modal('show')
             },
             insertUsuari(){
@@ -234,7 +246,7 @@
                 this.usuari = usuari;
                 $('#modalBorrar').modal('show')
             },
-            borrarCurs(){
+            borrarUsuari(){
                 let me = this;
                 axios
                     .delete('/usuaris/'+ me.usuari.id)
