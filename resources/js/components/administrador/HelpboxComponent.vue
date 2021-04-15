@@ -32,7 +32,7 @@
 
         </div>
 
-        <button @click="crearPregunta()" id="botoCrear"><i class="far fa-plus-circle fa-3x"></i></button>
+        <a @click="crearPregunta()" id="botoCrear"><i class="far fa-plus-circle fa-3x"></i></a>
 
         <!-- Modal Borrar-->
         <div class="modal fade" id="modalBorrar" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
@@ -107,6 +107,11 @@
                     preguntaES: '',
                     preguntaEN: ''
                 },
+                preguntaVacia: {
+                    id: '',
+                    preguntaES: '',
+                    preguntaEN: ''
+                },
                 insert: false
             }
 
@@ -127,6 +132,7 @@
             },
             crearPregunta(){
                 this.insert = true;
+                this.pregunta = this.preguntaVacia;
                 $('#modalPregunta').modal('show')
             },
             insertPregunta(){
