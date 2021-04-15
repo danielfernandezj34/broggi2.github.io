@@ -19,7 +19,6 @@
 -- Table structure for table `afectats`
 --
 use broggi ;
-
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `afectats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -104,7 +103,7 @@ CREATE TABLE `comarques` (
 
 LOCK TABLES `comarques` WRITE;
 /*!40000 ALTER TABLE `comarques` DISABLE KEYS */;
-INSERT INTO `comarques` (`nom`, `provincies_id`) VALUES (1,'Alt Camp',4),(2,'Alt Empordà',2),(3,'Alt Penedès',1),(4,'Alt Urgell',3),(5,'Alta Ribagorça',3),(6,'Anoia',1),(7,'Aran',3),(8,'Bages',1),(9,'Baix Camp',4),(10,'Baix Ebre',4),(11,'Baix Empordà',2),(12,'Baix Llobregat',1),(13,'Baix Penedès',4),(14,'Barcelonès',1),(16,'Berguedà',1),(17,'Cerdanya',2),(18,'Cerdanya',3),(19,'Conca de Barberà',4),(20,'Garraf',1),(21,'Garrigues',3),(22,'Garrotxa',2),(23,'Gironès',2),(24,'Maresme',1),(25,'Moianès',1),(26,'Montsià',4),(27,'Noguera',3),(28,'Osona',1),(29,'Osona',2),(30,'Pallars Jussà',3),(31,'Pla de l\'Estany',2),(32,'Pla d\'Urgell',3),(33,'Priorat',4),(34,'Ribera d\'Ebre',4),(35,'Ripollès',2),(36,'Segarra',3),(37,'Segrià',3),(38,'Selva',2),(39,'Solsonès',3),(40,'Tarragonès',4),(41,'Terra Alta',4),(42,'Urgell',3),(43,'Vallès Occidental',1),(44,'Vallès Oriental',1),(45,'Pallars Sobirà',3);
+INSERT INTO `comarques` VALUES (1,'Alt Camp',4),(2,'Alt Empordà',2),(3,'Alt Penedès',1),(4,'Alt Urgell',3),(5,'Alta Ribagorça',3),(6,'Anoia',1),(7,'Aran',3),(8,'Bages',1),(9,'Baix Camp',4),(10,'Baix Ebre',4),(11,'Baix Empordà',2),(12,'Baix Llobregat',1),(13,'Baix Penedès',4),(14,'Barcelonès',1),(16,'Berguedà',1),(17,'Cerdanya',2),(18,'Cerdanya',3),(19,'Conca de Barberà',4),(20,'Garraf',1),(21,'Garrigues',3),(22,'Garrotxa',2),(23,'Gironès',2),(24,'Maresme',1),(25,'Moianès',1),(26,'Montsià',4),(27,'Noguera',3),(28,'Osona',1),(29,'Osona',2),(30,'Pallars Jussà',3),(31,'Pla de l\'Estany',2),(32,'Pla d\'Urgell',3),(33,'Priorat',4),(34,'Ribera d\'Ebre',4),(35,'Ripollès',2),(36,'Segarra',3),(37,'Segrià',3),(38,'Selva',2),(39,'Solsonès',3),(40,'Tarragonès',4),(41,'Terra Alta',4),(42,'Urgell',3),(43,'Vallès Occidental',1),(44,'Vallès Oriental',1),(45,'Pallars Sobirà',3);
 /*!40000 ALTER TABLE `comarques` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -441,7 +440,7 @@ CREATE TABLE `sexes` (
 
 LOCK TABLES `sexes` WRITE;
 /*!40000 ALTER TABLE `sexes` DISABLE KEYS */;
-INSERT INTO `sexes` (`sexe`) VALUES (2,'Dona'),(1,'Home');
+INSERT INTO `sexes` (`sexe`) VALUES ('Dona'),('Home');
 /*!40000 ALTER TABLE `sexes` ENABLE KEYS */;
 UNLOCK TABLES;
 
