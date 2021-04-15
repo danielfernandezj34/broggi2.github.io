@@ -129,6 +129,8 @@
                                 </div>
                                 <div class="col-sm-9" v-else>
                                     <select class="form-control" id="municipi" name="municipi" v-model="alertant.municipis_id">
+                                        <option v-if="insert" selected disabled>Seleccionar...</option>
+                                        <option v-for="municipi in municipis" :key="municipi.id" v-bind:value="municipi.id">{{ municipi.nom   }}</option>
                                         <option v-for="municipi in municipis" :key="municipi.id" v-bind:value="municipi.id">{{ municipi.nom   }}</option>
                                     </select>
                                 </div>
@@ -230,6 +232,15 @@
                     municipis_id: '',
                     tipus_alertants_id: ''
                 },
+                alertantVacio:{
+                    id: '',
+                    telefon: '',
+                    nom: '',
+                    cognoms: '',
+                    adreca: '',
+                    municipis_id: '',
+                    tipus_alertants_id: ''
+                },
                 tipus_alertants: [],
                 municipis: [],
                 insert: false
@@ -275,6 +286,7 @@
             },
             crearAlertant(){
                 this.insert = true;
+                this.alertant = this.alertantVacio;
                 $('#modalAlertant').modal('show')
             },
             insertAlertant(){

@@ -80,6 +80,10 @@ Route::post('/login', [UsuarisController::class, 'login'])->name('login');
         return view('administrador.helpbox');
     });
 
+    Route::get('/recurs', function () {
+        return view('administrador.recursos_editar');
+    });
+
     Route::get('/usuaris/crear', function(){
         return view('administrador.crear-user');
     })->name('crearu');
