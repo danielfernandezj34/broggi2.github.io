@@ -19,13 +19,12 @@
 -- Table structure for table `afectats`
 --
 use broggi ;
-
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `afectats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `afectats` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `telefon` int(10) NOT NULL,
   `cip` varchar(45) DEFAULT NULL,
   `nom` varchar(45) DEFAULT NULL,
@@ -77,7 +76,7 @@ CREATE TABLE `alertants` (
 
 LOCK TABLES `alertants` WRITE;
 /*!40000 ALTER TABLE `alertants` DISABLE KEYS */;
-INSERT INTO `alertants` VALUES (1,973350050,'Fundació Sant Hospital','','Pg. de Joan Brudieu, 8',782,1),(2,972880150,'Hospital de Puigcerdà','','Pl. de Santa Maria, 1',592,1),(3,973652255,'Hospital Comarcal del Pallars','','Pau Casals, 5',851,1),(4,973640004,'Espitau Val d\'Aran','','Espitau, 8',891,1),(5,973232943,'Clínica de Ponent','','Prat de la Riba, 79',386,1),(6,973727222,'Hospital Santa Maria','','Av. Alcalde Rovira Roure, 44',386,1),(7,973248100,'Hospital Universitari Arnau de Vilanova de Lleida','','Av. Alcalde Rovira Roure, 80',386,1),(8,977613000,'Pius Hospital de Valls','','Pl. Sant Francesc, s/n',877,1),(9,977010800,'Centre Mèdic Quirúrgic Reus','','Antoni Gaudí, 26',610,1),(10,977337303,'Hospital Sant Joan de Reus','','Josep Laporte, s/n',610,1),(11,977257900,'Hospital del Vendrell','','Carretera de Barcelona, s/n',883,1),(12,977259900,'Hospital Sant Pau i Santa Tecla','','Rambla Vella, 14',807,1),(13,977295800,'Hospital Universitari Joan XXIII de Tarragona','','Dr. Mallafré i Guasch, 4',807,1),(14,977519100,'Hospital Verge de la Cinta de Tortosa','','Esplanetes, 44-58',848,1),(15,977588200,'Clínica Terres de l\'Ebre','','Pl. Joaquim Bau, 6-8',848,1),(16,977700050,'Hospital Comarcal d\'Amposta','','Jacint Verdaguer, 11',52,1),(17,977401674,'Hospital Comarcal Móra d\'Ebre','','Benet i Messeguer, s/n',472,1),(18,972501400,'Hospital de Figueres','','Ronda del Rector Arolas, s/n',290,1),(19,972600160,'Hospital de Palamós','','Hospital, 36',515,1),(20,972261800,'Hospital Sant Jaume d\'Olot','','Mulleras, 15',498,1),(21,972204500,'Clínica Girona','','Joan Maragall, 26',330,1),(22,972225833,'ICO Girona','','Av. de França, s/n',330,1),(23,972940200,'Hospital Universitari Doctor Josep Trueta de Girona','','Av. de França, s/n',330,1),(24,972182500,'Hospital Santa Caterina','','Dr. Castany, s/n (Parc Hospitalari Martí i Julià)',651,1),(25,937690201,'Hospital Comarcal Sant Jaume de Calella','','Sant Jaume, 209',161,1),(26,972570208,'Clínica Salus Infirmorum','','Av. Mossèn Lluís Constans, 130',87,1),(27,972730013,'Hospital de Campdevànol','','Ctra. de Gombrèn, 20',170,1),(28,972353264,'Hospital Comarcal de Blanes','','Accés cala Sant Francesc, 5',125,1),(29,938075500,'Hospital d\'Igualada','','Av. Catalunya, 11',360,1),(30,938732550,'Centre Hospitalari','','Av. de les Bases de Manresa, 6-8',410,1),(31,938742112,'Hospital Sant Joan de Déu','','Dr. Joan Soler, s/n',410,1),(32,938243400,'Hospital Comarcal Sant Bernabé','','Ctra. de Ribes, s/n',114,1),(33,938891111,'Hospital General de Vic','','Francesc Pla El Vigatà, 1',888,1),(34,938180440,'Hospital Comarcal de l\'Alt Penedès','','Espirall, s/n',903,1),(35,937742020,'Hospital Sant Joan de Déu','','Av. Mancomunitats Comarcals, 1',414,1),(36,936615208,'Hospital General. Parc Sanitari Sant Joan de Déu','','Camí Vell de la Colònia, 25',661,1),(37,936590111,'Hospital de Viladecans','','Av. de Gavà, 38',898,1),(38,932532100,'Hospital Sant Joan de Déu','','Pg. de Sant Joan de Déu, 2',270,1),(39,935531200,'Hospital de Sant Joan Despí Moisès Broggi','','Jacint Verdaguer, 90',695,1),(40,932483000,'Hospital del Mar','','Pg. Marítim, 25-29',91,1),(41,933069900,'Hospital Plató','','Plató, 21',91,1),(42,933674100,'Hospital de l\'Esperança','','Sant Josep de la Muntanya, 12',91,1),(43,934169700,'Fundació Puigvert / Iuna','','Cartagena, 340',91,1),(44,935072700,'Hospital Dos de Maig','','Dos de Maig, 301',91,1),(45,932275600,'Hospital Casa Maternitat','','Sabino de Arana, 1',91,1),(46,933221111,'Hospital Universitari Sagrat Cor','','Viladomat, 288',91,1),(47,934893000,'Hospital Universitari General de la Vall d\'Hebron','','Pg. de la Vall d\'Hebron, 119-129',91,1),(48,932112508,'Hospital Sant Rafael','','Pg. de la Vall d\'Hebron, 107',91,1),(49,934893000,'Hospital Universitari Maternoinfantil de la Vall d\'Hebron','','Pg. de la Vall d\'Hebron, 119-129',91,1),(50,934893000,'Hospital Universitari de Traumatologia i Rehabilitació de la Vall d\'Hebron','','Pg. de la Vall d\'Hebron, 119-129',91,1),(51,932275400,'Hospital Clínic i Provincial de Barcelona','','Villarroel, 170',91,1),(52,935537160,'Hospital de la Santa Creu i Sant Pau','','Sant Quintí, 89',91,1),(53,934407500,'Hospital General de l\'Hospitalet','','Josep Molins, 29',357,1),(54,932607733,'ICO L\'Hospitalet','','Av. de la Granvia, s/n km 2,7 (Hospital Duran i Reynals)',357,1),(55,932607500,'Hospital Universitari de Bellvitge','','Feixa Llarga, s/n',357,1),(56,934648300,'Hospital Municipal Badalona','','Via Augusta, 9-13',79,1),(57,934977700,'Institut Guttmann','','Camí de Can Ruti, s/n',79,1),(58,934978710,'ICO Badalona','','Ctra. de Canyet, s/n',79,1),(59,934651200,'Hospital Universitari Germans Trias i Pujol de Badalona','','Ctra. de Canyet, s/n',79,1),(60,933860202,'Fundació Hospital de l\'Esperit Sant','','Av. de Mossèn Josep Pons i Robadà, s/n',743,1),(61,938931616,'Fundació Hospital Comarcal Sant Antoni Abat','','Rambla de Sant Josep, 21',926,1),(62,938960025,'Fundació Hospital Residència Sant Camil','','Ctra. de Puigmoltó, km 0,8',720,1),(63,937417700,'Hospital de Mataró','','Ctra. de Cirera, s/n',431,1),(64,937231010,'Hospital de Sabadell','','Parc Taulí, s/n',643,1),(65,937365050,'Hospital Mútua Terrassa','','Pl. Dr. Robert, 5',816,1),(66,937310007,'Hospital de Terrassa','','Ctra. de Torrebonica, s/n',816,1),(67,935760300,'Fundació Privada Hospital de Mollet','','Sant Llorenç, 39',444,1),(68,938425000,'Hospital General de Granollers','','Av. de Francesc Ribas, s/n',341,1),(69,938670617,'Hospital de Sant Celoni','','Av. de l\'Hospital, 19',665,1);
+INSERT INTO `alertants` (`telefon`, `nom`, `cognoms`, `adreca`, `municipis_id`, `tipus_alertants_id`) VALUES (973350050,'Fundació Sant Hospital','','Pg. de Joan Brudieu, 8',782,1),(972880150,'Hospital de Puigcerdà','','Pl. de Santa Maria, 1',592,1),(973652255,'Hospital Comarcal del Pallars','','Pau Casals, 5',851,1),(973640004,'Espitau Val d\'Aran','','Espitau, 8',891,1),(973232943,'Clínica de Ponent','','Prat de la Riba, 79',386,1),(973727222,'Hospital Santa Maria','','Av. Alcalde Rovira Roure, 44',386,1),(973248100,'Hospital Universitari Arnau de Vilanova de Lleida','','Av. Alcalde Rovira Roure, 80',386,1),(977613000,'Pius Hospital de Valls','','Pl. Sant Francesc, s/n',877,1),(977010800,'Centre Mèdic Quirúrgic Reus','','Antoni Gaudí, 26',610,1),(977337303,'Hospital Sant Joan de Reus','','Josep Laporte, s/n',610,1),(977257900,'Hospital del Vendrell','','Carretera de Barcelona, s/n',883,1),(977259900,'Hospital Sant Pau i Santa Tecla','','Rambla Vella, 14',807,1),(977295800,'Hospital Universitari Joan XXIII de Tarragona','','Dr. Mallafré i Guasch, 4',807,1),(977519100,'Hospital Verge de la Cinta de Tortosa','','Esplanetes, 44-58',848,1),(977588200,'Clínica Terres de l\'Ebre','','Pl. Joaquim Bau, 6-8',848,1),(977700050,'Hospital Comarcal d\'Amposta','','Jacint Verdaguer, 11',52,1),(977401674,'Hospital Comarcal Móra d\'Ebre','','Benet i Messeguer, s/n',472,1),(972501400,'Hospital de Figueres','','Ronda del Rector Arolas, s/n',290,1),(972600160,'Hospital de Palamós','','Hospital, 36',515,1),(972261800,'Hospital Sant Jaume d\'Olot','','Mulleras, 15',498,1),(972204500,'Clínica Girona','','Joan Maragall, 26',330,1),(972225833,'ICO Girona','','Av. de França, s/n',330,1),(972940200,'Hospital Universitari Doctor Josep Trueta de Girona','','Av. de França, s/n',330,1),(972182500,'Hospital Santa Caterina','','Dr. Castany, s/n (Parc Hospitalari Martí i Julià)',651,1),(937690201,'Hospital Comarcal Sant Jaume de Calella','','Sant Jaume, 209',161,1),(972570208,'Clínica Salus Infirmorum','','Av. Mossèn Lluís Constans, 130',87,1),(972730013,'Hospital de Campdevànol','','Ctra. de Gombrèn, 20',170,1),(972353264,'Hospital Comarcal de Blanes','','Accés cala Sant Francesc, 5',125,1),(938075500,'Hospital d\'Igualada','','Av. Catalunya, 11',360,1),(938732550,'Centre Hospitalari','','Av. de les Bases de Manresa, 6-8',410,1),(938742112,'Hospital Sant Joan de Déu','','Dr. Joan Soler, s/n',410,1),(938243400,'Hospital Comarcal Sant Bernabé','','Ctra. de Ribes, s/n',114,1),(938891111,'Hospital General de Vic','','Francesc Pla El Vigatà, 1',888,1),(938180440,'Hospital Comarcal de l\'Alt Penedès','','Espirall, s/n',903,1),(937742020,'Hospital Sant Joan de Déu','','Av. Mancomunitats Comarcals, 1',414,1),(936615208,'Hospital General. Parc Sanitari Sant Joan de Déu','','Camí Vell de la Colònia, 25',661,1),(936590111,'Hospital de Viladecans','','Av. de Gavà, 38',898,1),(932532100,'Hospital Sant Joan de Déu','','Pg. de Sant Joan de Déu, 2',270,1),(935531200,'Hospital de Sant Joan Despí Moisès Broggi','','Jacint Verdaguer, 90',695,1),(932483000,'Hospital del Mar','','Pg. Marítim, 25-29',91,1),(933069900,'Hospital Plató','','Plató, 21',91,1),(933674100,'Hospital de l\'Esperança','','Sant Josep de la Muntanya, 12',91,1),(934169700,'Fundació Puigvert / Iuna','','Cartagena, 340',91,1),(935072700,'Hospital Dos de Maig','','Dos de Maig, 301',91,1),(932275600,'Hospital Casa Maternitat','','Sabino de Arana, 1',91,1),(933221111,'Hospital Universitari Sagrat Cor','','Viladomat, 288',91,1),(934893000,'Hospital Universitari General de la Vall d\'Hebron','','Pg. de la Vall d\'Hebron, 119-129',91,1),(932112508,'Hospital Sant Rafael','','Pg. de la Vall d\'Hebron, 107',91,1),(934893000,'Hospital Universitari Maternoinfantil de la Vall d\'Hebron','','Pg. de la Vall d\'Hebron, 119-129',91,1),(934893000,'Hospital Universitari de Traumatologia i Rehabilitació de la Vall d\'Hebron','','Pg. de la Vall d\'Hebron, 119-129',91,1),(932275400,'Hospital Clínic i Provincial de Barcelona','','Villarroel, 170',91,1),(935537160,'Hospital de la Santa Creu i Sant Pau','','Sant Quintí, 89',91,1),(934407500,'Hospital General de l\'Hospitalet','','Josep Molins, 29',357,1),(932607733,'ICO L\'Hospitalet','','Av. de la Granvia, s/n km 2,7 (Hospital Duran i Reynals)',357,1),(932607500,'Hospital Universitari de Bellvitge','','Feixa Llarga, s/n',357,1),(934648300,'Hospital Municipal Badalona','','Via Augusta, 9-13',79,1),(934977700,'Institut Guttmann','','Camí de Can Ruti, s/n',79,1),(934978710,'ICO Badalona','','Ctra. de Canyet, s/n',79,1),(934651200,'Hospital Universitari Germans Trias i Pujol de Badalona','','Ctra. de Canyet, s/n',79,1),(933860202,'Fundació Hospital de l\'Esperit Sant','','Av. de Mossèn Josep Pons i Robadà, s/n',743,1),(938931616,'Fundació Hospital Comarcal Sant Antoni Abat','','Rambla de Sant Josep, 21',926,1),(938960025,'Fundació Hospital Residència Sant Camil','','Ctra. de Puigmoltó, km 0,8',720,1),(937417700,'Hospital de Mataró','','Ctra. de Cirera, s/n',431,1),(937231010,'Hospital de Sabadell','','Parc Taulí, s/n',643,1),(937365050,'Hospital Mútua Terrassa','','Pl. Dr. Robert, 5',816,1),(937310007,'Hospital de Terrassa','','Ctra. de Torrebonica, s/n',816,1),(935760300,'Fundació Privada Hospital de Mollet','','Sant Llorenç, 39',444,1),(938425000,'Hospital General de Granollers','','Av. de Francesc Ribas, s/n',341,1),(938670617,'Hospital de Sant Celoni','','Av. de l\'Hospital, 19',665,1);
 /*!40000 ALTER TABLE `alertants` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,7 +375,7 @@ DROP TABLE IF EXISTS `recursos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `recursos` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `codi` varchar(45) NOT NULL,
   `actiu` tinyint(4) NOT NULL,
   `tipus_recursos_id` int(11) NOT NULL,
@@ -404,7 +403,7 @@ DROP TABLE IF EXISTS `rols`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rols` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -416,7 +415,7 @@ CREATE TABLE `rols` (
 
 LOCK TABLES `rols` WRITE;
 /*!40000 ALTER TABLE `rols` DISABLE KEYS */;
-INSERT INTO `rols` VALUES (1,'Administrador'),(2,'CECOS'),(3,'Recurs');
+INSERT INTO `rols` (`nom`) VALUES ('Administrador'),('CECOS'),('Recurs');
 /*!40000 ALTER TABLE `rols` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,7 +427,7 @@ DROP TABLE IF EXISTS `sexes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sexes` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `sexe` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sexe_UNIQUE` (`sexe`)
@@ -441,7 +440,7 @@ CREATE TABLE `sexes` (
 
 LOCK TABLES `sexes` WRITE;
 /*!40000 ALTER TABLE `sexes` DISABLE KEYS */;
-INSERT INTO `sexes` VALUES (2,'Dona'),(1,'Home');
+INSERT INTO `sexes` (`sexe`) VALUES ('Dona'),('Home');
 /*!40000 ALTER TABLE `sexes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -453,7 +452,7 @@ DROP TABLE IF EXISTS `tipus_alertants`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipus_alertants` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipus` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tipus_UNIQUE` (`tipus`)
@@ -466,7 +465,7 @@ CREATE TABLE `tipus_alertants` (
 
 LOCK TABLES `tipus_alertants` WRITE;
 /*!40000 ALTER TABLE `tipus_alertants` DISABLE KEYS */;
-INSERT INTO `tipus_alertants` VALUES (5,'Accidental'),(2,'Afectat'),(1,'Centre sanitari'),(3,'Entorn afectat'),(4,'VIP');
+INSERT INTO `tipus_alertants` (`tipus`) VALUES ('Centre sanitari'),('Afectat'),('Entorn afectat'),('VIP'),('Accidental');
 /*!40000 ALTER TABLE `tipus_alertants` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -478,9 +477,9 @@ DROP TABLE IF EXISTS `tipus_incidencies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipus_incidencies` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipus` varchar(45) NOT NULL,
-  `video` varchar(255) NOT NULL,
+  `video` varchar(255),
   PRIMARY KEY (`id`),
   UNIQUE KEY `tipus_UNIQUE` (`tipus`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -492,7 +491,7 @@ CREATE TABLE `tipus_incidencies` (
 
 LOCK TABLES `tipus_incidencies` WRITE;
 /*!40000 ALTER TABLE `tipus_incidencies` DISABLE KEYS */;
-INSERT INTO `tipus_incidencies` VALUES (1,'Accident',''),(2,'Traumatisme',''),(3,'Malaltia lloc públic',''),(4,'Malaltia domicili',''),(5,'Consulta mèdica',''),(6,'Transport sanitari','');
+INSERT INTO `tipus_incidencies` (`tipus`, `video`) VALUES ('Accident',''),('Traumatisme',''),('Malaltia lloc públic',''),('Malaltia domicili',''),('Consulta mèdica',''),('Transport sanitari','');
 /*!40000 ALTER TABLE `tipus_incidencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -504,7 +503,7 @@ DROP TABLE IF EXISTS `tipus_recursos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipus_recursos` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipus` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tipus_UNIQUE` (`tipus`)
@@ -517,7 +516,7 @@ CREATE TABLE `tipus_recursos` (
 
 LOCK TABLES `tipus_recursos` WRITE;
 /*!40000 ALTER TABLE `tipus_recursos` DISABLE KEYS */;
-INSERT INTO `tipus_recursos` VALUES (3,'Amb. Assitencial-Tango'),(1,'Amb. Medicalitzada-Mike'),(2,'Amb. Sanitaritzada-India'),(4,'Helicopter medicalitzat');
+INSERT INTO `tipus_recursos` (`tipus`) VALUES ('Amb. Medicalitzada-Mike'),('Amb. Sanitaritzada-India'),('Amb. Assitencial-Tango'),('Helicopter medicalitzat');
 /*!40000 ALTER TABLE `tipus_recursos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -529,7 +528,7 @@ DROP TABLE IF EXISTS `usuaris`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuaris` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
   `contrasenya` varchar(256) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -551,7 +550,7 @@ CREATE TABLE `usuaris` (
 
 LOCK TABLES `usuaris` WRITE;
 /*!40000 ALTER TABLE `usuaris` DISABLE KEYS */;
-INSERT INTO `usuaris` VALUES (1,'admin','$2y$10$WzJGSzjr45.84Fx5.j0xmeDGlIC67pN40hGmk/lkEftppqbYO1.dO','admin@cepnet.net','AdminBroggi','Apellidos',1,1),(2,'administratiu','$2y$10$wqSPLw6BSZ.Q6rrBfvr2Ve1YqSgaxAoPqVOQVFIrvOMrFz98ijExe','administratiu@cepnet.net','AdministratiuBroggi','Apellidos',2,1),(3,'recurs','$2y$10$Waq/ZF4v82AxoJndfWnCA.IO9g61g2nrasZjuo9/naoMvXuHhvCJ6','recurs@cepnet.net','RecursBroggi','Apellidos',3,1);
+INSERT INTO `usuaris` (`username`, `contrasenya`, `email`, `nom`, `cognoms`, `rols_id`, `recursos_id`) VALUES ('admin','$2y$10$WzJGSzjr45.84Fx5.j0xmeDGlIC67pN40hGmk/lkEftppqbYO1.dO','admin@cepnet.net','AdminBroggi','Apellidos',1,1),('administratiu','$2y$10$wqSPLw6BSZ.Q6rrBfvr2Ve1YqSgaxAoPqVOQVFIrvOMrFz98ijExe','administratiu@cepnet.net','AdministratiuBroggi','Apellidos',2,1),('recurs','$2y$10$Waq/ZF4v82AxoJndfWnCA.IO9g61g2nrasZjuo9/naoMvXuHhvCJ6','recurs@cepnet.net','RecursBroggi','Apellidos',3,1);
 /*!40000 ALTER TABLE `usuaris` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
