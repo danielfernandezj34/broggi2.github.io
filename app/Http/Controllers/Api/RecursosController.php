@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Recursos;
 use Illuminate\Http\Request;
 use App\Http\Resources\RecursosResource;
+use Illuminate\Database\QueryException;
+use App\Clases\Utilitat;
 
 class RecursosController extends Controller
 {
@@ -29,7 +31,24 @@ class RecursosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $recurso = new Recursos();
+
+        $recurso->codi = $request->input('codi');
+        $recurso->actiu = ($request->input('actiu') == 'actiu');
+        $recurso->tipus_recursos_id = $request->input('tipus_recursos_id');
+
+        try {
+            $recurso->save();
+            $response = (new RecursosResource($recurso))
+                        ->response()
+                        ->setStatusCode(201);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -50,9 +69,25 @@ class RecursosController extends Controller
      * @param  \App\Models\Recursos  $recursos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recursos $recursos)
+    public function update(Request $request, Recursos $recurso)
     {
-        //
+        $recurso->codi = $request->input('codi');
+        $recurso->actiu = $request->input('actiu');
+        $recurso->tipus_recursos_id = $request->input('tipus_recursos_id');
+
+
+        try {
+            $recurso->save();
+            $response = (new RecursosResource($recurso))
+                        ->response()
+                        ->setStatusCode(201);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -61,8 +96,17 @@ class RecursosController extends Controller
      * @param  \App\Models\Recursos  $recursos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recursos $recursos)
+    public function destroy(Recursos $recurso)
     {
-        //
+        try {
+            $recurso->delete();
+            $response = \response()
+                    ->json(['error' => "Registre esborrat correctament"], 200);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+        return $response;
     }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Usuaris;
 use Illuminate\Http\Request;
 use App\Http\Resources\UsuarisResource;
+use Illuminate\Database\QueryException;
+use App\Clases\Utilitat;
 
 class UsuarisController extends Controller
 {
@@ -30,7 +32,28 @@ class UsuarisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuari = new Usuaris();
+
+        $usuari->username = $request->input('username');
+        $usuari->contrasenya = $request->input('contrasenya');
+        $usuari->email = $request->input('email');
+        $usuari->nom = $request->input('nom');
+        $usuari->cognoms = $request->input('cognoms');
+        $usuari->rols_id = $request->input('rols_id');
+        $usuari->recursos_id = $request->input('recursos_id');
+
+        try {
+            $usuari->save();
+            $response = (new UsuarisResource($usuari))
+                        ->response()
+                        ->setStatusCode(201);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -51,9 +74,29 @@ class UsuarisController extends Controller
      * @param  \App\Models\Usuaris  $usuaris
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuaris $usuaris)
+    public function update(Request $request, Usuaris $usuari)
     {
-        //
+        $usuari->username = $request->input('username');
+        $usuari->contrasenya = $request->input('contrasenya');
+        $usuari->email = $request->input('email');
+        $usuari->nom = $request->input('nom');
+        $usuari->cognoms = $request->input('cognoms');
+        $usuari->rols_id = $request->input('rols_id');
+        $usuari->recursos_id = $request->input('recursos_id');
+
+
+        try {
+            $usuari->save();
+            $response = (new UsuarisResource($usuari))
+                        ->response()
+                        ->setStatusCode(201);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -62,8 +105,17 @@ class UsuarisController extends Controller
      * @param  \App\Models\Usuaris  $usuaris
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuaris $usuaris)
+    public function destroy(Usuaris $usuari)
     {
-        //
+        try {
+            $usuari->delete();
+            $response = \response()
+                    ->json(['error' => "Registre esborrat correctament"], 200);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+        return $response;
     }
 }

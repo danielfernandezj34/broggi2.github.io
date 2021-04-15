@@ -89,10 +89,10 @@
                                     <input v-else type="nom" name="cognoms" class="form-control" id="cognoms" v-model="alertant.cognoms">
                                 </div>
 
-                                <label for="telefon_alertant" class="col-sm-3 col-form-label" >Telefon de l'Alertant</label>
+                                <label for="telefon" class="col-sm-3 col-form-label" >Telefon de l'Alertant</label>
                                 <div class="col-sm-3">
-                                    <input v-if="insert" type="tel" name="telefon_alertant" class="form-control" id="telefon_alertant" v-model="alertant.telefon" placeholder="Exemple: 612345678" maxlength="9" pattern="[0-9]{9}">
-                                    <input v-else type="tel" name="telefon_alertant" class="form-control" id="telefon_alertant" v-model="alertant.telefon" maxlength="9" pattern="[0-9]{9}">
+                                    <input v-if="insert" type="tel" name="telefon" class="form-control" id="telefon" v-model="alertant.telefon" placeholder="Exemple: 612345678" maxlength="9" pattern="[0-9]{9}">
+                                    <input v-else type="tel" name="telefon" class="form-control" id="telefon" v-model="alertant.telefon" maxlength="9" pattern="[0-9]{9}">
                                 </div>
                             </div>
 
@@ -106,14 +106,9 @@
 
                             <div class="form-group row">
                                 <label for="tipus_alertant" class="col-sm-3 col-form-label" >Tipus d'Alertant</label>
-                                <div class="col-sm-9" v-if="insert">
+                                <div class="col-sm-9">
                                     <select class="form-control" id="tipus_alertant" name="tipus_alertant" v-model="alertant.tipus_alertants_id">
                                         <option v-if="insert" selected disabled>Seleccionar...</option>
-                                        <option v-for="tipus_alertant in tipus_alertants" :key="tipus_alertant.id" v-bind:value="tipus_alertant.id">{{ tipus_alertant.tipus   }}</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-9" v-else>
-                                    <select class="form-control" id="tipus_alertant" name="tipus_alertant" v-model="alertant.tipus_alertants_id">
                                         <option v-for="tipus_alertant in tipus_alertants" :key="tipus_alertant.id" v-bind:value="tipus_alertant.id">{{ tipus_alertant.tipus   }}</option>
                                     </select>
                                 </div>
@@ -121,16 +116,9 @@
 
                             <div class="form-group row">
                                 <label for="municipi" class="col-sm-3 col-form-label" >Municipi</label>
-                                <div class="col-sm-9" v-if="insert">
+                                <div class="col-sm-9">
                                     <select class="form-control" id="municipi" name="municipi" v-model="alertant.municipis_id">
                                         <option v-if="insert" selected disabled>Seleccionar...</option>
-                                        <option v-for="municipi in municipis" :key="municipi.id" v-bind:value="municipi.id">{{ municipi.nom   }}</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-9" v-else>
-                                    <select class="form-control" id="municipi" name="municipi" v-model="alertant.municipis_id">
-                                        <option v-if="insert" selected disabled>Seleccionar...</option>
-                                        <option v-for="municipi in municipis" :key="municipi.id" v-bind:value="municipi.id">{{ municipi.nom   }}</option>
                                         <option v-for="municipi in municipis" :key="municipi.id" v-bind:value="municipi.id">{{ municipi.nom   }}</option>
                                     </select>
                                 </div>
