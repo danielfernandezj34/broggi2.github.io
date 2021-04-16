@@ -25,7 +25,7 @@
                         <div class="col-sm-12 col-12">
                             <div class="form-check form-check-inline">
                                 <div v-for="tipusAlertant in tipusAlertants" :key="tipusAlertant.id" >
-                                    <input v-if="alertant.tipus_alertants_id == tipusAlertant.id" class="form-check-input" type="radio" name="tipus_alertant" :id="tipusAlertant.id" checked>
+                                    <input v-if="alertant.tipus_alertants_id == tipusAlertant.id" class="form-check-input" type="radio" name="tipus_alertant" v-model="tipusaSelec" :id="tipusAlertant.id" :value="tipusAlertant.id"  checked>
                                     <input v-else class="form-check-input" type="radio" name="tipus_alertant" :id="tipusAlertant.id" v-model="tipusaSelec" :value="tipusAlertant.id">
                                     <label class="form-check-label mr-2" :for="tipusAlertant.id" >{{ tipusAlertant.tipus }}</label>
                                 </div>

@@ -2,7 +2,7 @@
     <main>
         <div class="card mt-3">
             <div class="card-body mt-1">
-                <h5 class="card-title" id="titol_incidencies">incidencies asignades</h5>
+                <h5 class="card-title" id="titol_form">Incidencies asignades</h5>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar Incidencia" aria-label="Buscar Incidencia">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fal fa-search"> Buscar</i></button>
@@ -43,7 +43,7 @@
 
         </div>
                 <!-- Modal Editar -->
-        <div class="modal fade" id="modalEditarIncidencia" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="modalEditarIncidencia" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
                 <!-- Modal Mostrar -->
@@ -255,7 +255,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -408,8 +408,6 @@
     },
         created(){
             this.selectIncidencies();
-            this.selectUsuaris();
-            this.selectRecursos();
         },
         mounted() {
             console.log('Component mounted.')
