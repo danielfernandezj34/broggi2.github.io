@@ -34,17 +34,6 @@
         @yield('container')
     </div>
     <a href="@yield('boto_atras')"><i class="far fa-arrow-alt-circle-left fa-3x" data-atras="@yield('color-atras')" id="atras"></i></a>
-    <div id="div_helpbox" class="col-sm-12">
-        <i class="far fa-question-square fa-3x float-sm-right" id="helpbox"
-            type="button"
-            title="Helpbox"
-            data-container="body"
-            data-toggle="popover"
-            data-placement="left"
-            data-trigger="hover"
-            data-delay= "500"
-            data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i>
-    </div>
 </body>
 <script src="{{ asset('js/app.js') }}"></script>
 {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -4,6 +4,8 @@
 @section('color-atras', 'recurs')
 @section('boto_atras', './principal_recursos')
 @section('container')
-    <recursos-asignats ></recursos-asignats>
+    <recursos-consultar ></recursos-consultar>
     {{-- :user_id="{{ Auth::user()->id }}" --}}
 @endsection
+
+

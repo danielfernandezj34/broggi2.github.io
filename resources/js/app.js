@@ -34,6 +34,7 @@ Vue.component('alertants-component', require('./components/administrador/Alertan
 Vue.component('helpbox-component', require('./components/administrador/HelpboxComponent.vue').default);
 Vue.component('recursos-component', require('./components/administrador/RecursosComponent.vue').default);
 Vue.component('recursos-asignats', require('./components/recursos/asignatsComponent.vue').default);
+Vue.component('recursos-consultar', require('./components/recursos/ConsultarComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
