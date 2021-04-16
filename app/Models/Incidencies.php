@@ -14,7 +14,7 @@ class Incidencies extends Model
 
     public function afectats()
     {
-        return $this->hasMany(Afectats::class, 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
+        return $this->belongsToMany(Afectats::class, 'incidencies_has_afectats', 'incidencies_id', 'afectats_id');
     }
 
     public function tipus_incidencies()
@@ -34,11 +34,11 @@ class Incidencies extends Model
 
     public function recursos()
     {
-        return $this->hasMany(Recursos::class, 'incidencies_has_recursos', 'incidencies_id', 'recursos_id')->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti');
+        return $this->belongsToMany(Recursos::class, 'incidencies_has_recursos', 'incidencies_id', 'recursos_id')->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti');
     }
 
     public function usuari()
     {
-        return $this->belongsToMany(Usuaris::class, 'usuaris_id');
+        return $this->hasMany(Usuaris::class, 'usuaris_id');
     }
 }
