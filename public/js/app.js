@@ -42262,7 +42262,7 @@ var render = function() {
         attrs: { id: _vm.botodiv_admin_recurs }
       },
       [
-        _c("a", { attrs: { href: "./incidencies" } }, [
+        _c("a", { attrs: { href: "./consultar" } }, [
           _c(
             "button",
             {
