@@ -11,7 +11,6 @@
                     <thead>
                         <tr>
                             <th scope="col">Nom</th>
-                            <th scope="col">Cognoms</th>
                             <th scope="col">Telèfon</th>
                             <th scope="col">Tipus d'alertant</th>
                             <th scope="col"></th>
@@ -20,7 +19,6 @@
                     <tbody>
                         <tr v-for="alertant in alertants" :key="alertant.id">
                             <td>{{ alertant.nom }}</td>
-                            <td>{{ alertant.cognoms }}</td>
                             <td>{{ alertant.telefon }}</td>
                             <div v-for="tipus_alertant in tipus_alertants" :key="tipus_alertant.id">
                                 <td v-if="alertant.tipus_alertants_id == tipus_alertant.id">

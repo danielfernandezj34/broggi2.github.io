@@ -13,10 +13,10 @@
             <a href="./helpbox"><button :id="boto_h" type="button" class="btn btn-outline-danger ml-lg-5" ><strong>Helpbox</strong></button></a>
         </div>
         <div :id="div_a" class="float-sm-left col-md-4 col-sm-12">
-            <button :id="boto_i" type="button" class="btn btn-outline-info" ><strong>Incidències</strong></button>
+            <a href="./incidencies_editar"><button :id="boto_i" type="button" class="btn btn-outline-info" ><strong>Incidències</strong></button></a>
         </div>
         <div :id="div_a" class="float-sm-left col-md-4 col-sm-12">
-            <button :id="boto_e" type="button" class="btn btn-outline-dark mr-lg-5" ><strong>Estadistiques</strong></button>
+            <a href="./estadistiques"><button :id="boto_e" type="button" class="btn btn-outline-dark mr-lg-5" ><strong>Estadistiques</strong></button></a>
         </div>
     </div>
 </template>

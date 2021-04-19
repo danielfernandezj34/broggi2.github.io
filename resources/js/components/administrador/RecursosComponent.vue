@@ -27,7 +27,7 @@
                                     </td>
                                 </div>
                                 <td>
-                                    <button type="submit" id="botones" class="btn btn-danger btn-sm float-right" @click="confirmarDelete(recurso)"><i class="far fa-trash-alt"></i> Esborrar</button>
+                                    <button type="button" id="botones" class="btn btn-danger btn-sm float-right" @click="confirmarDelete(recurso)"><i class="far fa-trash-alt"></i> Esborrar</button>
                                     <button type="button" class="btn btn-secondary btn-sm mr-1 float-right" @click="editRecurs(recurso)"><i class="far fa-edit"></i> Editar</button>
                                 </td>
                             </tr>
@@ -73,13 +73,25 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="form-group row">
-                                <label for="id_recurs" class="col-sm-3 col-form-label" id="id_recurs">Id del recurs</label>
-                                <div class="col-sm-3">
-                                    <input type="number" name="id_recurs" class="form-control" id="id_recurs" placeholder= "Número d'Incidencia" min="0" disabled v-model="recurso.id">
+                            <div class="form-group row ml-5">
+
+                                <label for="tipus_recursos" class="col-sm-3 col-form-label ml-5">Tipus de recurs</label>
+                                <div class="col-sm-5">
+                                    <select name="tipus_recursos" id="tipus_recursos" class="custom-select" v-model="recurso.tipus_recursos_id">
+                                        <option v-if="insert" selected disabled>Seleccionar...</option>
+                                        <option v-for="tipusRecurso in tipusRecursos" :key="tipusRecurso.id" v-bind:value="tipusRecurso.id">{{ tipusRecurso.tipus }}</option>
+                                    </select>
                                 </div>
 
-                                <label for="actiu" class="col-sm-1 col-form-label">Actiu</label>
+                            </div>
+                            <div class="form-group row ml-3">
+
+                                <label for="codi" class="col-sm-3 col-form-label" >Codi del recurs</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="codi" class="form-control" id="codi" placeholder= "Codi" v-model="recurso.codi">
+                                </div>
+
+                                <label for="actiu" class="col-sm-1 col-form-label ml-5">Actiu</label>
                                 <div class="col-sm-1 mt-2">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="actiu" name="actiu" v-model="recurso.actiu">
@@ -87,19 +99,6 @@
                                     </div>
                                 </div>
 
-                            </div>
-                            <div class="form-group row">
-                                <label for="codi" class="col-sm-3 col-form-label" >Codi del recurs</label>
-                                <div class="col-sm-3">
-                                    <input type="text" name="codi" class="form-control" id="codi" placeholder= "Codi" v-model="recurso.codi">
-                                </div>
-                                <label for="tipus_recursos" class="col-sm-2 col-form-label">Tipus de recurs</label>
-                                <div class="col-sm-3">
-                                    <select name="tipus_recursos" id="tipus_recursos" class="custom-select" v-model="recurso.tipus_recursos_id">
-                                        <option v-if="insert" selected disabled>Seleccionar...</option>
-                                        <option v-for="tipusRecurso in tipusRecursos" :key="tipusRecurso.id" v-bind:value="tipusRecurso.id">{{ tipusRecurso.tipus }}</option>
-                                    </select>
-                                </div>
                             </div>
                         </form>
                     </div>

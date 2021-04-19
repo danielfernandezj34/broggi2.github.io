@@ -87,6 +87,10 @@ Route::post('/login', [UsuarisController::class, 'login'])->name('login');
     Route::get('/usuaris/crear', function(){
         return view('administrador.crear-user');
     })->name('crearu');
+
+    Route::get('/estadistiques', function () {
+        return view('administrador.graficos');
+    });
     ///////////
 
     //RUTA LOGOUT

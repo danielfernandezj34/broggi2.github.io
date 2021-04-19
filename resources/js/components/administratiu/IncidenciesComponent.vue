@@ -9,6 +9,7 @@
                 </form>
                 <div v-if="incidencies.length == 0" class="alert alert-light" role="alert">
                             No hi ha cap incidència.
+
                 </div>
                 <table v-else class="table mt-2">
                     <thead>
