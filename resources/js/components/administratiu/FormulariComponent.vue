@@ -24,7 +24,8 @@
                                         data-content="Quin és el seu numero de telefon?"></i>
                                 </div>
                             </label>
-                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="telefonAfectat" @keypress="selectAlertant(telefonAfectat)">
+
+                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="telefonAlertant" @keyup="selectAlertant(telefonAlertant)">
                             <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
                         </div>
 
@@ -48,10 +49,14 @@
                         </label>
                         <div class="col-sm-12 col-12">
                             <div class="form-check form-check-inline">
-                                <div v-for="tipusAlertant in tipusAlertants" :key="tipusAlertant.id" >
-                                    <input v-if="alertant.tipus_alertants_id == tipusAlertant.id" class="form-check-input" type="radio" name="tipus_alertant" :id="tipusAlertant.id" checked>
-                                    <input v-else class="form-check-input" type="radio" name="tipus_alertant" :id="tipusAlertant.id" v-model="tipusaSelec" :value="tipusAlertant.id">
-                                    <label class="form-check-label mr-2" :for="tipusAlertant.id" >{{ tipusAlertant.tipus }}</label>
+                                <div v-if="alertantAgafat != null">
+                                    <input class="form-control" type="text" name="tipus_alertant" id="tipus_alertant" :value="alertantAgafat">
+                                </div>
+                                <div v-else>
+                                    <div v-for="tipusAlertant in tipusAlertants" :key="tipusAlertant.id" >
+                                        <input class="form-check-input" type="radio" name="tipus_alertant" :id="tipusAlertant.id"  v-model="Alertantradio" :value="tipusAlertant.id" :disabled="tipusAlertant.id == 1">
+                                        <label class="form-check-label mr-2" :value="tipusAlertant.id" :for="tipusAlertant.id" >{{ tipusAlertant.tipus }}</label>
+                                    </div>
                                 </div>
 
                             </div>
@@ -60,7 +65,7 @@
                     </div>
 
 
-                    <div class="card-body" v-if="alertant.telefon == telefonAfectat" style="border: 2px solid #2c3e50">
+                    <div class="card-body" v-if="alertant.telefon == telefonAlertant" style="border: 2px solid #2c3e50">
 
                         <div v-if="alertant.tipus_alertants_id == 1">
 
@@ -107,6 +112,144 @@
                                     <input class="form-control" type="text" name="municipi" id="municipi" :value="municipiHospital">
                                 </div>
                             </div>
+                        </div>
+
+                        <div v-else-if="alertant.tipus_alertants_id == 4">
+
+                            <div class="form-group row" >
+
+                                <div class="col-sm-6 col-6">
+                                    <label for="nom_alertant" class="col-form-label"><strong>Nom</strong>
+                                        <div id="div_helpbox" class="col-sm-12">
+                                            <i style="float: right; position: relative;margin: -17px 0px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="What is your name?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quin és el seu nom?"></i>
+                                        </div>
+                                    </label>
+
+                                    <input class="form-control" type="text" name="nom_alertant" id="nom_alertant" :value="alertant.nom">
+
+                                </div>
+
+                               <div class="col-sm-6 col-6">
+                                <label for="cognom_alertant" class="col-form-label"><strong>Cognoms</strong>
+                                    <div id="div_helpbox" class="col-sm-12">
+                                        <i style="float: right;position: relative;margin-top: -17px;margin-right:-30px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                            type="button"
+                                            title="What is your surname?"
+                                            data-container="body"
+                                            data-toggle="popover"
+                                            data-placement="left"
+                                            data-trigger="hover"
+                                            data-delay= "500"
+                                            data-content="Quin és el seu cognom?"></i>
+                                    </div>
+                                </label>
+                                <input class="form-control" type="text" name="cognom_alertant" id="cognom_alertant" :value="alertant.cognoms">
+                            </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 col-6">
+                                    <label for="provincia" class="col-form-label"><strong>Província</strong>
+                                        <div id="div_helpbox" class="col-sm-12">
+                                            <i style="float: right;position: relative;margin-top: -17px;margin-right:-32px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="In which province are you?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quina és la seva provincia?"></i>
+                                        </div>
+                                    </label><br>
+                                    <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id" >
+                                        <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" :value="provincia.id" v-model="provinciaSelec" @click="ordenarComarques(provincia.id)">
+                                        <label class="form-check-label" :for="provincia.nom">{{ provincia.nom }}</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-6">
+                                    <label for="comarca" class="col-form-label"><strong>Comarca</strong>
+                                        <div id="div_helpbox" class="col-sm-12">
+                                            <i style="float: right;position: relative;margin-top: -17px;margin-right:-32px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="In which region are you?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quina és la seva comarca?"></i>
+                                        </div>
+                                    </label>
+                                    <select v-model="ComarcaSelec" @click="ordenarMunicipis(ComarcaSelec)" class="form-control" name="comarca" id="comarca">
+                                        <option  v-for="comarcaOrdenat in comarquesOrdenat" :key="comarcaOrdenat.id" :value="comarcaOrdenat.id">{{ comarcaOrdenat.nom }}</option>
+                                    </select>
+
+                                    <label for="municipi" class="col-form-label"><strong>Municipi</strong>
+                                        <div id="div_helpbox" class="col-sm-12">
+                                            <i style="float: right;position: relative;margin-top: -17px;margin-right:-32px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="In which municipality are you?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quin es el seu municipi?"></i>
+                                        </div>
+                                    </label>
+                                    <select v-model="municipiSelec" class="form-control" name="municipi" id="municipi">
+
+                                        <option v-for="municipiOrdenat in municipisOrdenat" :key="municipiOrdenat.id" :value="municipiOrdenat.id">{{ municipiOrdenat.nom }}</option>
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-12 col-12">
+                                    <label for="direccio" class="col-form-label"><strong>Adreça</strong>
+                                        <div id="div_helpbox" class="col-sm-12">
+                                            <i style="float: right;position: relative;margin-top: -17px;margin-right:-32px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="What is your address?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quina es la teva adreça?"></i>
+                                        </div>
+                                    </label>
+                                    <input type="text" class="form-control" name="direccio" id="direccio">
+                                    <label for="comp_direccio" class="col-form-label"><strong>Adreça complementària</strong>
+                                        <div id="div_helpbox" class="col-sm-12">
+                                            <i style="float: right;position: relative;margin-top: -17px;margin-right:-32px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="What is your complementary address?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quina es la teva adreça complementària?"></i>
+                                        </div>
+                                    </label>
+                                    <input type="text" class="form-control" name="comp_direccio" id="comp_direccio">
+                                </div>
+                            </div>
+
                         </div>
 
 
@@ -166,7 +309,7 @@
                                         </div>
                                     </label><br>
                                     <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id" >
-                                        <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" :value="provincia.id" v-model="ProvinciaSelec" @click="ordenarComarques(provincia.id)">
+                                        <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" v-model="provinciaSelec"  :value="provincia.id" @click="ordenarComarques(provincia.id)">
                                         <label class="form-check-label" :for="provincia.nom">{{ provincia.nom }}</label>
                                     </div>
                                 </div>
@@ -202,7 +345,7 @@
                                                 data-content="Quin es el seu municipi?"></i>
                                         </div>
                                     </label>
-                                    <select v-model="ProvinciaSelec" class="form-control" name="municipi" id="municipi">
+                                    <select v-model="municipiSelec" class="form-control" name="municipi" id="municipi">
 
                                         <option v-for="municipiOrdenat in municipisOrdenat" :key="municipiOrdenat.id" :value="municipiOrdenat.id">{{ municipiOrdenat.nom }}</option>
 
@@ -307,7 +450,7 @@
                                     </div>
                                 </label><br>
                                 <div class="form-check form-check-inline" v-for="provincia in provincies" :key="provincia.id" >
-                                    <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" :value="provincia.id" v-model="ProvinciaSelec" @click="ordenarComarques(provincia.id)">
+                                    <input class="form-check-input" type="radio" name="provincia" :id="provincia.nom" :value="provincia.id" v-model="provinciaSelec" @click="ordenarComarques(provincia.id)">
                                     <label class="form-check-label" :for="provincia.nom">{{ provincia.nom }}</label>
                                 </div>
                             </div>
@@ -319,7 +462,7 @@
                                 </select>
 
                                 <label for="municipi" class="col-form-label"><strong>Municipi</strong></label>
-                                <select v-model="ProvinciaSelec" class="form-control" name="municipi" id="municipi">
+                                <select v-model="municipiSelec" class="form-control" name="municipi" id="municipi">
 
                                     <option v-for="municipiOrdenat in municipisOrdenat" :key="municipiOrdenat.id" :value="municipiOrdenat.id">{{ municipiOrdenat.nom }}</option>
                                 </select>
@@ -1093,7 +1236,7 @@
 
                         <div class="card card-body" style="border: 2px solid #2c3e50">
                             <h4 class="card-title">Afectat 1</h4>
-                            <div v-if="tipusaSelec == 2">
+                            <div v-if="Alertantradio == 2">
                                 <div class="form-group row">
 
                                     <div class="col-sm-5 col-5">
@@ -1115,8 +1258,8 @@
 
                                     <div class="col-sm-5 col-5">
                                         <label for="cognom_afectat1" class="col-form-label"><strong>Cognom</strong>
-                                            <div id="div_helpbox" class="col-sm-12">
-                                            <i style="float: right;position: relative;margin-top: -17px;margin-right:-30px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                            <div class="mt-2">
+                                            <i style="float: right;position: relative;margin-top: -25px;margin-right:-30px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                                 type="button"
                                                 title="What is your surname?"
                                                 data-container="body"
@@ -1167,7 +1310,7 @@
                                                     data-content="Quin és el seu telèfon?"></i>
                                             </div>
                                         </label>
-                                        <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0" :value="telefonAfectat" disabled>
+                                        <input class="form-control" type="tel" name="telefon_alertant1" id="telefon_alertant1" maxlength="9" min="0" :value="telefonAlertant" disabled>
 
                                     </div>
 
@@ -1195,19 +1338,20 @@
 
                                     <div class="col-sm-5 col-5">
                                         <label for="cognom_afectat1" class="col-form-label"><strong>Cognom</strong>
-                                            <div id="div_helpbox" class="col-sm-12">
-                                                <i style="float: right;position: relative;margin-top: -17px;margin-right:-30px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                                    type="button"
-                                                    title="What is your surname?"
-                                                    data-container="body"
-                                                    data-toggle="popover"
-                                                    data-placement="left"
-                                                    data-trigger="hover"
-                                                    data-delay= "500"
-                                                    data-content="Quin és el seu cognom?"></i>
+                                            <div class="mt-2">
+                                            <i style="float: right;position: relative;margin-top: -25px;margin-right:-30px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button"
+                                                title="What is your surname?"
+                                                data-container="body"
+                                                data-toggle="popover"
+                                                data-placement="left"
+                                                data-trigger="hover"
+                                                data-delay= "500"
+                                                data-content="Quin és el seu cognom?"></i>
                                             </div>
                                         </label>
-                                        <input class="form-control" type="text" name="cognom_afectat1" id="cognom_afectat1" >
+                                        <input class="form-control" type="text" name="cognom_afectat1" id="cognom_afectat1">
+
                                     </div>
 
                                 </div>
@@ -1367,9 +1511,8 @@
         </div>
 
 
-        <div class="row mt-2 mb-1">
-            <div class="col">
-                <div class="collapse multi-collapse" id="recurs_mobil">
+
+                <div class="collapse multi-collapse mt-2 mb-2 col-sm-12 col-12" id="recurs_mobil">
                     <div class="card card-body">
                         <div class="form-group row">
                             <div class="col-sm-4 col-4">
@@ -1443,14 +1586,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
 
 
-            <div class="row mt-2 mb-1">
-                <div class="col">
-                    <div class="collapse multi-collapse" id="no_recurs">
+                    <div class="collapse multi-collapse mt-2 mb-2 col-sm-12 col-12" id="no_recurs">
                         <div class="card card-body">
 
                             <div class="form-group row">
@@ -1470,12 +1609,9 @@
 
                         </div>
                     </div>
-                </div>
                 <button type="submit" href="" class="btn btn-success btn-lg boto_enviar" style="background-color: #f70c74"><i class="fas fa-check fa-1x"></i>Enviar</button>
             </div>
-
         </div>
-    </div>
 
 
 
@@ -1499,15 +1635,17 @@
                 recursSelec1 : '',
                 recursSelec2 : '',
                 recursSelec3 : '',
-                ProvinciaSelec: '',
+                provinciaSelec: '',
                 ComarcaSelec: '',
                 sexeSelec : '',
                 tipusaSelec : '',
                 centreSelec: '',
                 nomAfectat: '',
                 cognomAfectat: '',
-                telefonAfectat: '',
+                telefonAlertant: '',
                 municipiHospital: '',
+                Alertantradio : '',
+                municipiSelec : '',
                 color : '#f70c74',
                 color2 : '#2c3e50',
                 color3 : '#2c3e50',
@@ -1639,7 +1777,7 @@
                     }
                     i++;
                 }
-                console.log('funcion running');
+
             },
             ordenarMunicipis(ComarcaSelec){
                 var i = 0;
@@ -1651,20 +1789,21 @@
                     }
                     i++;
                 }
-                console.log('Funcio ordenar municipis running')
-            },
+
+            },//Función para seleccionar el alertante cuando el administrativo pone el telefono
             selectAlertant(telefon){
                 var i = 0;
                 var j = 0;
                 var x = 0;
                 this.alertant = [];
-                debugger;
+                this.alertantAgafat = null;
+                this.municipiHospital = '';
                 while(this.alertants.length > i){
                     if(this.alertants[i].telefon == telefon){
                         this.alertant.id = this.alertants[i].id;
                         this.alertant.telefon = this.alertants[i].telefon;
                         this.alertant.nom = this.alertants[i].nom;
-                        this.alertant.cognom = this.alertants[i].cognom;
+                        this.alertant.cognoms = this.alertants[i].cognoms;
                         this.alertant.adreca = this.alertants[i].adreca;
                         this.alertant.municipis_id = this.alertants[i].municipis_id;
                         this.alertant.tipus_alertants_id = this.alertants[i].tipus_alertants_id;
