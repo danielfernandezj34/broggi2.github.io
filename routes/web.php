@@ -21,7 +21,7 @@ Route::post('/login', [UsuarisController::class, 'login'])->name('login');
 
 
 //RUTA PARA QUE NO SE PUEDA ACCEDER A OTRAS PAGINAS DE LA WEB SIN EL LOGIN
-// Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     //RUTAS RECURSOS
     Route::get('/consultar', function () {
@@ -97,7 +97,7 @@ Route::post('/login', [UsuarisController::class, 'login'])->name('login');
     Route::get('/logout', [UsuarisController::class, 'logout']);
     ///////////
 
-// });
+});
 
 
 
