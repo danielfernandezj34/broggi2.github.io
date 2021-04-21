@@ -6,7 +6,10 @@
                 <form class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
                     <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
                 </form>
-                <table class="table mt-2">
+                <div v-if="alertants.length == 0" class="alert alert-light mt-2" role="alert">
+                    No hi ha cap Alertant.
+                </div>
+                <table v-else class="table mt-2">
                     <thead>
                         <tr>
                             <th scope="col">Nom</th>
@@ -295,6 +298,7 @@
                     .get('/paginate', {params:{
                         nomAlertant: this.nomAlertant,
                         idTipusAlertant : this.idTipusAlertant
+
                     }})
                     .then(response => {
                         me.alertants = response.data.data;
