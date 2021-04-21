@@ -1,6 +1,6 @@
 <template>
     <main>
-        <div class="card mt-3">
+        <div class="card mt-3 mb-3">
             <div class="card-body mt-1">
                 <h5 class="card-title" id="titol_form">Taula d'Alertants</h5>
                 <form class="form-inline my-2 my-lg-0">
@@ -33,6 +33,21 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example" class="ml-5">
+                    <ul class="pagination">
+                        <li class="page-item" :class="{disabled: meta_alertant.from == meta_alertant.current_page}">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" :class="{active: pagina == meta_alertant.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
+                        <li class="page-item" :class="{disabled: meta_alertant.last_page == meta_alertant.current_page}">
+                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
 
@@ -229,7 +244,11 @@
                 },
                 tipus_alertants: [],
                 municipis: [],
-                insert: false
+                insert: false,
+                pagina: "",
+                meta_alertant: {},
+                paginas: []
+
             }
 
         },
@@ -237,15 +256,22 @@
             selectAlertants(){
                 let me = this;
                 axios
-                    .get('/alertants')
+                    .get('/paginate')
                     .then(response => {
-                        me.alertants = response.data;
+                        me.alertants = response.data.data;
+                        me.meta_alertant = response.data.meta;
+
+                        for (let index = 0; index < me.meta_alertant.last_page; index++) {
+                            me.paginas[index] = index + 1;
+                        }
                     })
                     .catch(error => {
                         console.log(error)
                         this.errored = true;
                     })
                     .finally(() => this.loading = false)
+
+
                 let me2 = this;
                 axios
                     .get('/tipusAlertants')
@@ -256,6 +282,21 @@
                         console.log(error)
                         this.errored = true;
                     })
+            },
+            paginar(pagina){
+                let me = this;
+                axios
+                    .get('/paginate' + '?page=' + pagina)
+                    .then(response => {
+                        me.alertants = response.data.data;
+                        me.meta_alertant = response.data.meta;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+
+                    .finally(() => this.loading = false)
             },
             selectMunicipis(){
                 let me = this;
