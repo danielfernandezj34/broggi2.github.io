@@ -38,6 +38,21 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example" class="ml-5">
+                    <ul class="pagination">
+                        <li class="page-item" :class="{disabled: meta_usuaris.from == meta_usuaris.current_page}">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" :class="{active: pagina == meta_usuaris.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
+                        <li class="page-item" :class="{disabled: meta_usuaris.last_page == meta_usuaris.current_page}">
+                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
         </div>
@@ -173,7 +188,10 @@
                     recursos_id: ''
                 },
                 tipusRecursos: [],
-                insert: false
+                insert: false,
+                pagina: "",
+                meta_usuaris: {},
+                paginas: []
             }
 
         },
@@ -181,11 +199,15 @@
             selectUsuaris(){
                 let me = this;
                 axios
-                    .get('/usuaris',{params:{
+                    .get('/paginate_usuaris',{params:{
                         buscador: this.buscador
                     }})
                     .then(response => {
-                        me.usuaris = response.data;
+                        me.usuaris = response.data.data;
+                        me.meta_usuaris = response.data.meta;
+                        for (let index = 0; index < me.meta_usuaris.last_page; index++) {
+                            me.paginas[index] = index + 1;
+                        }
                     })
                     .catch(error => {
                         console.log(error)
@@ -202,6 +224,21 @@
                         console.log(error)
                         this.errored = true;
                     })
+            },
+            paginar(pagina){
+                let me = this;
+                axios
+                    .get('/paginate_usuaris' + '?page=' + pagina)
+                    .then(response => {
+                        me.usuaris = response.data.data;
+                        me.meta_usuaris = response.data.meta;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+
+                    .finally(() => this.loading = false)
             },
             selectTipusRecursos(){
                 let me = this;

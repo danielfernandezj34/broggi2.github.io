@@ -18,7 +18,7 @@ class AlertantsPaginateController extends Controller
      */
     public function index()
     {
-        $alertants = Alertants::paginate(8);
+        $alertants = Alertants::paginate(6);
 
         return AlertantsResource::collection($alertants);
     }

@@ -41,6 +41,21 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example" class="ml-5">
+                    <ul class="pagination">
+                        <li class="page-item" :class="{disabled: meta_incidencies.from == meta_incidencies.current_page}">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" :class="{active: pagina == meta_incidencies.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
+                        <li class="page-item" :class="{disabled: meta_incidencies.last_page == meta_incidencies.current_page}">
+                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
         <!-- Modal Borrar-->
@@ -370,7 +385,10 @@ export default ({
                 tipus_incidencies_id:'',
                 alertants_id:'',
                 municipis_id:'',
-                usuaris_id:''
+                usuaris_id:'',
+                pagina: "",
+                meta_incidencies: {},
+                paginas: []
             }
         }
 
@@ -379,11 +397,15 @@ export default ({
          selectIncidencies(){
             let me= this;
             axios
-            .get('/incidencies',{params:{
+            .get('/paginate_incidencies',{params:{
                 buscador: this.buscador
             }})
             .then(response => {
-                me.incidencies = response.data;
+                me.incidencies = response.data.data;
+                me.meta_incidencies = response.data.meta;
+                for (let index = 0; index < me.meta_incidencies.last_page; index++) {
+                    me.paginas[index] = index + 1;
+                }
              })
                 .catch(error => {
                 console.log(error)
@@ -455,6 +477,21 @@ export default ({
                 console.log(error)
                 this.errored = true;
              })
+                .finally(() => this.loading = false)
+        },
+        paginar(pagina){
+            let me = this;
+            axios
+                .get('/paginate_incidencies' + '?page=' + pagina)
+                .then(response => {
+                    me.incidencies = response.data.data;
+                    me.meta_incidencies = response.data.meta;
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.errored = true;
+                })
+
                 .finally(() => this.loading = false)
         },
         editIncidencia(incidencia){

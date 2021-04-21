@@ -256,7 +256,7 @@
             selectAlertants(){
                 let me = this;
                 axios
-                    .get('/paginate')
+                    .get('/paginate_alertants')
                     .then(response => {
                         me.alertants = response.data.data;
                         me.meta_alertant = response.data.meta;
@@ -286,7 +286,7 @@
             paginar(pagina){
                 let me = this;
                 axios
-                    .get('/paginate' + '?page=' + pagina)
+                    .get('/paginate_alertants' + '?page=' + pagina)
                     .then(response => {
                         me.alertants = response.data.data;
                         me.meta_alertant = response.data.meta;
