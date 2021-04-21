@@ -18,9 +18,8 @@ class AlertantsPaginateController extends Controller
      */
     public function index(Request $request)
     {
-<<<<<<< HEAD
         $alertants = Alertants::paginate(6);
-=======
+
         $filtreNomAlertant = $request->nomAlertant;
         $filtreIdTipusAlertant = $request->idTipusAlertant;
 
@@ -33,7 +32,6 @@ class AlertantsPaginateController extends Controller
                 $alertants = Alertants::where('tipus_alertants_id', '=', $filtreIdTipusAlertant)->paginate(8)->withQueryString();
             }
         }
->>>>>>> 344dfff3424e4b2d726cf74b097f91fd0e720ff4
 
         return AlertantsResource::collection($alertants);
     }
