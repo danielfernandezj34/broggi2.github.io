@@ -18,18 +18,16 @@ class AlertantsPaginateController extends Controller
      */
     public function index(Request $request)
     {
-        $alertants = Alertants::paginate(6);
-
         $filtreNomAlertant = $request->nomAlertant;
         $filtreIdTipusAlertant = $request->idTipusAlertant;
 
         if($filtreNomAlertant != ''){
-            $alertants = Alertants::where('nom','LIKE','%'.$filtreNomAlertant.'%' )->paginate(8)->withQueryString();
+            $alertants = Alertants::where('nom','LIKE','%'.$filtreNomAlertant.'%' )->paginate(6)->withQueryString();
         }else{
             if($filtreIdTipusAlertant == ''){
-                $alertants = Alertants::paginate(8);
+                $alertants = Alertants::paginate(6);
             }else{
-                $alertants = Alertants::where('tipus_alertants_id', '=', $filtreIdTipusAlertant)->paginate(8)->withQueryString();
+                $alertants = Alertants::where('tipus_alertants_id', '=', $filtreIdTipusAlertant)->paginate(6)->withQueryString();
             }
         }
 

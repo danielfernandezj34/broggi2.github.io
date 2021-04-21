@@ -18,9 +18,29 @@ class RecursosPaginateController extends Controller
      */
     public function index(Request $request)
     {
-        $recursos = Recursos::paginate(6);
-
+        $filtreidTipusRecurs = $request->idTipusRecurs;
+        $filtreActiu = $request->actiu;
+        $filtreCodiRecurs = $request->codiRecurs;
+        if($filtreCodiRecurs != ''){
+            $recursos =  Recursos::where('codi', '=', $filtreCodiRecurs) ->paginate(6)->withQueryString();;
+        }else{
+            if($filtreidTipusRecurs == ''){
+                if($filtreActiu == ''){
+                        $recursos = Recursos::paginate(6);
+                }else{
+                        $recursos = Recursos::where('actiu', '=', $filtreActiu) ->paginate(6)->withQueryString();;
+                }
+            }else{
+                    if($filtreActiu == ''){
+                        $recursos = Recursos::where('tipus_recursos_id', '=', $filtreidTipusRecurs) ->paginate(6)->withQueryString();;
+                    }else{
+                        $recursos = Recursos::where('tipus_recursos_id', '=', $filtreidTipusRecurs)
+                                            ->where('actiu', '=', $filtreActiu) ->paginate(6)->withQueryString();;
+                    }
+            }
+        }
         return RecursosResource::collection($recursos);
+
     }
 
     /**
