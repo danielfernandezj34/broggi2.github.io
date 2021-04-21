@@ -3,11 +3,13 @@
         <div class="card mt-3">
             <div class="card-body mt-1">
                 <h5 class="card-title" id="titol_form">Usuaris</h5>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar Usuari" aria-label="Buscar Usuari">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fal fa-search"> Buscar</i></button>
+                <form class="form-inline my-2 my-lg-0 col-sm-4" id="buscador_form">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar Usuari" aria-label="Buscar Usuari" v-model="buscador" @keyup="buscarUsuaris">
                 </form>
-                <table class="table mt-2">
+                <div v-if="usuaris.length == 0" class="alert alert-light mt-2" role="alert">
+                            No hi ha cap usuari.
+                </div>
+                <table v-else class="table mt-2">
                     <thead>
                         <tr>
                             <th scope="col">Nom</th>
@@ -146,6 +148,8 @@
     export default {
         data() {
             return{
+                buscador:'',
+                setTimeoutBuscador:'',
                 usuaris: [],
                 rols: [],
                 usuari: {
@@ -177,7 +181,9 @@
             selectUsuaris(){
                 let me = this;
                 axios
-                    .get('/usuaris')
+                    .get('/usuaris',{params:{
+                        buscador: this.buscador
+                    }})
                     .then(response => {
                         me.usuaris = response.data;
                     })
@@ -259,6 +265,10 @@
                         $('modalBorrar').modal('hide');
                     })
             },
+             buscarUsuaris(){
+                clearTimeout(this.setTimeoutBuscador);
+                this.setTimeoutBuscador = setTimeout(this.selectUsuaris, 360);
+            }
         },
         created(){
             this.selectUsuaris();
