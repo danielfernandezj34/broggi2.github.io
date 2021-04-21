@@ -7,5 +7,5 @@
     <a class="dropdown-item" href="./incidencies">Consultar incidencies</a>
 @endsection
 @section('container')
-    <formulari-administratiu></formulari-administratiu>
+    <trucada-administratiu></trucada-administratiu>
 @endsection
