@@ -22,7 +22,7 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = '/broggi/public/api/';
+window.axios.defaults.baseURL = '/broggi2.github.io/public/api/';
 
 
 /**
