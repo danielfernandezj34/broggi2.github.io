@@ -6,7 +6,6 @@
 
                 <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
                     <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
-
                 </div>
 
 
