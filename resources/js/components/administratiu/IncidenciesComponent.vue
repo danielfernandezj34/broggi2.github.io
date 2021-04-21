@@ -3,13 +3,11 @@
         <div class="card mt-3">
             <div class="card-body mt-1">
                 <h5 class="card-title" id="titol_form">Taula d'Incidencies</h5>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Número de la incidència" aria-label="Buscar ID incidència">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="boto_buscar"><i class="fal fa-search"> Buscar</i></button>
+                <form class="form-inline my-2 my-lg-0 col-sm-4" id="buscador_form">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Número de la incidència" aria-label="Buscar ID incidència" v-model="buscador" @keyup="buscarIncidencies">
                 </form>
-                <div v-if="incidencies.length == 0" class="alert alert-light" role="alert">
+                <div v-if="incidencies.length == 0" class="alert alert-light mt-2" role="alert">
                             No hi ha cap incidència.
-
                 </div>
                 <table v-else class="table mt-2">
                     <thead>
@@ -348,6 +346,8 @@
 export default ({
     data() {
         return{
+            buscador:'',
+            setTimeoutBuscador:'',
             incidencies:[],
             tipusIncidencies:[],
             usuaris:[],
@@ -379,7 +379,9 @@ export default ({
          selectIncidencies(){
             let me= this;
             axios
-            .get('/incidencies')
+            .get('/incidencies',{params:{
+                buscador: this.buscador
+            }})
             .then(response => {
                 me.incidencies = response.data;
              })
@@ -494,6 +496,10 @@ export default ({
                 this.recursosIncidencia = incidencia.recursos;
                 this.afectats = incidencia.afectats;
                 $('#modalMostrarIncidencia').modal('show')
+            },
+            buscarIncidencies(){
+                clearTimeout(this.setTimeoutBuscador);
+                this.setTimeoutBuscador = setTimeout(this.selectIncidencies, 360);
             }
     },
     created(){
