@@ -853,7 +853,7 @@
             <div class="card-header bg-primary text-white">
                 <h3 class="card-title">Recurs</h3>
             </div>
-            <div class="card card-body  mt-2 ml-2 mr-2" style="border: 2px solid #2c3e50; border-radius: 4px">
+            <div class="card card-body mb-2 mt-2 ml-2 mr-2" style="border: 2px solid #2c3e50; border-radius: 4px">
                 <div class="form-group row">
                     <div class="col-sm-4 col-4">
                         <h5><u>Primer recurs mòbil</u></h5>
