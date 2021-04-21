@@ -2,7 +2,7 @@
     <main>
         <div class="card mt-3">
             <div class="card-body mt-1">
-                <h5 class="card-title" id="titol_form">Incidencies asignades</h5>
+                <h5 class="card-title" id="titol_form">Incidencies assignades</h5>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar Incidencia" aria-label="Buscar Incidencia">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fal fa-search"> Buscar</i></button>
@@ -57,55 +57,39 @@
                         <form>
                             <div v-for="recursIncidencia in recursosIncidencia" :key="recursIncidencia.id">
                                 <div class="form-group row">
-                                    <label for="recursos_id" class="col-sm-2 col-form-label" >Id del Recurs</label>
-                                    <div class="col-sm-4">
-                                            <input type="text" name="recursos_id" class="form-control" id="recursos_id"  v-model="recursIncidencia.pivot.recursos_id" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="prioritat" class="col-sm-2 col-form-label" >Prioritat</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="prioritat" class="form-control" id="prioritat"  v-model="recursIncidencia.pivot.prioritat" disabled>
-                                    </div>
-                                    <label for="desti" class="col-sm-2 col-form-label" >Destí</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="desti" class="form-control" id="desti"  v-model="recursIncidencia.pivot.desti" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="hora_activacio" class="col-sm-2 col-form-label">Hora d'Activació</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="hora_activacio" id="hora_activacio" class="form-control"  v-model="recursIncidencia.pivot.hora_activacio" disabled>
+                                        <input type="text" name="hora_activacio" id="hora_activacio" class="form-control"  v-model="recursIncidencia.pivot.hora_activacio">
                                     </div>
                                     <label for="hora_mobilitzacio" class="col-sm-2 col-form-label">Hora de Mobilització</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="hora_mobilitzacio" id="hora_mobilitzacio" class="form-control"  v-model="recursIncidencia.pivot.hora_mobilitzacio" disabled>
+                                        <input type="text" name="hora_mobilitzacio" id="hora_mobilitzacio" class="form-control"  v-model="recursIncidencia.pivot.hora_mobilitzacio">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="hora_assistencia" class="col-sm-2 col-form-label">Hora d'Assistència</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="hora_assistencia" id="hora_assistencia" class="form-control"  v-model="recursIncidencia.pivot.hora_assistencia" disabled>
+                                        <input type="text" name="hora_assistencia" id="hora_assistencia" class="form-control"  v-model="recursIncidencia.pivot.hora_assistencia">
                                     </div>
                                     <label for="hora_transport" class="col-sm-2 col-form-label">Hora de Transport</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="hora_transport" id="hora_transport" class="form-control"  v-model="recursIncidencia.pivot.hora_transport" disabled>
+                                        <input type="text" name="hora_transport" id="hora_transport" class="form-control"  v-model="recursIncidencia.pivot.hora_transport">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="hora_arribada_hospital" class="col-sm-2 col-form-label">Hora d'Arribada a l'Hospital</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="hora_arribada_hospital" id="hora_arribada_hospital" class="form-control"  v-model="recursIncidencia.pivot.hora_arribada_hospital" disabled>
+                                        <input type="text" name="hora_arribada_hospital" id="hora_arribada_hospital" class="form-control"  v-model="recursIncidencia.pivot.hora_arribada_hospital">
                                     </div>
                                     <label for="hora_transferencia" class="col-sm-2 col-form-label">Hora de Transferència</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="hora_transferencia" id="hora_transferencia" class="form-control"  v-model="recursIncidencia.pivot.hora_transferencia" disabled>
+                                        <input type="text" name="hora_transferencia" id="hora_transferencia" class="form-control"  v-model="recursIncidencia.pivot.hora_transferencia">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="hora_finalitzacio" class="col-sm-2 col-form-label">Hora de Finalització</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="hora_finalitzacio" id="hora_finalitzacio" class="form-control"  v-model="recursIncidencia.pivot.hora_finalitzacio" disabled>
+                                        <input type="text" name="hora_finalitzacio" id="hora_finalitzacio" class="form-control"  v-model="recursIncidencia.pivot.hora_finalitzacio">
                                     </div>
                                 </div>
                             </div>
@@ -370,6 +354,7 @@
         },
         editIncidencia(incidencia){
                 this.incidencia = incidencia;
+                this.recursosIncidencia = incidencia.recursos;
                 $('#modalEditarIncidencia').modal('show')
             },
          updateIncidencia(){
