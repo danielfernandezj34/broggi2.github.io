@@ -3,9 +3,9 @@
         <div class="card mt-3">
             <div class="card-body mt-1">
                 <h5 class="card-title" id="titol_form">Taula d'Incidencies</h5>
-                <form class="form-inline my-2 my-lg-0 col-sm-4" id="buscador_form">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Número de la incidència" aria-label="Buscar ID incidència" v-model="buscador" @keyup="buscarIncidencies">
-                </form>
+                <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                </div>
                 <div v-if="incidencies.length == 0" class="alert alert-light mt-2" role="alert">
                             No hi ha cap incidència.
                 </div>
@@ -353,6 +353,46 @@
                 </div>
             </div>
         </div>
+        <!-- Modal filtres -->
+        <div class="modal fade" id="modalFiltres" aria-labelledby="modalFiltresLabel" role="dialog" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filtres</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row ml-3">
+                            <label for="idIncidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel codi de l'incidència <br><h5 style="font-size: 11px">(si filtres per codi els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="nomAdministratiu ==''" aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
+                            <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
+                        </div>
+                         <div class="form-group row ml-3">
+                            <label for="nomAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pel nom de l'administratiu <br><h5 style="font-size: 11px">(si filtres per codi els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="idIncidencia ==''" aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu">
+                            <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu">
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="tipus_incidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel tipus d'Incidència'</label>
+                            <select class="col-sm-5 custom-select" v-if="codiIncidencia ==''" name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusIncidencia">
+                                <option  selected value=''>Seleccionar Tots</option>
+                                <option v-for="tipusRecurso in tipusRecursos" :key="tipusRecurso.id" v-bind:value="tipusRecurso.id">{{ tipusRecurso.tipus }}</option>
+                            </select>
+                            <select class="col-sm-5 custom-select" v-else disabled name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusRecurs">
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
+                    <button type="button" class="btn btn-danger btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiRecurs, idTipusRecurs, actiu)">Aplicar Filtres</i></button>
+                </div>
+                </div>
+            </div>
+        </div>
     </main>
 </template>
 
@@ -534,9 +574,15 @@ export default ({
                 this.afectats = incidencia.afectats;
                 $('#modalMostrarIncidencia').modal('show')
             },
-            buscarIncidencies(){
-                clearTimeout(this.setTimeoutBuscador);
-                this.setTimeoutBuscador = setTimeout(this.selectIncidencies, 360);
+             filtres(){
+                $('#modalFiltres').modal('show')
+            },
+            aplicarFiltres(codiRecurs, idTipusRecurs, actiu){
+                this.codiRecurs = codiRecurs;
+                this.idTipusRecurs = idTipusRecurs;
+                this.actiu = actiu;
+                this.selectRecursos();
+                $('#modalFiltres').modal('hide');
             }
     },
     created(){
