@@ -6,7 +6,6 @@
 
                 <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
                     <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
-
                 </div>
 
 
@@ -38,6 +37,21 @@
                             </tr>
                         </tbody>
                     </table>
+                    <nav aria-label="Page navigation example" class="ml-5">
+                        <ul class="pagination">
+                            <li class="page-item" :class="{disabled: meta_recursos.from == meta_recursos.current_page}">
+                                <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" :class="{active: pagina == meta_recursos.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
+                            <li class="page-item" :class="{disabled: meta_recursos.last_page == meta_recursos.current_page}">
+                                <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
             </div>
         </div>
 
@@ -186,7 +200,10 @@
                     tipus_recursos_id: ''
                 },
                 tipusRecursos: [],
-                insert: false
+                insert: false,
+                pagina: "",
+                meta_recursos: {},
+                paginas: []
             }
 
         },
@@ -205,13 +222,17 @@
                 .finally(() => this.loading = false)
                 let me2 = this;
                 axios
-                .get('/recursos', {params:{
+                .get('/paginate_recursos', {params:{
                 idTipusRecurs: this.idTipusRecurs,
                 actiu: this.actiu,
                 codiRecurs: this.codiRecurs
                 }})
                 .then(response => {
-                    me2.recursos = response.data;
+                    me2.recursos = response.data.data;
+                    me2.meta_recursos = response.data.meta;
+                    for (let index = 0; index < me.meta_recursos.last_page; index++) {
+                        me.paginas[index] = index + 1;
+                    }
                 })
                 .catch(error => {
                     console.log(error)
@@ -219,6 +240,21 @@
                 })
                 .finally(() => this.loading = false)
 
+            },
+            paginar(pagina){
+                let me = this;
+                axios
+                    .get('/paginate_recursos' + '?page=' + pagina)
+                    .then(response => {
+                        me.recursos = response.data.data;
+                        me.meta_recursos = response.data.meta;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+
+                    .finally(() => this.loading = false)
             },
             crearRecurs(){
                 this.insert = true;

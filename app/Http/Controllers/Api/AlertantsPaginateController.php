@@ -16,9 +16,24 @@ class AlertantsPaginateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $alertants = Alertants::paginate(8);
+<<<<<<< HEAD
+        $alertants = Alertants::paginate(6);
+=======
+        $filtreNomAlertant = $request->nomAlertant;
+        $filtreIdTipusAlertant = $request->idTipusAlertant;
+
+        if($filtreNomAlertant != ''){
+            $alertants = Alertants::where('nom','LIKE','%'.$filtreNomAlertant.'%' )->paginate(8)->withQueryString();
+        }else{
+            if($filtreIdTipusAlertant == ''){
+                $alertants = Alertants::paginate(8);
+            }else{
+                $alertants = Alertants::where('tipus_alertants_id', '=', $filtreIdTipusAlertant)->paginate(8)->withQueryString();
+            }
+        }
+>>>>>>> 344dfff3424e4b2d726cf74b097f91fd0e720ff4
 
         return AlertantsResource::collection($alertants);
     }

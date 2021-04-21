@@ -28,6 +28,21 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example" class="ml-5">
+                    <ul class="pagination">
+                        <li class="page-item" :class="{disabled: meta_helpbox.from == meta_helpbox.current_page}">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" :class="{active: pagina == meta_helpbox.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
+                        <li class="page-item" :class="{disabled: meta_helpbox.last_page == meta_helpbox.current_page}">
+                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
         </div>
@@ -112,7 +127,10 @@
                     preguntaES: '',
                     preguntaEN: ''
                 },
-                insert: false
+                insert: false,
+                pagina: "",
+                meta_helpbox: {},
+                paginas: []
             }
 
         },
@@ -120,14 +138,33 @@
             selectPreguntes(){
                 let me = this;
                 axios
-                    .get('/helpbox')
+                    .get('/paginate_helpbox')
                     .then(response => {
-                        me.helpbox = response.data;
+                        me.helpbox = response.data.data;
+                        me.meta_helpbox = response.data.meta;
+                        for (let index = 0; index < me.meta_helpbox.last_page; index++) {
+                            me.paginas[index] = index + 1;
+                        }
                     })
                     .catch(error => {
                         console.log(error)
                         this.errored = true;
                     })
+                    .finally(() => this.loading = false)
+            },
+            paginar(pagina){
+                let me = this;
+                axios
+                    .get('/paginate_helpbox' + '?page=' + pagina)
+                    .then(response => {
+                        me.helpbox = response.data.data;
+                        me.meta_helpbox = response.data.meta;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+
                     .finally(() => this.loading = false)
             },
             crearPregunta(){
