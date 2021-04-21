@@ -16,9 +16,20 @@ class AlertantsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $alertants = Alertants::all();
+        $filtreNomAlertant = $request->nomAlertant;
+        $filtreIdTipusAlertant = $request->idTipusAlertant;
+
+        if($filtreNomAlertant != ''){
+            $alertants = Alertants::where('nom','LIKE','%'.$filtreNomAlertant.'%' )->get();
+        }else{
+            if($filtreIdTipusAlertant == ''){
+                $alertants = Alertants::all();
+            }else{
+                $alertants = Alertants::where('tipus_alertants_id', '=', $filtreIdTipusAlertant)->get();
+            }
+        }
 
         return AlertantsResource::collection($alertants);
     }

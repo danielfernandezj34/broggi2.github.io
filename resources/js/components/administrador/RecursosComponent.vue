@@ -6,7 +6,6 @@
 
                 <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
                     <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
-
                 </div>
 
 
@@ -25,7 +24,8 @@
                         <tbody>
                             <tr v-for="recurso in recursos" :key="recurso.id">
                                 <td>{{ recurso.codi }}</td>
-                                <td>{{ recurso.actiu }}</td>
+                                <td v-if="recurso.actiu == 0">No Actiu</td>
+                                 <td v-else>Actiu</td>
                                 <div v-for="tipusRecurs in tipusRecursos" :key="tipusRecurs.id">
                                     <td v-if="recurso.tipus_recursos_id == tipusRecurs.id">
                                             {{ tipusRecurs.tipus }}
