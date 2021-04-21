@@ -41,4 +41,10 @@ class Incidencies extends Model
     {
         return $this->hasMany(Usuaris::class, 'usuaris_id');
     }
+
+    public function scopeFiltrePerId($query, $filtre){
+        if(!empty($filtre)){
+           $query->where('num_incident', $filtre);
+        }
+    }
 }
