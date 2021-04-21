@@ -25,7 +25,7 @@
                                 </div>
                             </label>
 
-                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="telefonAlertant" @keyup="selectAlertant(telefonAlertant)">
+                            <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="alertantnou.telefon" @keyup="selectAlertant(alertantnou.telefon)">
                             <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
                         </div>
 
@@ -49,15 +49,18 @@
                         </label>
                         <div class="col-sm-12 col-12">
                             <div class="form-check form-check-inline">
-                                <div v-if="alertantAgafat != null">
-                                    <input class="form-control" type="text" name="tipus_alertant" id="tipus_alertant" :value="alertantAgafat">
+                                <div class="mr-1" v-for="tipusAlertant in tipusAlertants" :key="tipusAlertant.id">
+                                    <input type="radio" class="form-check-input" name="tipus_alertant" :id="tipusAlertant.id"  :checked="tipusAlertant.id == alertant.tipus_alertants_id" :disabled="tipusAlertant.id == 1">
+                                    <input type="hidden" v-model="tipusAlertant.id">
+                                    <label class="form-check-label" :for="tipusAlertant.id" >{{ tipusAlertant.tipus }}</label>
                                 </div>
-                                <div v-else>
+
+                                <!-- <div v-else>
                                     <div v-for="tipusAlertant in tipusAlertants" :key="tipusAlertant.id" >
-                                        <input class="form-check-input" type="radio" name="tipus_alertant" :id="tipusAlertant.id"  v-model="Alertantradio" :value="tipusAlertant.id" :disabled="tipusAlertant.id == 1">
+                                        <input class="form-check-input" type="radio" name="tipus_alertant" :id="tipusAlertant.id"  v-model="tipusAlertant.id" :disabled="tipusAlertant.id == 1">
                                         <label class="form-check-label mr-2" :value="tipusAlertant.id" :for="tipusAlertant.id" >{{ tipusAlertant.tipus }}</label>
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
                         </div>
@@ -65,13 +68,13 @@
                     </div>
 
 
-                    <div class="card-body" v-if="alertant.telefon == telefonAlertant" style="border: 2px solid #2c3e50">
+                    <div class="card-body" v-if="alertant.telefon == alertantnou.telefon" style="border: 2px solid #2c3e50">
 
                         <div v-if="alertant.tipus_alertants_id == 1">
 
                             <div class="form-group row" >
 
-                                <div class="col-sm-7 col-7" >
+                                <div class="col-sm-9 col-9" >
                                     <label for="nom_hospital" class="col-form-label"><strong>Nom del centre Sanitari</strong>
                                         <div id="div_helpbox" class="col-sm-12">
                                             <i style="float: right;position: relative;margin: -17px 0px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
@@ -85,15 +88,15 @@
                                                 data-content="Quin és el seu nom?"></i>
                                         </div>
                                     </label>
-                                    <input class="form-control" type="text" name="nom_hospital" id="nom_hospital" :value="alertant.nom" disabled>
+                                    <input class="form-control" type="text" name="nom_hospital" id="nom_hospital" v-model="alertant.nom"  disabled>
                                 </div>
 
-                                <div class="col-sm-5 col-5">
-                                    <label for="nom_afectat1" class="col-form-label"><strong>Nom del metge</strong>
+                                <div class="col-sm-9 col-9" >
+                                    <label for="nom_metge" class="col-form-label"><strong>Nom del metge</strong></label>
+                                    <input class="form-control" type="text" name="nom_metge" id="nom_metge" v-model="incidencia.nom_metge">
 
-                                    </label>
-                                    <input class="form-control" type="text" name="nom_afectat1" id="nom_afectat1">
                                 </div>
+
 
                             </div>
 
@@ -102,7 +105,8 @@
                                     <label for="adresa" class="col-form-label"><strong>Adreça</strong>
 
                                     </label>
-                                    <input class="form-control" type="text" name="adresa" id="adresa" :value="alertant.adreca">
+                                    <input v-if="alertant.adreca != null" class="form-control" type="text" name="adresa" id="adresa" v-model="alertant.adreca">
+                                    <input v-else class="form-control" type="text" name="adresa" id="adresa" v-model="alertantnou.adreca">
                                 </div>
 
                                 <div class="col-sm-6 col-6">
@@ -545,7 +549,7 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="document_afectat5" class="col-form-label"><strong>DNI, TS/NSS</strong>
+                                    <label for="document_afectat5" class="col-form-label"><strong>CIP</strong>
                                         <div class="mt-2">
                                             <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                                 type="button"
@@ -727,7 +731,7 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="document_afectat4" class="col-form-label"><strong>DNI, TS/NSS</strong>
+                                    <label for="document_afectat4" class="col-form-label"><strong>CIP</strong>
                                         <div class="mt-2">
                                             <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                                 type="button"
@@ -911,7 +915,7 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="document_afectat3" class="col-form-label"><strong>DNI, TS/NSS</strong>
+                                    <label for="document_afectat3" class="col-form-label"><strong>CIP</strong>
                                         <div class="mt-2">
                                             <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                                 type="button"
@@ -1095,7 +1099,7 @@
                             <div class="form-group row">
 
                                 <div class="col-sm-5 col-5">
-                                    <label for="document_afectat2" class="col-form-label"><strong>DNI, TS/NSS</strong>
+                                    <label for="document_afectat2" class="col-form-label"><strong>CIP</strong>
                                         <div class="mt-2">
                                             <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                                 type="button"
@@ -1236,7 +1240,7 @@
 
                         <div class="card card-body" style="border: 2px solid #2c3e50">
                             <h4 class="card-title">Afectat 1</h4>
-                            <div v-if="Alertantradio == 2">
+                            <div v-if="alertantAgafat == 2">
                                 <div class="form-group row">
 
                                     <div class="col-sm-5 col-5">
@@ -1279,7 +1283,7 @@
                                 <div class="form-group row">
 
                                     <div class="col-sm-5 col-5">
-                                        <label for="document_afectat1" class="col-form-label"><strong>DNI, TS/NSS</strong>
+                                        <label for="document_afectat1" class="col-form-label"><strong>CIP</strong>
                                             <div class="mt-2">
                                                 <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                                     type="button"
@@ -1359,7 +1363,7 @@
                                 <div class="form-group row">
 
                                     <div class="col-sm-5 col-5">
-                                        <label for="document_afectat1" class="col-form-label"><strong>DNI, TS/NSS</strong>
+                                        <label for="document_afectat1" class="col-form-label"><strong>CIP</strong>
                                             <div class="mt-2">
                                                 <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                                     type="button"
@@ -1660,7 +1664,31 @@
                     municipis_id : '',
                     tipus_alertants_id : ''
                 },
-                alertantAgafat: ''
+                alertantAgafat: '',
+                incidencia: {
+                    id: '',
+                    num_incident : '',
+                    data : '',
+                    hora : '',
+                    telefon_alertant : '',
+                    adreca : '',
+                    adreca_complement : '',
+                    descripcio : '',
+                    nom_metge : '',
+                    tipus_incidencies_id : '',
+                    alertants_id : '',
+                    municipis_id : '',
+                    usuaris_id : ''
+                },
+                alertantnou : {
+                    id: '',
+                    telefon : '',
+                    nom : '',
+                    cognom : '',
+                    adreca : '',
+                    municipis_id : '',
+                    tipus_alertants_id : ''
+                }
             }
         },
         methods: {
@@ -1795,7 +1823,7 @@
                 var i = 0;
                 var j = 0;
                 var x = 0;
-                this.alertant = [];
+                //this.alertant = null;
                 this.alertantAgafat = null;
                 this.municipiHospital = '';
                 while(this.alertants.length > i){
@@ -1813,7 +1841,7 @@
                 if(this.alertant.tipus_alertants_id != null){
                     while(this.tipusAlertants.length > j){
                         if(this.tipusAlertants[j].id == this.alertant.tipus_alertants_id){
-                            this.alertantAgafat = this.tipusAlertants[j].tipus;
+                            this.alertantAgafat = this.tipusAlertants[j].id;
                         }
 
                         j++;

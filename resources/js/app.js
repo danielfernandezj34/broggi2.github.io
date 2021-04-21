@@ -28,7 +28,7 @@ Vue.component('mostrar-incidencies', require('./components/administratiu/Inciden
 Vue.component('formulari-administratiu', require('./components/administratiu/FormulariComponent.vue').default);
 
 
-
+Vue.component('trucada-administratiu', require('./components/administratiu/GestionarTrucadaComponent.vue').default);
 
 Vue.component('alertants-component', require('./components/administrador/AlertantComponent.vue').default);
 Vue.component('helpbox-component', require('./components/administrador/HelpboxComponent.vue').default);
