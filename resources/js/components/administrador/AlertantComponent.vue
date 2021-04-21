@@ -295,15 +295,11 @@
             selectAlertants(){
                 let me = this;
                 axios
-<<<<<<< HEAD
-                    .get('/paginate_alertants')
-=======
-                    .get('/paginate', {params:{
+                    .get('/paginate_alertants', {params:{
                         nomAlertant: this.nomAlertant,
                         idTipusAlertant : this.idTipusAlertant
 
                     }})
->>>>>>> 344dfff3424e4b2d726cf74b097f91fd0e720ff4
                     .then(response => {
                         me.alertants = response.data.data;
                         me.meta_alertant = response.data.meta;
