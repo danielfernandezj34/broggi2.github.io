@@ -28,9 +28,5 @@ class Usuaris extends Authenticatable
     {
         return $this->belongsToMany(Rols::class, 'rols_id');
     }
-    public function scopeFiltrePerNom($query, $filtre){
-        if(!empty($filtre)){
-           $query->where('nom','LIKE','%'.$filtre.'%');
-        }
-    }
+
 }

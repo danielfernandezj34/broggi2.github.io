@@ -19,7 +19,7 @@ class UsuarisController extends Controller
      public function index(Request $request)
     {
         $filtre = $request->buscador;
-        $usuaris = Usuaris::filtrePerNom($filtre)->get();
+        $usuaris = Usuaris::where('nom','LIKE','%'.$filtre.'%')->get();
 
         return UsuarisResource::collection($usuaris);
 

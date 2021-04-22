@@ -19,8 +19,7 @@ class UsuarisPaginateController extends Controller
      public function index(Request $request)
     {
         $filtre = $request->buscador;
-        $usuaris = Usuaris::filtrePerNom($filtre)->paginate(6)->withQueryString();
-
+        $usuaris = Usuaris::where('nom','LIKE','%'.$filtre.'%')->paginate(6)->withQueryString();
         return UsuarisResource::collection($usuaris);
 
     }
