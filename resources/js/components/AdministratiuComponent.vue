@@ -19,7 +19,7 @@
                                 {{ ventana }}
                             </button>
                         </div>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="stop">
                             <span aria-hidden="true">&times;</span>Tancar
                         </button>
                     </div>
@@ -29,30 +29,28 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-md-10 d-flex justify-content-center">
                                         <video ref="videoRef" type="video/mp4" :src="videoRuta" id="video"></video>
-                                        <hr>
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col-md-2">
-                                        <button type="button" class="btn btn-danger btn-sm" :disabled="reproducirVideo" @click="play"><i class="far fa-trash-alt"></i>Play</button>
+                                    <div class="col-md-2 my-3 d-flex justify-content-center">
+                                        <button type="button" class="btn btn-danger btn-sm mx-3" :disabled="reproducirVideo" @click="play"><i class="far fa-trash-alt"></i>Play</button>
                                         <button type="button" class="btn btn-success btn-sm" :disabled="!reproducirVideo" @click="stop">Stop</button>
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-around mt-4">
                                     <div class="col-md-3 d-flex justify-content-center">
-                                        <button class="btn btn-secondary btn-sm"
-                                                :class="{ videoActivo: videoSeleccionado === video }"
+                                        <button class="btn btn-secondary btn-sm mx-5"
                                                 v-for="(video, index) in videos"
-                                                :key="index"
-                                                @click="videoSeleccionado = video">
-                                            {{ video }}
+                                                :key="video.nombre"
+                                                @click="cambiarVideo(index)">
+                                            {{ video.nombre }}
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div v-show="ventanaSeleccionada === 'Formación'">
+                        <div v-show="ventanaSeleccionada === 'Formació'">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-10">
@@ -80,9 +78,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
-                </div>
             </div>
         </div>
     </div>
@@ -96,11 +91,19 @@
                 boto_admin_recurs_for : 'boto_admin_recurs_formacio',
                 boto_admin_recurs_tru : 'boto_admin_recurs_trucada',
                 reproducirVideo: false,
-                videoRuta: '"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
-                ventanas: ['PCR', 'Formación'],
+                ventanas: ['PCR', 'Formació'],
                 ventanaSeleccionada: 'PCR',
-                videos: ['clip1', 'clip2', 'clip3'],
-                videoSeleccionado: 'clip1'
+                videoSeleccionado: 0,
+                videos: [{
+                    nombre: 'clip1',
+                    ruta: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4'
+                },{
+                    nombre: 'clip2',
+                    ruta: 'https://ia803008.us.archive.org/1/items/FantasticPlanetTrailer/FantasticPlanetTrailer.mp4'
+                },{
+                    nombre: 'clip3',
+                    ruta: 'https://ia803106.us.archive.org/8/items/sinema-trailer_king-kong-vs-godzilla/King%20Kong%20vs%20Godzilla%20Trailer%20%28In%20English%29%20%28288p_30fps_H264-96kbit_AAC%29.mp4'
+                }]
             }
         },
         methods:{
@@ -114,6 +117,14 @@
             stop() {
                 this.$refs.videoRef.pause()
                 this.reproducirVideo = false
+            },
+            cambiarVideo(index){
+                this.videoSeleccionado = index
+            }
+        },
+        computed:{
+            videoRuta(){
+                return this.videos[this.videoSeleccionado].ruta
             }
         },
         mounted() {
