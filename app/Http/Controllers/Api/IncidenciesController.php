@@ -18,10 +18,7 @@ class IncidenciesController extends Controller
      */
     public function index(Request $request)
     {
-        $filtre = $request->buscador;
-        $incidencies = Incidencies::with('recursos', 'afectats')
-                                    ->filtrePerId($filtre)
-                                    ->get();
+        $incidencies = Incidencies::all();
 
         return IncidenciesResource::collection($incidencies);
     }
