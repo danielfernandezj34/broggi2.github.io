@@ -1509,10 +1509,10 @@
 
 
 
-        <div class="form-group row ml-5">
-            <a class="btn btn-primary m-2 btn-lg" data-toggle="collapse" href="#recurs_mobil" role="button" aria-expanded="false" aria-controls="recurs_mobil">Resposta amb recurs mòbil</a>
-            <a class="btn btn-primary m-2 btn-lg" data-toggle="collapse" href="#no_recurs" role="button" aria-expanded="false" aria-controls="no_recurs">Resposta sense recurs mòbil</a>
-        </div>
+            <div class="form-group row ml-5">
+                <a class="btn btn-primary m-2 btn-lg" data-toggle="collapse" href="#recurs_mobil" role="button" aria-expanded="false" aria-controls="recurs_mobil">Resposta amb recurs mòbil</a>
+                <a class="btn btn-primary m-2 btn-lg" data-toggle="collapse" href="#no_recurs" role="button" aria-expanded="false" aria-controls="no_recurs">Resposta sense recurs mòbil</a>
+            </div>
 
 
 
@@ -1593,29 +1593,28 @@
 
 
 
-                    <div class="collapse multi-collapse mt-2 mb-2 col-sm-12 col-12" id="no_recurs">
-                        <div class="card card-body">
+                <div class="collapse multi-collapse mt-2 mb-2 col-sm-12 col-12" id="no_recurs">
+                    <div class="card card-body">
 
-                            <div class="form-group row">
+                        <div class="form-group row">
 
 
-                                <label for="resp_no_recurs" class="col-form-label col-2 col-sm-2"><strong>Tipus de resposta</strong></label>
-                                <select class="form-control col-5 col-sm-5" name="resp_no_recurs" id="resp_no_recurs">
-                                    <option value="seleccionar" selected disabled>Seleccionar...</option>
-                                    <option value="consulta_telefonica" name="consulta_telefonica">Consulta telefònica</option>
-                                    <option value="informacio_telefonica" name="informacio_telefonica">Informació telefònica</option>
-                                    <option value="usvap" name="derivacio_centre">Derivació a centres sanitaris</option>
-                                    <option value="Derivació_a_altres_centres_sanitaris" name="derivacio_altre_sanitari">Derivació a altres centres sanitaris</option>
-                                    <option value="altre" name="altre_sense">Altre</option>
-                                </select>
-
-                            </div>
+                            <label for="resp_no_recurs" class="col-form-label col-2 col-sm-2"><strong>Tipus de resposta</strong></label>
+                            <select class="form-control col-5 col-sm-5" name="resp_no_recurs" id="resp_no_recurs">
+                                <option value="seleccionar" selected disabled>Seleccionar...</option>
+                                <option value="consulta_telefonica" name="consulta_telefonica">Consulta telefònica</option>
+                                <option value="informacio_telefonica" name="informacio_telefonica">Informació telefònica</option>
+                                <option value="usvap" name="derivacio_centre">Derivació a centres sanitaris</option>
+                                <option value="Derivació_a_altres_centres_sanitaris" name="derivacio_altre_sanitari">Derivació a altres centres sanitaris</option>
+                                <option value="altre" name="altre_sense">Altre</option>
+                            </select>
 
                         </div>
+
                     </div>
-                <button type="submit" href="" class="btn btn-success btn-lg boto_enviar" style="background-color: #f70c74"><i class="fas fa-check fa-1x"></i>Enviar</button>
-            </div>
+                </div>
         </div>
+    </div>
 
 
 
