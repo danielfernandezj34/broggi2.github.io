@@ -1,14 +1,18 @@
 <template>
     <main>
         <div class="card mt-3 mb-3">
+            <div class="card-body">
+                <h5 class="card-title" id="titol_form">Recursos</h5>
 
-            <div class="card-header bg-primary text-white">
-            <h5 class="card-title" id="titol_form">Recursos</h5>
-            </div>
+                <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                </div>
 
-            <div class="card-body ">
-                <form>
-                    <table class="table mt-2">
+
+                <div v-if="recursos.length == 0" class="alert alert-light mt-2" role="alert">
+                    No hi ha cap Recurs.
+                </div>
+                    <table v-else class="table mt-2">
                         <thead>
                             <tr>
                                 <th scope="col">Codi</th>
@@ -33,7 +37,21 @@
                             </tr>
                         </tbody>
                     </table>
-                </form>
+                    <nav aria-label="Page navigation example" class="ml-5">
+                        <ul class="pagination">
+                            <li class="page-item" :class="{disabled: meta_recursos.from == meta_recursos.current_page}">
+                                <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" :class="{active: pagina == meta_recursos.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
+                            <li class="page-item" :class="{disabled: meta_recursos.last_page == meta_recursos.current_page}">
+                                <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
             </div>
         </div>
 
@@ -111,6 +129,51 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal filtres -->
+        <div class="modal fade" id="modalFiltres" aria-labelledby="modalFiltresLabel" role="dialog" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filtres</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row ml-3">
+                            <label for="idRecurs" class="col-sm-6 col-form-label ml-5">Filtrar pel codi del recurs <br><h7 style="font-size: 11px">(si filtres per codi els altres filtres no es podràn aplicar)</h7></label>
+                            <input type="text" class="form-control col-sm-5" aria-label="Introdueix el codi del recurs" v-model="codiRecurs" placeholder= "Codi del Recurs">
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="tipus_recursos" class="col-sm-6 col-form-label ml-5">Filtrar pel tipus de recurs</label>
+                            <select class="col-sm-5 custom-select" v-if="codiRecurs ==''" name="tipus_recursos" id="tipus_recursos" v-model="idTipusRecurs">
+                                <option  selected value=''>Seleccionar Tots</option>
+                                <option v-for="tipusRecurso in tipusRecursos" :key="tipusRecurso.id" v-bind:value="tipusRecurso.id">{{ tipusRecurso.tipus }}</option>
+                            </select>
+                            <select class="col-sm-5 custom-select" v-else disabled name="tipus_recursos" id="tipus_recursos" v-model="idTipusRecurs">
+                            </select>
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="tipus_recursos" class="col-sm-6 col-form-label ml-5">Filtrar per actiu</label>
+                            <select class="col-sm-5 custom-select" v-if="codiRecurs ==''" name="tipus_recursos" id="tipus_recursos" v-model="actiu">
+                                <option  selected value=''>Seleccionar Tots</option>
+                                <option  selected value= 1>Actius</option>
+                                <option  selected value= 0>No Actiu</option>
+                            </select>
+                            <select class="col-sm-5 custom-select" v-else disabled name="tipus_recursos" id="tipus_recursos" v-model="actiu">
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
+                    <button type="button" class="btn btn-danger btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiRecurs, idTipusRecurs, actiu)">Aplicar Filtres</i></button>
+                </div>
+                </div>
+            </div>
+        </div>
     </main>
 </template>
 
@@ -118,6 +181,11 @@
     export default {
         data() {
             return{
+                buscador:'',
+                actiu:'',
+                idTipusRecurs:'',
+                codiRecurs:'',
+                setTimeoutBuscador:'',
                 recursos: [],
                 recurso: {
                     id: '',
@@ -132,7 +200,10 @@
                     tipus_recursos_id: ''
                 },
                 tipusRecursos: [],
-                insert: false
+                insert: false,
+                pagina: "",
+                meta_recursos: {},
+                paginas: []
             }
 
         },
@@ -140,26 +211,50 @@
             selectRecursos(){
                 let me = this;
                 axios
-                    .get('/recursos')
+                .get('/tipusRecursos')
+                .then(response => {
+                    me.tipusRecursos = response.data;
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.errored = true;
+                })
+                .finally(() => this.loading = false)
+                let me2 = this;
+                axios
+                .get('/paginate_recursos', {params:{
+                idTipusRecurs: this.idTipusRecurs,
+                actiu: this.actiu,
+                codiRecurs: this.codiRecurs
+                }})
+                .then(response => {
+                    me2.recursos = response.data.data;
+                    me2.meta_recursos = response.data.meta;
+                    for (let index = 0; index < me.meta_recursos.last_page; index++) {
+                        me.paginas[index] = index + 1;
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.errored = true;
+                })
+                .finally(() => this.loading = false)
+
+            },
+            paginar(pagina){
+                let me = this;
+                axios
+                    .get('/paginate_recursos' + '?page=' + pagina)
                     .then(response => {
-                        me.recursos = response.data;
+                        me.recursos = response.data.data;
+                        me.meta_recursos = response.data.meta;
                     })
                     .catch(error => {
                         console.log(error)
                         this.errored = true;
                     })
+
                     .finally(() => this.loading = false)
-                    let me2 = this;
-                    axios
-                        .get('/tipusRecursos')
-                        .then(response => {
-                            me2.tipusRecursos = response.data;
-                        })
-                        .catch(error => {
-                            console.log(error)
-                            this.errored = true;
-                        })
-                        .finally(() => this.loading = false)
             },
             crearRecurs(){
                 this.insert = true;
@@ -210,6 +305,16 @@
                         $('modalBorrar').modal('hide');
                     })
             },
+            filtres(){
+                $('#modalFiltres').modal('show')
+            },
+            aplicarFiltres(codiRecurs, idTipusRecurs, actiu){
+                this.codiRecurs = codiRecurs;
+                this.idTipusRecurs = idTipusRecurs;
+                this.actiu = actiu;
+                this.selectRecursos();
+                $('#modalFiltres').modal('hide');
+            }
         },
         created(){
             this.selectRecursos();
@@ -219,3 +324,5 @@
         }
     }
 </script>
+
+
