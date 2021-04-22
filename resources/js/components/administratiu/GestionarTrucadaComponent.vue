@@ -1396,18 +1396,44 @@
                 //this.afectat.sexes_id este campo ya esta puesto en el v-model del formulario en la parte de GÉNERE
                 ////////////
 
+                //Campos de tabla alertant rellenados con los valores que le faltaban
+                this.alertant.municipis_id = this.incidencia.municipis_id;
+                /////////
+
 
                 let me = this;
                 axios
                     .post('/incidencies', me.incidencia)
                     .then(function(response){
                         console.log(response);
-                        return url('/principal_administratiu');
-                }).catch(function(error) {
-                    console.log(error.response.status);
-                    console.log(error.response.data);
-                    me.errorMessage = error.response.data.error;
+
+                    }).catch(function(error) {
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                        me.errorMessage = error.response.data.error;
                 })
+                axios
+                    .post('/afectats', me.afectat)
+                    .then(function(response){
+                        console.log(response);
+
+                    }).catch(function(error){
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                        me.errorMessage = error.response.data.error;
+                })
+                axios
+                    .post('/alertants', me.alertant)
+                    .then(function(response){
+                        console.log(response);
+                    }).catch(function(error){
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                        me.errorMessage = error.response.data.error;
+                })
+
+
+                return url('/principal_administratiu');
             }
 
         },
