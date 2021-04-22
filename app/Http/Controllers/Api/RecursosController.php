@@ -16,9 +16,29 @@ class RecursosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $recursos = Recursos::all();
+        $filtreidTipusRecurs = $request->idTipusRecurs;
+        $filtreActiu = $request->actiu;
+        $filtreCodiRecurs = $request->codiRecurs;
+        if($filtreCodiRecurs != ''){
+            $recursos =  Recursos::where('codi', '=', $filtreCodiRecurs)->get();
+        }else{
+            if($filtreidTipusRecurs == ''){
+                if($filtreActiu == ''){
+                        $recursos = Recursos::all();
+                }else{
+                        $recursos = Recursos::where('actiu', '=', $filtreActiu)->get();
+                }
+            }else{
+                    if($filtreActiu == ''){
+                        $recursos = Recursos::where('tipus_recursos_id', '=', $filtreidTipusRecurs)->get();
+                    }else{
+                        $recursos = Recursos::where('tipus_recursos_id', '=', $filtreidTipusRecurs)
+                                            ->where('actiu', '=', $filtreActiu)->get();
+                    }
+            }
+        }
 
         return RecursosResource::collection($recursos);
     }
@@ -110,3 +130,4 @@ class RecursosController extends Controller
         return $response;
     }
 }
+

@@ -5,6 +5,6 @@
 @section('boto_atras', './principal_recursos')
 @section('container')
 
-<recursos-asignats ></recursos-asignats>
+<recursos-asignats :user_id="{{ Auth::user()->id }}"></recursos-asignats>
 {{-- :user_id="{{ Auth::user()->id }}" --}}
 @endsection

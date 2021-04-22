@@ -1,13 +1,15 @@
 <template>
     <main>
-        <div class="card mt-3">
+        <div class="card mt-3 mb-3">
             <div class="card-body mt-1">
                 <h5 class="card-title" id="titol_form">Taula d'Alertants</h5>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Número d'incidència" aria-label="Buscar ID incidència">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="boto_buscar"><i class="fal fa-search"> Buscar</i></button>
+                <form class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
                 </form>
-                <table class="table mt-2">
+                <div v-if="alertants.length == 0" class="alert alert-light mt-2" role="alert">
+                    No hi ha cap Alertant.
+                </div>
+                <table v-else class="table mt-2">
                     <thead>
                         <tr>
                             <th scope="col">Nom</th>
@@ -33,6 +35,21 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example" class="ml-5">
+                    <ul class="pagination">
+                        <li class="page-item" :class="{disabled: meta_alertant.from == meta_alertant.current_page}">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" :class="{active: pagina == meta_alertant.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
+                        <li class="page-item" :class="{disabled: meta_alertant.last_page == meta_alertant.current_page}">
+                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
 
@@ -200,6 +217,41 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal filtres -->
+        <div class="modal fade" id="modalFiltres" aria-labelledby="modalFiltresLabel" role="dialog" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filtres</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row ml-3">
+                            <label for="nomAlertant" class="col-sm-6 col-form-label ml-5">Filtrar pel nom<br><h5 style="font-size: 11px">(si filtres pel nom els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" aria-label="Introdueix el nom de l'alertant" v-model="nomAlertant" placeholder= "Nom de l'Alertant">
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="tipus_alertant" class="col-sm-6 col-form-label ml-5">Filtrar pel tipus d'alertant</label>
+                            <select class="col-sm-5 custom-select" v-if="nomAlertant ==''" name="tipus_alertant" id="tipus_alertant" v-model="idTipusAlertant">
+                                <option  selected value=''>Seleccionar Tots</option>
+                                <option v-for="tipus_alertant in tipus_alertants" :key="tipus_alertant.id" v-bind:value="tipus_alertant.id">{{ tipus_alertant.tipus }}</option>
+                            </select>
+                            <select class="col-sm-5 custom-select" v-else disabled name="tipus_alertants" id="tipus_alertants" v-model="idTipusAlertant">
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
+                    <button type="button" class="btn btn-danger btn-sm"><i class="far fa-filter" @click="aplicarFiltres(nomAlertant, idTipusAlertant)">Aplicar Filtres</i></button>
+                </div>
+                </div>
+            </div>
+        </div>
     </main>
 </template>
 
@@ -209,6 +261,8 @@
         data() {
             return{
                 alertants: [],
+                nomAlertant: '',
+                idTipusAlertant: '',
                 alertant:{
                     id: '',
                     telefon: '',
@@ -229,7 +283,11 @@
                 },
                 tipus_alertants: [],
                 municipis: [],
-                insert: false
+                insert: false,
+                pagina: "",
+                meta_alertant: {},
+                paginas: []
+
             }
 
         },
@@ -237,15 +295,26 @@
             selectAlertants(){
                 let me = this;
                 axios
-                    .get('/alertants')
+                    .get('/paginate_alertants', {params:{
+                        nomAlertant: this.nomAlertant,
+                        idTipusAlertant : this.idTipusAlertant
+
+                    }})
                     .then(response => {
-                        me.alertants = response.data;
+                        me.alertants = response.data.data;
+                        me.meta_alertant = response.data.meta;
+
+                        for (let index = 0; index < me.meta_alertant.last_page; index++) {
+                            me.paginas[index] = index + 1;
+                        }
                     })
                     .catch(error => {
                         console.log(error)
                         this.errored = true;
                     })
                     .finally(() => this.loading = false)
+
+
                 let me2 = this;
                 axios
                     .get('/tipusAlertants')
@@ -256,6 +325,21 @@
                         console.log(error)
                         this.errored = true;
                     })
+            },
+            paginar(pagina){
+                let me = this;
+                axios
+                    .get('/paginate_alertants' + '?page=' + pagina)
+                    .then(response => {
+                        me.alertants = response.data.data;
+                        me.meta_alertant = response.data.meta;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+
+                    .finally(() => this.loading = false)
             },
             selectMunicipis(){
                 let me = this;
@@ -322,6 +406,15 @@
             mostrarAlertant(alertant){
                 this.alertant = alertant;
                 $('#modalMostrarAlertant').modal('show')
+            },
+            filtres(){
+                $('#modalFiltres').modal('show')
+            },
+            aplicarFiltres(nomAlertant, idTipusAlertant){
+                this.nomAlertant = nomAlertant;
+                this.idTipusAlertant = idTipusAlertant;
+                this.selectAlertants();
+                $('#modalFiltres').modal('hide');
             }
         },
         created(){
