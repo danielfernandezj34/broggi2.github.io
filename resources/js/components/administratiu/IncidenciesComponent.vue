@@ -366,29 +366,42 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group row ml-3">
-                            <label for="idIncidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel codi de l'incidència <br><h5 style="font-size: 11px">(si filtres per codi els altres filtres no es podràn aplicar)</h5></label>
+                            <label for="codiIncidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel codi de l'incidència <br><h5 style="font-size: 11px">(si filtres per codi els altres filtres no es podràn aplicar)</h5></label>
                             <input type="text" class="form-control col-sm-5" v-if="nomAdministratiu ==''" aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
                             <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
                         </div>
                          <div class="form-group row ml-3">
-                            <label for="nomAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pel nom de l'administratiu <br><h5 style="font-size: 11px">(si filtres per codi els altres filtres no es podràn aplicar)</h5></label>
-                            <input type="text" class="form-control col-sm-5" v-if="idIncidencia ==''" aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu">
+                            <label for="nomAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pel nom de l'administratiu <br><h5 style="font-size: 11px">(si filtres pel nom els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia ==''" aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu" @keyup="buscarUsuaris">
                             <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu">
                         </div>
-                        <div class="form-group row ml-3">
-                            <label for="tipus_incidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel tipus d'Incidència'</label>
-                            <select class="col-sm-5 custom-select" v-if="codiIncidencia ==''" name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusIncidencia">
-                                <option  selected value=''>Seleccionar Tots</option>
-                                <option v-for="tipusRecurso in tipusRecursos" :key="tipusRecurso.id" v-bind:value="tipusRecurso.id">{{ tipusRecurso.tipus }}</option>
+                        <div class="form-group row ml-3" v-if="nomAdministratiu != ''">
+                            <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu</label>
+                            <select class="col-sm-5 custom-select" name="idAdministratiu" id="idAdministratiu" v-model="idAdministratiu">
+                                <option  selected disabled v-if="usuarisFiltrats.length ==0">No hi ha cap coincidència.</option>
+                                <option  selected value='' v-else>Seleccionar Tots</option>
+                                <option v-for="usuariFiltrat in usuarisFiltrats" :key="usuariFiltrat.id" v-bind:value="usuariFiltrat.id">{{ usuariFiltrat.nom }} {{ usuariFiltrat.cognoms }}</option>
                             </select>
-                            <select class="col-sm-5 custom-select" v-else disabled name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusRecurs">
+                        </div>
+                        <div class="form-group row ml-3" v-else>
+                            <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu <br><h5 style="font-size: 11px">(Escriu el nom de l'administratiu per iniciar la cerca)</h5></label>
+                            <select class="col-sm-5 custom-select" disabled name="idAdministratiu" id="idAdministratiu" v-model="idAdministratiu">
+                            </select>
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="tipus_incidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel tipus d'Incidència <br><h5 style="font-size: 11px">(si filtres pel tipus els altres filtres no es podràn aplicar)</h5></label>
+                            <select class="col-sm-5 custom-select" v-if="codiIncidencia =='' && nomAdministratiu == ''" name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusIncidencia">
+                                <option  selected value=''>Seleccionar Tots</option>
+                                <option v-for="tipusIncidencia in tipusIncidencies" :key="tipusIncidencia.id" v-bind:value="tipusIncidencia.id">{{ tipusIncidencia.tipus }}</option>
+                            </select>
+                            <select class="col-sm-5 custom-select" v-else disabled name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusIncidencia">
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-danger btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiRecurs, idTipusRecurs, actiu)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-danger btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia)">Aplicar Filtres</i></button>
                 </div>
                 </div>
             </div>
@@ -403,9 +416,14 @@ export default ({
         return{
             buscador:'',
             setTimeoutBuscador:'',
+            codiIncidencia:'',
+            idAdministratiu:'',
+            nomAdministratiu:'',
+            idTipusIncidencia:'',
             incidencies:[],
             tipusIncidencies:[],
             usuaris:[],
+            usuarisFiltrats:[],
             municipis:[],
             alertants:[],
             recursos:[],
@@ -438,7 +456,9 @@ export default ({
             let me= this;
             axios
             .get('/paginate_incidencies',{params:{
-                buscador: this.buscador
+                codiIncidencia: this.codiIncidencia,
+                idAdministratiu: this.idAdministratiu,
+                idTipusIncidencia: this.idTipusIncidencia,
             }})
             .then(response => {
                 me.incidencies = response.data.data;
@@ -519,6 +539,22 @@ export default ({
              })
                 .finally(() => this.loading = false)
         },
+        filtrarUsuaris(){
+            let me= this;
+            axios
+            .get('/usuaris',{params:{
+                buscador: this.nomAdministratiu
+            }})
+            .then(response => {
+                me.usuarisFiltrats = response.data;
+             })
+                .catch(error => {
+                console.log(error)
+                this.errored = true;
+             })
+                .finally(() => this.loading = false)
+
+        },
         paginar(pagina){
             let me = this;
             axios
@@ -577,12 +613,16 @@ export default ({
              filtres(){
                 $('#modalFiltres').modal('show')
             },
-            aplicarFiltres(codiRecurs, idTipusRecurs, actiu){
-                this.codiRecurs = codiRecurs;
-                this.idTipusRecurs = idTipusRecurs;
-                this.actiu = actiu;
-                this.selectRecursos();
+            aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia){
+                this.codiIncidencia = codiIncidencia;
+                this.idAdministratiu = idAdministratiu;
+                this.idTipusIncidencia = idTipusIncidencia;
+                this.selectIncidencies();
                 $('#modalFiltres').modal('hide');
+            },
+             buscarUsuaris(){
+                clearTimeout(this.setTimeoutBuscador);
+                this.setTimeoutBuscador = setTimeout(this.filtrarUsuaris, 250);
             }
     },
     created(){
