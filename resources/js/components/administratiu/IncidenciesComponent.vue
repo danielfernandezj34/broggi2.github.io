@@ -474,6 +474,7 @@ export default ({
             .then(response => {
                 me.incidencies = response.data.data;
                 me.meta_incidencies = response.data.meta;
+                me.paginas=[];
                 for (let index = 0; index < me.meta_incidencies.last_page; index++) {
                     me.paginas[index] = index + 1;
                 }
@@ -570,7 +571,11 @@ export default ({
         paginar(pagina){
             let me = this;
             axios
-                .get('/paginate_incidencies' + '?page=' + pagina)
+                .get('/paginate_incidencies' + '?page=' + pagina,{params:{
+                codiIncidencia: this.codiIncidencia,
+                idAdministratiu: this.idAdministratiu,
+                idTipusIncidencia: this.idTipusIncidencia,
+            }})
                 .then(response => {
                     me.incidencies = response.data.data;
                     me.meta_incidencies = response.data.meta;
