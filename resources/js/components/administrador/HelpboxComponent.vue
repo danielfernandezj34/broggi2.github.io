@@ -10,8 +10,8 @@
                 <table class="table mt-2">
                     <thead>
                         <tr>
-                            <th scope="col">Pregunta Espanyol</th>
-                            <th scope="col">Pregunta Anglés</th>
+                            <th scope="col">Pregunta Català</th>
+                            <th scope="col">Pregunta Anglès</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
