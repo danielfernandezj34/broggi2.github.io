@@ -379,7 +379,6 @@
                             <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu</label>
                             <select class="col-sm-5 custom-select" name="idAdministratiu" id="idAdministratiu" v-model="idAdministratiu">
                                 <option  selected disabled v-if="usuarisFiltrats.length ==0">No hi ha cap coincidència.</option>
-                                <option  selected value='' v-else>Seleccionar Tots</option>
                                 <option v-for="usuariFiltrat in usuarisFiltrats" :key="usuariFiltrat.id" v-bind:value="usuariFiltrat.id">{{ usuariFiltrat.nom }} {{ usuariFiltrat.cognoms }}</option>
                             </select>
                         </div>
