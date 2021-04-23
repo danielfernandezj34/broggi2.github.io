@@ -372,8 +372,13 @@
                         </div>
                          <div class="form-group row ml-3">
                             <label for="nomAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pel nom de l'administratiu <br><h5 style="font-size: 11px">(si filtres pel nom els altres filtres no es podràn aplicar)</h5></label>
-                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia ==''" aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu" @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia =='' && cognomsAdministratiu == ''" aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu" @keyup="buscarUsuaris">
                             <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu">
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="cognomsAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pels cognoms de l'administratiu <br><h5 style="font-size: 11px">(si filtres pels cognoms els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia =='' && nomAdministratiu == ''" aria-label="Filtrar pels cognoms de l'administratiu" v-model="cognomsAdministratiu" placeholder= "Cognoms de l'Administratiu" @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pels cognoms de l'administratiu" v-model="cognomsAdministratiu" placeholder= "Cognoms de l'Administratiu">
                         </div>
                         <div class="form-group row ml-3" v-if="nomAdministratiu != ''">
                             <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu</label>
@@ -424,6 +429,7 @@ export default ({
             codiIncidencia:'',
             idAdministratiu:'',
             nomAdministratiu:'',
+            cognomsAdministratiu:'',
             idTipusIncidencia:'',
             incidencies:[],
             tipusIncidencies:[],
@@ -548,7 +554,8 @@ export default ({
             let me= this;
             axios
             .get('/usuaris',{params:{
-                buscador: this.nomAdministratiu
+                nom: this.nomAdministratiu,
+                cognoms: this.cognomsAdministratiu
             }})
             .then(response => {
                 me.usuarisFiltrats = response.data;

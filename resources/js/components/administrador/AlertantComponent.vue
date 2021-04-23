@@ -296,14 +296,13 @@
                 let me = this;
                 axios
                     .get('/paginate_alertants', {params:{
-                        nomAlertant: this.nomAlertant,
-                        idTipusAlertant : this.idTipusAlertant
-
+                        nomAlertant: me.nomAlertant,
+                        idTipusAlertant : me.idTipusAlertant
                     }})
                     .then(response => {
                         me.alertants = response.data.data;
                         me.meta_alertant = response.data.meta;
-
+                        me.paginas=[];
                         for (let index = 0; index < me.meta_alertant.last_page; index++) {
                             me.paginas[index] = index + 1;
                         }
@@ -329,7 +328,10 @@
             paginar(pagina){
                 let me = this;
                 axios
-                    .get('/paginate_alertants' + '?page=' + pagina)
+                    .get('/paginate_alertants' + '?page=' + pagina, {params:{
+                        nomAlertant: me.nomAlertant,
+                        idTipusAlertant : me.idTipusAlertant
+                    }})
                     .then(response => {
                         me.alertants = response.data.data;
                         me.meta_alertant = response.data.meta;
