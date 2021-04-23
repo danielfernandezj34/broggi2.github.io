@@ -205,6 +205,7 @@
                     .then(response => {
                         me.usuaris = response.data.data;
                         me.meta_usuaris = response.data.meta;
+                        me.paginas=[];
                         for (let index = 0; index < me.meta_usuaris.last_page; index++) {
                             me.paginas[index] = index + 1;
                         }
@@ -228,7 +229,9 @@
             paginar(pagina){
                 let me = this;
                 axios
-                    .get('/paginate_usuaris' + '?page=' + pagina)
+                    .get('/paginate_usuaris' + '?page=' + pagina, {params:{
+                        buscador: this.buscador
+                    }})
                     .then(response => {
                         me.usuaris = response.data.data;
                         me.meta_usuaris = response.data.meta;

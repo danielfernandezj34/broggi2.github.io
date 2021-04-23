@@ -230,6 +230,7 @@
                 .then(response => {
                     me2.recursos = response.data.data;
                     me2.meta_recursos = response.data.meta;
+                    me2.paginas=[];
                     for (let index = 0; index < me.meta_recursos.last_page; index++) {
                         me.paginas[index] = index + 1;
                     }
@@ -244,7 +245,11 @@
             paginar(pagina){
                 let me = this;
                 axios
-                    .get('/paginate_recursos' + '?page=' + pagina)
+                    .get('/paginate_recursos' + '?page=' + pagina, {params:{
+                idTipusRecurs: this.idTipusRecurs,
+                actiu: this.actiu,
+                codiRecurs: this.codiRecurs
+                }})
                     .then(response => {
                         me.recursos = response.data.data;
                         me.meta_recursos = response.data.meta;
