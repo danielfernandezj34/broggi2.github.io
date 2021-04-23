@@ -160,7 +160,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="updateIncidencia()">Modificar</button>
+                        <button type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateIncidencia()">Modificar</button>
                     </div>
                 </div>
             </div>
@@ -372,8 +372,13 @@
                         </div>
                          <div class="form-group row ml-3">
                             <label for="nomAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pel nom de l'administratiu <br><h5 style="font-size: 11px">(si filtres pel nom els altres filtres no es podràn aplicar)</h5></label>
-                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia ==''" aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu" @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia =='' && cognomsAdministratiu == ''" aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu" @keyup="buscarUsuaris">
                             <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu">
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="cognomsAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pels cognoms de l'administratiu <br><h5 style="font-size: 11px">(si filtres pels cognoms els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia =='' && nomAdministratiu == ''" aria-label="Filtrar pels cognoms de l'administratiu" v-model="cognomsAdministratiu" placeholder= "Cognoms de l'Administratiu" @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pels cognoms de l'administratiu" v-model="cognomsAdministratiu" placeholder= "Cognoms de l'Administratiu">
                         </div>
                         <div class="form-group row ml-3" v-if="nomAdministratiu != ''">
                             <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu</label>
@@ -400,7 +405,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-danger btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia)">Aplicar Filtres</i></button>
                 </div>
                 </div>
             </div>
@@ -424,6 +429,7 @@ export default ({
             codiIncidencia:'',
             idAdministratiu:'',
             nomAdministratiu:'',
+            cognomsAdministratiu:'',
             idTipusIncidencia:'',
             incidencies:[],
             tipusIncidencies:[],
@@ -468,6 +474,7 @@ export default ({
             .then(response => {
                 me.incidencies = response.data.data;
                 me.meta_incidencies = response.data.meta;
+                me.paginas=[];
                 for (let index = 0; index < me.meta_incidencies.last_page; index++) {
                     me.paginas[index] = index + 1;
                 }
@@ -548,7 +555,8 @@ export default ({
             let me= this;
             axios
             .get('/usuaris',{params:{
-                buscador: this.nomAdministratiu
+                nom: this.nomAdministratiu,
+                cognoms: this.cognomsAdministratiu
             }})
             .then(response => {
                 me.usuarisFiltrats = response.data;
@@ -563,7 +571,11 @@ export default ({
         paginar(pagina){
             let me = this;
             axios
-                .get('/paginate_incidencies' + '?page=' + pagina)
+                .get('/paginate_incidencies' + '?page=' + pagina,{params:{
+                codiIncidencia: this.codiIncidencia,
+                idAdministratiu: this.idAdministratiu,
+                idTipusIncidencia: this.idTipusIncidencia,
+            }})
                 .then(response => {
                     me.incidencies = response.data.data;
                     me.meta_incidencies = response.data.meta;
