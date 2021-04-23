@@ -35,8 +35,8 @@
                             </td>
                             <td>
                                     <button type="submit" class="btn btn-primary btn-sm" @click="mostrarIncidencia(incidencia)"><i class="fas fa-eye"></i></button>
-                                    <button v-if="user_id == incidencia.usuaris_id" type="submit" class="btn btn-secondary btn-sm ml-1" @click="editIncidencia(incidencia)"><i class="far fa-edit"></i> Editar</button>
-                                    <button v-if="user_id == incidencia.usuaris_id" type="submit" id="botones" class="btn btn-danger btn-sm ml-1" @click="confirmarDelete(incidencia)"><i class="far fa-trash-alt"></i> Esborrar</button>
+                                    <button type="submit" class="btn btn-secondary btn-sm ml-1" @click="editIncidencia(incidencia)"><i class="far fa-edit"></i> Editar</button>
+                                    <button type="submit" id="botones" class="btn btn-danger btn-sm ml-1" @click="confirmarDelete(incidencia)"><i class="far fa-trash-alt"></i> Esborrar</button>
                                 </td>
                         </tr>
                     </tbody>
@@ -411,12 +411,6 @@
 <script>
 
 export default ({
-    props : {
-        user_id:{
-            type: Number,
-            require: true
-        }
-    },
     data() {
         return{
             buscador:'',
