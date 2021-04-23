@@ -144,8 +144,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="insertAlertant()">Afegir</button>
-                        <button v-else type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="updateAlertant()">Modificar</button>
+                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertAlertant()">Afegir</button>
+                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateAlertant()">Modificar</button>
                     </div>
                 </div>
             </div>
@@ -247,7 +247,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-danger btn-sm"><i class="far fa-filter" @click="aplicarFiltres(nomAlertant, idTipusAlertant)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(nomAlertant, idTipusAlertant)">Aplicar Filtres</i></button>
                 </div>
                 </div>
             </div>
