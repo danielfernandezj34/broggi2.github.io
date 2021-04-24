@@ -150,8 +150,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="insertUsuari()">Afegir</button>
-                        <button v-else type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="updateUsuari()">Modificar</button>
+                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertUsuari()">Afegir</button>
+                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateUsuari()">Modificar</button>
                     </div>
                 </div>
             </div>
@@ -205,6 +205,7 @@
                     .then(response => {
                         me.usuaris = response.data.data;
                         me.meta_usuaris = response.data.meta;
+                        me.paginas=[];
                         for (let index = 0; index < me.meta_usuaris.last_page; index++) {
                             me.paginas[index] = index + 1;
                         }
@@ -228,7 +229,9 @@
             paginar(pagina){
                 let me = this;
                 axios
-                    .get('/paginate_usuaris' + '?page=' + pagina)
+                    .get('/paginate_usuaris' + '?page=' + pagina, {params:{
+                        buscador: this.buscador
+                    }})
                     .then(response => {
                         me.usuaris = response.data.data;
                         me.meta_usuaris = response.data.meta;

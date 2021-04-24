@@ -35,8 +35,8 @@
                             </td>
                             <td>
                                     <button type="submit" class="btn btn-primary btn-sm" @click="mostrarIncidencia(incidencia)"><i class="fas fa-eye"></i></button>
-                                    <button v-if="user_id == incidencia.usuaris_id" type="submit" class="btn btn-secondary btn-sm ml-1" @click="editIncidencia(incidencia)"><i class="far fa-edit"></i> Editar</button>
-                                    <button v-if="user_id == incidencia.usuaris_id" type="submit" id="botones" class="btn btn-danger btn-sm ml-1" @click="confirmarDelete(incidencia)"><i class="far fa-trash-alt"></i> Esborrar</button>
+                                    <button type="submit" class="btn btn-secondary btn-sm ml-1" @click="editIncidencia(incidencia)"><i class="far fa-edit"></i> Editar</button>
+                                    <button type="submit" id="botones" class="btn btn-danger btn-sm ml-1" @click="confirmarDelete(incidencia)"><i class="far fa-trash-alt"></i> Esborrar</button>
                                 </td>
                         </tr>
                     </tbody>
@@ -372,15 +372,15 @@
                         </div>
                          <div class="form-group row ml-3">
                             <label for="nomAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pel nom de l'administratiu <br><h5 style="font-size: 11px">(si filtres pel nom els altres filtres no es podràn aplicar)</h5></label>
-                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia =='' && cognomsAdministratiu == ''" aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu" @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia =='' && cognomsAdministratiu ==''" aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu" @keyup="buscarUsuaris">
                             <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu">
                         </div>
                         <div class="form-group row ml-3">
                             <label for="cognomsAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pels cognoms de l'administratiu <br><h5 style="font-size: 11px">(si filtres pels cognoms els altres filtres no es podràn aplicar)</h5></label>
-                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia =='' && nomAdministratiu == ''" aria-label="Filtrar pels cognoms de l'administratiu" v-model="cognomsAdministratiu" placeholder= "Cognoms de l'Administratiu" @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia =='' && nomAdministratiu ==''" aria-label="Filtrar pels cognoms de l'administratiu" v-model="cognomsAdministratiu" placeholder= "Cognoms de l'Administratiu" @keyup="buscarUsuaris">
                             <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pels cognoms de l'administratiu" v-model="cognomsAdministratiu" placeholder= "Cognoms de l'Administratiu">
                         </div>
-                        <div class="form-group row ml-3" v-if="nomAdministratiu != ''">
+                        <div class="form-group row ml-3" v-if="nomAdministratiu != '' || cognomsAdministratiu != ''">
                             <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu</label>
                             <select class="col-sm-5 custom-select" name="idAdministratiu" id="idAdministratiu" v-model="idAdministratiu">
                                 <option  selected disabled v-if="usuarisFiltrats.length ==0">No hi ha cap coincidència.</option>
@@ -416,12 +416,6 @@
 <script>
 
 export default ({
-    props : {
-        user_id:{
-            type: Number,
-            require: true
-        }
-    },
     data() {
         return{
             buscador:'',

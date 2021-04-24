@@ -18,11 +18,27 @@ class IncidenciesPaginateController extends Controller
      */
     public function index(Request $request)
     {
-        $filtre = $request->buscador;
-        $incidencies = Incidencies::with('recursos', 'afectats')
-                                    ->filtrePerId($filtre)
-                                    ->paginate(6)
-                                    ->withQueryString();
+        $filtreCodiIncidencia = $request->codiIncidencia;
+        $filtreIdAdministratiu = $request->idAdministratiu;
+        $filtreIdTipusIncidencia = $request->idTipusIncidencia;
+
+        if($filtreCodiIncidencia == ''){
+            if($filtreIdAdministratiu == ''){
+                if($filtreIdTipusIncidencia == ''){
+                    $incidencies = Incidencies::paginate(6);
+                }else{
+                    $incidencies = Incidencies::where('tipus_incidencies_id', '=', $filtreIdTipusIncidencia)->paginate(6)->withQueryString();
+
+                }
+            }else{
+            $incidencies = Incidencies::where('usuaris_id', '=', $filtreIdAdministratiu)->paginate(6)->withQueryString();
+            }
+        }else{
+            $incidencies = Incidencies::where('num_incident', '=', $filtreCodiIncidencia)->paginate(6)->withQueryString();
+        }
+
+
+
 
         return IncidenciesResource::collection($incidencies);
     }

@@ -123,8 +123,8 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="insertRecurs()">Afegir</button>
-                        <button v-else type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="updateRecurs()">Modificar</button>
+                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertRecurs()">Afegir</button>
+                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateRecurs()">Modificar</button>
                     </div>
                 </div>
             </div>
@@ -169,7 +169,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-danger btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiRecurs, idTipusRecurs, actiu)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiRecurs, idTipusRecurs, actiu)">Aplicar Filtres</i></button>
                 </div>
                 </div>
             </div>
@@ -230,6 +230,7 @@
                 .then(response => {
                     me2.recursos = response.data.data;
                     me2.meta_recursos = response.data.meta;
+                    me2.paginas=[];
                     for (let index = 0; index < me.meta_recursos.last_page; index++) {
                         me.paginas[index] = index + 1;
                     }
@@ -244,7 +245,11 @@
             paginar(pagina){
                 let me = this;
                 axios
-                    .get('/paginate_recursos' + '?page=' + pagina)
+                    .get('/paginate_recursos' + '?page=' + pagina, {params:{
+                idTipusRecurs: this.idTipusRecurs,
+                actiu: this.actiu,
+                codiRecurs: this.codiRecurs
+                }})
                     .then(response => {
                         me.recursos = response.data.data;
                         me.meta_recursos = response.data.meta;
