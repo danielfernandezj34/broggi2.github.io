@@ -1534,25 +1534,6 @@ export default {
                 this.incidencia.usuaris_id= this.user_id;
                 /////////////
 
-                //Campos de tabla afectat rellenados con los valores que le faltaban
-                if(this.alertant.tipus_alertants_id == 2){
-                    this.afectat.telefon = this.alertant.telefon;
-                    this.afectat.nom = this.alertant.nom;
-                    this.afectat.cognoms = this.alertant.cognoms;
-                }
-                //this.afectat.telefon este campo ya esta puesto en el v-model del formulario en la parte de TELEFONO AFECTAT si el alertante no es AFECTADO
-                //this.afectat.cip este campo ya esta puesto en el v-model del formulario en la parte de TE CIP si el usuario da a la opcion de SI
-                //this.afectat.edat este campo ya esta puesto en el v-model del formulario en la parte de EDAT
-                //this.afectat.te_cip este campo ya esta puesto en el v-model del formulario en la parte de TE CIP
-                //this.afectat.sexes_id este campo ya esta puesto en el v-model del formulario en la parte de GÉNERE
-                ////////////
-
-                //Campos de tabla alertant rellenados con los valores que le faltaban
-                this.alertant.municipis_id = this.incidencia.municipis_id;
-                /////////
-
-
-
 
 
                 let me = this;
@@ -1566,6 +1547,40 @@ export default {
                         console.log(error.response.data);
                         me.errorMessage = error.response.data.error;
                 })
+
+                this.crearAfectat();
+
+                if(this.afectat2.te_cip != null){
+                    this.crearAfectat2();
+                }
+                if(this.afectat3.te_cip != null){
+                    this.crearAfectat3();
+                }
+                if(this.afectat4.te_cip != null){
+                    this.crearAfectat4();
+                }
+                this.crearAlertant();
+
+
+
+
+                return url('/principal_administratiu');
+            },
+            crearAfectat(){
+                var me = this;
+                //Campos de tabla afectat rellenados con los valores que le faltaban
+                if(this.alertant.tipus_alertants_id == 2){
+                    this.afectat.telefon = this.alertant.telefon;
+                    this.afectat.nom = this.alertant.nom;
+                    this.afectat.cognoms = this.alertant.cognoms;
+                }
+                //this.afectat.telefon este campo ya esta puesto en el v-model del formulario en la parte de TELEFONO AFECTAT si el alertante no es AFECTADO
+                //this.afectat.cip este campo ya esta puesto en el v-model del formulario en la parte de TE CIP si el usuario da a la opcion de SI
+                //this.afectat.edat este campo ya esta puesto en el v-model del formulario en la parte de EDAT
+                //this.afectat.te_cip este campo ya esta puesto en el v-model del formulario en la parte de TE CIP
+                //this.afectat.sexes_id este campo ya esta puesto en el v-model del formulario en la parte de GÉNERE
+                ////////////
+
                 axios
                     .post('/afectats', me.afectat)
                     .then(function(response){
@@ -1577,8 +1592,10 @@ export default {
                         me.errorMessage = error.response.data.error;
                 })
 
-                if(this.afectat2.te_cip != ''){
-                    axios
+            },
+            crearAfectat2(){
+                var me = this;
+                axios
                         .post('/afectats', me.afectat2)
                         .then(function(response){
                             console.log(response);
@@ -1588,34 +1605,41 @@ export default {
                             console.log(error.response.data);
                             me.errorMessage = error.response.data.error;
                     })
-                }
+            },
+            crearAfectat3(){
+                var me = this;
 
-                if(this.afectat3.te_cip != ''){
-                    axios
-                        .post('/afectats', me.afectat3)
-                        .then(function(response){
-                            console.log(response);
+                axios
+                    .post('/afectats', me.afectat3)
+                    .then(function(response){
+                        console.log(response);
 
-                        }).catch(function(error){
-                            console.log(error.response.status);
-                            console.log(error.response.data);
-                            me.errorMessage = error.response.data.error;
-                    })
-                }
+                    }).catch(function(error){
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                        me.errorMessage = error.response.data.error;
+                })
+            },
+            crearAfectat4(){
+                var me = this;
 
-                if(this.afectat4.te_cip != ''){
-                    axios
-                        .post('/afectats', me.afectat4)
-                        .then(function(response){
-                            console.log(response);
+                axios
+                    .post('/afectats', me.afectat4)
+                    .then(function(response){
+                        console.log(response);
 
-                        }).catch(function(error){
-                            console.log(error.response.status);
-                            console.log(error.response.data);
-                            me.errorMessage = error.response.data.error;
-                    })
-                }
+                    }).catch(function(error){
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                        me.errorMessage = error.response.data.error;
+                })
 
+            },
+            crearAlertant(){
+                var me = this;
+                //Campos de tabla alertant rellenados con los valores que le faltaban
+                this.alertant.municipis_id = this.incidencia.municipis_id;
+                /////////
                 axios
                     .post('/alertants', me.alertant)
                     .then(function(response){
@@ -1625,12 +1649,11 @@ export default {
                         console.log(error.response.data);
                         me.errorMessage = error.response.data.error;
                 })
+            },
 
-
-                return url('/principal_administratiu');
-            }
 
         },
+
         created() {
         this.selectAll();
         },
