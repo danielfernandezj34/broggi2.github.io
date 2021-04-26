@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\AlertantsPaginateController;
 use App\Http\Controllers\Api\UsuarisPaginateController;
 use App\Http\Controllers\Api\RecursosPaginateController;
 use App\Http\Controllers\Api\HelpboxPaginateController;
+use App\Http\Controllers\Api\Incidencies_has_recursosController;
 use App\Http\Controllers\Api\IncidenciesPaginateController;
 
 /*
@@ -56,3 +57,4 @@ Route::apiResource('paginate_usuaris', UsuarisPaginateController::class);
 Route::apiResource('paginate_recursos', RecursosPaginateController::class);
 Route::apiResource('paginate_helpbox', HelpboxPaginateController::class);
 Route::apiResource('paginate_incidencies', IncidenciesPaginateController::class);
+Route::apiResource('incidencies_has_recursos', Incidencies_has_recursosController::class);

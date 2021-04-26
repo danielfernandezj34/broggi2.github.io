@@ -25,7 +25,7 @@
                                     </div> -->
                                 </label>
 
-                                <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="alertant.telefon" @keyup="cercaAlertant(alertant.telefon)">
+                                <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="alertant.telefon" @keyup.enter="cercaAlertant(alertant.telefon)">
                                 <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
                             </div>
 
@@ -321,7 +321,8 @@
                                     data-content="Quin és el seu telèfon?"></i>
                                 </div> -->
                             </label>
-                            <input class="form-control" type="tel" name="telefon_alertant4" id="telefon_alertant4" maxlength="9" min="0" v-model="afectat4.telefon">
+                            <input class="form-control" type="tel" name="telefon_alertant4" id="telefon_alertant4" maxlength="9" min="0" v-model="afectat4.telefon" @keyup="cercarAfectat4(afectat4.telefon)">
+                            <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
 
                         </div>
                     </div>
@@ -329,7 +330,7 @@
                     <div class="form-group row">
 
                         <div class="col-4 col-sm-4">
-                            <label for="te_cip" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal)</strong></label>
+                            <label for="te_cip4" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal)</strong></label>
                             <div class="form-check form-check-inline">
                                 <input type="radio" class="form-check-input" name="cip_si4" id="cip_si4" value="1" v-model="afectat4.te_cip">
                                 <label for="cip_si4" class="form-check-label">Sí</label>
@@ -339,7 +340,7 @@
                                 <label for="cip_no4" class="form-check-label">No</label>
                             </div>
                             <div v-if="afectat4.te_cip == 1">
-                                <input type="text" class="form-control mt-1" name="cip" id="cip" v-model="afectat4.cip" placeholder="Número del CIP">
+                                <input type="text" class="form-control mt-1" name="cip" id="cip" v-model="afectat4.cip" @keyup="cercarAfectatCip4(afectat4.cip)" placeholder="Número del CIP">
                             </div>
                         </div>
 
@@ -444,7 +445,8 @@
                                     data-content="Quin és el seu telèfon?"></i>
                                 </div> -->
                             </label>
-                            <input class="form-control" type="tel" name="telefon_alertant3" id="telefon_alertant3" maxlength="9" min="0" v-model="afectat3.telefon">
+                            <input class="form-control" type="tel" name="telefon_alertant3" id="telefon_alertant3" maxlength="9" min="0" v-model="afectat3.telefon" @keyup="cercarAfectat3(afectat3.telefon)">
+                            <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
 
                         </div>
                     </div>
@@ -452,7 +454,7 @@
                     <div class="form-group row">
 
                         <div class="col-4 col-sm-4">
-                            <label for="te_cip" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal)</strong></label>
+                            <label for="te_cip3" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal)</strong></label>
                             <div class="form-check form-check-inline">
                                 <input type="radio" class="form-check-input" name="cip_si3" id="cip_si3" value="1" v-model="afectat3.te_cip">
                                 <label for="cip_si3" class="form-check-label">Sí</label>
@@ -462,7 +464,7 @@
                                 <label for="cip_no3" class="form-check-label">No</label>
                             </div>
                             <div v-if="afectat3.te_cip == 1">
-                                <input type="text" class="form-control mt-1" name="cip" id="cip" v-model="afectat3.cip" placeholder="Número del CIP">
+                                <input type="text" class="form-control mt-1" name="cip" id="cip" v-model="afectat3.cip" @keyup="cercarAfectatCip3(afectat3.cip)" placeholder="Número del CIP">
                             </div>
                         </div>
 
@@ -568,7 +570,8 @@
                                     data-content="Quin és el seu telèfon?"></i>
                                 </div> -->
                             </label>
-                            <input class="form-control" type="tel" name="telefon_alertant2" id="telefon_alertant2" maxlength="9" min="0" v-model="afectat2.telefon">
+                            <input class="form-control" type="tel" name="telefon_alertant2" id="telefon_alertant2" maxlength="9" min="0" v-model="afectat2.telefon" @keyup.enter="cercarAfectat2(afectat2.telefon)">
+                            <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
 
                         </div>
                     </div>
@@ -576,7 +579,7 @@
                     <div class="form-group row">
 
                         <div class="col-4 col-sm-4">
-                            <label for="te_cip" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal)</strong></label>
+                            <label for="te_cip2" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal)</strong></label>
                             <div class="form-check form-check-inline">
                                 <input type="radio" class="form-check-input" name="cip_si2" id="cip_si2" value="1" v-model="afectat2.te_cip">
                                 <label for="cip_si2" class="form-check-label">Sí</label>
@@ -586,7 +589,7 @@
                                 <label for="cip_no2" class="form-check-label">No</label>
                             </div>
                             <div v-if="afectat2.te_cip == 1">
-                                <input type="text" class="form-control mt-1" name="cip" id="cip" v-model="afectat2.cip" placeholder="Número del CIP">
+                                <input type="text" class="form-control mt-1" name="cip" id="cip" v-model="afectat2.cip" @keyup.enter="cercarAfectatCip2(afectat2.cip)" placeholder="Número del CIP">
                             </div>
                         </div>
 
@@ -634,86 +637,23 @@
                 <div v-if="tipusAfec == 2" class="card-body mt-2 ml-2 mr-2 mb-2" style="border: 2px solid #2c3e50; border-radius: 4px">
                     <h3><strong>Dades</strong></h3>
                     <div class="form-group row">
-                        <div class="col-4 col-sm-4">
-                            <label for="num_afectats_h" class="col-form-label mt-2"><strong>Numero de afectats homes</strong>
-                            <!-- <div class="mt-2">
-                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                type="button"
-                                title="What is the number of affected??"
-                                data-container="body"
-                                data-toggle="popover"
-                                data-placement="left"
-                                data-trigger="hover"
-                                data-delay= "500"
-                                data-content="Quin és el número d'afectats?"></i>
-                            </div> -->
+                        <div class="col-12 col-sm-12">
+                            <label for="descripcioAdicional" class="col-form-label"><strong>Descripció general sobre els afectats del incident</strong>
+                                <!-- <div class="mt-2">
+                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button"
+                                    title="Can you describe what happened?"
+                                    data-container="body"
+                                    data-toggle="popover"
+                                    data-placement="left"
+                                    data-trigger="hover"
+                                    data-delay= "500"
+                                    data-content="Pots descriure que ha pasat?"></i>
+                                </div> -->
                             </label>
-                            <input type="number" class="form-control" name="num_afectats_h" id="num_afectats_h" min="0">
+                            <textarea class="form-control" v-model="descripcioAdicional" id="descripcioAdicional" name= "descripcioAdicional" rows="8" placeholder="Descripció breu sobre els afectats ex: (Dona de 35 anys, dos Homes de 42 i 38 anys...)"></textarea>
                         </div>
 
-                        <div class="col-4 col-sm-4">
-                            <label for="num_afectats_m" class="col-form-label mt-2"><strong>Numero d'afectats dones</strong>
-                            <!-- <div class="mt-2">
-                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                type="button"
-                                title="What is the number of affected??"
-                                data-container="body"
-                                data-toggle="popover"
-                                data-placement="left"
-                                data-trigger="hover"
-                                data-delay= "500"
-                                data-content="Quin és el número d'afectats?"></i>
-                            </div> -->
-                            </label>
-                            <input type="number" class="form-control" name="num_afectats_m" id="num_afectats_m" min="0">
-                        </div>
-
-                        <div class="col-4 col-sm-4">
-                            <label for="num_afectats_i" class="col-form-label mt-2"><strong>Numero d' afectats d'infants</strong>
-                            <!-- <div class="mt-2">
-                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                type="button"
-                                title="What is the number of affected??"
-                                data-container="body"
-                                data-toggle="popover"
-                                data-placement="left"
-                                data-trigger="hover"
-                                data-delay= "500"
-                                data-content="Quin és el número d'afectats?"></i>
-                            </div> -->
-                            </label>
-                            <input type="number" class="form-control" name="num_afectats_i" id="num_afectats_i" min="0">
-                        </div>
-
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-4 col-sm-4">
-                            <label for="rang_edat_h" class="col-form-label"><strong>Rang d'edats homes</strong></label>
-                            <div class="form-group row ml-1">
-                                <input class="col-3 form-control" type="number" id="min_rang_edat_h1" name="min_rang_edat_h1" placeholder="Min" min="0" max="110">
-                                <label class="input-group-text" for="max_rang_edat_h1">-</label>
-                                <input class="col-3 form-control" type="number" id="max_rang_edat_h1" name="max_rang_edat_h1" placeholder="Max" min="0" max="110">
-                            </div>
-                        </div>
-
-                        <div class="col-4 col-sm-4">
-                            <label for="rang_edat_d" class="col-form-label"><strong>Rang d'edats dones</strong></label>
-                            <div class="form-group row ml-1">
-                                <input class="col-3 form-control" type="number" id="min_rang_edat_d1" name="min_rang_edat_d1" placeholder="Min" min="0" max="110">
-                                <label class="input-group-text" for="max_rang_edat_h1">-</label>
-                                <input class="col-3 form-control" type="number" id="max_rang_edat_d1" name="max_rang_edat_d1" placeholder="Max" min="0" max="110">
-                            </div>
-                        </div>
-
-                        <div class="col-4 col-sm-4">
-                            <label for="rang_edat_i" class="col-form-label"><strong>Rang d'edats infants</strong></label>
-                            <div class="form-group row ml-1">
-                                <input class="col-3 form-control" type="number" id="min_rang_edat_i1" name="min_rang_edat_i1" placeholder="Min" min="0" max="110">
-                                <label class="input-group-text" for="max_rang_edat_h1">-</label>
-                                <input class="col-3 form-control" type="number" id="max_rang_edat_i1" name="max_rang_edat_i1" placeholder="Max" min="0" max="110">
-                            </div>
-                        </div>
                     </div>
 
                 </div>
@@ -723,7 +663,7 @@
 
 
                     <div class="form-group row">
-                        <button type="button" class="btn btn-primary m-2" id="afegir" v-on:click="colorboto()" :style="{ 'background-color': color}" style="float:right" data-toggle="collapse" href="#afectat2" role="button" aria-expanded="false" aria-controls="afectat2" :disabled="alertant.nom == '' && afectat.nom == ''">
+                        <button type="button" class="btn btn-primary m-2" id="afegir" v-on:click="colorboto()" :style="{ 'background-color': color}" style="float:right" data-toggle="collapse" href="#afectat2" role="button" aria-expanded="false" aria-controls="afectat2" :disabled="afectat.te_cip == ''">
                             Afegir Segon Afectat
                         </button>
                     </div>
@@ -783,7 +723,8 @@
                                 </div> -->
                             </label>
                             <input v-if="alertant.tipus_alertants_id == 2" class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="alertant.telefon" disabled>
-                            <input v-else class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="afectat.telefon">
+                            <input v-else class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="afectat.telefon" @keyup.enter="cercarAfectat(afectat.telefon)" >
+                            <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
 
                         </div>
 
@@ -804,7 +745,7 @@
                                 <label for="cip_no" class="form-check-label">No</label>
                             </div>
                             <div v-if="afectat.te_cip == 1">
-                                <input type="text" class="form-control mt-1" name="cip" id="cip" v-model="afectat.cip" placeholder="Número del CIP">
+                                <input type="text" class="form-control mt-1" name="cip" id="cip" v-model="afectat.cip" @keyup.enter="cercarAfectatCip(afectat.cip)" placeholder="Número del CIP">
                             </div>
                         </div>
 
@@ -927,8 +868,8 @@
 
                         <div class="col-sm-4 col-4">
                             <h5><u>Segon recurs mòbil</u></h5>
-                            <label for="recurs2" class="col-form-label"><strong>Tipus de recurs</strong></label>
-                            <select class="form-control" name="recurs2" id="recurs2" v-model="incidencies_has_recursos2.recursos_id">
+                            <label for="recurs_2" class="col-form-label"><strong>Tipus de recurs</strong></label>
+                            <select class="form-control" name="recurs_2" id="recurs_2" v-model="incidencies_has_recursos2.recursos_id">
                                 <option v-for="recurs in recursos" :key="recurs.id" :value="recurs.id">{{ recurs.tipus }}</option>
                             </select>
                         </div>
@@ -966,15 +907,14 @@
                 </div>
             </div>
         </form>
-        <button type="submit" @click="crearIncidencia()" class="btn btn-success btn-lg boto_enviar" style="background-color: #f70c74"><i class="fas fa-check fa-1x"></i>Enviar</button>
+        <button type="submit" @click="crearIncidencia()" class="btn btn-success btn-lg boto_enviar" style="background-color: #f70c74"><i class="fas fa-check fa-1x"></i> Enviar</button>
 
     </div>
 
 </template>
 
 <script>
-
-    export default {
+export default {
         props : {
             user_id : {
                 type : Number,
@@ -992,6 +932,7 @@
                 recursos : [],
                 sexes : [],
                 alertants : [],
+                afectats : [],
                 ///////////////
                 comarcaSel : '',
                 nomComarca : '',
@@ -1003,6 +944,7 @@
                 color3 : '#2c3e50',
                 color4 : '#2c3e50',
                 tipusAfec : 1,
+                descripcioAdicional : '',
                 //POST de la incidencia
                 incidencia : {
                     id : '',
@@ -1253,6 +1195,14 @@
                         this.errored = true;
                     })
                     .finally(() => this.loading = false)
+                let me10 = this;
+                axios
+                    .get('/afectats')
+                    .then(response => {
+                        me10.afectats = response.data;
+                    })
+                    .finally(() => this.loading = false)
+
             },
             localitzacio(id){
                 console.log('funcio running');
@@ -1366,12 +1316,155 @@
                     }
                 }
             },
-            crearIncidencia(){
+            cercarAfectat(telefon){
+                var i = 0;
+                while(this.afectats.length > i){
+                    if(this.afectats[i].telefon == telefon){
+                        this.afectat.telefon = this.afectats[i].telefon;
+                        this.afectat.cip = this.afectats[i].cip;
+                        this.afectat.nom = this.afectats[i].nom;
+                        this.afectat.cognoms = this.afectats[i].cognoms;
+                        this.afectat.edat = this.afectats[i].edat;
+                        this.afectat.te_cip = this.afectats[i].te_cip;
+                        this.afectat.sexes_id = this.afectats[i].sexes_id;
+                    }
+                    i++;
+                }
 
+
+            },
+            cercarAfectat2(telefon){
+                var i = 0;
+                //debugger;
+                while(this.afectats.length > i){
+                    if(this.afectats[i].telefon == telefon){
+                        this.afectat.telefon = this.afectats[i].telefon;
+                        this.afectat.cip = this.afectats[i].cip;
+                        this.afectat.nom = this.afectats[i].nom;
+                        this.afectat.cognoms = this.afectats[i].cognoms;
+                        this.afectat.edat = this.afectats[i].edat;
+                        this.afectat.te_cip = this.afectats[i].te_cip;
+                        this.afectat.sexes_id = this.afectats[i].sexes_id;
+                    }
+                    i++;
+                }
+
+
+            },
+            cercarAfectat3(telefon){
+                var i = 0;
+
+                while(this.afectats.length > i){
+                    if(this.afectats[i].telefon == telefon){
+                        this.afectat3.telefon = this.afectats[i].telefon;
+                        this.afectat3.cip = this.afectats[i].cip;
+                        this.afectat3.nom = this.afectats[i].nom;
+                        this.afectat3.cognoms = this.afectats[i].cognoms;
+                        this.afectat3.edat = this.afectats[i].edat;
+                        this.afectat3.te_cip = this.afectats[i].te_cip;
+                        this.afectat3.sexes_id = this.afectats[i].sexes_id;
+                    }
+                    i++;
+                }
+
+
+            },
+            cercarAfectat4(telefon){
+                var i = 0;
+
+                while(this.afectats.length > i){
+                    if(this.afectats[i].telefon == telefon){
+                        this.afectat4.telefon = this.afectats[i].telefon;
+                        this.afectat4.cip = this.afectats[i].cip;
+                        this.afectat4.nom = this.afectats[i].nom;
+                        this.afectat4.cognoms = this.afectats[i].cognoms;
+                        this.afectat4.edat = this.afectats[i].edat;
+                        this.afectat4.te_cip = this.afectats[i].te_cip;
+                        this.afectat4.sexes_id = this.afectats[i].sexes_id;
+                    }
+                    i++;
+                }
+
+
+            },
+            cercarAfectatCip(cip){
+                var i = 0;
+
+                while(this.afectats.length > i){
+                    if(this.afectats[i].cip == cip){
+                        this.afectat.telefon = this.afectats[i].telefon;
+                        this.afectat.cip = this.afectats[i].cip;
+                        this.afectat.nom = this.afectats[i].nom;
+                        this.afectat.cognoms = this.afectats[i].cognoms;
+                        this.afectat.edat = this.afectats[i].edat;
+                        this.afectat.te_cip = this.afectats[i].te_cip;
+                        this.afectat.sexes_id = this.afectats[i].sexes_id;
+                    }
+                    i++;
+                }
+
+
+            },
+            cercarAfectatCip2(cip){
+                var i = 0;
+
+                while(this.afectats.length > i){
+                    if(this.afectats[i].cip == cip){
+                        this.afectat2.telefon = this.afectats[i].telefon;
+                        this.afectat2.cip = this.afectats[i].cip;
+                        this.afectat2.nom = this.afectats[i].nom;
+                        this.afectat2.cognoms = this.afectats[i].cognoms;
+                        this.afectat2.edat = this.afectats[i].edat;
+                        this.afectat2.te_cip = this.afectats[i].te_cip;
+                        this.afectat2.sexes_id = this.afectats[i].sexes_id;
+                    }
+                    i++;
+                }
+
+
+            },
+            cercarAfectatCip3(cip){
+                var i = 0;
+
+                while(this.afectats.length > i){
+                    if(this.afectats[i].cip == cip){
+                        this.afectat3.telefon = this.afectats[i].telefon;
+                        this.afectat3.cip = this.afectats[i].cip;
+                        this.afectat3.nom = this.afectats[i].nom;
+                        this.afectat3.cognoms = this.afectats[i].cognoms;
+                        this.afectat3.edat = this.afectats[i].edat;
+                        this.afectat3.te_cip = this.afectats[i].te_cip;
+                        this.afectat3.sexes_id = this.afectats[i].sexes_id;
+                    }
+                    i++;
+                }
+
+
+            },
+            cercarAfectatCip4(cip){
+                var i = 0;
+
+                while(this.afectats.length > i){
+                    if(this.afectats[i].cip == cip){
+                        this.afectat4.telefon = this.afectats[i].telefon;
+                        this.afectat4.cip = this.afectats[i].cip;
+                        this.afectat4.nom = this.afectats[i].nom;
+                        this.afectat4.cognoms = this.afectats[i].cognoms;
+                        this.afectat4.edat = this.afectats[i].edat;
+                        this.afectat4.te_cip = this.afectats[i].te_cip;
+                        this.afectat4.sexes_id = this.afectats[i].sexes_id;
+                    }
+                    i++;
+                }
+
+
+            },
+            crearIncidencia(){
+                const data = new Date();
                 //Campos de tabla incidencia rellenados con los valores que le faltaban
-                this.incidencia.num_incident;
-                this.incidencia.data;
-                this.incidencia.hora;
+                this.incidencia.num_incident = this.incidencia.id;
+                this.incidencia.data = data.getDate()+ '-' + data.getFullYear();
+                this.incidencia.hora = data.getHours() + '-' + data.getMinutes();
                 this.incidencia.telefon_alertant = this.alertant.telefon;
                 this.incidencia.adreca = this.alertant.adreca;
                 //this.incidencia.adreca_complement este campo ya esta puesto en el v-model del formulario en la parte de ADREÇA COMPLEMENTARIA
@@ -1382,7 +1475,44 @@
                 //this.incidencia.municipis_id este campo ya esta puesto en el v-model del formulario en la parte de MUNICIPI
                 this.incidencia.usuaris_id= this.user_id;
                 /////////////
+                if(descripcioAdicional != ''){
+                    this.incidencia.descripcio + ', DESCRIPCIO DELS AFECTATS: '+ descripcioAdicional;
+                }
 
+
+
+                let me = this;
+                axios
+                    .post('/incidencies', me.incidencia)
+                    .then(function(response){
+                        console.log(response);
+
+                    }).catch(function(error) {
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                        me.errorMessage = error.response.data.error;
+                })
+
+                this.crearAfectat();
+
+                if(this.afectat2.te_cip != null){
+                    this.crearAfectat2();
+                }
+                if(this.afectat3.te_cip != null){
+                    this.crearAfectat3();
+                }
+                if(this.afectat4.te_cip != null){
+                    this.crearAfectat4();
+                }
+                this.crearAlertant();
+
+
+
+
+                return url('/principal_administratiu');
+            },
+            crearAfectat(){
+                var me = this;
                 //Campos de tabla afectat rellenados con los valores que le faltaban
                 if(this.alertant.tipus_alertants_id == 2){
                     this.afectat.telefon = this.alertant.telefon;
@@ -1396,21 +1526,83 @@
                 //this.afectat.sexes_id este campo ya esta puesto en el v-model del formulario en la parte de GÉNERE
                 ////////////
 
-
-                let me = this;
                 axios
-                    .post('/incidencies', me.incidencia)
+                    .post('/afectats', me.afectat)
                     .then(function(response){
                         console.log(response);
-                        return url('/principal_administratiu');
-                }).catch(function(error) {
-                    console.log(error.response.status);
-                    console.log(error.response.data);
-                    me.errorMessage = error.response.data.error;
+
+                    }).catch(function(error){
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                        me.errorMessage = error.response.data.error;
                 })
+
+            },
+            crearAfectat2(){
+                var me = this;
+                axios
+                        .post('/afectats', me.afectat2)
+                        .then(function(response){
+                            console.log(response);
+
+                        }).catch(function(error){
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                            me.errorMessage = error.response.data.error;
+                    })
+            },
+            crearAfectat3(){
+                var me = this;
+
+                axios
+                    .post('/afectats', me.afectat3)
+                    .then(function(response){
+                        console.log(response);
+
+                    }).catch(function(error){
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                        me.errorMessage = error.response.data.error;
+                })
+            },
+            crearAfectat4(){
+                var me = this;
+
+                axios
+                    .post('/afectats', me.afectat4)
+                    .then(function(response){
+                        console.log(response);
+
+                    }).catch(function(error){
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                        me.errorMessage = error.response.data.error;
+                })
+
+            },
+            crearAlertant(){
+                var me = this;
+                //Campos de tabla alertant rellenados con los valores que le faltaban
+                this.alertant.municipis_id = this.incidencia.municipis_id;
+                /////////
+                axios
+                    .post('/alertants', me.alertant)
+                    .then(function(response){
+                        console.log(response);
+                    }).catch(function(error){
+                        console.log(error.response.status);
+                        console.log(error.response.data);
+                        me.errorMessage = error.response.data.error;
+                })
+            },
+            crearIncidencies_has_recursos(){
+                let inci = {};
+
             }
 
+
         },
+
         created() {
         this.selectAll();
         },
