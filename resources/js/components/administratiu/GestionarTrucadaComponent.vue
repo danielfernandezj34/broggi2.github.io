@@ -1475,8 +1475,8 @@ export default {
                 //this.incidencia.municipis_id este campo ya esta puesto en el v-model del formulario en la parte de MUNICIPI
                 this.incidencia.usuaris_id= this.user_id;
                 /////////////
-                if(descripcioAdicional != ''){
-                    this.incidencia.descripcio + ', DESCRIPCIO DELS AFECTATS: '+ descripcioAdicional;
+                if(this.descripcioAdicional != ''){
+                    this.incidencia.descripcio + ', DESCRIPCIO DELS AFECTATS: '+ this.descripcioAdicional;
                 }
 
 
@@ -1493,6 +1493,7 @@ export default {
                         me.errorMessage = error.response.data.error;
                 })
 
+
                 this.crearAfectat();
 
                 if(this.afectat2.te_cip != null){
@@ -1506,10 +1507,11 @@ export default {
                 }
                 this.crearAlertant();
 
+                return window.open('../../../views/administratiu/mostrar_incidencias.blade.php', '_self');
 
 
 
-                return url('/principal_administratiu');
+
             },
             crearAfectat(){
                 var me = this;

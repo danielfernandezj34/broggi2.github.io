@@ -20,10 +20,11 @@ class UsuarisController extends Controller
     {
         $filtreNom = $request->nom;
         $filtreCognoms = $request->cognoms;
-
+        $filtreEmail = $request->email;
 
         $usuaris = Usuaris::where('nom','LIKE','%'.$filtreNom.'%')
                             ->where('cognoms','LIKE','%'.$filtreCognoms.'%')
+                            ->where('email','LIKE','%'.$filtreEmail.'%')
                             ->get();
 
         return UsuarisResource::collection($usuaris);
