@@ -28,4 +28,5 @@ class Usuaris extends Authenticatable
     {
         return $this->belongsToMany(Rols::class, 'rols_id');
     }
+
 }

@@ -3,11 +3,13 @@
         <div class="card mt-3">
             <div class="card-body mt-1">
                 <h5 class="card-title" id="titol_form">Usuaris</h5>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar Usuari" aria-label="Buscar Usuari">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fal fa-search"> Buscar</i></button>
+                <form class="form-inline my-2 my-lg-0 col-sm-4" id="buscador_form">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar Usuari" aria-label="Buscar Usuari" v-model="buscador" @keyup="buscarUsuaris">
                 </form>
-                <table class="table mt-2">
+                <div v-if="usuaris.length == 0" class="alert alert-light mt-2" role="alert">
+                            No hi ha cap usuari.
+                </div>
+                <table v-else class="table mt-2">
                     <thead>
                         <tr>
                             <th scope="col">Nom</th>
@@ -36,6 +38,21 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example" class="ml-5">
+                    <ul class="pagination">
+                        <li class="page-item" :class="{disabled: meta_usuaris.from == meta_usuaris.current_page}">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" :class="{active: pagina == meta_usuaris.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
+                        <li class="page-item" :class="{disabled: meta_usuaris.last_page == meta_usuaris.current_page}">
+                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
         </div>
@@ -133,8 +150,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="insertUsuari()">Afegir</button>
-                        <button v-else type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="updateUsuari()">Modificar</button>
+                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertUsuari()">Afegir</button>
+                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateUsuari()">Modificar</button>
                     </div>
                 </div>
             </div>
@@ -146,6 +163,8 @@
     export default {
         data() {
             return{
+                buscador:'',
+                setTimeoutBuscador:'',
                 usuaris: [],
                 rols: [],
                 usuari: {
@@ -169,7 +188,10 @@
                     recursos_id: ''
                 },
                 tipusRecursos: [],
-                insert: false
+                insert: false,
+                pagina: "",
+                meta_usuaris: {},
+                paginas: []
             }
 
         },
@@ -177,9 +199,16 @@
             selectUsuaris(){
                 let me = this;
                 axios
-                    .get('/usuaris')
+                    .get('/paginate_usuaris',{params:{
+                        buscador: this.buscador
+                    }})
                     .then(response => {
-                        me.usuaris = response.data;
+                        me.usuaris = response.data.data;
+                        me.meta_usuaris = response.data.meta;
+                        me.paginas=[];
+                        for (let index = 0; index < me.meta_usuaris.last_page; index++) {
+                            me.paginas[index] = index + 1;
+                        }
                     })
                     .catch(error => {
                         console.log(error)
@@ -196,6 +225,23 @@
                         console.log(error)
                         this.errored = true;
                     })
+            },
+            paginar(pagina){
+                let me = this;
+                axios
+                    .get('/paginate_usuaris' + '?page=' + pagina, {params:{
+                        buscador: this.buscador
+                    }})
+                    .then(response => {
+                        me.usuaris = response.data.data;
+                        me.meta_usuaris = response.data.meta;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+
+                    .finally(() => this.loading = false)
             },
             selectTipusRecursos(){
                 let me = this;
@@ -259,6 +305,10 @@
                         $('modalBorrar').modal('hide');
                     })
             },
+             buscarUsuaris(){
+                clearTimeout(this.setTimeoutBuscador);
+                this.setTimeoutBuscador = setTimeout(this.selectUsuaris, 360);
+            }
         },
         created(){
             this.selectUsuaris();

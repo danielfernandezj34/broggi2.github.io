@@ -16,9 +16,15 @@ class UsuarisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     public function index(Request $request)
     {
-        $usuaris = Usuaris::all();
+        $filtreNom = $request->nom;
+        $filtreCognoms = $request->cognoms;
+
+
+        $usuaris = Usuaris::where('nom','LIKE','%'.$filtreNom.'%')
+                            ->where('cognoms','LIKE','%'.$filtreCognoms.'%')
+                            ->get();
 
         return UsuarisResource::collection($usuaris);
 

@@ -7,5 +7,5 @@
 @section('incidencies')
     <a class="dropdown-item" href="./incidencies">Consultar incidencies</a>
 @endsection
-    <mostrar-incidencies></mostrar-incidencies>
+    <mostrar-adminincidencies></mostrar-adminincidencies>
 @endsection

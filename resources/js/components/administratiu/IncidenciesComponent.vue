@@ -3,13 +3,11 @@
         <div class="card mt-3">
             <div class="card-body mt-1">
                 <h5 class="card-title" id="titol_form">Taula d'Incidencies</h5>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Número de la incidència" aria-label="Buscar ID incidència">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="boto_buscar"><i class="fal fa-search"> Buscar</i></button>
-                </form>
-                <div v-if="incidencies.length == 0" class="alert alert-light" role="alert">
+                <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                </div>
+                <div v-if="incidencies.length == 0" class="alert alert-light mt-2" role="alert">
                             No hi ha cap incidència.
-
                 </div>
                 <table v-else class="table mt-2">
                     <thead>
@@ -37,12 +35,27 @@
                             </td>
                             <td>
                                     <button type="submit" class="btn btn-primary btn-sm" @click="mostrarIncidencia(incidencia)"><i class="fas fa-eye"></i></button>
-                                    <button type="submit" class="btn btn-secondary btn-sm ml-1" @click="editIncidencia(incidencia)"><i class="far fa-edit"></i> Editar</button>
-                                    <button type="submit" id="botones" class="btn btn-danger btn-sm ml-1" @click="confirmarDelete(incidencia)"><i class="far fa-trash-alt"></i> Esborrar</button>
+                                    <button v-if="user_id == incidencia.usuaris_id" type="submit" class="btn btn-secondary btn-sm ml-1" @click="editIncidencia(incidencia)"><i class="far fa-edit"></i> Editar</button>
+                                    <button v-if="user_id == incidencia.usuaris_id" type="submit" id="botones" class="btn btn-danger btn-sm ml-1" @click="confirmarDelete(incidencia)"><i class="far fa-trash-alt"></i> Esborrar</button>
                                 </td>
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example" class="ml-5">
+                    <ul class="pagination">
+                        <li class="page-item" :class="{disabled: meta_incidencies.from == meta_incidencies.current_page}">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" :class="{active: pagina == meta_incidencies.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
+                        <li class="page-item" :class="{disabled: meta_incidencies.last_page == meta_incidencies.current_page}">
+                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
         <!-- Modal Borrar-->
@@ -147,7 +160,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="updateIncidencia()">Modificar</button>
+                        <button type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateIncidencia()">Modificar</button>
                     </div>
                 </div>
             </div>
@@ -340,17 +353,88 @@
                 </div>
             </div>
         </div>
+        <!-- Modal filtres -->
+        <div class="modal fade" id="modalFiltres" aria-labelledby="modalFiltresLabel" role="dialog" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filtres</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row ml-3">
+                            <label for="codiIncidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel codi de l'incidència <br><h5 style="font-size: 11px">(si filtres per codi els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="nomAdministratiu ==''" aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
+                            <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
+                        </div>
+                         <div class="form-group row ml-3">
+                            <label for="nomAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pel nom de l'administratiu <br><h5 style="font-size: 11px">(si filtres pel nom els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia =='' && cognomsAdministratiu == ''" aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu" @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pel nom de l'administratiu" v-model="nomAdministratiu" placeholder= "Nom de l'Administratiu">
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="cognomsAdministratiu" class="col-sm-6 col-form-label ml-5">Filtrar pels cognoms de l'administratiu <br><h5 style="font-size: 11px">(si filtres pels cognoms els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="codiIncidencia =='' && nomAdministratiu == ''" aria-label="Filtrar pels cognoms de l'administratiu" v-model="cognomsAdministratiu" placeholder= "Cognoms de l'Administratiu" @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pels cognoms de l'administratiu" v-model="cognomsAdministratiu" placeholder= "Cognoms de l'Administratiu">
+                        </div>
+                        <div class="form-group row ml-3" v-if="nomAdministratiu != ''">
+                            <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu</label>
+                            <select class="col-sm-5 custom-select" name="idAdministratiu" id="idAdministratiu" v-model="idAdministratiu">
+                                <option  selected disabled v-if="usuarisFiltrats.length ==0">No hi ha cap coincidència.</option>
+                                <option v-for="usuariFiltrat in usuarisFiltrats" :key="usuariFiltrat.id" v-bind:value="usuariFiltrat.id">{{ usuariFiltrat.nom }} {{ usuariFiltrat.cognoms }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group row ml-3" v-else>
+                            <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu <br><h5 style="font-size: 11px">(Escriu el nom de l'administratiu per iniciar la cerca)</h5></label>
+                            <select class="col-sm-5 custom-select" disabled name="idAdministratiu" id="idAdministratiu" v-model="idAdministratiu">
+                            </select>
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="tipus_incidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel tipus d'Incidència <br><h5 style="font-size: 11px">(si filtres pel tipus els altres filtres no es podràn aplicar)</h5></label>
+                            <select class="col-sm-5 custom-select" v-if="codiIncidencia =='' && nomAdministratiu == ''" name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusIncidencia">
+                                <option  selected value=''>Seleccionar Tots</option>
+                                <option v-for="tipusIncidencia in tipusIncidencies" :key="tipusIncidencia.id" v-bind:value="tipusIncidencia.id">{{ tipusIncidencia.tipus }}</option>
+                            </select>
+                            <select class="col-sm-5 custom-select" v-else disabled name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusIncidencia">
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
+                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia)">Aplicar Filtres</i></button>
+                </div>
+                </div>
+            </div>
+        </div>
     </main>
 </template>
 
 <script>
 
 export default ({
+    props : {
+        user_id:{
+            type: Number,
+            require: true
+        }
+    },
     data() {
         return{
+            buscador:'',
+            setTimeoutBuscador:'',
+            codiIncidencia:'',
+            idAdministratiu:'',
+            nomAdministratiu:'',
+            cognomsAdministratiu:'',
+            idTipusIncidencia:'',
             incidencies:[],
             tipusIncidencies:[],
             usuaris:[],
+            usuarisFiltrats:[],
             municipis:[],
             alertants:[],
             recursos:[],
@@ -370,7 +454,10 @@ export default ({
                 tipus_incidencies_id:'',
                 alertants_id:'',
                 municipis_id:'',
-                usuaris_id:''
+                usuaris_id:'',
+                pagina: "",
+                meta_incidencies: {},
+                paginas: []
             }
         }
 
@@ -379,9 +466,18 @@ export default ({
          selectIncidencies(){
             let me= this;
             axios
-            .get('/incidencies')
+            .get('/paginate_incidencies',{params:{
+                codiIncidencia: this.codiIncidencia,
+                idAdministratiu: this.idAdministratiu,
+                idTipusIncidencia: this.idTipusIncidencia,
+            }})
             .then(response => {
-                me.incidencies = response.data;
+                me.incidencies = response.data.data;
+                me.meta_incidencies = response.data.meta;
+                me.paginas=[];
+                for (let index = 0; index < me.meta_incidencies.last_page; index++) {
+                    me.paginas[index] = index + 1;
+                }
              })
                 .catch(error => {
                 console.log(error)
@@ -455,6 +551,42 @@ export default ({
              })
                 .finally(() => this.loading = false)
         },
+        filtrarUsuaris(){
+            let me= this;
+            axios
+            .get('/usuaris',{params:{
+                nom: this.nomAdministratiu,
+                cognoms: this.cognomsAdministratiu
+            }})
+            .then(response => {
+                me.usuarisFiltrats = response.data;
+             })
+                .catch(error => {
+                console.log(error)
+                this.errored = true;
+             })
+                .finally(() => this.loading = false)
+
+        },
+        paginar(pagina){
+            let me = this;
+            axios
+                .get('/paginate_incidencies' + '?page=' + pagina,{params:{
+                codiIncidencia: this.codiIncidencia,
+                idAdministratiu: this.idAdministratiu,
+                idTipusIncidencia: this.idTipusIncidencia,
+            }})
+                .then(response => {
+                    me.incidencies = response.data.data;
+                    me.meta_incidencies = response.data.meta;
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.errored = true;
+                })
+
+                .finally(() => this.loading = false)
+        },
         editIncidencia(incidencia){
                 this.incidencia = incidencia;
                 this.recursosIncidencia = incidencia.recursos;
@@ -494,6 +626,20 @@ export default ({
                 this.recursosIncidencia = incidencia.recursos;
                 this.afectats = incidencia.afectats;
                 $('#modalMostrarIncidencia').modal('show')
+            },
+             filtres(){
+                $('#modalFiltres').modal('show')
+            },
+            aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia){
+                this.codiIncidencia = codiIncidencia;
+                this.idAdministratiu = idAdministratiu;
+                this.idTipusIncidencia = idTipusIncidencia;
+                this.selectIncidencies();
+                $('#modalFiltres').modal('hide');
+            },
+             buscarUsuaris(){
+                clearTimeout(this.setTimeoutBuscador);
+                this.setTimeoutBuscador = setTimeout(this.filtrarUsuaris, 250);
             }
     },
     created(){

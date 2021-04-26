@@ -7,5 +7,5 @@
     <a class="dropdown-item" href="./incidencies">Consultar incidencies</a>
 @endsection
 @section('container')
-    <mostrar-incidencies></mostrar-incidencies>
+    <mostrar-incidencies :user_id={{ Auth::user()->id}}></mostrar-incidencies>
 @endsection

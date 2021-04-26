@@ -1,7 +1,7 @@
 <template>
     <main>
         <div id="app">
-            <div id="chart-container">
+            <div id="chart-container" class="mt-5">
                 <fusioncharts
                     :type="type"
                     :width="width"
@@ -12,6 +12,7 @@
                 </fusioncharts>
             </div>
         </div>
+
     </main>
 </template>
 
@@ -19,69 +20,88 @@
 import Vue from 'vue';
 import VueFusionCharts from 'vue-fusioncharts';
 import FusionCharts from 'fusioncharts';
-import Column2D from 'fusioncharts/fusioncharts.charts';
+import Column3D from 'fusioncharts/fusioncharts.charts';
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
-Vue.use(VueFusionCharts, FusionCharts, Column2D, FusionTheme);
-
+Vue.use(VueFusionCharts, FusionCharts, Column3D, FusionTheme);
 const chartData = [
     {
-      label: "Venezuela",
-      value: "290"
+        label: "Barcelona",
+        value: "290"
     },
     {
-      label: "Saudi",
-      value: "260"
+        label: "Tarragona",
+        value: "60"
     },
     {
-      label: "Canada",
-      value: "180"
+        label: "Lleida",
+        value: "200"
     },
     {
-      label: "Iran",
-      value: "140"
-    },
-    {
-      label: "Russia",
-      value: "115"
-    },
-    {
-      label: "UAE",
-      value: "100"
-    },
-    {
-      label: "US",
-      value: "30"
-    },
-    {
-      label: "China",
-      value: "30"
+        label: "Girona",
+        value: "140"
     }
   ];
 
 const dataSource = {
-  chart: {
-    caption: "Countries With Most Oil Reserves [2017-18]",
-    subcaption: "In MMbbl = One Million barrels",
-    xaxisname: "Country",
-    yaxisname: "Reserves (MMbbl)",
-    numbersuffix: "K",
-    theme: "fusion"
-  },
-  data: chartData
-  };
+    chart: {
+        caption: "Incidencies per Provincies",
+        subcaption: "Per veure per Comarca seleccionar la provincia desitjada",
+        xaxisname: "Provincia",
+        yaxisname: "Incidencies",
+        numbersuffix: "",
+        theme: "fusion"
+    },
+    data: chartData
+    };
 
 export default {
-  name: 'app',
-  data() {
-    return {
-      "type": "column2d",
-      "width": "550",
-      "height": "350",
-      "dataFormat": "json",
-      dataSource
+    name: 'app',
+    data() {
+        return {
+            "type": "column3d",
+            "renderAt": "chart-container",
+            "width": "750",
+            "height": "450",
+            "dataFormat": "json",
+            dataSource,
+            provincies: [],
+            provincia:{
+                label: "",
+                value: ""
+            }
+        }
+    },
+    methods: {
+        selectProvincies(){
+            let me = this;
+            axios
+                .get('/provincies')
+                .then( response => {
+                    me.provincies = response.data;
+                })
+                .catch( error => {
+                    console.log(error)
+                    this.errored = true;
+                })
+                .finally(() => this.loading = false)
+        },
+        insertarProvincies(){
+            var i = 0;
+
+            while(i < this.provincies){
+                // this.provincia.label = this.provincies[i].nom;
+                // chartData.push(this.provincia);
+
+                // i++;
+            }
+
+        }
+    },
+    created() {
+        this.selectProvincies();
+        this.insertarProvincies();
     }
-  }
 }
 </script>
 
