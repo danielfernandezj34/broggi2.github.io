@@ -1,10 +1,5 @@
 import Vue from 'vue';
 
-// Include the vue-fusioncharts component
-import VueFusionCharts from 'vue-fusioncharts';
-
-
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -32,6 +27,7 @@ Vue.component('administratiu-principal', require('./components/AdministratiuComp
 Vue.component('usuari-component', require('./components/administrador/UsuarisComponent.vue').default);
 Vue.component('recurs-principal', require('./components/RecursComponent.vue').default);
 Vue.component('mostrar-incidencies', require('./components/administratiu/IncidenciesComponent.vue').default);
+Vue.component('mostrar-adminincidencies', require('./components/administrador/IncidenciesComponent.vue').default);
 Vue.component('formulari-administratiu', require('./components/administratiu/FormulariComponent.vue').default);
 
 

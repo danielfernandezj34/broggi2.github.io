@@ -18,10 +18,7 @@ class IncidenciesController extends Controller
      */
     public function index(Request $request)
     {
-        $filtre = $request->buscador;
-        $incidencies = Incidencies::with('recursos', 'afectats')
-                                    ->filtrePerId($filtre)
-                                    ->get();
+        $incidencies = Incidencies::all();
 
         return IncidenciesResource::collection($incidencies);
     }
@@ -34,7 +31,29 @@ class IncidenciesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $incidencies = new Incidencies();
+
+        $incidencies->telefon_alertant = $request->input('telefon');
+        $incidencies->adreca = $request->input('adreca');
+        $incidencies->adreca_complement = $request->input('adreca_complement');
+        $incidencies->descripcio = $request->input('descripcio');
+        $incidencies->nom_metge = $request->input('nom_metge');
+        $incidencies->tipus_incidencies_id = $request->input('tipus_incidencies_id');
+        // $incidencies->alertants_id = $request->input('alertants_id');
+        $incidencies->municipis_id = $request->input('municipis_id');
+        $incidencies->ususaris_id = $request->input('user_id');
+        try{
+            $incidencies->save();
+            $response = (new IncidenciesResource($incidencies))
+                        ->response()
+                        ->setStatusCode(201);
+        } catch (QueryException $exception) {
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**

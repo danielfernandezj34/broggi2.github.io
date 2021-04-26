@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div :id="div_a" class="float-sm-left col-md-4 col-sm-12" @mouseover="usuari_img" >
+        <div :id="div_a" class="float-sm-left col-md-4 col-sm-12" >
             <a href="./usuaris"><button :id="boto_u" type="button" class="btn btn-primary ml-lg-5" ><strong>Usuaris i rols</strong></button></a>
         </div>
         <div :id="div_a" class="float-sm-left col-md-4 col-sm-12">

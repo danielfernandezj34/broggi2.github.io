@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Incidencies_has_recursos;
 use App\Http\Controllers\Controller;
-use App\Models\Provincies;
 use Illuminate\Http\Request;
-use App\Http\Resources\ProvinciesResource;
-use Illuminate\Support\Facades\DB;
 
-class ProvinciesController extends Controller
+class Incidencies_has_recursosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,7 @@ class ProvinciesController extends Controller
      */
     public function index()
     {
-        $provincies = Provincies::all();
-
-        return ProvinciesResource::collection($provincies);
+        //
     }
 
     /**
@@ -36,10 +32,10 @@ class ProvinciesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Provincies  $provincies
+     * @param  \App\Models\Incidencies_has_recursos  $incidencies_has_recursos
      * @return \Illuminate\Http\Response
      */
-    public function show(Provincies $provincies)
+    public function show(Incidencies_has_recursos $incidencies_has_recursos)
     {
         //
     }
@@ -48,10 +44,10 @@ class ProvinciesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Provincies  $provincies
+     * @param  \App\Models\Incidencies_has_recursos  $incidencies_has_recursos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provincies $provincies)
+    public function update(Request $request, Incidencies_has_recursos $incidencies_has_recursos)
     {
         //
     }
@@ -59,10 +55,10 @@ class ProvinciesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Provincies  $provincies
+     * @param  \App\Models\Incidencies_has_recursos  $incidencies_has_recursos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Provincies $provincies)
+    public function destroy(Incidencies_has_recursos $incidencies_has_recursos)
     {
         //
     }
