@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('js/popper.js') }}">
     <title>@yield('titulo')</title>
-    <link rel="icon" href="{{ asset('img/sems-logo.png') }}">
+    <link rel="icon" href="{{ asset('img/favicon2.png') }}">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Poppins">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
