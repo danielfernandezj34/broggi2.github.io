@@ -322,6 +322,7 @@
                                 </div> -->
                             </label>
                             <input class="form-control" type="tel" name="telefon_alertant4" id="telefon_alertant4" maxlength="9" min="0" v-model="afectat4.telefon" @keyup="cercarAfectat4(afectat4.telefon)">
+                            <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
 
                         </div>
                     </div>
@@ -445,6 +446,7 @@
                                 </div> -->
                             </label>
                             <input class="form-control" type="tel" name="telefon_alertant3" id="telefon_alertant3" maxlength="9" min="0" v-model="afectat3.telefon" @keyup="cercarAfectat3(afectat3.telefon)">
+                            <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
 
                         </div>
                     </div>
@@ -569,6 +571,7 @@
                                 </div> -->
                             </label>
                             <input class="form-control" type="tel" name="telefon_alertant2" id="telefon_alertant2" maxlength="9" min="0" v-model="afectat2.telefon" @keyup.enter="cercarAfectat2(afectat2.telefon)">
+                            <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
 
                         </div>
                     </div>
@@ -634,86 +637,23 @@
                 <div v-if="tipusAfec == 2" class="card-body mt-2 ml-2 mr-2 mb-2" style="border: 2px solid #2c3e50; border-radius: 4px">
                     <h3><strong>Dades</strong></h3>
                     <div class="form-group row">
-                        <div class="col-4 col-sm-4">
-                            <label for="num_afectats_h" class="col-form-label mt-2"><strong>Numero de afectats homes</strong>
-                            <!-- <div class="mt-2">
-                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                type="button"
-                                title="What is the number of affected??"
-                                data-container="body"
-                                data-toggle="popover"
-                                data-placement="left"
-                                data-trigger="hover"
-                                data-delay= "500"
-                                data-content="Quin és el número d'afectats?"></i>
-                            </div> -->
+                        <div class="col-12 col-sm-12">
+                            <label for="descripcioAdicional" class="col-form-label"><strong>Descripció general sobre els afectats del incident</strong>
+                                <!-- <div class="mt-2">
+                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button"
+                                    title="Can you describe what happened?"
+                                    data-container="body"
+                                    data-toggle="popover"
+                                    data-placement="left"
+                                    data-trigger="hover"
+                                    data-delay= "500"
+                                    data-content="Pots descriure que ha pasat?"></i>
+                                </div> -->
                             </label>
-                            <input type="number" class="form-control" name="num_afectats_h" id="num_afectats_h" min="0">
+                            <textarea class="form-control" v-model="descripcioAdicional" id="descripcioAdicional" name= "descripcioAdicional" rows="8" placeholder="Descripció breu sobre els afectats ex: (Dona de 35 anys, dos Homes de 42 i 38 anys...)"></textarea>
                         </div>
 
-                        <div class="col-4 col-sm-4">
-                            <label for="num_afectats_m" class="col-form-label mt-2"><strong>Numero d'afectats dones</strong>
-                            <!-- <div class="mt-2">
-                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                type="button"
-                                title="What is the number of affected??"
-                                data-container="body"
-                                data-toggle="popover"
-                                data-placement="left"
-                                data-trigger="hover"
-                                data-delay= "500"
-                                data-content="Quin és el número d'afectats?"></i>
-                            </div> -->
-                            </label>
-                            <input type="number" class="form-control" name="num_afectats_m" id="num_afectats_m" min="0">
-                        </div>
-
-                        <div class="col-4 col-sm-4">
-                            <label for="num_afectats_i" class="col-form-label mt-2"><strong>Numero d' afectats d'infants</strong>
-                            <!-- <div class="mt-2">
-                                <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                type="button"
-                                title="What is the number of affected??"
-                                data-container="body"
-                                data-toggle="popover"
-                                data-placement="left"
-                                data-trigger="hover"
-                                data-delay= "500"
-                                data-content="Quin és el número d'afectats?"></i>
-                            </div> -->
-                            </label>
-                            <input type="number" class="form-control" name="num_afectats_i" id="num_afectats_i" min="0">
-                        </div>
-
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-4 col-sm-4">
-                            <label for="rang_edat_h" class="col-form-label"><strong>Rang d'edats homes</strong></label>
-                            <div class="form-group row ml-1">
-                                <input class="col-3 form-control" type="number" id="min_rang_edat_h1" name="min_rang_edat_h1" placeholder="Min" min="0" max="110">
-                                <label class="input-group-text" for="max_rang_edat_h1">-</label>
-                                <input class="col-3 form-control" type="number" id="max_rang_edat_h1" name="max_rang_edat_h1" placeholder="Max" min="0" max="110">
-                            </div>
-                        </div>
-
-                        <div class="col-4 col-sm-4">
-                            <label for="rang_edat_d" class="col-form-label"><strong>Rang d'edats dones</strong></label>
-                            <div class="form-group row ml-1">
-                                <input class="col-3 form-control" type="number" id="min_rang_edat_d1" name="min_rang_edat_d1" placeholder="Min" min="0" max="110">
-                                <label class="input-group-text" for="max_rang_edat_h1">-</label>
-                                <input class="col-3 form-control" type="number" id="max_rang_edat_d1" name="max_rang_edat_d1" placeholder="Max" min="0" max="110">
-                            </div>
-                        </div>
-
-                        <div class="col-4 col-sm-4">
-                            <label for="rang_edat_i" class="col-form-label"><strong>Rang d'edats infants</strong></label>
-                            <div class="form-group row ml-1">
-                                <input class="col-3 form-control" type="number" id="min_rang_edat_i1" name="min_rang_edat_i1" placeholder="Min" min="0" max="110">
-                                <label class="input-group-text" for="max_rang_edat_h1">-</label>
-                                <input class="col-3 form-control" type="number" id="max_rang_edat_i1" name="max_rang_edat_i1" placeholder="Max" min="0" max="110">
-                            </div>
-                        </div>
                     </div>
 
                 </div>
@@ -784,6 +724,7 @@
                             </label>
                             <input v-if="alertant.tipus_alertants_id == 2" class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="alertant.telefon" disabled>
                             <input v-else class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="afectat.telefon" @keyup.enter="cercarAfectat(afectat.telefon)" >
+                            <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
 
                         </div>
 
@@ -1003,6 +944,7 @@ export default {
                 color3 : '#2c3e50',
                 color4 : '#2c3e50',
                 tipusAfec : 1,
+                descripcioAdicional : '',
                 //POST de la incidencia
                 incidencia : {
                     id : '',
@@ -1533,6 +1475,9 @@ export default {
                 //this.incidencia.municipis_id este campo ya esta puesto en el v-model del formulario en la parte de MUNICIPI
                 this.incidencia.usuaris_id= this.user_id;
                 /////////////
+                if(descripcioAdicional != ''){
+                    this.incidencia.descripcio + ', DESCRIPCIO DELS AFECTATS: '+ descripcioAdicional;
+                }
 
 
 
@@ -1650,6 +1595,10 @@ export default {
                         me.errorMessage = error.response.data.error;
                 })
             },
+            crearIncidencies_has_recursos(){
+                let inci = {};
+
+            }
 
 
         },
