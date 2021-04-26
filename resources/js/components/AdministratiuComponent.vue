@@ -51,21 +51,21 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-md-10 d-flex justify-content-center">
                                         <div style="height: 360px; width: 640px">
-                                            <video controls type="video/mp4" :src="videoRuta" id="video"></video>
+                                            <video ref="video" controls type="video/mp4" :src="videoRuta" id="video" @timeupdate="segundosVideo_ = $event.target.segundosVideo"></video>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div>
-                                            <button>Alertant</button>
+                                            <button @click="segundosVideo = 0.0">Alertant</button>
                                         </div>
                                         <div>
-                                            <button>Localització</button>
+                                            <button @click="segundosVideo = 100.0">Localització</button>
                                         </div>
                                         <div>
-                                            <button>Afectats</button>
+                                            <button @click="segundosVideo = 300.0">Afectats</button>
                                         </div>
                                         <div>
-                                            <button @click="mostrarAfectats()">Múltiples Afectats</button>
+                                            <button>Múltiples Afectats</button>
                                         </div>
                                         <div>
                                             <button>Recurs</button>
@@ -92,12 +92,15 @@
                 ventanas: ['PCR', 'Formació'],
                 ventanaSeleccionada: 'PCR',
                 videoSeleccionado: 0,
+                segundosVideo_: 0,
                 videos: [{
                     nombre: 'clip1',
                     ruta: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4'
                 },{
                     nombre: 'clip2',
-                    ruta: '../../../public/img/clip1.mp4'
+                    ruta: 'http://localhost/broggi2.github.io/public/img/clip1.mp4'
+                    // http://localhost/public/img/clip1.mp4
+                    // http://localhost/broggi2.github.io/public/img/clip1.mp4
                 },{
                     nombre: 'clip3',
                     ruta: 'https://ia803106.us.archive.org/8/items/sinema-trailer_king-kong-vs-godzilla/King%20Kong%20vs%20Godzilla%20Trailer%20%28In%20English%29%20%28288p_30fps_H264-96kbit_AAC%29.mp4'
@@ -107,17 +110,21 @@
         methods:{
             abrirModalPCR(){
                 $('#modalPCR').modal('show')
+                $('#modalPCR').modal('handleUpdate')
             },
             cambiarVideo(index){
                 this.videoSeleccionado = index
-            },
-            mostrarAfectats(){
-                this.videoSeleccionado.currentTime = 30
             }
         },
         computed:{
             videoRuta(){
                 return this.videos[this.videoSeleccionado].ruta
+            },
+            currentTime: {
+                get: ({ segundosVideo_ }) => segundosVideo_,
+                set(time) {
+                    this.$refs.video.segundosVideo = time
+                }
             }
         },
         mounted() {
