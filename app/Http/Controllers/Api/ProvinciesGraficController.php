@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Provincies;
 use Illuminate\Http\Request;
-use App\Http\Resources\ProvinciesResource;
 use Illuminate\Support\Facades\DB;
 
-class ProvinciesController extends Controller
+class ProvinciesGraficController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,15 @@ class ProvinciesController extends Controller
      */
     public function index()
     {
-        $provincies = Provincies::all();
+        $provincies = DB::table('provincies')
+            ->join('comarques', 'provincies.id', '=', 'comarques.provincies_id')
+            ->join('municipis', 'comarques.id', '=', 'municipis.comarques_id')
+            ->join('incidencies', 'municipis.id', '=', 'incidencies.municipis_id')
+            ->select('provincies.nom AS Provincia', DB::raw('count(*) as Incidencies'))
+            ->groupBy('provincies.nom')
+            ->get();
 
-        return ProvinciesResource::collection($provincies);
+        return $provincies;
     }
 
     /**

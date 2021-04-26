@@ -6,6 +6,7 @@
 @section('incidencies')
     <a class="dropdown-item" href="./incidencies">Consultar incidencies</a>
 @endsection
+
 @section('container')
 
     <estadistiques-component></estadistiques-component>
