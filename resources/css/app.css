@@ -1,8 +1,9 @@
 html{
-    font-family: 'poppins';
+    font-family: 'Poppins', sans-serif !important;
 }
 body[data-tipo='administratiu'] {
     background-color: #e0f0f5;
+    font-family: 'Poppins', sans-serif !important;
 }
 i[data-atras='administratiu'] {
     color: #fccc0b;
@@ -12,6 +13,7 @@ i[data-atras='administratiu']:hover{
 }
 body[data-tipo='administrador'] {
     background-color: #fcf2cc;
+    font-family: 'Poppins', sans-serif !important;
 }
 i[data-atras='administrador']{
     color: #f70c74;
@@ -21,6 +23,7 @@ i[data-atras='administrador']:hover{
 }
 body[data-tipo='recurs'] {
     background-color: #f8e8f0;
+    font-family: 'Poppins', sans-serif !important;
 }
 i[data-atras='recurs']{
     color: #0ab4cc;
@@ -375,4 +378,7 @@ button.page-link {
 }
 #chart_div{
     margin-left: 20%;
+}
+#video{
+    width: 800px;
 }

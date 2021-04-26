@@ -3,9 +3,9 @@
         <div class="card mt-3">
             <div class="card-body mt-1">
                 <h5 class="card-title" id="titol_form">Usuaris</h5>
-                <form class="form-inline my-2 my-lg-0 col-sm-4" id="buscador_form">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar Usuari" aria-label="Buscar Usuari" v-model="buscador" @keyup="buscarUsuaris">
-                </form>
+                <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                </div>
                 <div v-if="usuaris.length == 0" class="alert alert-light mt-2" role="alert">
                             No hi ha cap usuari.
                 </div>
@@ -150,9 +150,67 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="insertUsuari()">Afegir</button>
-                        <button v-else type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="updateUsuari()">Modificar</button>
+                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertUsuari()">Afegir</button>
+                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateUsuari()">Modificar</button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal filtres -->
+        <div class="modal fade" id="modalFiltres" aria-labelledby="modalFiltresLabel" role="dialog" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filtres</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                         <div class="form-group row ml-3">
+                            <label for="nomUsuari" class="col-sm-6 col-form-label ml-5">Filtrar pel nom de l'usuari <br><h5 style="font-size: 11px">(si filtres pel nom els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="emailUsuari =='' && cognomsUsuari ==''" aria-label="Filtrar pel nom de l'usuari" v-model="nomUsuari" placeholder= "Nom de l'Usuari" @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pel nom de l'usuari" v-model="nomUsuari" placeholder= "Nom de l'Usuari">
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="cognomsUsuari" class="col-sm-6 col-form-label ml-5">Filtrar pels cognoms de l'usuari <br><h5 style="font-size: 11px">(si filtres pels cognoms els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="emailUsuari =='' && nomUsuari ==''" aria-label="Filtrar pels cognoms de l'usuari" v-model="cognomsUsuari" placeholder= "Cognoms de l'Usuari" @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Filtrar pels cognoms de l'usuari" v-model="cognomsUsuari" placeholder= "Cognoms de l'Usuari">
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="emailUsuari" class="col-sm-6 col-form-label ml-5">Filtrar per l'email de l'usuari <br><h5 style="font-size: 11px">(si filtres per l'email els altres filtres no es podràn aplicar)</h5></label>
+                            <input type="text" class="form-control col-sm-5" v-if="nomUsuari =='' && cognomsUsuari ==''" aria-label="Introdueix l'email de l'usuari" v-model="emailUsuari" placeholder= "Email de l'Usuari"  @keyup="buscarUsuaris">
+                            <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Introdueix l'email de l'usuari" v-model="emailUsuari" placeholder= "Email de l'Usuari">
+                        </div>
+                        <div class="form-group row ml-3" v-if="nomUsuari != '' || cognomsUsuari != '' || emailUsuari != ''">
+                            <label for="idUsuari" class="col-sm-6 col-form-label ml-5">Selecciona l'Usuari</label>
+                            <select class="col-sm-5 custom-select" name="idUsuari" id="idUsuari" v-model="idUsuari">
+                                <option  selected disabled v-if="usuarisFiltrats.length ==0">No hi ha cap coincidència.</option>
+                                <option v-for="usuariFiltrat in usuarisFiltrats" :key="usuariFiltrat.id" v-bind:value="usuariFiltrat.id">{{ usuariFiltrat.nom }} {{ usuariFiltrat.cognoms }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group row ml-3" v-else>
+                            <label for="idUsuari" class="col-sm-6 col-form-label ml-5">Selecciona l'Usuari <br><h5 style="font-size: 11px">(Escriu el nom, els cognoms o l'email de l'usuari per iniciar la cerca)</h5></label>
+                            <select class="col-sm-5 custom-select" disabled name="idUsuari" id="idUsuari" v-model="idUsuari">
+                            </select>
+                        </div>
+                        <div class="form-group row ml-3">
+                            <label for="rol_usuari" class="col-sm-6 col-form-label ml-5">Filtrar pel rol de l'Usuari <br><h5 style="font-size: 11px">(si filtres pel rol els altres filtres no es podràn aplicar)</h5></label>
+                            <select class="col-sm-5 custom-select" v-if="emailUsuari =='' && nomUsuari == '' && cognomsUsuari ==''" name="rol_usuari" id="rol_usuari" v-model="idRolUsuari">
+                                <option  selected value=''>Seleccionar Tots</option>
+                                <option v-for="rol in rols" :key="rol.id" v-bind:value="rol.id">{{ rol.nom }}</option>
+                            </select>
+                            <select class="col-sm-5 custom-select" v-else disabled name="rol_usuari" value='' id="rol_usuari" v-model="idRolUsuari">
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
+                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(emailUsuari, idUsuari, idRolUsuari)">Aplicar Filtres</i></button>
+                </div>
                 </div>
             </div>
         </div>
@@ -165,6 +223,12 @@
             return{
                 buscador:'',
                 setTimeoutBuscador:'',
+                emailUsuari:'',
+                nomUsuari:'',
+                cognomsUsuari:'',
+                idUsuari:'',
+                idRolUsuari:'',
+                usuarisFiltrats:[],
                 usuaris: [],
                 rols: [],
                 usuari: {
@@ -200,11 +264,15 @@
                 let me = this;
                 axios
                     .get('/paginate_usuaris',{params:{
-                        buscador: this.buscador
+                        nom: this.nomUsuari,
+                        cognoms: this.cognomsUsuari,
+                        email: this.emailUsuari,
+                        idRol: this.idRolUsuari
                     }})
                     .then(response => {
                         me.usuaris = response.data.data;
                         me.meta_usuaris = response.data.meta;
+                        me.paginas=[];
                         for (let index = 0; index < me.meta_usuaris.last_page; index++) {
                             me.paginas[index] = index + 1;
                         }
@@ -228,7 +296,9 @@
             paginar(pagina){
                 let me = this;
                 axios
-                    .get('/paginate_usuaris' + '?page=' + pagina)
+                    .get('/paginate_usuaris' + '?page=' + pagina, {params:{
+                        buscador: this.buscador
+                    }})
                     .then(response => {
                         me.usuaris = response.data.data;
                         me.meta_usuaris = response.data.meta;
@@ -302,10 +372,38 @@
                         $('modalBorrar').modal('hide');
                     })
             },
+             filtres(){
+                $('#modalFiltres').modal('show')
+            },
+            aplicarFiltres(emailUsuari, idUsuari, idRolUsuari){
+                this.emailUsuari = emailUsuari;
+                this.idUsuari = idUsuari;
+                this.idRolUsuari = idRolUsuari;
+                this.selectUsuaris();
+                $('#modalFiltres').modal('hide');
+            },
              buscarUsuaris(){
                 clearTimeout(this.setTimeoutBuscador);
-                this.setTimeoutBuscador = setTimeout(this.selectUsuaris, 360);
-            }
+                this.setTimeoutBuscador = setTimeout(this.filtrarUsuaris, 250);
+            },
+            filtrarUsuaris(){
+            let me= this;
+            axios
+            .get('/usuaris',{params:{
+                nom: this.nomUsuari,
+                cognoms: this.cognomsUsuari,
+                email: this.emailUsuari,
+            }})
+            .then(response => {
+                me.usuarisFiltrats = response.data;
+             })
+                .catch(error => {
+                console.log(error)
+                this.errored = true;
+             })
+                .finally(() => this.loading = false)
+
+        },
         },
         created(){
             this.selectUsuaris();

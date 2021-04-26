@@ -32,19 +32,21 @@ class Incidencies extends Model
         return $this->belongsTo(Municipis::class, 'municipis_id');
     }
 
-    public function recursos()
-    {
-        return $this->belongsToMany(Recursos::class, 'incidencies_has_recursos', 'incidencies_id', 'recursos_id')->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti');
-    }
-
     public function usuari()
     {
         return $this->hasMany(Usuaris::class, 'usuaris_id');
     }
 
-    public function scopeFiltrePerId($query, $filtre){
-        if(!empty($filtre)){
-           $query->where('num_incident', $filtre);
+    public function incidencies_has_recursos()
+    {
+        return $this->hasMany(Incidencies_has_recursos::class, 'incidencies_id');
+    }
+
+    public function scopeFiltrePerUsuarisId($query, $filtreUsuarisFiltre){
+        if(count($filtreUsuarisFiltre) != 0){
+            foreach($filtreUsuarisFiltre as $filtreUsuariFiltre){
+                $query->where('usuaris_id','=', $filtreUsuariFiltre);
+            }
         }
     }
 }
