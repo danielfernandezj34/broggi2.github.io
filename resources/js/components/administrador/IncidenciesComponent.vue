@@ -367,7 +367,7 @@
                     <form>
                         <div class="form-group row ml-3">
                             <label for="codiIncidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel codi de l'incidència <br><h5 style="font-size: 11px">(si filtres per codi els altres filtres no es podràn aplicar)</h5></label>
-                            <input type="text" class="form-control col-sm-5" v-if="nomAdministratiu ==''" aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
+                            <input type="text" class="form-control col-sm-5" v-if="nomAdministratiu =='' && cognomsAdministratiu ==''" aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
                             <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
                         </div>
                          <div class="form-group row ml-3">
@@ -388,13 +388,13 @@
                             </select>
                         </div>
                         <div class="form-group row ml-3" v-else>
-                            <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu <br><h5 style="font-size: 11px">(Escriu el nom de l'administratiu per iniciar la cerca)</h5></label>
+                            <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu <br><h5 style="font-size: 11px">(Escriu el nom o els cognoms de l'administratiu per iniciar la cerca)</h5></label>
                             <select class="col-sm-5 custom-select" disabled name="idAdministratiu" id="idAdministratiu" v-model="idAdministratiu">
                             </select>
                         </div>
                         <div class="form-group row ml-3">
                             <label for="tipus_incidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel tipus d'Incidència <br><h5 style="font-size: 11px">(si filtres pel tipus els altres filtres no es podràn aplicar)</h5></label>
-                            <select class="col-sm-5 custom-select" v-if="codiIncidencia =='' && nomAdministratiu == ''" name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusIncidencia">
+                            <select class="col-sm-5 custom-select" v-if="codiIncidencia =='' && nomAdministratiu == '' && cognomsAdministratiu ==''" name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusIncidencia">
                                 <option  selected value=''>Seleccionar Tots</option>
                                 <option v-for="tipusIncidencia in tipusIncidencies" :key="tipusIncidencia.id" v-bind:value="tipusIncidencia.id">{{ tipusIncidencia.tipus }}</option>
                             </select>
