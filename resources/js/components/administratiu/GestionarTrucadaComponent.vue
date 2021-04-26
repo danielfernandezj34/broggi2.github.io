@@ -1496,13 +1496,13 @@ export default {
 
                 this.crearAfectat();
 
-                if(this.afectat2.te_cip != null){
+                if(this.afectat2.te_cip != ''){
                     this.crearAfectat2();
                 }
-                if(this.afectat3.te_cip != null){
+                if(this.afectat3.te_cip != ''){
                     this.crearAfectat3();
                 }
-                if(this.afectat4.te_cip != null){
+                if(this.afectat4.te_cip != ''){
                     this.crearAfectat4();
                 }
                 this.crearAlertant();
