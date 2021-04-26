@@ -27,7 +27,7 @@ class AlertantsPaginateController extends Controller
             $alertants = Alertants::where('nom','LIKE','%'.$filtreNomAlertant.'%' )->paginate(8)->withQueryString();
         }else{
             if($filtreIdTipusAlertant == ''){
-                $alertants = Alertants::paginate(8);
+                $alertants = Alertants::paginate(6);
             }else{
                 $alertants = Alertants::where('tipus_alertants_id', '=', $filtreIdTipusAlertant)->paginate(8)->withQueryString();
             }

@@ -373,4 +373,7 @@ button.page-link {
   width: 500px !important;
   margin: 20px auto;
 }
+#chart_div{
+    margin-left: 20%;
+}
 

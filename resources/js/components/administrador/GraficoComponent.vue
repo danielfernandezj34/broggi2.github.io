@@ -1,107 +1,69 @@
 <template>
     <main>
-        <div id="app">
-            <div id="chart-container" class="mt-5">
-                <fusioncharts
-                    :type="type"
-                    :width="width"
-                    :height="height"
-                    :dataformat="dataFormat"
-                    :dataSource="dataSource"
-                    >
-                </fusioncharts>
-            </div>
-        </div>
+
+        <div id="chart_div"></div>
 
     </main>
 </template>
 
-<script>
-import Vue from 'vue';
-import VueFusionCharts from 'vue-fusioncharts';
-import FusionCharts from 'fusioncharts';
-import Column3D from 'fusioncharts/fusioncharts.charts';
-import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
-Vue.use(VueFusionCharts, FusionCharts, Column3D, FusionTheme);
-const chartData = [
-    {
-        label: "Barcelona",
-        value: "290"
-    },
-    {
-        label: "Tarragona",
-        value: "60"
-    },
-    {
-        label: "Lleida",
-        value: "200"
-    },
-    {
-        label: "Girona",
-        value: "140"
-    }
-  ];
-
-const dataSource = {
-    chart: {
-        caption: "Incidencies per Provincies",
-        subcaption: "Per veure per Comarca seleccionar la provincia desitjada",
-        xaxisname: "Provincia",
-        yaxisname: "Incidencies",
-        numbersuffix: "",
-        theme: "fusion"
-    },
-    data: chartData
-    };
-
-export default {
-    name: 'app',
-    data() {
-        return {
-            "type": "column3d",
-            "renderAt": "chart-container",
-            "width": "750",
-            "height": "450",
-            "dataFormat": "json",
-            dataSource,
-            provincies: [],
-            provincia:{
-                label: "",
-                value: ""
+<script type="text/javascript">
+    export default {
+        data() {
+            return{
+                provincies: []
             }
-        }
-    },
-    methods: {
-        selectProvincies(){
-            let me = this;
-            axios
-                .get('/provincies')
-                .then( response => {
-                    me.provincies = response.data;
-                })
-                .catch( error => {
-                    console.log(error)
-                    this.errored = true;
-                })
-                .finally(() => this.loading = false)
         },
-        insertarProvincies(){
-            var i = 0;
+        methods: {
+            selectProvincies(){
+                let me = this;
+                axios
+                    .get('/provincies_grafic')
+                    .then(response => {
+                        me.provincies = response.data;
+                        google.charts.load('current', {'packages':['corechart']});
+                        google.charts.setOnLoadCallback(me.drawChart);
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+            },
+            drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Provincia');
+                data.addColumn('number', 'Incidencies');
+                for (let index = 0; index < this.provincies.length; index++) {
+                    data.addRow([this.provincies[index].Provincia, this.provincies[index].Incidencies]);
+                }
 
-            while(i < this.provincies){
-                // this.provincia.label = this.provincies[i].nom;
-                // chartData.push(this.provincia);
+                var options = {'title':'Incidencies per Provincia',
+                        'is3D':true,
+                        'width':700,
+                        'height':500,
+                        'backgroundColor': 'transparent'
+                };
 
-                // i++;
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
             }
 
+
+        },
+        created(){
+            this.selectProvincies();
+        },
+        mounted() {
+            console.log('Component mounted.');
         }
-    },
-    created() {
-        this.selectProvincies();
-        this.insertarProvincies();
+
+
     }
-}
+
+
+
+
+
 </script>
 

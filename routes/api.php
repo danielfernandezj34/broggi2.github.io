@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\UsuarisPaginateController;
 use App\Http\Controllers\Api\RecursosPaginateController;
 use App\Http\Controllers\Api\HelpboxPaginateController;
 use App\Http\Controllers\Api\IncidenciesPaginateController;
+use App\Http\Controllers\Api\ProvinciesGraficController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +57,4 @@ Route::apiResource('paginate_usuaris', UsuarisPaginateController::class);
 Route::apiResource('paginate_recursos', RecursosPaginateController::class);
 Route::apiResource('paginate_helpbox', HelpboxPaginateController::class);
 Route::apiResource('paginate_incidencies', IncidenciesPaginateController::class);
+Route::apiResource('provincies_grafic', ProvinciesGraficController::class);
