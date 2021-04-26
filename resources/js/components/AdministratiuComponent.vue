@@ -19,7 +19,7 @@
                                 {{ ventana }}
                             </button>
                         </div>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="stop">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>Tancar
                         </button>
                     </div>
@@ -28,13 +28,9 @@
                             <div class="container-fluid">
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-md-10 d-flex justify-content-center">
-                                        <video ref="videoRef" type="video/mp4" :src="videoRuta" id="video"></video>
-                                    </div>
-                                </div>
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-md-2 my-3 d-flex justify-content-center">
-                                        <button type="button" class="btn btn-danger btn-sm mx-3" :disabled="reproducirVideo" @click="play"><i class="far fa-trash-alt"></i>Play</button>
-                                        <button type="button" class="btn btn-success btn-sm" :disabled="!reproducirVideo" @click="stop">Stop</button>
+                                        <div style="height: 360px; width: 640px">
+                                            <video controls type="video/mp4" :src="videoRuta" id="video"></video>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-around mt-4">
@@ -52,26 +48,28 @@
 
                         <div v-show="ventanaSeleccionada === 'Formació'">
                             <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <video ref="myvideo" :src="video" width="800"></video>
-                                        <hr>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-10 d-flex justify-content-center">
+                                        <div style="height: 360px; width: 640px">
+                                            <video controls type="video/mp4" :src="videoRuta" id="video"></video>
+                                        </div>
                                     </div>
-                                    <div class="col-md-2 d-flex justify-content-center">
-                                        <button style= "width:20px, height:20px" type="button" class="btn btn-danger btn-sm" :disabled="reproducirVideo" @click="play"><i class="far fa-trash-alt"></i>Play</button>
-                                        <button :disabled="!reproducirVideo" @click="stop">Stop</button>
-                                    </div>
-                                </div>
-                                <div class="row d-flex justify-content-around mt-4">
-                                    <div class="col-md-3 d-flex justify-content-center">
-                                        <button type="button" class="btn btn-danger btn-sm" :disabled="reproducirVideo" @click="play"><i class="far fa-trash-alt"></i>Play</button>
-                                    </div>
-
-                                    <div class="col-md-3 d-flex justify-content-center">
-                                        <button type="button" class="btn btn-danger btn-sm" :disabled="reproducirVideo" @click="play"><i class="far fa-trash-alt"></i>Play</button>
-                                    </div>
-                                    <div class="col-md-3 d-flex justify-content-center">
-                                        <button type="button" class="btn btn-danger btn-sm" :disabled="reproducirVideo" @click="play"><i class="far fa-trash-alt"></i>Play</button>
+                                    <div class="col-md-2">
+                                        <div>
+                                            <button>Alertant</button>
+                                        </div>
+                                        <div>
+                                            <button>Localització</button>
+                                        </div>
+                                        <div>
+                                            <button>Afectats</button>
+                                        </div>
+                                        <div>
+                                            <button @click="mostrarAfectats()">Múltiples Afectats</button>
+                                        </div>
+                                        <div>
+                                            <button>Recurs</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +97,7 @@
                     ruta: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4'
                 },{
                     nombre: 'clip2',
-                    ruta: 'https://ia803008.us.archive.org/1/items/FantasticPlanetTrailer/FantasticPlanetTrailer.mp4'
+                    ruta: '../../../public/img/clip1.mp4'
                 },{
                     nombre: 'clip3',
                     ruta: 'https://ia803106.us.archive.org/8/items/sinema-trailer_king-kong-vs-godzilla/King%20Kong%20vs%20Godzilla%20Trailer%20%28In%20English%29%20%28288p_30fps_H264-96kbit_AAC%29.mp4'
@@ -110,16 +108,11 @@
             abrirModalPCR(){
                 $('#modalPCR').modal('show')
             },
-            play() {
-                this.$refs.videoRef.play()
-                this.reproducirVideo = true
-            },
-            stop() {
-                this.$refs.videoRef.pause()
-                this.reproducirVideo = false
-            },
             cambiarVideo(index){
                 this.videoSeleccionado = index
+            },
+            mostrarAfectats(){
+                this.videoSeleccionado.currentTime = 30
             }
         },
         computed:{
