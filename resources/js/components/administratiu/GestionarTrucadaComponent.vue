@@ -5,6 +5,7 @@
                 <div class="card col-6 mr-1 mt-2" id="card">
                     <div class="card-header bg-primary text-white">
                         <h3 class="card-title">Alertant</h3>
+                        <input type="hidden" id="id_alertant" name="id_alertant" v-model="alertant.id">
                     </div>
                     <div class="card-body">
 
@@ -272,6 +273,7 @@
                     <h3><strong>Afectat 4</strong></h3>
                     <div class="form-group row">
                         <div class="col-sm-4 col-4">
+                            <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat4.id">
                             <label for="nom_afectat4" class="col-form-label"><strong>Nom</strong>
                                 <!-- <div class="mt-2">
                                     <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
@@ -396,6 +398,7 @@
                     <h3><strong>Afectat 3</strong></h3>
                     <div class="form-group row">
                         <div class="col-sm-4 col-4">
+                            <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat3.id">
                             <label for="nom_afectat3" class="col-form-label"><strong>Nom</strong>
                                 <!-- <div class="mt-2">
                                     <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
@@ -521,6 +524,7 @@
 
                     <div class="form-group row">
                         <div class="col-sm-4 col-4">
+                            <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat2.id">
                             <label for="nom_afectat2" class="col-form-label"><strong>Nom</strong>
                                 <!-- <div class="mt-2">
                                     <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
@@ -671,6 +675,7 @@
                     <div class="form-group row">
 
                         <div class="col-sm-4 col-4">
+                            <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat.id">
                             <label for="nom_afectat" class="col-form-label"><strong>Nom</strong>
                                 <!-- <div class="mt-2">
                                     <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
@@ -907,7 +912,7 @@
                 </div>
             </div>
         </form>
-        <button type="submit" @click="crearIncidencia()" class="btn btn-success btn-lg boto_enviar" style="background-color: #f70c74"><i class="fas fa-check fa-1x"></i> Enviar</button>
+        <button type="button" @click="crearIncidencia()" class="btn btn-success btn-lg boto_enviar" style="background-color: #f70c74"><i class="fas fa-check fa-1x"></i> Enviar</button>
 
     </div>
 
@@ -1460,6 +1465,8 @@ export default {
 
             },
             crearIncidencia(){
+                debugger;
+                var problema = false;
                 const data = new Date();
                 //Campos de tabla incidencia rellenados con los valores que le faltaban
                 this.incidencia.num_incident = this.incidencia.id;
@@ -1471,7 +1478,7 @@ export default {
                 //this.incidencia.descripcio este campo ya esta puesto en el v-model del formulario en la parte de DESCRIPCIO
                 //this.incidencia.nom_metge este campo ya esta puesto en el v-model del formulario en la parte de NOM DEL METGE
                 //this.incidencia.tipus_incidencies_id este campo ya esta puesto en el v-model del formulario en la parte de TIPUS DE D'ACCIDENT O D'INCIDENT
-                this.incidencia.alertants_id = this.alertant.id;
+                // this.incidencia.alertants_id = this.alertant.id;
                 //this.incidencia.municipis_id este campo ya esta puesto en el v-model del formulario en la parte de MUNICIPI
                 this.incidencia.usuaris_id= this.user_id;
                 /////////////
@@ -1488,11 +1495,11 @@ export default {
                         console.log(response);
 
                     }).catch(function(error) {
+                        problema = true;
                         console.log(error.response.status);
                         console.log(error.response.data);
                         me.errorMessage = error.response.data.error;
                 })
-
 
                 this.crearAfectat();
 
@@ -1507,10 +1514,9 @@ export default {
                 }
                 this.crearAlertant();
 
-                return window.open('../../../views/administratiu/mostrar_incidencias.blade.php', '_self');
-
-
-
+                if(problema == false){
+                    return window.open('http://localhost:8080/broggi2.github.io/public/incidencies', '_self');
+                }
 
             },
             crearAfectat(){
