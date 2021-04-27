@@ -229,8 +229,9 @@
                                             data-content="Quina es la teva adreça?"></i>
                                     </div> -->
                                 </label>
-                                <input v-if="alertant.tipus_alertants_id == 1" type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca" disabled>
-                                <input v-else type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca">
+                                <!-- <input v-if="alertant.tipus_alertants_id == 1" type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca" disabled> -->
+                                <input type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca">
+
                                 <div v-if="alertant.tipus_alertants_id != 1">
                                     <label for="comp_direccio" class="col-form-label"><strong>Adreça complementària</strong>
                                         <!-- <div id="div_helpbox" class="col-sm-12">
@@ -950,6 +951,14 @@ export default {
                 color4 : '#2c3e50',
                 tipusAfec : 1,
                 descripcioAdicional : '',
+                telefonAfectat : '',
+                telefonAfectat2 : '',
+                telefonAfectat3 : '',
+                telefonAfectat4 : '',
+                cipAfectat : '',
+                cipAfectat2 : '',
+                cipAfectat3 : '',
+                cipAfectat4 : '',
                 //POST de la incidencia
                 incidencia : {
                     id : '',
@@ -1332,6 +1341,7 @@ export default {
                         this.afectat.edat = this.afectats[i].edat;
                         this.afectat.te_cip = this.afectats[i].te_cip;
                         this.afectat.sexes_id = this.afectats[i].sexes_id;
+                        this.telefonAfectat = telefon;
                     }
                     i++;
                 }
@@ -1350,6 +1360,7 @@ export default {
                         this.afectat.edat = this.afectats[i].edat;
                         this.afectat.te_cip = this.afectats[i].te_cip;
                         this.afectat.sexes_id = this.afectats[i].sexes_id;
+                        this.telefonAfectat2 = telefon;
                     }
                     i++;
                 }
@@ -1368,6 +1379,7 @@ export default {
                         this.afectat3.edat = this.afectats[i].edat;
                         this.afectat3.te_cip = this.afectats[i].te_cip;
                         this.afectat3.sexes_id = this.afectats[i].sexes_id;
+                        this.telefonAfectat3 = telefon;
                     }
                     i++;
                 }
@@ -1386,6 +1398,7 @@ export default {
                         this.afectat4.edat = this.afectats[i].edat;
                         this.afectat4.te_cip = this.afectats[i].te_cip;
                         this.afectat4.sexes_id = this.afectats[i].sexes_id;
+                        this.telefonAfectat4 = telefon;
                     }
                     i++;
                 }
@@ -1404,6 +1417,7 @@ export default {
                         this.afectat.edat = this.afectats[i].edat;
                         this.afectat.te_cip = this.afectats[i].te_cip;
                         this.afectat.sexes_id = this.afectats[i].sexes_id;
+                        this.cipAfectat = cip;
                     }
                     i++;
                 }
@@ -1422,6 +1436,7 @@ export default {
                         this.afectat2.edat = this.afectats[i].edat;
                         this.afectat2.te_cip = this.afectats[i].te_cip;
                         this.afectat2.sexes_id = this.afectats[i].sexes_id;
+                        this.cipAfectat2 = cip;
                     }
                     i++;
                 }
@@ -1440,6 +1455,7 @@ export default {
                         this.afectat3.edat = this.afectats[i].edat;
                         this.afectat3.te_cip = this.afectats[i].te_cip;
                         this.afectat3.sexes_id = this.afectats[i].sexes_id;
+                        this.cipAfectat3 = cip;
                     }
                     i++;
                 }
@@ -1458,6 +1474,7 @@ export default {
                         this.afectat4.edat = this.afectats[i].edat;
                         this.afectat4.te_cip = this.afectats[i].te_cip;
                         this.afectat4.sexes_id = this.afectats[i].sexes_id;
+                        this.cipAfectat4 = cip;
                     }
                     i++;
                 }
@@ -1465,9 +1482,32 @@ export default {
 
             },
             crearIncidencia(){
-                debugger;
+                // debugger;
                 var problema = false;
                 const data = new Date();
+
+                if(this.afectat.telefon != telefonAfectat){
+                    this.crearAfectat();
+                }
+
+                if(this.afectat2.telefon != telefonAfectat2){
+                    if(this.afectat2.te_cip != ''){
+                        this.crearAfectat2();
+                    }
+                }
+                if(this.afectat3.telefon != telefonAfectat3){
+                    if(this.afectat3.te_cip != ''){
+                        this.crearAfectat3();
+                    }
+                }
+                if(this.afectat4.telefon != telefonAfectat4){
+                    if(this.afectat4.te_cip != ''){
+                        this.crearAfectat4();
+                    }
+                }
+
+                this.crearAlertant();
+
                 //Campos de tabla incidencia rellenados con los valores que le faltaban
                 this.incidencia.num_incident = this.incidencia.id;
                 this.incidencia.data = data.getDate()+ '-' + data.getFullYear();
@@ -1487,6 +1527,8 @@ export default {
                 }
 
 
+                this.crearIncidencies_has_recursos();
+
 
                 let me = this;
                 axios
@@ -1501,21 +1543,8 @@ export default {
                         me.errorMessage = error.response.data.error;
                 })
 
-                this.crearAfectat();
-
-                if(this.afectat2.te_cip != ''){
-                    this.crearAfectat2();
-                }
-                if(this.afectat3.te_cip != ''){
-                    this.crearAfectat3();
-                }
-                if(this.afectat4.te_cip != ''){
-                    this.crearAfectat4();
-                }
-                this.crearAlertant();
-
                 if(problema == false){
-                    return window.open('http://localhost:8080/broggi2.github.io/public/incidencies', '_self');
+                    return window.open('http://localhost:80/broggi2.github.io/public/incidencies', '_self');
                 }
 
             },
@@ -1593,18 +1622,93 @@ export default {
                 //Campos de tabla alertant rellenados con los valores que le faltaban
                 this.alertant.municipis_id = this.incidencia.municipis_id;
                 /////////
-                axios
-                    .post('/alertants', me.alertant)
-                    .then(function(response){
-                        console.log(response);
-                    }).catch(function(error){
-                        console.log(error.response.status);
-                        console.log(error.response.data);
-                        me.errorMessage = error.response.data.error;
-                })
+                if(this.alertant.tipus_alertants_id != 1){
+                    axios
+                        .post('/alertants', me.alertant)
+                        .then(function(response){
+                            console.log(response);
+                        }).catch(function(error){
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                            me.errorMessage = error.response.data.error;
+                    })
+                }
+
             },
             crearIncidencies_has_recursos(){
-                let inci = {};
+                var me = this;
+
+                if(this.incidencies_has_recursos.recursos_id != ''){
+                    this.incidencies_has_recursos.incidencies_id = this.incidencia.id;
+                    axios
+                        .post('/incidencies_has_recursos', me.incidencies_has_recursos)
+                        .then(function(response){
+                            console.log(response);
+                        }).catch(function(error){
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                            me.errorMessage = error.response.data.error;
+                    })
+                }
+                if(this.incidencies_has_recursos2.recursos_id != ''){
+                    this.incidencies_has_recursos2.incidencies_id = this.incidencia.id;
+                    axios
+                        .post('/incidencies_has_recursos', me.incidencies_has_recursos2)
+                        .then(function(response){
+                            console.log(response);
+                        }).catch(function(error){
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                            me.errorMessage = error.response.data.error;
+                    })
+                }
+                if(this.incidencies_has_recursos3.recursos_id != ''){
+                    this.incidencies_has_recursos3.incidencies_id = this.incidencia.id;
+                    axios
+                        .post('/incidencies_has_recursos', me.incidencies_has_recursos3)
+                        .then(function(response){
+                            console.log(response);
+                        }).catch(function(error){
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                            me.errorMessage = error.response.data.error;
+                    })                }
+                if(this.incidencies_has_recursos4.recursos_id != ''){
+                    this.incidencies_has_recursos4.incidencies_id = this.incidencia.id;
+                    axios
+                        .post('/incidencies_has_recursos', me.incidencies_has_recursos4)
+                        .then(function(response){
+                            console.log(response);
+                        }).catch(function(error){
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                            me.errorMessage = error.response.data.error;
+                    })
+                }
+                if(this.incidencies_has_recursos5.recursos_id != ''){
+                    this.incidencies_has_recursos5.incidencies_id = this.incidencia.id;
+                    axios
+                        .post('/incidencies_has_recursos', me.incidencies_has_recursos5)
+                        .then(function(response){
+                            console.log(response);
+                        }).catch(function(error){
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                            me.errorMessage = error.response.data.error;
+                    })
+                }
+                if(this.incidencies_has_recursos6.recursos_id != ''){
+                    this.incidencies_has_recursos6.incidencies_id = this.incidencia.id;
+                    axios
+                        .post('/incidencies_has_recursos', me.incidencies_has_recursos6)
+                        .then(function(response){
+                            console.log(response);
+                        }).catch(function(error){
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                            me.errorMessage = error.response.data.error;
+                    })
+                }
 
             }
 
