@@ -24,7 +24,8 @@
                         <tbody>
                             <tr v-for="recurso in recursos" :key="recurso.id">
                                 <td>{{ recurso.codi }}</td>
-                                <td>{{ recurso.actiu }}</td>
+                                <td v-if="recurso.actiu == 1">Actiu</td>
+                                <td v-else>No Actiu</td>
                                 <div v-for="tipusRecurs in tipusRecursos" :key="tipusRecurs.id">
                                     <td v-if="recurso.tipus_recursos_id == tipusRecurs.id">
                                             {{ tipusRecurs.tipus }}
