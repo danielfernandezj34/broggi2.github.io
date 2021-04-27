@@ -229,7 +229,7 @@
                                             data-content="Quina es la teva adreça?"></i>
                                     </div> -->
                                 </label>
-                                <!-- <input v-if="alertant.tipus_alertants_id == 1" type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca" disabled> -->
+                                <input v-if="alertant.tipus_alertants_id == 1" type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca" disabled>
                                 <input type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca">
 
                                 <div v-if="alertant.tipus_alertants_id != 1">
