@@ -2,9 +2,11 @@
     <main>
         <div class="card mt-3">
             <div class="card-body mt-1">
-                <h5 class="card-title" id="titol_form">Taula d'Incidencies</h5>
-                <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
-                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                <div style="text-align:center; align-items:center; justify-content:center">
+                    <h5 class="card-title">Taula d'Incidencies</h5>
+                </div>
+                <div style="text-align:center; align-items:center; justify-content:center">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres" @click="filtres"><i class="far fa-filter"></i> Filtres</button>
                 </div>
                 <div v-if="incidencies.length == 0" class="alert alert-light mt-2" role="alert">
                             No hi ha cap incidència.
@@ -160,7 +162,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateIncidencia()">Modificar</button>
+                        <button type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateIncidencia()"><i class="far fa-check"></i> Modificar</button>
                     </div>
                 </div>
             </div>
@@ -404,8 +406,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
+                    <button type="button" class="btn btn-success btn-sm" @click="aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia)"><i class="far fa-filter"></i> Aplicar Filtres</button>
                 </div>
                 </div>
             </div>
