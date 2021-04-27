@@ -83,7 +83,7 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <label for="preguntaES" class="col-sm-4 col-form-label">Pregunta en Espanyol</label>
+                            <label for="preguntaES" class="col-sm-4 col-form-label">Pregunta en Català</label>
                             <div class="form-group row">
                                 <div class="col-sm-12">
                                     <input v-if="insert" type="text" id="preguntaES" name="preguntaES" class="form-control" v-model="pregunta.preguntaES">
