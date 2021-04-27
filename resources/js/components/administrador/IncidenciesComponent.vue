@@ -2,10 +2,10 @@
     <main>
         <div class="card mt-3">
             <div class="card-body mt-1">
-                <div style="text-align:center; align-items:center; justify-content:center">
+                <div id="centrarElements">
                     <h5 class="card-title">Taula d'Incidencies</h5>
                 </div>
-                <div style="text-align:center; align-items:center; justify-content:center">
+                <div id="centrarElements">
                     <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres" @click="filtres"><i class="far fa-filter"></i> Filtres</button>
                 </div>
                 <div v-if="incidencies.length == 0" class="alert alert-light mt-2" role="alert">
