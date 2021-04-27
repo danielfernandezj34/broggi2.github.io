@@ -2,9 +2,11 @@
     <main>
         <div class="card mt-3">
             <div class="card-body mt-1">
-                <h5 class="card-title" id="titol_form">Usuaris</h5>
-                <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
-                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                <div style="text-align:center; align-items:center; justify-content:center">
+                    <h5 class="card-title">Usuaris</h5>
+                </div>
+                <div style="text-align:center; align-items:center; justify-content:center">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres" @click="filtres"><i class="far fa-filter"></i> Filtres</button>
                 </div>
                 <div v-if="usuaris.length == 0" class="alert alert-light mt-2" role="alert">
                             No hi ha cap usuari.
@@ -124,18 +126,6 @@
                                 </div>
                             </div>
 
-
-                            <div class="form-group row">
-
-                                <label for="recurs" class="col-sm-2 col-form-label">Tipus de Recurs</label>
-                                <div class="col-sm-7 mt-2">
-                                    <select class="form-control" id="recurs" name="recurs" v-model="usuari.recursos_id">
-                                        <option v-for="tipusRecurs in tipusRecursos" :key="tipusRecurs.id" v-bind:value="tipusRecurs.id">{{ tipusRecurs.tipus   }}</option>
-                                    </select>
-                                </div>
-
-                            </div>
-
                             <div class="form-group row">
                                 <label for="rol" class="col-sm-2 col-form-label">Tipus de Rol</label>
                                 <div class="form-check form-check-inline ml-3" v-for="rol in rols" :key="rol.id">
@@ -146,12 +136,29 @@
                                 </div>
                             </div>
 
+                            <div v-if="usuari.rols_id == 3" class="form-group row">
+                                <label for="recurs" class="col-sm-2 col-form-label">Tipus de Recurs</label>
+                                <div class="col-sm-7 mt-2">
+                                    <select class="form-control" id="recurs" name="recurs" v-model="usuari.recursos_id">
+                                        <option v-for="tipusRecurs in tipusRecursos" :key="tipusRecurs.id" v-bind:value="tipusRecurs.id">{{tipusRecurs.tipus}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div v-else style="visibility:hidden" disabled class="form-group row" >
+                                <label for="recurs" class="col-sm-2 col-form-label" >Tipus de Recurs</label>
+                                <div class="col-sm-7 mt-2">
+                                    <select class="form-control" id="recurs" name="recurs" v-model="usuari.recursos_id">
+                                        <option value="" selected> </option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertUsuari()">Afegir</button>
-                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateUsuari()">Modificar</button>
+                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertUsuari()"><i class="far fa-check"></i> Afegir</button>
+                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateUsuari()"><i class="far fa-check"></i> Modificar</button>
                     </div>
                 </div>
             </div>
@@ -208,8 +215,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(emailUsuari, idUsuari, idRolUsuari)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
+                    <button type="button" class="btn btn-success btn-sm" @click="aplicarFiltres(emailUsuari, idUsuari, idRolUsuari)"><i class="far fa-filter"></i> Aplicar Filtres</button>
                 </div>
                 </div>
             </div>
