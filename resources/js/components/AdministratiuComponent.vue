@@ -10,8 +10,8 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="d-flex justify-content-center">
-                            <button class="btn btn-secondary btn-sm"
+                        <div class="d-flex justify-content-center ml-3">
+                            <button class="btn btn-primary btn-sm ml-2"
                                     :class="{ ventanaActiva: ventanaSeleccionada === ventana }"
                                     v-for="(ventana, index) in ventanas"
                                     :key="index"
@@ -26,16 +26,22 @@
                     <div class="modal-body">
                         <div v-show="ventanaSeleccionada === 'PCR'">
                             <div class="container-fluid">
+                                <div class="row d-flex my-3 justify-content-center">
+                                    <div class="col-md-8 d-flex justify-content-center">
+                                        <h4>Demostració de com fer una PCR, amb un video general i dos detallant els procediments</h4>
+                                    </div>
+                                </div>
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-md-10 d-flex justify-content-center">
-                                        <div style="height: 360px; width: 640px">
+                                        <div>
                                             <video controls type="video/mp4" :src="videoRuta" id="video"></video>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row d-flex justify-content-around mt-4">
+                                <div class="row d-flex justify-content-around my-3">
                                     <div class="col-md-3 d-flex justify-content-center">
-                                        <button class="btn btn-secondary btn-sm mx-5"
+                                        <button class="btn btn-secondary btn-sm mx-4"
+                                                :class="{ ventanaActiva: videoSeleccionado == video.id }"
                                                 v-for="(video, index) in videos"
                                                 :key="video.nombre"
                                                 @click="cambiarVideo(index)">
@@ -48,28 +54,25 @@
 
                         <div v-show="ventanaSeleccionada === 'Formació'">
                             <div class="container-fluid">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-md-10 d-flex justify-content-center">
+                                <div class="row d-flex my-3 justify-content-center">
+                                    <div class="col-md-8 d-flex justify-content-center">
+                                        <h4>Formació per poder omplir el formulari de la trucada</h4>
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-end">
+                                    <div class="col-md-9 d-flex justify-content-end">
                                         <div style="height: 360px; width: 640px">
-                                            <video ref="video" controls type="video/mp4" :src="videoRuta" id="video" @timeupdate="segundosVideo_ = $event.target.segundosVideo"></video>
+                                            <video ref="video" controls type="video/mp4" :src="videoFormacio" id="video" @timeupdate="currentTime_ = $event.target.currentTime"></video>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <div>
-                                            <button @click="segundosVideo = 0.0">Alertant</button>
-                                        </div>
-                                        <div>
-                                            <button @click="segundosVideo = 100.0">Localització</button>
-                                        </div>
-                                        <div>
-                                            <button @click="segundosVideo = 300.0">Afectats</button>
-                                        </div>
-                                        <div>
-                                            <button>Múltiples Afectats</button>
-                                        </div>
-                                        <div>
-                                            <button>Recurs</button>
-                                        </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-secondary btn-sm mx-4 my-2"
+                                                :class="{ ventanaActiva: seccionSeleccionada == seccion.id }"
+                                                v-for="(seccion, index) in secciones"
+                                                :key="seccion.nombre"
+                                                @click="currentTime(seccion.segundo); cambiarSeccion(index);">
+                                            {{ seccion.nombre }}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -92,18 +95,42 @@
                 ventanas: ['PCR', 'Formació'],
                 ventanaSeleccionada: 'PCR',
                 videoSeleccionado: 0,
-                segundosVideo_: 0,
+                seccionSeleccionada: 0,
+                videoFormacio: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
+                currentTime_: 0,
                 videos: [{
-                    nombre: 'clip1',
-                    ruta: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4'
+                    id: '0',
+                    nombre: 'RCP Completa',
+                    ruta: 'http://localhost/broggi2.github.io/public/img/RCP.mp4'
                 },{
-                    nombre: 'clip2',
-                    ruta: 'http://localhost/broggi2.github.io/public/img/clip1.mp4'
-                    // http://localhost/public/img/clip1.mp4
-                    // http://localhost/broggi2.github.io/public/img/clip1.mp4
+                    id: '1',
+                    nombre: 'DESA',
+                    ruta: 'http://localhost/broggi2.github.io/public/img/DESA.mp4'
                 },{
-                    nombre: 'clip3',
-                    ruta: 'https://ia803106.us.archive.org/8/items/sinema-trailer_king-kong-vs-godzilla/King%20Kong%20vs%20Godzilla%20Trailer%20%28In%20English%29%20%28288p_30fps_H264-96kbit_AAC%29.mp4'
+                    id: '2',
+                    nombre: 'Seqüència RCP',
+                    ruta: 'http://localhost/broggi2.github.io/public/img/SequenciaRCP.mp4'
+                }],
+                secciones: [{
+                    id: '0',
+                    nombre: 'Alertant',
+                    segundo: '100.0'
+                },{
+                    id: '1',
+                    nombre: 'Localització',
+                    segundo: '150.0'
+                },{
+                    id: '2',
+                    nombre: 'Afectats',
+                    segundo: '200.0'
+                },{
+                    id: '3',
+                    nombre: 'Múltiples Afectats',
+                    segundo: '300.0'
+                },{
+                    id: '4',
+                    nombre: 'Recurs',
+                    segundo: '50.0'
                 }]
             }
         },
@@ -114,6 +141,9 @@
             },
             cambiarVideo(index){
                 this.videoSeleccionado = index
+            },
+            cambiarSeccion(index){
+                this.seccionSeleccionada = index
             }
         },
         computed:{
@@ -121,10 +151,10 @@
                 return this.videos[this.videoSeleccionado].ruta
             },
             currentTime: {
-                get: ({ segundosVideo_ }) => segundosVideo_,
+                get: ({ currentTime_ }) => currentTime_,
                 set(time) {
-                    this.$refs.video.segundosVideo = time
-                }
+                    this.$refs.video.currentTime = time
+                },
             }
         },
         mounted() {
