@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Incidencies_has_recursos;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use App\Clases\Utilitat;
 
 class Incidencies_has_recursosController extends Controller
 {
@@ -26,7 +28,20 @@ class Incidencies_has_recursosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $incidencies_has_rec = new Incidencies_has_recursos();
+
+        $incidencies_has_rec->incidencies_id = $request->input('incidencies_id');
+        $incidencies_has_rec->recursos_id = $request->input('recursos_id');
+
+        try{
+
+        } catch(QueryException $exception){
+            $mensaje = Utilitat::errorMessage($exception);
+            $response = \response()
+                    ->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
