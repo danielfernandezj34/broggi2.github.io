@@ -52,6 +52,7 @@ class AlertantsController extends Controller
         $alertant->municipis_id = $request->input('municipis_id');
 
         try {
+
             $alertant->save();
             $response = (new AlertantsResource($alertant))
                         ->response()
