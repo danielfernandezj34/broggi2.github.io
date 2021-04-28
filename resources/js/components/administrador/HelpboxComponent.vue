@@ -31,13 +31,13 @@
                 <nav aria-label="Page navigation example" class="ml-5">
                     <ul class="pagination">
                         <li class="page-item" :class="{disabled: meta_helpbox.from == meta_helpbox.current_page}">
-                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(meta_helpbox.current_page - 1)">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li class="page-item" :class="{active: pagina == meta_helpbox.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
                         <li class="page-item" :class="{disabled: meta_helpbox.last_page == meta_helpbox.current_page}">
-                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                            <a class="page-link" aria-label="Next" @click="paginar(meta_helpbox.current_page + 1)">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
@@ -103,8 +103,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="insertPregunta()">Afegir</button>
-                        <button v-else type="button" id="botonBorrar" class="btn btn-danger btn-sm" @click="updatePregunta()">Modificar</button>
+                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertPregunta()"><i class="far fa-check"></i> Afegir</button>
+                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updatePregunta()"><i class="far fa-check"></i> Modificar</button>
                     </div>
                 </div>
             </div>
