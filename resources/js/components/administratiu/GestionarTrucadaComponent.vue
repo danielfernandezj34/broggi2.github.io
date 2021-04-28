@@ -230,7 +230,7 @@
                                     </div> -->
                                 </label>
                                 <input v-if="alertant.tipus_alertants_id == 1" type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca" disabled>
-                                <input type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca">
+                                <input v-else type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca">
 
                                 <div v-if="alertant.tipus_alertants_id != 1">
                                     <label for="comp_direccio" class="col-form-label"><strong>Adreça complementària</strong>
@@ -973,7 +973,12 @@ export default {
                     tipus_incidencies_id : '',
                     alertants_id : '',
                     municipis_id : 0,
-                    usuaris_id : ''
+                    usuaris_id : '',
+                    incidencies_has_recursos: [],
+                    incidencies_has_afectats : {
+                        incidencies_id : '',
+                        afectats_id : ''
+                    }
                 },
                 alertant: {
                     id: '',
@@ -1332,6 +1337,7 @@ export default {
             },
             cercarAfectat(telefon){
                 var i = 0;
+                debugger;
                 while(this.afectats.length > i){
                     if(this.afectats[i].telefon == telefon){
                         this.afectat.telefon = this.afectats[i].telefon;
@@ -1482,28 +1488,49 @@ export default {
 
             },
             crearIncidencia(){
-                // debugger;
+
                 var problema = false;
                 const data = new Date();
-
-                if(this.afectat.telefon != telefonAfectat){
+                //debugger;
+                if(this.afectat.telefon != this.telefonAfectat){
                     this.crearAfectat();
+                    this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                    this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                }else{
+                    this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                    this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
                 }
 
-                if(this.afectat2.telefon != telefonAfectat2){
+
+                if(this.afectat2.telefon != this.telefonAfectat2){
                     if(this.afectat2.te_cip != ''){
                         this.crearAfectat2();
+                        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
                     }
-                }
-                if(this.afectat3.telefon != telefonAfectat3){
+                }else{
+                    this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                    this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                    }
+                if(this.afectat3.telefon != this.telefonAfectat3){
                     if(this.afectat3.te_cip != ''){
                         this.crearAfectat3();
+                        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
                     }
-                }
-                if(this.afectat4.telefon != telefonAfectat4){
+                }else{
+                        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                    }
+                if(this.afectat4.telefon != this.telefonAfectat4){
                     if(this.afectat4.te_cip != ''){
                         this.crearAfectat4();
+                        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
                     }
+                }else{
+                    this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                    this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
                 }
 
                 this.crearAlertant();
@@ -1526,8 +1553,27 @@ export default {
                     this.incidencia.descripcio + ', DESCRIPCIO DELS AFECTATS: '+ this.descripcioAdicional;
                 }
 
+                if(this.incidencies_has_recursos.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos);
+                }
+                if(this.incidencies_has_recursos2.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos2);
+                }
+                if(this.incidencies_has_recursos3.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos3);
+                }
+                if(this.incidencies_has_recursos4.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos4);
+                }
+                if(this.incidencies_has_recursos5.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos5);
+                }
+                if(this.incidencies_has_recursos6.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos6);
+                }
 
-                this.crearIncidencies_has_recursos();
+
+
 
 
                 let me = this;
@@ -1535,7 +1581,6 @@ export default {
                     .post('/incidencies', me.incidencia)
                     .then(function(response){
                         console.log(response);
-
                     }).catch(function(error) {
                         problema = true;
                         console.log(error.response.status);
@@ -1543,8 +1588,10 @@ export default {
                         me.errorMessage = error.response.data.error;
                 })
 
+
+
                 if(problema == false){
-                    return window.open('http://localhost:80/broggi2.github.io/public/incidencies', '_self');
+                    return window.open('http://localhost:8080/broggi2.github.io/public/incidencies', '_self');
                 }
 
             },
@@ -1635,82 +1682,82 @@ export default {
                 }
 
             },
-            crearIncidencies_has_recursos(){
-                var me = this;
+            // crearIncidencies_has_recursos(){
+            //     var me = this;
 
-                if(this.incidencies_has_recursos.recursos_id != ''){
-                    this.incidencies_has_recursos.incidencies_id = this.incidencia.id;
-                    axios
-                        .post('/incidencies_has_recursos', me.incidencies_has_recursos)
-                        .then(function(response){
-                            console.log(response);
-                        }).catch(function(error){
-                            console.log(error.response.status);
-                            console.log(error.response.data);
-                            me.errorMessage = error.response.data.error;
-                    })
-                }
-                if(this.incidencies_has_recursos2.recursos_id != ''){
-                    this.incidencies_has_recursos2.incidencies_id = this.incidencia.id;
-                    axios
-                        .post('/incidencies_has_recursos', me.incidencies_has_recursos2)
-                        .then(function(response){
-                            console.log(response);
-                        }).catch(function(error){
-                            console.log(error.response.status);
-                            console.log(error.response.data);
-                            me.errorMessage = error.response.data.error;
-                    })
-                }
-                if(this.incidencies_has_recursos3.recursos_id != ''){
-                    this.incidencies_has_recursos3.incidencies_id = this.incidencia.id;
-                    axios
-                        .post('/incidencies_has_recursos', me.incidencies_has_recursos3)
-                        .then(function(response){
-                            console.log(response);
-                        }).catch(function(error){
-                            console.log(error.response.status);
-                            console.log(error.response.data);
-                            me.errorMessage = error.response.data.error;
-                    })                }
-                if(this.incidencies_has_recursos4.recursos_id != ''){
-                    this.incidencies_has_recursos4.incidencies_id = this.incidencia.id;
-                    axios
-                        .post('/incidencies_has_recursos', me.incidencies_has_recursos4)
-                        .then(function(response){
-                            console.log(response);
-                        }).catch(function(error){
-                            console.log(error.response.status);
-                            console.log(error.response.data);
-                            me.errorMessage = error.response.data.error;
-                    })
-                }
-                if(this.incidencies_has_recursos5.recursos_id != ''){
-                    this.incidencies_has_recursos5.incidencies_id = this.incidencia.id;
-                    axios
-                        .post('/incidencies_has_recursos', me.incidencies_has_recursos5)
-                        .then(function(response){
-                            console.log(response);
-                        }).catch(function(error){
-                            console.log(error.response.status);
-                            console.log(error.response.data);
-                            me.errorMessage = error.response.data.error;
-                    })
-                }
-                if(this.incidencies_has_recursos6.recursos_id != ''){
-                    this.incidencies_has_recursos6.incidencies_id = this.incidencia.id;
-                    axios
-                        .post('/incidencies_has_recursos', me.incidencies_has_recursos6)
-                        .then(function(response){
-                            console.log(response);
-                        }).catch(function(error){
-                            console.log(error.response.status);
-                            console.log(error.response.data);
-                            me.errorMessage = error.response.data.error;
-                    })
-                }
 
-            }
+            //         this.incidencies_has_recursos.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })
+            //     }
+            //     if(this.incidencies_has_recursos2.recursos_id != ''){
+            //         this.incidencies_has_recursos2.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos2)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })
+            //     }
+            //     if(this.incidencies_has_recursos3.recursos_id != ''){
+            //         this.incidencies_has_recursos3.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos3)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })                }
+            //     if(this.incidencies_has_recursos4.recursos_id != ''){
+            //         this.incidencies_has_recursos4.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos4)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })
+            //     }
+            //     if(this.incidencies_has_recursos5.recursos_id != ''){
+            //         this.incidencies_has_recursos5.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos5)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })
+            //     }
+            //     if(this.incidencies_has_recursos6.recursos_id != ''){
+            //         this.incidencies_has_recursos6.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos6)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })
+            //     }
+
+            // }
 
 
         },

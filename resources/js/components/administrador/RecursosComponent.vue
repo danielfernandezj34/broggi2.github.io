@@ -40,13 +40,13 @@
                     <nav aria-label="Page navigation example" class="ml-5">
                         <ul class="pagination">
                             <li class="page-item" :class="{disabled: meta_recursos.from == meta_recursos.current_page}">
-                                <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                                <a class="page-link"  aria-label="Previous"  @click="paginar(meta_recursos.current_page - 1)">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
                             <li class="page-item" :class="{active: pagina == meta_recursos.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
                             <li class="page-item" :class="{disabled: meta_recursos.last_page == meta_recursos.current_page}">
-                                <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                                <a class="page-link" aria-label="Next" @click="paginar(meta_recursos.current_page + 1)">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -244,6 +244,7 @@
             },
             paginar(pagina){
                 let me = this;
+
                 axios
                     .get('/paginate_recursos' + '?page=' + pagina, {params:{
                 idTipusRecurs: this.idTipusRecurs,
