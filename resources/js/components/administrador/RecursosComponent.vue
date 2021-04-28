@@ -3,7 +3,7 @@
         <div class="card mt-3 mb-3">
             <div class="card-body">
                 <div id="centrarElements">
-                    <h5 class="card-title">Recursos</h5>
+                    <h5 class="card-title">Taula de Recursos</h5>
                 </div>
                 <div id="centrarElements">
                     <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres" @click="filtres"><i class="far fa-filter"></i> Filtres</button>
