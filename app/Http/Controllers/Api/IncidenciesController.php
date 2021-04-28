@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Clases\Utilitat;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
 use App\Http\Resources\IncidenciesResource;
+use App\Models\Incidencies_has_recursos;
 
 class IncidenciesController extends Controller
 {
@@ -31,6 +33,7 @@ class IncidenciesController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
         $incidencies = new Incidencies();
 
         $incidencies->telefon_alertant = $request->input('telefon');
@@ -42,8 +45,28 @@ class IncidenciesController extends Controller
         $incidencies->alertants_id = $request->input('alertants_id');
         $incidencies->municipis_id = $request->input('municipis_id');
         $incidencies->ususaris_id = $request->input('user_id');
+        $incidencies_has_recursos = $request->input('incidencies_has_recursos');
+        $incidencies_has_afectats = $request->input('incidencies_has_afectats');
+
         try{
             $incidencies->save();
+
+            foreach($incidencies_has_recursos as $incidencia_has_recurs){
+                $ihr = new Incidencies_has_recursos();
+                $ihr->incidencies_id = $incidencia_has_recurs['incidencies_id'];
+                $ihr->recursos_id = $incidencies_has_recursos['recursos_id'];
+                $ihr->prioritat = $incidencies_has_recursos['prioritat'];
+
+                $incidencies->incidencies_has_recursos()->save($ihr);
+            }
+
+            // foreach($incidencies_has_afectats as $incidencia_has_afectat){
+            //     $iha = new
+            // }
+
+            DB::commit();
+            $incidencies->refresh();
+
             $response = (new IncidenciesResource($incidencies))
                         ->response()
                         ->setStatusCode(201);

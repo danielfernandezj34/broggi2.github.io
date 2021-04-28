@@ -25,16 +25,16 @@ class IncidenciesPaginateController extends Controller
         if($filtreCodiIncidencia == ''){
             if($filtreIdAdministratiu == ''){
                 if($filtreIdTipusIncidencia == ''){
-                    $incidencies = Incidencies::paginate(6);
+                    $incidencies = Incidencies::with(['usuari', 'tipus_incidencies'])->paginate(6);
                 }else{
-                    $incidencies = Incidencies::where('tipus_incidencies_id', '=', $filtreIdTipusIncidencia)->paginate(6)->withQueryString();
+                    $incidencies = Incidencies::with(['usuari', 'tipus_incidencies'])->where('tipus_incidencies_id', '=', $filtreIdTipusIncidencia)->paginate(6);
 
                 }
             }else{
-            $incidencies = Incidencies::where('usuaris_id', '=', $filtreIdAdministratiu)->paginate(6)->withQueryString();
+            $incidencies = Incidencies::with(['usuari', 'tipus_incidencies'])->where('usuaris_id', '=', $filtreIdAdministratiu)->paginate(6);
             }
         }else{
-            $incidencies = Incidencies::where('num_incident', '=', $filtreCodiIncidencia)->paginate(6)->withQueryString();
+            $incidencies = Incidencies::with(['usuari', 'tipus_incidencies'])->where('num_incident', '=', $filtreCodiIncidencia)->paginate(6);
         }
 
 

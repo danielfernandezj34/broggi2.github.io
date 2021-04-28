@@ -34,12 +34,12 @@ class Incidencies extends Model
 
     public function usuari()
     {
-        return $this->hasMany(Usuaris::class, 'usuaris_id');
+        return $this->belongsTo(Usuaris::class, 'usuaris_id');
     }
 
     public function incidencies_has_recursos()
     {
-        return $this->hasMany(Incidencies_has_recursos::class, 'incidencies_id');
+        return $this->hasMany(Incidencies_has_recursos::class, 'id');
     }
 
     public function scopeFiltrePerUsuarisId($query, $filtreUsuarisFiltre){
