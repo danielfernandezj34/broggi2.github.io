@@ -69,6 +69,11 @@ i[data-atras='recurs']:hover{
 #id_primercamp{
     margin-left: 25%;
 }
+#centrarElements{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
 #titul_incidencia{
     color: white;
     text-align: center;
@@ -88,10 +93,8 @@ i[data-atras='recurs']:hover{
 .form-inline{
     margin-left:35%;
 }
-#centrarElements{
-    text-align:center;
-    align-items:center;
-    justify-content:center;
+#titol_form{
+    margin-left:40%;
 }
 .boto_enviar{
     position: fixed;
