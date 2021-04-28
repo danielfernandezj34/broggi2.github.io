@@ -2,9 +2,11 @@
     <main>
         <div class="card mt-3">
             <div class="card-body mt-1">
-                <h5 class="card-title" id="titol_form">Taula d'Incidencies</h5>
-                <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
-                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                <div style="text-align:center; align-items:center; justify-content:center">
+                    <h5 class="card-title">Taula d'Incidencies</h5>
+                </div>
+                <div style="text-align:center; align-items:center; justify-content:center">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres" @click="filtres"><i class="far fa-filter"></i> Filtres</button>
                 </div>
                 <div v-if="incidencies.length == 0" class="alert alert-light mt-2" role="alert">
                             No hi ha cap incidència.
@@ -23,34 +25,30 @@
                         <tr v-for="incidencia in incidencies" :key="incidencia.id">
                             <td>{{ incidencia.num_incident }}</td>
                             <td>{{ incidencia.nom_metge }}</td>
-                            <div v-for="tipusIncidencia in tipusIncidencies" :key="tipusIncidencia.id">
-                                <td v-if="tipusIncidencia.id == incidencia.tipus_incidencies_id">
-                                    {{ tipusIncidencia.tipus }}
+                            <div >
+                                <td >
+                                    {{ incidencia.tipus_incidencies.tipus }}
                                 </td>
                             </div>
-                            <td v-for="usuari in usuaris" :key="usuari.id">
-                                <div v-if="usuari.id == incidencia.usuaris_id">
-                                    {{ usuari.nom }} {{ usuari.cognoms }}
-                                </div>
-                            </td>
+                            <td>{{ incidencia.usuari.nom }} {{ incidencia.usuari.cognoms }}</td>
                             <td>
                                     <button type="submit" class="btn btn-primary btn-sm" @click="mostrarIncidencia(incidencia)"><i class="fas fa-eye"></i></button>
                                     <button v-if="user_id == incidencia.usuaris_id" type="submit" class="btn btn-secondary btn-sm ml-1" @click="editIncidencia(incidencia)"><i class="far fa-edit"></i> Editar</button>
                                     <button v-if="user_id == incidencia.usuaris_id" type="submit" id="botones" class="btn btn-danger btn-sm ml-1" @click="confirmarDelete(incidencia)"><i class="far fa-trash-alt"></i> Esborrar</button>
-                                </td>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
                 <nav aria-label="Page navigation example" class="ml-5">
                     <ul class="pagination">
                         <li class="page-item" :class="{disabled: meta_incidencies.from == meta_incidencies.current_page}">
-                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(meta_incidencies.current_page - 1)">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li class="page-item" :class="{active: pagina == meta_incidencies.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
                         <li class="page-item" :class="{disabled: meta_incidencies.last_page == meta_incidencies.current_page}">
-                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                            <a class="page-link" aria-label="Next" @click="paginar(meta_incidencies.current_page + 1)">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
@@ -404,8 +402,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"> Tancar</button>
+                    <button type="button" class="btn btn-success btn-sm" @click="aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia)"><i class="far fa-filter"> Aplicar Filtres</i></button>
                 </div>
                 </div>
             </div>
@@ -455,10 +453,11 @@ export default ({
                 alertants_id:'',
                 municipis_id:'',
                 usuaris_id:'',
-                pagina: "",
-                meta_incidencies: {},
-                paginas: []
-            }
+
+            },
+            pagina: "",
+            paginas: [],
+            meta_incidencies: {}
         }
 
     },

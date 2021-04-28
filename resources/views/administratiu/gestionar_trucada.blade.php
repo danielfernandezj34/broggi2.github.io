@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('titulo', 'Gestionar Trucada')
+@section('titulo', 'SEMS - Gestionar Trucada')
 @section('color_fons', "administratiu")
 @section('color-atras', 'administratiu')
 @section('boto_atras', './principal_administratiu')

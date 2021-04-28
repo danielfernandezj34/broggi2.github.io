@@ -88,8 +88,10 @@ i[data-atras='recurs']:hover{
 .form-inline{
     margin-left:35%;
 }
-#titol_form{
-    margin-left:40%;
+#centrarElements{
+    text-align:center;
+    align-items:center;
+    justify-content:center;
 }
 .boto_enviar{
     position: fixed;

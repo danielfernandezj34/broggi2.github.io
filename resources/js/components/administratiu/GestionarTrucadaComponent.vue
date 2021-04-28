@@ -5,6 +5,7 @@
                 <div class="card col-6 mr-1 mt-2" id="card">
                     <div class="card-header bg-primary text-white">
                         <h3 class="card-title">Alertant</h3>
+                        <input type="hidden" id="id_alertant" name="id_alertant" v-model="alertant.id">
                     </div>
                     <div class="card-body">
 
@@ -230,6 +231,7 @@
                                 </label>
                                 <input v-if="alertant.tipus_alertants_id == 1" type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca" disabled>
                                 <input v-else type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca">
+
                                 <div v-if="alertant.tipus_alertants_id != 1">
                                     <label for="comp_direccio" class="col-form-label"><strong>Adreça complementària</strong>
                                         <!-- <div id="div_helpbox" class="col-sm-12">
@@ -272,6 +274,7 @@
                     <h3><strong>Afectat 4</strong></h3>
                     <div class="form-group row">
                         <div class="col-sm-4 col-4">
+                            <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat4.id">
                             <label for="nom_afectat4" class="col-form-label"><strong>Nom</strong>
                                 <!-- <div class="mt-2">
                                     <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
@@ -396,6 +399,7 @@
                     <h3><strong>Afectat 3</strong></h3>
                     <div class="form-group row">
                         <div class="col-sm-4 col-4">
+                            <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat3.id">
                             <label for="nom_afectat3" class="col-form-label"><strong>Nom</strong>
                                 <!-- <div class="mt-2">
                                     <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
@@ -521,6 +525,7 @@
 
                     <div class="form-group row">
                         <div class="col-sm-4 col-4">
+                            <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat2.id">
                             <label for="nom_afectat2" class="col-form-label"><strong>Nom</strong>
                                 <!-- <div class="mt-2">
                                     <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
@@ -671,6 +676,7 @@
                     <div class="form-group row">
 
                         <div class="col-sm-4 col-4">
+                            <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat.id">
                             <label for="nom_afectat" class="col-form-label"><strong>Nom</strong>
                                 <!-- <div class="mt-2">
                                     <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
@@ -907,7 +913,7 @@
                 </div>
             </div>
         </form>
-        <button type="submit" @click="crearIncidencia()" class="btn btn-success btn-lg boto_enviar" style="background-color: #f70c74"><i class="fas fa-check fa-1x"></i> Enviar</button>
+        <button type="button" @click="crearIncidencia()" class="btn btn-success btn-lg boto_enviar" style="background-color: #f70c74"><i class="fas fa-check fa-1x"></i> Enviar</button>
 
     </div>
 
@@ -945,6 +951,14 @@ export default {
                 color4 : '#2c3e50',
                 tipusAfec : 1,
                 descripcioAdicional : '',
+                telefonAfectat : '',
+                telefonAfectat2 : '',
+                telefonAfectat3 : '',
+                telefonAfectat4 : '',
+                cipAfectat : '',
+                cipAfectat2 : '',
+                cipAfectat3 : '',
+                cipAfectat4 : '',
                 //POST de la incidencia
                 incidencia : {
                     id : '',
@@ -959,7 +973,12 @@ export default {
                     tipus_incidencies_id : '',
                     alertants_id : '',
                     municipis_id : 0,
-                    usuaris_id : ''
+                    usuaris_id : '',
+                    incidencies_has_recursos: [],
+                    incidencies_has_afectats : {
+                        incidencies_id : '',
+                        afectats_id : ''
+                    }
                 },
                 alertant: {
                     id: '',
@@ -1318,6 +1337,7 @@ export default {
             },
             cercarAfectat(telefon){
                 var i = 0;
+                debugger;
                 while(this.afectats.length > i){
                     if(this.afectats[i].telefon == telefon){
                         this.afectat.telefon = this.afectats[i].telefon;
@@ -1327,6 +1347,7 @@ export default {
                         this.afectat.edat = this.afectats[i].edat;
                         this.afectat.te_cip = this.afectats[i].te_cip;
                         this.afectat.sexes_id = this.afectats[i].sexes_id;
+                        this.telefonAfectat = telefon;
                     }
                     i++;
                 }
@@ -1345,6 +1366,7 @@ export default {
                         this.afectat.edat = this.afectats[i].edat;
                         this.afectat.te_cip = this.afectats[i].te_cip;
                         this.afectat.sexes_id = this.afectats[i].sexes_id;
+                        this.telefonAfectat2 = telefon;
                     }
                     i++;
                 }
@@ -1363,6 +1385,7 @@ export default {
                         this.afectat3.edat = this.afectats[i].edat;
                         this.afectat3.te_cip = this.afectats[i].te_cip;
                         this.afectat3.sexes_id = this.afectats[i].sexes_id;
+                        this.telefonAfectat3 = telefon;
                     }
                     i++;
                 }
@@ -1381,6 +1404,7 @@ export default {
                         this.afectat4.edat = this.afectats[i].edat;
                         this.afectat4.te_cip = this.afectats[i].te_cip;
                         this.afectat4.sexes_id = this.afectats[i].sexes_id;
+                        this.telefonAfectat4 = telefon;
                     }
                     i++;
                 }
@@ -1399,6 +1423,7 @@ export default {
                         this.afectat.edat = this.afectats[i].edat;
                         this.afectat.te_cip = this.afectats[i].te_cip;
                         this.afectat.sexes_id = this.afectats[i].sexes_id;
+                        this.cipAfectat = cip;
                     }
                     i++;
                 }
@@ -1417,6 +1442,7 @@ export default {
                         this.afectat2.edat = this.afectats[i].edat;
                         this.afectat2.te_cip = this.afectats[i].te_cip;
                         this.afectat2.sexes_id = this.afectats[i].sexes_id;
+                        this.cipAfectat2 = cip;
                     }
                     i++;
                 }
@@ -1435,6 +1461,7 @@ export default {
                         this.afectat3.edat = this.afectats[i].edat;
                         this.afectat3.te_cip = this.afectats[i].te_cip;
                         this.afectat3.sexes_id = this.afectats[i].sexes_id;
+                        this.cipAfectat3 = cip;
                     }
                     i++;
                 }
@@ -1453,6 +1480,7 @@ export default {
                         this.afectat4.edat = this.afectats[i].edat;
                         this.afectat4.te_cip = this.afectats[i].te_cip;
                         this.afectat4.sexes_id = this.afectats[i].sexes_id;
+                        this.cipAfectat4 = cip;
                     }
                     i++;
                 }
@@ -1460,7 +1488,53 @@ export default {
 
             },
             crearIncidencia(){
+
+                var problema = false;
                 const data = new Date();
+                //debugger;
+                if(this.afectat.telefon != this.telefonAfectat){
+                    this.crearAfectat();
+                    this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                    this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                }else{
+                    this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                    this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                }
+
+
+                if(this.afectat2.telefon != this.telefonAfectat2){
+                    if(this.afectat2.te_cip != ''){
+                        this.crearAfectat2();
+                        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                    }
+                }else{
+                    this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                    this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                    }
+                if(this.afectat3.telefon != this.telefonAfectat3){
+                    if(this.afectat3.te_cip != ''){
+                        this.crearAfectat3();
+                        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                    }
+                }else{
+                        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                    }
+                if(this.afectat4.telefon != this.telefonAfectat4){
+                    if(this.afectat4.te_cip != ''){
+                        this.crearAfectat4();
+                        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                    }
+                }else{
+                    this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+                    this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+                }
+
+                this.crearAlertant();
+
                 //Campos de tabla incidencia rellenados con los valores que le faltaban
                 this.incidencia.num_incident = this.incidencia.id;
                 this.incidencia.data = data.getDate()+ '-' + data.getFullYear();
@@ -1471,13 +1545,34 @@ export default {
                 //this.incidencia.descripcio este campo ya esta puesto en el v-model del formulario en la parte de DESCRIPCIO
                 //this.incidencia.nom_metge este campo ya esta puesto en el v-model del formulario en la parte de NOM DEL METGE
                 //this.incidencia.tipus_incidencies_id este campo ya esta puesto en el v-model del formulario en la parte de TIPUS DE D'ACCIDENT O D'INCIDENT
-                this.incidencia.alertants_id = this.alertant.id;
+                // this.incidencia.alertants_id = this.alertant.id;
                 //this.incidencia.municipis_id este campo ya esta puesto en el v-model del formulario en la parte de MUNICIPI
                 this.incidencia.usuaris_id= this.user_id;
                 /////////////
                 if(this.descripcioAdicional != ''){
                     this.incidencia.descripcio + ', DESCRIPCIO DELS AFECTATS: '+ this.descripcioAdicional;
                 }
+
+                if(this.incidencies_has_recursos.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos);
+                }
+                if(this.incidencies_has_recursos2.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos2);
+                }
+                if(this.incidencies_has_recursos3.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos3);
+                }
+                if(this.incidencies_has_recursos4.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos4);
+                }
+                if(this.incidencies_has_recursos5.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos5);
+                }
+                if(this.incidencies_has_recursos6.recursos_id != ''){
+                    this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos6);
+                }
+
+
 
 
 
@@ -1486,31 +1581,18 @@ export default {
                     .post('/incidencies', me.incidencia)
                     .then(function(response){
                         console.log(response);
-
                     }).catch(function(error) {
+                        problema = true;
                         console.log(error.response.status);
                         console.log(error.response.data);
                         me.errorMessage = error.response.data.error;
                 })
 
 
-                this.crearAfectat();
 
-                if(this.afectat2.te_cip != null){
-                    this.crearAfectat2();
+                if(problema == false){
+                    return window.open('http://localhost:8080/broggi2.github.io/public/incidencies', '_self');
                 }
-                if(this.afectat3.te_cip != null){
-                    this.crearAfectat3();
-                }
-                if(this.afectat4.te_cip != null){
-                    this.crearAfectat4();
-                }
-                this.crearAlertant();
-
-                return window.open('../../../views/administratiu/mostrar_incidencias.blade.php', '_self');
-
-
-
 
             },
             crearAfectat(){
@@ -1587,20 +1669,95 @@ export default {
                 //Campos de tabla alertant rellenados con los valores que le faltaban
                 this.alertant.municipis_id = this.incidencia.municipis_id;
                 /////////
-                axios
-                    .post('/alertants', me.alertant)
-                    .then(function(response){
-                        console.log(response);
-                    }).catch(function(error){
-                        console.log(error.response.status);
-                        console.log(error.response.data);
-                        me.errorMessage = error.response.data.error;
-                })
-            },
-            crearIncidencies_has_recursos(){
-                let inci = {};
+                if(this.alertant.tipus_alertants_id != 1){
+                    axios
+                        .post('/alertants', me.alertant)
+                        .then(function(response){
+                            console.log(response);
+                        }).catch(function(error){
+                            console.log(error.response.status);
+                            console.log(error.response.data);
+                            me.errorMessage = error.response.data.error;
+                    })
+                }
 
-            }
+            },
+            // crearIncidencies_has_recursos(){
+            //     var me = this;
+
+
+            //         this.incidencies_has_recursos.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })
+            //     }
+            //     if(this.incidencies_has_recursos2.recursos_id != ''){
+            //         this.incidencies_has_recursos2.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos2)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })
+            //     }
+            //     if(this.incidencies_has_recursos3.recursos_id != ''){
+            //         this.incidencies_has_recursos3.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos3)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })                }
+            //     if(this.incidencies_has_recursos4.recursos_id != ''){
+            //         this.incidencies_has_recursos4.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos4)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })
+            //     }
+            //     if(this.incidencies_has_recursos5.recursos_id != ''){
+            //         this.incidencies_has_recursos5.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos5)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })
+            //     }
+            //     if(this.incidencies_has_recursos6.recursos_id != ''){
+            //         this.incidencies_has_recursos6.incidencies_id = this.incidencia.id;
+            //         axios
+            //             .post('/incidencies_has_recursos', me.incidencies_has_recursos6)
+            //             .then(function(response){
+            //                 console.log(response);
+            //             }).catch(function(error){
+            //                 console.log(error.response.status);
+            //                 console.log(error.response.data);
+            //                 me.errorMessage = error.response.data.error;
+            //         })
+            //     }
+
+            // }
 
 
         },
