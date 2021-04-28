@@ -3,7 +3,7 @@
         <div class="card mt-3">
             <div class="card-body mt-1">
                 <div id="centrarElements">
-                    <h5 class="card-title">Usuaris</h5>
+                    <h5 class="card-title">Taula d'Usuaris</h5>
                 </div>
                 <div id="centrarElements">
                     <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres" @click="filtres"><i class="far fa-filter"></i> Filtres</button>
@@ -44,13 +44,13 @@
                 <nav aria-label="Page navigation example" class="ml-5">
                     <ul class="pagination">
                         <li class="page-item" :class="{disabled: meta_usuaris.from == meta_usuaris.current_page}">
-                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(meta_usuaris.current_page - 1)">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li class="page-item" :class="{active: pagina == meta_usuaris.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
                         <li class="page-item" :class="{disabled: meta_usuaris.last_page == meta_usuaris.current_page}">
-                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                            <a class="page-link" aria-label="Next" @click="paginar(meta_usuaris.current_page + 1)">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
