@@ -2552,10 +2552,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      provincies: []
+      provincies: [],
+      comarques: [],
+      barcelona: [],
+      girona: [],
+      lleida: [],
+      tarragona: [],
+      item: {
+        row: '',
+        column: ''
+      }
     };
   },
   methods: {
@@ -2568,7 +2582,7 @@ __webpack_require__.r(__webpack_exports__);
         google.charts.load('current', {
           'packages': ['corechart']
         });
-        google.charts.setOnLoadCallback(me.drawChart);
+        google.charts.setOnLoadCallback(me.drawChartProvincies);
       })["catch"](function (error) {
         console.log(error);
         _this.errored = true;
@@ -2576,7 +2590,88 @@ __webpack_require__.r(__webpack_exports__);
         return _this.loading = false;
       });
     },
-    drawChart: function drawChart() {
+    selectComarques: function selectComarques() {
+      var _this2 = this;
+
+      var me = this;
+      axios.get('/comarques_grafic').then(function (response) {
+        me.comarques = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+        _this2.errored = true;
+      })["finally"](function () {
+        return _this2.loading = false;
+      });
+    },
+    selectComarquesBarcelona: function selectComarquesBarcelona() {
+      var _this3 = this;
+
+      var me = this;
+      axios.get('/comarques_barcelona').then(function (response) {
+        me.barcelona = response.data;
+        google.charts.load('current', {
+          packages: ['corechart', 'bar']
+        });
+        google.charts.setOnLoadCallback(me.drawChartComarquesBarcelona);
+      })["catch"](function (error) {
+        console.log(error);
+        _this3.errored = true;
+      })["finally"](function () {
+        return _this3.loading = false;
+      });
+    },
+    selectComarquesGirona: function selectComarquesGirona() {
+      var _this4 = this;
+
+      var me = this;
+      axios.get('/comarques_girona').then(function (response) {
+        me.girona = response.data;
+        google.charts.load('current', {
+          packages: ['corechart', 'bar']
+        });
+        google.charts.setOnLoadCallback(me.drawChartComarquesGirona);
+      })["catch"](function (error) {
+        console.log(error);
+        _this4.errored = true;
+      })["finally"](function () {
+        return _this4.loading = false;
+      });
+    },
+    selectComarquesLleida: function selectComarquesLleida() {
+      var _this5 = this;
+
+      var me = this;
+      axios.get('/comarques_lleida').then(function (response) {
+        me.lleida = response.data;
+        google.charts.load('current', {
+          packages: ['corechart', 'bar']
+        });
+        google.charts.setOnLoadCallback(me.drawChartComarquesLleida);
+      })["catch"](function (error) {
+        console.log(error);
+        _this5.errored = true;
+      })["finally"](function () {
+        return _this5.loading = false;
+      });
+    },
+    selectComarquesTarragona: function selectComarquesTarragona() {
+      var _this6 = this;
+
+      var me = this;
+      axios.get('/comarques_tarragona').then(function (response) {
+        me.tarragona = response.data;
+        google.charts.load('current', {
+          packages: ['corechart', 'bar']
+        });
+        google.charts.setOnLoadCallback(me.drawChartComarquesTarragona);
+      })["catch"](function (error) {
+        console.log(error);
+        _this6.errored = true;
+      })["finally"](function () {
+        return _this6.loading = false;
+      });
+    },
+    drawChartProvincies: function drawChartProvincies() {
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Provincia');
       data.addColumn('number', 'Incidencies');
@@ -2586,18 +2681,224 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       var options = {
-        'title': 'Incidencies per Provincia',
+        'title': 'Selecciona la Provincia per veure mes detalls',
         'is3D': true,
-        'width': 700,
+        'width': 0,
         'height': 500,
         'backgroundColor': 'transparent'
       };
       var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
       chart.draw(data, options);
+      google.visualization.events.addListener(chart, 'select', selectHandler);
+
+      function selectHandler() {
+        var selection = chart.getSelection();
+
+        for (var i = 0; i < selection.length; i++) {
+          var item = selection[i];
+
+          if (item.row != null) {
+            if (item.row == 0) {
+              if (document.getElementById('chart_div3').style.visibility == "visible") {
+                document.getElementById('chart_div3').style.visibility = "hidden";
+              }
+
+              if (document.getElementById('chart_div4').style.visibility == "visible") {
+                document.getElementById('chart_div4').style.visibility = "hidden";
+              }
+
+              if (document.getElementById('chart_div5').style.visibility == "visible") {
+                document.getElementById('chart_div5').style.visibility = "hidden";
+              }
+
+              document.getElementById('chart_div2').style.visibility = "visible";
+            } else if (item.row == 1) {
+              if (document.getElementById('chart_div2').style.visibility == "visible") {
+                document.getElementById('chart_div2').style.visibility = "hidden";
+              }
+
+              if (document.getElementById('chart_div4').style.visibility == "visible") {
+                document.getElementById('chart_div4').style.visibility = "hidden";
+              }
+
+              if (document.getElementById('chart_div5').style.visibility == "visible") {
+                document.getElementById('chart_div5').style.visibility = "hidden";
+              }
+
+              document.getElementById('chart_div3').style.visibility = "visible";
+            } else if (item.row == 2) {
+              if (document.getElementById('chart_div2').style.visibility == "visible") {
+                document.getElementById('chart_div2').style.visibility = "hidden";
+              }
+
+              if (document.getElementById('chart_div3').style.visibility == "visible") {
+                document.getElementById('chart_div3').style.visibility = "hidden";
+              }
+
+              if (document.getElementById('chart_div5').style.visibility == "visible") {
+                document.getElementById('chart_div5').style.visibility = "hidden";
+              }
+
+              document.getElementById('chart_div4').style.visibility = "visible";
+            } else if (item.row == 3) {
+              if (document.getElementById('chart_div2').style.visibility == "visible") {
+                document.getElementById('chart_div2').style.visibility = "hidden";
+              }
+
+              if (document.getElementById('chart_div3').style.visibility == "visible") {
+                document.getElementById('chart_div3').style.visibility = "hidden";
+              }
+
+              if (document.getElementById('chart_div4').style.visibility == "visible") {
+                document.getElementById('chart_div4').style.visibility = "hidden";
+              }
+
+              document.getElementById('chart_div5').style.visibility = "visible";
+            }
+          }
+        }
+      }
+    },
+    drawChartComarquesBarcelona: function drawChartComarquesBarcelona() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Comarca');
+      data.addColumn('number', 'Incidencies');
+
+      for (var index = 0; index < this.comarques.length; index++) {
+        if (this.comarques[index].Provincia == 1) {
+          var lastrow = data.addRow([this.comarques[index].Comarca, null]);
+
+          for (var index2 = 0; index2 < this.barcelona.length; index2++) {
+            if (this.comarques[index].Comarca == this.barcelona[index2].Comarca) {
+              data.addRow([this.comarques[index].Comarca, this.barcelona[index2].Incidencies]);
+              data.removeRow(lastrow);
+            }
+          }
+        }
+      }
+
+      var options = {
+        'title': 'Barcelona',
+        'width': 0,
+        'height': 600,
+        'backgroundColor': 'transparent',
+        'legend': {
+          'position': 'none'
+        },
+        'chartArea': {
+          width: '50%'
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
+      chart.draw(data, options);
+    },
+    drawChartComarquesGirona: function drawChartComarquesGirona() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Comarca');
+      data.addColumn('number', 'Incidencies');
+
+      for (var index = 0; index < this.comarques.length; index++) {
+        if (this.comarques[index].Provincia == 2) {
+          var lastrow = data.addRow([this.comarques[index].Comarca, null]);
+
+          for (var index2 = 0; index2 < this.girona.length; index2++) {
+            if (this.comarques[index].Comarca == this.girona[index2].Comarca) {
+              data.addRow([this.comarques[index].Comarca, this.girona[index2].Incidencies]);
+              data.removeRow(lastrow);
+            }
+          }
+        }
+      }
+
+      var options = {
+        'title': 'Girona',
+        'width': 0,
+        'height': 600,
+        'backgroundColor': 'transparent',
+        'legend': {
+          'position': 'none'
+        },
+        'chartArea': {
+          width: '50%'
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div3'));
+      chart.draw(data, options);
+    },
+    drawChartComarquesLleida: function drawChartComarquesLleida() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Comarca');
+      data.addColumn('number', 'Incidencies');
+
+      for (var index = 0; index < this.comarques.length; index++) {
+        if (this.comarques[index].Provincia == 3) {
+          var lastrow = data.addRow([this.comarques[index].Comarca, null]);
+
+          for (var index2 = 0; index2 < this.lleida.length; index2++) {
+            if (this.comarques[index].Comarca == this.lleida[index2].Comarca) {
+              data.addRow([this.comarques[index].Comarca, this.lleida[index2].Incidencies]);
+              data.removeRow(lastrow);
+            }
+          }
+        }
+      }
+
+      var options = {
+        'title': 'Lleida',
+        'width': 0,
+        'height': 600,
+        'backgroundColor': 'transparent',
+        'legend': {
+          'position': 'none'
+        },
+        'chartArea': {
+          width: '50%'
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div4'));
+      chart.draw(data, options);
+    },
+    drawChartComarquesTarragona: function drawChartComarquesTarragona() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Comarca');
+      data.addColumn('number', 'Incidencies');
+
+      for (var index = 0; index < this.comarques.length; index++) {
+        if (this.comarques[index].Provincia == 4) {
+          var lastrow = data.addRow([this.comarques[index].Comarca, null]);
+
+          for (var index2 = 0; index2 < this.tarragona.length; index2++) {
+            if (this.comarques[index].Comarca == this.tarragona[index2].Comarca) {
+              data.addRow([this.comarques[index].Comarca, this.tarragona[index2].Incidencies]);
+              data.removeRow(lastrow);
+            }
+          }
+        }
+      }
+
+      var options = {
+        'title': 'Tarragona',
+        'width': 0,
+        'height': 600,
+        'backgroundColor': 'transparent',
+        'legend': {
+          'position': 'none'
+        },
+        'chartArea': {
+          width: '50%'
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div5'));
+      chart.draw(data, options);
     }
   },
   created: function created() {
     this.selectProvincies();
+    this.selectComarques();
+    this.selectComarquesBarcelona();
+    this.selectComarquesGirona();
+    this.selectComarquesLleida();
+    this.selectComarquesTarragona();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -47819,7 +48120,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("main", [_c("div", { attrs: { id: "chart_div" } })])
+    return _c("main", [
+      _c("div", { attrs: { id: "container" } }, [
+        _c("h4", { attrs: { id: "titul_grafic" } }, [
+          _vm._v("Incidencies per Provincia")
+        ]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "chart_div" } }),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "chart_div2" } }),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "chart_div3" } }),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "chart_div4" } }),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "chart_div5" } })
+      ])
+    ])
   }
 ]
 render._withStripped = true
