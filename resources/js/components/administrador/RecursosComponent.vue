@@ -2,10 +2,11 @@
     <main>
         <div class="card mt-3 mb-3">
             <div class="card-body">
-                <h5 class="card-title" id="titol_form">Recursos</h5>
-
-                <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
-                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                <div id="centrarElements">
+                    <h5 class="card-title">Taula de Recursos</h5>
+                </div>
+                <div id="centrarElements">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres" @click="filtres"><i class="far fa-filter"></i> Filtres</button>
                 </div>
 
 
@@ -24,7 +25,8 @@
                         <tbody>
                             <tr v-for="recurso in recursos" :key="recurso.id">
                                 <td>{{ recurso.codi }}</td>
-                                <td>{{ recurso.actiu }}</td>
+                                <td v-if="recurso.actiu == 1">Actiu</td>
+                                <td v-else>No Actiu</td>
                                 <div v-for="tipusRecurs in tipusRecursos" :key="tipusRecurs.id">
                                     <td v-if="recurso.tipus_recursos_id == tipusRecurs.id">
                                             {{ tipusRecurs.tipus }}
@@ -123,8 +125,8 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertRecurs()">Afegir</button>
-                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateRecurs()">Modificar</button>
+                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertRecurs()"><i class="far fa-check"></i> Afegir</button>
+                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateRecurs()"><i class="far fa-check"></i> Modificar</button>
                     </div>
                 </div>
             </div>
@@ -160,7 +162,7 @@
                             <select class="col-sm-5 custom-select" v-if="codiRecurs ==''" name="tipus_recursos" id="tipus_recursos" v-model="actiu">
                                 <option  selected value=''>Seleccionar Tots</option>
                                 <option  selected value= 1>Actius</option>
-                                <option  selected value= 0>No Actiu</option>
+                                <option  selected value= 0>No Actius</option>
                             </select>
                             <select class="col-sm-5 custom-select" v-else disabled name="tipus_recursos" id="tipus_recursos" v-model="actiu">
                             </select>
@@ -168,8 +170,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiRecurs, idTipusRecurs, actiu)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
+                    <button type="button" class="btn btn-success btn-sm" @click="aplicarFiltres(codiRecurs, idTipusRecurs, actiu)"><i class="far fa-filter"></i> Aplicar Filtres</button>
                 </div>
                 </div>
             </div>

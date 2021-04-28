@@ -2,9 +2,11 @@
     <main>
         <div class="card mt-3">
             <div class="card-body mt-1">
-                <h5 class="card-title" id="titol_form">Taula d'Incidencies</h5>
-                <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
-                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                <div id="centrarElements">
+                    <h5 class="card-title">Taula d'Incidencies</h5>
+                </div>
+                <div id="centrarElements">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres" @click="filtres"><i class="far fa-filter"></i> Filtres</button>
                 </div>
                 <div v-if="incidencies.length == 0" class="alert alert-light mt-2" role="alert">
                             No hi ha cap incidència.
@@ -160,7 +162,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateIncidencia()">Modificar</button>
+                        <button type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateIncidencia()"><i class="far fa-check"></i> Modificar</button>
                     </div>
                 </div>
             </div>
@@ -367,7 +369,7 @@
                     <form>
                         <div class="form-group row ml-3">
                             <label for="codiIncidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel codi de l'incidència <br><h5 style="font-size: 11px">(si filtres per codi els altres filtres no es podràn aplicar)</h5></label>
-                            <input type="text" class="form-control col-sm-5" v-if="nomAdministratiu ==''" aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
+                            <input type="text" class="form-control col-sm-5" v-if="nomAdministratiu =='' && cognomsAdministratiu ==''" aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
                             <input type="text" class="form-control col-sm-5" v-else disabled aria-label="Introdueix el codi de l'incidència" v-model="codiIncidencia" placeholder= "Codi de l'Incidència">
                         </div>
                          <div class="form-group row ml-3">
@@ -388,13 +390,13 @@
                             </select>
                         </div>
                         <div class="form-group row ml-3" v-else>
-                            <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu <br><h5 style="font-size: 11px">(Escriu el nom de l'administratiu per iniciar la cerca)</h5></label>
+                            <label for="idAdministratiu" class="col-sm-6 col-form-label ml-5">Selecciona l'Administratiu <br><h5 style="font-size: 11px">(Escriu el nom o els cognoms de l'administratiu per iniciar la cerca)</h5></label>
                             <select class="col-sm-5 custom-select" disabled name="idAdministratiu" id="idAdministratiu" v-model="idAdministratiu">
                             </select>
                         </div>
                         <div class="form-group row ml-3">
                             <label for="tipus_incidencia" class="col-sm-6 col-form-label ml-5">Filtrar pel tipus d'Incidència <br><h5 style="font-size: 11px">(si filtres pel tipus els altres filtres no es podràn aplicar)</h5></label>
-                            <select class="col-sm-5 custom-select" v-if="codiIncidencia =='' && nomAdministratiu == ''" name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusIncidencia">
+                            <select class="col-sm-5 custom-select" v-if="codiIncidencia =='' && nomAdministratiu == '' && cognomsAdministratiu ==''" name="tipus_incidencia" id="tipus_incidencia" v-model="idTipusIncidencia">
                                 <option  selected value=''>Seleccionar Tots</option>
                                 <option v-for="tipusIncidencia in tipusIncidencies" :key="tipusIncidencia.id" v-bind:value="tipusIncidencia.id">{{ tipusIncidencia.tipus }}</option>
                             </select>
@@ -404,8 +406,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
+                    <button type="button" class="btn btn-success btn-sm" @click="aplicarFiltres(codiIncidencia, idAdministratiu, idTipusIncidencia)"><i class="far fa-filter"></i> Aplicar Filtres</button>
                 </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <template>
     <main>
         <div class="card mt-3">
-            <div class="card-body mt-1">
+            <div class="card-body mt-1 col-sm-12">
                 <h5 class="card-title" id="titol_form">Incidencies assignades</h5>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar Incidencia" aria-label="Buscar Incidencia">
@@ -10,13 +10,13 @@
                 <table class="table mt-2">
                     <thead>
                         <tr>
-                            <th scope="col">Numero</th>
-                            <th scope="col">Telefon</th>
-                            <th scope="col">Data</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Descripcio</th>
+                            <th class="col-sm-2" scope="col">Numero</th>
+                            <th class="col-sm-2" scope="col">Telefon</th>
+                            <th class="col-sm-2" scope="col">Data</th>
+                            <th class="col-sm-2" scope="col">Hora</th>
+                            <th class="col-sm-2" scope="col">Descripcio</th>
 
-                            <th></th>
+                            <th class="col-sm-2" scope="col"></th>
 
                         </tr>
                     </thead>
@@ -24,15 +24,17 @@
                         <tr v-for="incidencia in incidencies" :key="incidencia.id">
 
                         <!-- <div v-if="user_id == incidencia.usuaris_id"> -->
-                            <td v-if="user_id == incidencia.usuaris_id">{{ incidencia.num_incident }}</td>
-                            <td v-if="user_id == incidencia.usuaris_id">{{ incidencia.telefon_alertant }}</td>
-                            <td v-if="user_id == incidencia.usuaris_id">{{ incidencia.data }}</td>
-                            <td v-if="user_id == incidencia.usuaris_id">{{ incidencia.hora }}</td>
-                            <td v-if="user_id == incidencia.usuaris_id">{{ incidencia.descripcio }}</td>
-                            <td v-if="user_id == incidencia.usuaris_id">
-                                <button type="submit" class="btn btn-secondary btn-sm" @click="mostrarIncidencia(incidencia)">Mostrar</button>
-                                <button type="submit" class="btn btn-primary btn-sm" @click="editIncidencia(incidencia)"><i class="far fa-edit"></i> Editar</button>
-                            </td>
+                            <div class="row">
+                                <td class="col-sm-2" v-if="user_id == incidencia.usuaris_id">{{ incidencia.num_incident }}</td>
+                                <td class="col-sm-2" v-if="user_id == incidencia.usuaris_id">{{ incidencia.telefon_alertant }}</td>
+                                <td class="col-sm-2" v-if="user_id == incidencia.usuaris_id">{{ incidencia.data }}</td>
+                                <td class="col-sm-2" v-if="user_id == incidencia.usuaris_id">{{ incidencia.hora }}</td>
+                                <td class="col-sm-2" v-if="user_id == incidencia.usuaris_id">{{ incidencia.descripcio }}</td>
+                                <td class="col-sm-2" v-if="user_id == incidencia.usuaris_id">
+                                    <button type="submit" class="btn btn-secondary btn-sm" @click="mostrarIncidencia(incidencia)">Mostrar</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" @click="editIncidencia(incidencia)"><i class="far fa-edit"></i> Editar</button>
+                                </td>
+                            </div>
                         <!-- </div> -->
                         </tr>
 

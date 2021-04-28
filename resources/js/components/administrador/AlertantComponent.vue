@@ -2,9 +2,11 @@
     <main>
         <div class="card mt-3 mb-3">
             <div class="card-body mt-1">
-                <h5 class="card-title" id="titol_form">Taula d'Alertants</h5>
-                <form class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
-                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                <div id="centrarElements">
+                    <h5 class="card-title">Taula d'Alertants</h5>
+                </div>
+                <form id="centrarElements">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres" @click="filtres"><i class="far fa-filter"></i> Filtres</button>
                 </form>
                 <div v-if="alertants.length == 0" class="alert alert-light mt-2" role="alert">
                     No hi ha cap Alertant.
@@ -144,8 +146,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertAlertant()">Afegir</button>
-                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateAlertant()">Modificar</button>
+                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertAlertant()"><i class="far fa-check"></i> Afegir</button>
+                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateAlertant()"><i class="far fa-check"></i> Modificar</button>
                     </div>
                 </div>
             </div>
@@ -246,8 +248,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(nomAlertant, idTipusAlertant)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
+                    <button type="button" class="btn btn-success btn-sm" @click="aplicarFiltres(nomAlertant, idTipusAlertant)"><i class="far fa-filter"></i> Aplicar Filtres</button>
                 </div>
                 </div>
             </div>

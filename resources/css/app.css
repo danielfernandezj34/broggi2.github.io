@@ -69,6 +69,11 @@ i[data-atras='recurs']:hover{
 #id_primercamp{
     margin-left: 25%;
 }
+#centrarElements{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
 #titul_incidencia{
     color: white;
     text-align: center;
@@ -375,6 +380,9 @@ button.page-link {
 .offset{
   width: 500px !important;
   margin: 20px auto;
+}
+#chart_div{
+    margin-left: 20%;
 }
 #video{
     width: 800px;
