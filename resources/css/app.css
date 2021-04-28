@@ -69,6 +69,11 @@ i[data-atras='recurs']:hover{
 #id_primercamp{
     margin-left: 25%;
 }
+#centrarElements{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
 #titul_incidencia{
     color: white;
     text-align: center;
