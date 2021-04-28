@@ -39,7 +39,7 @@ class IncidenciesController extends Controller
         $incidencies->descripcio = $request->input('descripcio');
         $incidencies->nom_metge = $request->input('nom_metge');
         $incidencies->tipus_incidencies_id = $request->input('tipus_incidencies_id');
-        // $incidencies->alertants_id = $request->input('alertants_id');
+        $incidencies->alertants_id = $request->input('alertants_id');
         $incidencies->municipis_id = $request->input('municipis_id');
         $incidencies->ususaris_id = $request->input('user_id');
         try{
