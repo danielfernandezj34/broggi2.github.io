@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('titulo', 'Recurs Incidencia')
+@section('titulo', 'SEMS - Recurs Incidencia')
 @section('color_fons', "recurs")
 @section('color-atras', 'recurs')
 @section('boto_atras', './principal_recursos')

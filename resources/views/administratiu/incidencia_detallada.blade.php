@@ -1,5 +1,5 @@
 @extends('plantilla')
-@section('titulo', 'Administratiu Inciències Detall')
+@section('titulo', 'SEMS - Administratiu Inciències Detall')
 @section('color_fons', "administratiu")
 @section('color-atras', 'administratiu')
 @section('boto_atras', './incidencies')

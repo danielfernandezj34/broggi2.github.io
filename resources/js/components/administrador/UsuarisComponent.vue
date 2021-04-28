@@ -2,9 +2,11 @@
     <main>
         <div class="card mt-3">
             <div class="card-body mt-1">
-                <h5 class="card-title" id="titol_form">Usuaris</h5>
-                <div class="form-inline my-2 my-lg-0" style="margin-left: 40%;">
-                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres"><i class="far fa-filter" @click="filtres"> Filtres</i></button>
+                <div id="centrarElements">
+                    <h5 class="card-title">Taula d'Usuaris</h5>
+                </div>
+                <div id="centrarElements">
+                    <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="button" id="boto_filtres" @click="filtres"><i class="far fa-filter"></i> Filtres</button>
                 </div>
                 <div v-if="usuaris.length == 0" class="alert alert-light mt-2" role="alert">
                             No hi ha cap usuari.
@@ -32,6 +34,7 @@
                                 </td>
                             </div>
                             <td>
+                                <button type="submit" class="btn btn-primary btn-sm" @click="mostrarUsuari(usuari)"><i class="fas fa-eye"></i></button>
                                 <button type="submit" class="btn btn-secondary btn-sm" @click="editUsuari(usuari)"><i class="far fa-edit"></i> Editar</button>
                                 <button type="submit" id="botones" class="btn btn-danger btn-sm ml-1" @click="confirmarDelete(usuari)"><i class="far fa-trash-alt"></i> Esborrar</button>
                             </td>
@@ -41,13 +44,13 @@
                 <nav aria-label="Page navigation example" class="ml-5">
                     <ul class="pagination">
                         <li class="page-item" :class="{disabled: meta_usuaris.from == meta_usuaris.current_page}">
-                            <a class="page-link"  aria-label="Previous"  @click="paginar(pagina)">
+                            <a class="page-link"  aria-label="Previous"  @click="paginar(meta_usuaris.current_page - 1)">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li class="page-item" :class="{active: pagina == meta_usuaris.current_page}" v-for="(pagina, index) in paginas" :key="index"><a class="page-link" v-text="pagina" @click="paginar(pagina)"></a></li>
                         <li class="page-item" :class="{disabled: meta_usuaris.last_page == meta_usuaris.current_page}">
-                            <a class="page-link" aria-label="Next" @click="paginar(pagina)">
+                            <a class="page-link" aria-label="Next" @click="paginar(meta_usuaris.current_page + 1)">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
@@ -124,19 +127,7 @@
                                 </div>
                             </div>
 
-
-                            <div class="form-group row">
-
-                                <label for="recurs" class="col-sm-2 col-form-label">Tipus de Recurs</label>
-                                <div class="col-sm-7 mt-2">
-                                    <select class="form-control" id="recurs" name="recurs" v-model="usuari.recursos_id">
-                                        <option v-for="tipusRecurs in tipusRecursos" :key="tipusRecurs.id" v-bind:value="tipusRecurs.id">{{ tipusRecurs.tipus   }}</option>
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div class="form-group row">
+                            <div class="form-group row" id="centrarElements">
                                 <label for="rol" class="col-sm-2 col-form-label">Tipus de Rol</label>
                                 <div class="form-check form-check-inline ml-3" v-for="rol in rols" :key="rol.id">
                                     <input class="form-check-input" type="radio" name="rol" :id="rol.id" :value="rol.id" v-model="usuari.rols_id">
@@ -146,12 +137,94 @@
                                 </div>
                             </div>
 
+                            <div v-if="usuari.rols_id == 3" class="form-group row" id="centrarElements">
+                                <label for="recurs" class="col-sm-2 col-form-label">Tipus de Recurs</label>
+                                <div class="col-sm-7 mt-2">
+                                    <select class="form-control" id="recurs" name="recurs" v-model="usuari.recursos_id">
+                                        <option v-for="tipusRecurs in tipusRecursos" :key="tipusRecurs.id" v-bind:value="tipusRecurs.id">{{tipusRecurs.tipus}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div v-else style="visibility:hidden" disabled class="form-group row" >
+                                <label for="recurs" class="col-sm-2 col-form-label" >Tipus de Recurs</label>
+                                <div class="col-sm-7 mt-2">
+                                    <select class="form-control" id="recurs" name="recurs" v-model="usuari.recursos_id">
+                                        <option value="" selected> </option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
-                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertUsuari()">Afegir</button>
-                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateUsuari()">Modificar</button>
+                        <button v-if="insert" type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="insertUsuari()"><i class="far fa-check"></i> Afegir</button>
+                        <button v-else type="button" id="botonBorrar" class="btn btn-success btn-sm" @click="updateUsuari()"><i class="far fa-check"></i> Modificar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Mostrar -->
+        <div class="modal fade" id="modalMostrarUsuari" tabindex="-1" role="dialog" aria-labelledby="modalBorrarLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="AlertantModalLabel">Mostrar Usuari</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="nom" class="col-sm-2 col-form-label" >Nom</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="nom" class="form-control" id="nom" v-model="usuari.nom" disabled>
+                                </div>
+                                 <label for="cognoms" class="col-sm-2 col-form-label" >Cognoms</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="cognoms" class="form-control" id="cognoms" v-model="usuari.cognoms" disabled>
+                                </div>
+                            </div>
+
+                             <div class="form-group row">
+                                <label for="email" class="col-sm-2 col-form-label" >Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="email" class="form-control" id="email" v-model="usuari.email" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="username" class="col-sm-2 col-form-label" >Username</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="username" class="form-control" id="username" v-model="usuari.username" disabled>
+                                </div>
+                                <label for="contrasenya" class="col-sm-2 col-form-label" >Contrasenya</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="contrasenya" class="form-control" id="contrasenya" v-model="usuari.contrasenya" disabled>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="rol" class="col-sm-2 col-form-label" >Rol</label>
+                                <div class="col-sm-4">
+                                    <div v-for="rol in rols" :key="rol.id">
+                                        <input type="text" name="rol" v-if="usuari.rols_id == rol.id" class="form-control" id="rol" v-model="rol.nom" disabled>
+                                    </div>
+                                </div>
+                                <label for="tipusRecurs" v-if="usuari.rols_id == 3" class="col-sm-2 col-form-label" >Tipus de recurs de l'usuari</label>
+                                <div v-if="usuari.rols_id == 3" class="col-sm-4">
+                                    <div v-for="tipusRecurs in tipusRecursos" :key="tipusRecurs.id">
+                                        <input v-if="tipusRecurs.id == usuari.recursos_id" type="text" name="tipusRecurs" class="form-control" id="tipusRecurs" v-model="tipusRecurs.tipus" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
                     </div>
                 </div>
             </div>
@@ -208,8 +281,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tancar</button>
-                    <button type="button" class="btn btn-success btn-sm"><i class="far fa-filter" @click="aplicarFiltres(emailUsuari, idUsuari, idRolUsuari)">Aplicar Filtres</i></button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i> Tancar</button>
+                    <button type="button" class="btn btn-success btn-sm" @click="aplicarFiltres(emailUsuari, idUsuari, idRolUsuari)"><i class="far fa-filter"></i> Aplicar Filtres</button>
                 </div>
                 </div>
             </div>
@@ -358,6 +431,10 @@
             confirmarDelete(usuari){
                 this.usuari = usuari;
                 $('#modalBorrar').modal('show')
+            },
+             mostrarUsuari(usuari){
+                this.usuari = usuari;
+                $('#modalMostrarUsuari').modal('show')
             },
             borrarUsuari(){
                 let me = this;
