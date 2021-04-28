@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+
         <form>
             <div class="form-group row">
                 <div class="card col-6 mr-1 mt-2" id="card">
@@ -8,6 +9,13 @@
                         <input type="hidden" id="id_alertant" name="id_alertant" v-model="alertant.id">
                     </div>
                     <div class="card-body">
+
+                        <div v-if="telefonAlertant == true" class=" col-sm-12 col-12 alert alert-success alert-dismissible fade show mt-2" role="alert">
+                            <strong>Alertant registrat anteriorment!</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
 
                         <div class="form-group row">
 
@@ -271,6 +279,12 @@
                 </div>
 
                 <div class="collapse multi-collapse card-body mt-2 ml-2 mr-2" id="afectat4" style="border: 2px solid #2c3e50; border-radius: 4px">
+                    <div v-if="telefonAfectat4 != ''" class=" col-sm-12 col-12 alert alert-success alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Afectat registrat anteriorment!</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <h3><strong>Afectat 4</strong></h3>
                     <div class="form-group row">
                         <div class="col-sm-4 col-4">
@@ -394,6 +408,12 @@
                     <div class="form-group row">
                         <button type="button" class="btn btn-primary m-2" id="afegir3" v-on:click="colorboto3()" :style="{ 'background-color': color3}" style="float:right" data-toggle="collapse" href="#afectat4" role="button" aria-expanded="false" aria-controls="afectat4" :disabled="afectat3.nom == ''">
                             Afegir Cuart Afectat
+                        </button>
+                    </div>
+                    <div v-if="telefonAfectat3 != ''" class=" col-sm-12 col-12 alert alert-success alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Afectat registrat anteriorment!</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <h3><strong>Afectat 3</strong></h3>
@@ -521,6 +541,14 @@
                             Afegir Tercer Afectat
                         </button>
                     </div>
+
+                    <div v-if="telefonAfectat2 != ''" class=" col-sm-12 col-12 alert alert-success alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Afectat registrat anteriorment!</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
                     <h3><strong>Afectat 2</strong></h3>
 
                     <div class="form-group row">
@@ -670,6 +698,12 @@
                     <div class="form-group row">
                         <button type="button" class="btn btn-primary m-2" id="afegir" v-on:click="colorboto()" :style="{ 'background-color': color}" style="float:right" data-toggle="collapse" href="#afectat2" role="button" aria-expanded="false" aria-controls="afectat2" :disabled="afectat.te_cip == ''">
                             Afegir Segon Afectat
+                        </button>
+                    </div>
+                    <div v-if="telefonAfectat != ''" class=" col-sm-12 col-12 alert alert-success alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Afectat registrat anteriorment!</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
@@ -951,6 +985,7 @@ export default {
                 color4 : '#2c3e50',
                 tipusAfec : 1,
                 descripcioAdicional : '',
+                telefonAlertant : false,
                 telefonAfectat : '',
                 telefonAfectat2 : '',
                 telefonAfectat3 : '',
@@ -1309,6 +1344,7 @@ export default {
                         this.alertant.adreca = this.alertants[i].adreca;
                         this.alertant.municipis_id = this.alertants[i].municipis_id;
                         this.alertant.tipus_alertants_id = this.alertants[i].tipus_alertants_id;
+                        this.telefonAlertant = true;
                     }
                     i++;
                 }
@@ -1337,7 +1373,7 @@ export default {
             },
             cercarAfectat(telefon){
                 var i = 0;
-                debugger;
+                // debugger;
                 while(this.afectats.length > i){
                     if(this.afectats[i].telefon == telefon){
                         this.afectat.telefon = this.afectats[i].telefon;
@@ -1591,7 +1627,7 @@ export default {
 
 
                 if(problema == false){
-                    return window.open('http://localhost:8080/broggi2.github.io/public/incidencies', '_self');
+                    return window.open('http://localhost:80/broggi2.github.io/public/incidencies', '_self');
                 }
 
             },
