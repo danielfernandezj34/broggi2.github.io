@@ -224,7 +224,11 @@
                         'legend': {
                             'position': 'none'
                         },
-                        'chartArea': {width: '50%'}
+
+                        'hAxis': {
+                            'format':'0',
+                            'minValue': 0
+                        }
                 };
 
                 var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
@@ -257,7 +261,10 @@
                         'legend': {
                             'position': 'none'
                         },
-                        'chartArea': {width: '50%'}
+                        'hAxis': {
+                            'format':'0',
+                            'minValue': 0
+                        }
                 };
 
                 var chart = new google.visualization.BarChart(document.getElementById('chart_div3'));
@@ -290,7 +297,10 @@
                         'legend': {
                             'position': 'none'
                         },
-                        'chartArea': {width: '50%'}
+                        'hAxis': {
+                            'format':'0',
+                            'minValue': 0
+                        }
                 };
 
                 var chart = new google.visualization.BarChart(document.getElementById('chart_div4'));
@@ -323,7 +333,11 @@
                         'legend': {
                             'position': 'none'
                         },
-                        'chartArea': {width: '50%'}
+
+                        'hAxis': {
+                            'format':'0',
+                            'minValue': 0
+                        }
                 };
 
                 var chart = new google.visualization.BarChart(document.getElementById('chart_div5'));
