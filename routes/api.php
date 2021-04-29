@@ -23,6 +23,11 @@ use App\Http\Controllers\Api\HelpboxPaginateController;
 use App\Http\Controllers\Api\Incidencies_has_recursosController;
 use App\Http\Controllers\Api\IncidenciesPaginateController;
 use App\Http\Controllers\Api\ProvinciesGraficController;
+use App\Http\Controllers\Api\ComarquesBarcelonaController;
+use App\Http\Controllers\Api\ComarquesGironaController;
+use App\Http\Controllers\Api\ComarquesLleidaController;
+use App\Http\Controllers\Api\ComarquesTarragonaController;
+use App\Http\Controllers\Api\ComarquesGraficController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,4 +64,9 @@ Route::apiResource('paginate_recursos', RecursosPaginateController::class);
 Route::apiResource('paginate_helpbox', HelpboxPaginateController::class);
 Route::apiResource('paginate_incidencies', IncidenciesPaginateController::class);
 Route::apiResource('provincies_grafic', ProvinciesGraficController::class);
+Route::apiResource('comarques_barcelona', ComarquesBarcelonaController::class);
+Route::apiResource('comarques_girona', ComarquesGironaController::class);
+Route::apiResource('comarques_lleida', ComarquesLleidaController::class);
+Route::apiResource('comarques_tarragona', ComarquesTarragonaController::class);
+Route::apiResource('comarques_grafic', ComarquesGraficController::class);
 Route::apiResource('incidencies_has_recursos', Incidencies_has_recursosController::class);
