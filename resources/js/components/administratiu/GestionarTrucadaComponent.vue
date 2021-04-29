@@ -21,17 +21,10 @@
 
                             <div class="col-sm-6 col-6">
                                 <label for="telefon_alertant" class="col-form-label"><strong>Telèfon</strong>
-                                    <!-- <div class="mt-2">
-                                        <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                            type="button"
-                                            title="What is your phone number?"
-                                            data-container="body"
-                                            data-toggle="popover"
-                                            data-placement="left"
-                                            data-trigger="hover"
-                                            data-delay= "500"
-                                            data-content="Quin és el seu numero de telefon?"></i>
-                                    </div> -->
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                            type="button" :title="[helpbox[3].preguntaES, helpbox[3].preguntaEN]"></i>
+                                    </div>
                                 </label>
 
                                 <input class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="alertant.telefon" @keyup.enter="cercaAlertant(alertant.telefon)">
@@ -40,17 +33,10 @@
 
                             <div class="col-sm-6 col-6">
                                 <label for="tipus_alertant" class="col-form-label"><strong>Tipus alertant</strong>
-                                    <!-- <div id="div_helpbox" style="float: right;" class="col-sm-12">
-                                        <i style="float: right;position: relative;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                            type="button"
-                                            title="What kind of informant are you, a VIP informant, a health center, an accidental informant, of the affected?"
-                                            data-container="body"
-                                            data-toggle="popover"
-                                            data-placement="left"
-                                            data-trigger="hover"
-                                            data-delay= "500"
-                                            data-content="Quin tipus d'alertat ets, VIP, centre medic, alertat accidental, l'entorn de l'afectat o el propi afectat?"></i>
-                                    </div> -->
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                            type="button" :title="[helpbox[0].preguntaES, helpbox[0].preguntaEN]"></i>
+                                    </div>
                                 </label>
                                 <select v-model="alertant.tipus_alertants_id" class="form-control" name="tipus_alertant" id="tipus_alertant">
                                     <option  v-for="tipuAlertant in tipusAlertants" :key="tipuAlertant.id" :value="tipuAlertant.id">{{ tipuAlertant.tipus }}</option>
@@ -68,17 +54,10 @@
 
                             <div class="col-sm-9 col-9" >
                                 <label for="nom_hospital" class="col-form-label"><strong>Nom del centre Sanitari</strong>
-                                    <!-- <div id="div_helpbox" class="col-12">
-                                        <i style="float: right;position: relative;margin: -17px 0px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                        type="button"
-                                        title="What is the name of the ?"
-                                        data-container="body"
-                                        data-toggle="popover"
-                                        data-placement="left"
-                                        data-trigger="hover"
-                                        data-delay= "500"
-                                        data-content="Quin és el seu nom?"></i>
-                                    </div> -->
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[14].preguntaES, helpbox[14].preguntaEN]"></i>
+                                    </div>
                                 </label>
                                 <input class="form-control" type="text" name="nom_hospital" id="nom_hospital" v-model="alertant.nom"  disabled>
                             </div>
@@ -95,17 +74,10 @@
 
                             <div class="col-sm-6 col-6">
                                 <label for="nom_alertant" class="col-form-label"><strong>Nom</strong>
-                                    <!-- <div id="div_helpbox" class="col-sm-12">
-                                        <i style="float: right; position: relative;margin: -17px 0px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                        type="button"
-                                        title="What is your name?"
-                                        data-container="body"
-                                        data-toggle="popover"
-                                        data-placement="left"
-                                        data-trigger="hover"
-                                        data-delay= "500"
-                                        data-content="Quin és el seu nom?"></i>
-                                    </div> -->
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[1].preguntaES, helpbox[1].preguntaEN]"></i>
+                                    </div>
                                 </label>
 
                                 <input class="form-control" type="text" name="nom_alertant" id="nom_alertant" v-model="alertant.nom">
@@ -114,17 +86,10 @@
 
                             <div class="col-sm-6 col-6">
                                 <label for="cognom_alertant" class="col-form-label"><strong>Cognoms</strong>
-                                    <!-- <div id="div_helpbox" class="col-sm-12">
-                                        <i style="float: right;position: relative;margin-top: -17px;margin-right:-30px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                        type="button"
-                                        title="What is your surname?"
-                                        data-container="body"
-                                        data-toggle="popover"
-                                        data-placement="left"
-                                        data-trigger="hover"
-                                        data-delay= "500"
-                                        data-content="Quin és el seu cognom?"></i>
-                                    </div> -->
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[2].preguntaES, helpbox[2].preguntaEN]"></i>
+                                    </div>
                                 </label>
                                 <input class="form-control" type="text" name="cognom_alertant" id="cognom_alertant" v-model="alertant.cognoms">
                             </div>
@@ -135,17 +100,10 @@
 
                         <div class="col-sm-6 col-6">
                             <label for="tipus_accident" class="col-form-label"><strong>Tipus d'accident o d'incident</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is the type of accident or incident?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el tipus d'accident?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button" :title="[helpbox[11].preguntaES, helpbox[11].preguntaEN]"></i>
+                                </div>
                             </label>
                             <select class="form-control" name="tipus_accident" id="tipus_accident" v-model="incidencia.tipus_incidencies_id">
                                 <option v-for="tipuIncidencia in tipusIncidencies" :key="tipuIncidencia.id" :value="tipuIncidencia.id">{{ tipuIncidencia.tipus }}</option>
@@ -154,17 +112,10 @@
 
                         <div class="col-sm-6 col-6">
                             <label for="descripcio" class="col-form-label"><strong>Descripció d'accident o d'incident</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="Can you describe what happened?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Pots descriure que ha pasat?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button" :title="[helpbox[13].preguntaES, helpbox[13].preguntaEN]"></i>
+                                </div>
                             </label>
                             <textarea class="form-control" v-model="incidencia.descripcio" id="descripcio" name= "descripcio" rows="4" placeholder="Descripció sobre l'accident o l'incident..."></textarea>
                         </div>
@@ -187,17 +138,10 @@
 
                             <div class="col-sm-7 col-7">
                                 <label for="municipi" class="col-form-label"><strong>Municipi</strong>
-                                    <!-- <div class="mt-2">
-                                        <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                            type="button"
-                                            title="What is your phone number?"
-                                            data-container="body"
-                                            data-toggle="popover"
-                                            data-placement="left"
-                                            data-trigger="hover"
-                                            data-delay= "500"
-                                            data-content="Quin és el seu numero de telefon?"></i>
-                                    </div> -->
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                            type="button" :title="[helpbox[5].preguntaES, helpbox[5].preguntaEN]"></i>
+                                    </div>
                                 </label>
                                 <input v-if="alertant.tipus_alertants_id == 1" type="text" class="form-control" id="municipi" name="municipi" v-model="nomMunicipi" disabled>
                                 <select v-else v-model="incidencia.municipis_id" class="form-control" name="municipi" id="municipi" @change="localitzacio(incidencia.municipis_id)">
@@ -209,14 +153,24 @@
 
                             <div class="col-sm-5 col-5">
 
-                                <label for="provincia" class="col-form-label"><strong>Provincies</strong></label>
+                                <label for="provincia" class="col-form-label"><strong>Provincies</strong>
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                            type="button" :title="[helpbox[4].preguntaES, helpbox[4].preguntaEN]"></i>
+                                    </div>
+                                </label>
                                 <input class="form-control" type="text" name="provincia" id="provincia" v-model="nomProvincia" disabled>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="comarca" class="col-form-label"><strong>Comarca</strong></label>
+                                <label for="comarca" class="col-form-label"><strong>Comarca</strong>
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                            type="button" :title="[helpbox[5].preguntaES, helpbox[5].preguntaEN]"></i>
+                                    </div>
+                                </label>
                                 <input class="form-control" type="text" name="comarca" id="comarca" v-model="nomComarca" disabled>
                             </div>
 
@@ -225,34 +179,20 @@
                         <div class="form-group row">
                             <div class="col-sm-12 col-12">
                                 <label for="direccio" class="col-form-label"><strong>Adreça</strong>
-                                    <!-- <div id="div_helpbox" class="col-sm-12">
-                                        <i style="float: right;position: relative;margin-top: -17px;margin-right:-32px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                            type="button"
-                                            title="What is your address?"
-                                            data-container="body"
-                                            data-toggle="popover"
-                                            data-placement="left"
-                                            data-trigger="hover"
-                                            data-delay= "500"
-                                            data-content="Quina es la teva adreça?"></i>
-                                    </div> -->
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                            type="button" :title="[helpbox[6].preguntaES, helpbox[6].preguntaEN]"></i>
+                                    </div>
                                 </label>
                                 <input v-if="alertant.tipus_alertants_id == 1" type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca" disabled>
                                 <input v-else type="text" class="form-control" name="direccio" id="direccio" v-model="alertant.adreca">
 
                                 <div v-if="alertant.tipus_alertants_id != 1">
                                     <label for="comp_direccio" class="col-form-label"><strong>Adreça complementària</strong>
-                                        <!-- <div id="div_helpbox" class="col-sm-12">
-                                            <i style="float: right;position: relative;margin-top: -17px;margin-right:-32px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                                type="button"
-                                                title="What is your complementary address?"
-                                                data-container="body"
-                                                data-toggle="popover"
-                                                data-placement="left"
-                                                data-trigger="hover"
-                                                data-delay= "500"
-                                                data-content="Quina es la teva adreça complementària?"></i>
-                                        </div> -->
+                                        <div class="mt-2">
+                                            <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                                type="button" :title="[helpbox[6].preguntaES, helpbox[6].preguntaEN]"></i>
+                                        </div>
                                     </label>
                                     <input type="text" class="form-control" name="comp_direccio" id="comp_direccio" v-model="incidencia.adreca_complement">
                                 </div>
@@ -289,36 +229,22 @@
                     <div class="form-group row">
                         <div class="col-sm-4 col-4">
                             <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat4.id">
-                            <label for="nom_afectat4" class="col-form-label"><strong>Nom</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your name?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu nom?"></i>
-                                </div> -->
-                            </label>
+                                <label for="nom_afectat4" class="col-form-label"><strong>Nom</strong>
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[1].preguntaES, helpbox[1].preguntaEN]"></i>
+                                    </div>
+                                </label>
                             <input class="form-control" type="text" name="nom_afectat4" id="nom_afectat4" v-model="afectat4.nom">
                         </div>
 
 
                         <div class="col-sm-4 col-4">
                             <label for="cognom_afectat4" class="col-form-label"><strong>Cognom</strong>
-                                <!-- <div class="mt-2">
-                                <i style="float: right;position: relative;margin-top: -25px;margin-right:-30px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your surname?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu cognom?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[2].preguntaES, helpbox[2].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="text" name="cognom_afectat4" id="cognom_afectat4" v-model="afectat4.cognoms">
 
@@ -326,17 +252,10 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="telefon_alertant4" class="col-form-label"><strong>Telèfon</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your phone number?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu telèfon?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button" :title="[helpbox[3].preguntaES, helpbox[3].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="tel" name="telefon_alertant4" id="telefon_alertant4" maxlength="9" min="0" v-model="afectat4.telefon" @keyup="cercarAfectat4(afectat4.telefon)">
                             <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
@@ -363,34 +282,20 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="edat_afectat4" class="col-form-label"><strong>Edat</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="How old are you?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quina edat tens?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button" :title="[helpbox[8].preguntaES, helpbox[8].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="number" name="edat_afectat4" id="edat_afectat4" min="0" maxlength="3" v-model="afectat4.edat">
                         </div>
 
                         <div class="col-sm-4 col-4">
                             <label for="genere4" class="col-form-label"><strong>Génere</strong>
-                                <!-- <div class="mt-2">
-                                        <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                            type="button"
-                                            title="Are you a man or a woman?"
-                                            data-container="body"
-                                            data-toggle="popover"
-                                            data-placement="left"
-                                            data-trigger="hover"
-                                            data-delay= "500"
-                                            data-content="Ets home o dona?"></i>
-                                    </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[10].preguntaES, helpbox[10].preguntaEN]"></i>
+                                </div>
                             </label><br>
                             <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
                                 <input class="form-check-input" type="radio" name="genere4" :id="4 + sexe.sexe" :value="sexe.id" v-model="afectat4.sexes_id">
@@ -421,17 +326,10 @@
                         <div class="col-sm-4 col-4">
                             <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat3.id">
                             <label for="nom_afectat3" class="col-form-label"><strong>Nom</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your name?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu nom?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[1].preguntaES, helpbox[1].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="text" name="nom_afectat3" id="nom_afectat3" v-model="afectat3.nom">
                         </div>
@@ -439,17 +337,10 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="cognom_afectat3" class="col-form-label"><strong>Cognom</strong>
-                                <!-- <div class="mt-2">
-                                <i style="float: right;position: relative;margin-top: -25px;margin-right:-30px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your surname?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu cognom?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[2].preguntaES, helpbox[2].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="text" name="cognom_afectat3" id="cognom_afectat3" v-model="afectat3.cognoms">
 
@@ -457,17 +348,10 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="telefon_alertant3" class="col-form-label"><strong>Telèfon</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your phone number?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu telèfon?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button" :title="[helpbox[3].preguntaES, helpbox[3].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="tel" name="telefon_alertant3" id="telefon_alertant3" maxlength="9" min="0" v-model="afectat3.telefon" @keyup="cercarAfectat3(afectat3.telefon)">
                             <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
@@ -494,34 +378,20 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="edat_afectat3" class="col-form-label"><strong>Edat</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="How old are you?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quina edat tens?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button" :title="[helpbox[8].preguntaES, helpbox[8].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="number" name="edat_afectat3" id="edat_afectat3" min="0" maxlength="3" v-model="afectat3.edat">
                         </div>
 
                         <div class="col-sm-4 col-4">
                             <label for="genere3" class="col-form-label"><strong>Génere</strong>
-                                <!-- <div class="mt-2">
-                                        <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                            type="button"
-                                            title="Are you a man or a woman?"
-                                            data-container="body"
-                                            data-toggle="popover"
-                                            data-placement="left"
-                                            data-trigger="hover"
-                                            data-delay= "500"
-                                            data-content="Ets home o dona?"></i>
-                                    </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[10].preguntaES, helpbox[10].preguntaEN]"></i>
+                                </div>
                             </label><br>
                             <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
                                 <input class="form-check-input" type="radio" name="genere3" :id="3 + sexe.sexe" :value="sexe.id" v-model="afectat3.sexes_id">
@@ -555,17 +425,10 @@
                         <div class="col-sm-4 col-4">
                             <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat2.id">
                             <label for="nom_afectat2" class="col-form-label"><strong>Nom</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your name?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu nom?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[1].preguntaES, helpbox[1].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="text" name="nom_afectat2" id="nom_afectat2" v-model="afectat2.nom">
                         </div>
@@ -573,17 +436,10 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="cognom_afectat2" class="col-form-label"><strong>Cognoms</strong>
-                                <!-- <div class="mt-2">
-                                <i style="float: right;position: relative;margin-top: -25px;margin-right:-30px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your surname?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu cognom?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[2].preguntaES, helpbox[2].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="text" name="cognom_afectat2" id="cognom_afectat2" v-model="afectat2.cognoms">
 
@@ -591,17 +447,10 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="telefon_alertant2" class="col-form-label"><strong>Telèfon</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your phone number?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu telèfon?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button" :title="[helpbox[3].preguntaES, helpbox[3].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="tel" name="telefon_alertant2" id="telefon_alertant2" maxlength="9" min="0" v-model="afectat2.telefon" @keyup.enter="cercarAfectat2(afectat2.telefon)">
                             <p class="card-text"><small class="text-muted">Click "Enter" o "Intro" per verificar el número</small></p>
@@ -628,34 +477,20 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="edat_afectat2" class="col-form-label"><strong>Edat</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="How old are you?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quina edat tens?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button" :title="[helpbox[8].preguntaES, helpbox[8].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="number" name="edat_afectat2" id="edat_afectat2" min="0" maxlength="3" v-model="afectat2.edat">
                         </div>
 
                         <div class="col-sm-4 col-4">
                             <label for="genere2" class="col-form-label"><strong>Génere</strong>
-                                <!-- <div class="mt-2">
-                                        <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                            type="button"
-                                            title="Are you a man or a woman?"
-                                            data-container="body"
-                                            data-toggle="popover"
-                                            data-placement="left"
-                                            data-trigger="hover"
-                                            data-delay= "500"
-                                            data-content="Ets home o dona?"></i>
-                                    </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[10].preguntaES, helpbox[10].preguntaEN]"></i>
+                                </div>
                             </label><br>
                             <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
                                 <input class="form-check-input" type="radio" name="genere2" :id="2 + sexe.sexe" :value="sexe.id" v-model="afectat2.sexes_id">
@@ -672,17 +507,6 @@
                     <div class="form-group row">
                         <div class="col-12 col-sm-12">
                             <label for="descripcioAdicional" class="col-form-label"><strong>Descripció general sobre els afectats del incident</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="Can you describe what happened?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Pots descriure que ha pasat?"></i>
-                                </div> -->
                             </label>
                             <textarea class="form-control" v-model="descripcioAdicional" id="descripcioAdicional" name= "descripcioAdicional" rows="8" placeholder="Descripció breu sobre els afectats ex: (Dona de 35 anys, dos Homes de 42 i 38 anys...)"></textarea>
                         </div>
@@ -712,17 +536,10 @@
                         <div class="col-sm-4 col-4">
                             <input type="hidden" id="id_alertant" name="id_alertant" v-model="afectat.id">
                             <label for="nom_afectat" class="col-form-label"><strong>Nom</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your name?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu nom?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[1].preguntaES, helpbox[1].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input v-if="alertant.tipus_alertants_id == 2" class="form-control" type="text" name="nom_afectat" id="nom_afectat" v-model="alertant.nom" disabled>
                             <input v-else class="form-control" type="text" name="nom_afectat" id="nom_afectat" v-model="afectat.nom">
@@ -731,17 +548,10 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="cognom_afectat" class="col-form-label"><strong>Cognom</strong>
-                                <!-- <div class="mt-2">
-                                <i style="float: right;position: relative;margin-top: -25px;margin-right:-30px;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your surname?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu cognom?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[2].preguntaES, helpbox[2].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input v-if="alertant.tipus_alertants_id == 2" class="form-control" type="text" name="cognom_afectat" id="cognom_afectat" v-model="alertant.cognoms" disabled>
                             <input v-else class="form-control" type="text" name="cognom_afectat" id="cognom_afectat" v-model="afectat.cognoms">
@@ -750,17 +560,10 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="telefon_alertant" class="col-form-label"><strong>Telèfon</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="What is your phone number?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quin és el seu telèfon?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button" :title="[helpbox[3].preguntaES, helpbox[3].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input v-if="alertant.tipus_alertants_id == 2" class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="alertant.telefon" disabled>
                             <input v-else class="form-control" type="tel" name="telefon_alertant" id="telefon_alertant" maxlength="9" min="0" v-model="afectat.telefon" @keyup.enter="cercarAfectat(afectat.telefon)" >
@@ -791,34 +594,20 @@
 
                         <div class="col-sm-4 col-4">
                             <label for="edat_afectat" class="col-form-label"><strong>Edat</strong>
-                                <!-- <div class="mt-2">
-                                    <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                    type="button"
-                                    title="How old are you?"
-                                    data-container="body"
-                                    data-toggle="popover"
-                                    data-placement="left"
-                                    data-trigger="hover"
-                                    data-delay= "500"
-                                    data-content="Quina edat tens?"></i>
-                                </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                    type="button" :title="[helpbox[8].preguntaES, helpbox[8].preguntaEN]"></i>
+                                </div>
                             </label>
                             <input class="form-control" type="number" name="edat_afectat" id="edat_afectat" min="0" maxlength="3" v-model="afectat.edat">
                         </div>
 
                         <div class="col-sm-4 col-4">
                             <label for="genere" class="col-form-label"><strong>Génere</strong>
-                                <!-- <div class="mt-2">
-                                        <i style="float: right;position: relative;margin: -25px -20px 0 0;" class="far fa-question-square ml-4 float-sm-right" id="helpbox"
-                                            type="button"
-                                            title="Are you a man or a woman?"
-                                            data-container="body"
-                                            data-toggle="popover"
-                                            data-placement="left"
-                                            data-trigger="hover"
-                                            data-delay= "500"
-                                            data-content="Ets home o dona?"></i>
-                                    </div> -->
+                                <div class="mt-2">
+                                    <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[10].preguntaES, helpbox[10].preguntaEN]"></i>
+                                </div>
                             </label><br>
                             <div class="form-check form-check-inline" v-for="sexe in sexes" :key="sexe.id" >
                                 <input class="form-check-input" type="radio" name="genere" :id="1 + sexe.sexe" :value="sexe.id" v-model="afectat.sexes_id">

@@ -11,7 +11,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="d-flex justify-content-center ml-3">
-                            <button class="btn btn-primary btn-sm ml-2"
+                            <button class="btn text-white btn-sm ml-2 botonesAdministratiu"
                                     :class="{ ventanaActiva: ventanaSeleccionada === ventana }"
                                     v-for="(ventana, index) in ventanas"
                                     :key="index"
@@ -59,9 +59,9 @@
                                         <h4>Formació per poder omplir el formulari de la trucada</h4>
                                     </div>
                                 </div>
-                                <div class="row d-flex justify-content-end">
+                                <div class="row d-flex justify-content-end ">
                                     <div class="col-md-9 d-flex justify-content-end">
-                                        <div style="height: 360px; width: 640px">
+                                        <div>
                                             <video ref="video" controls type="video/mp4" :src="videoFormacio" id="video" @timeupdate="currentTime_ = $event.target.currentTime"></video>
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@
                                                 :class="{ ventanaActiva: seccionSeleccionada == seccion.id }"
                                                 v-for="(seccion, index) in secciones"
                                                 :key="seccion.nombre"
-                                                @click="currentTime(seccion.segundo); cambiarSeccion(index);">
+                                                @click="currentTime = seccion.segundo; cambiarSeccion(index);">
                                             {{ seccion.nombre }}
                                         </button>
                                     </div>
@@ -96,8 +96,8 @@
                 ventanaSeleccionada: 'PCR',
                 videoSeleccionado: 0,
                 seccionSeleccionada: 0,
-                videoFormacio: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
-                currentTime_: 0,
+                currentTime_: 10,
+                videoFormacio: 'http://localhost/broggi2.github.io/public/img/RCP.mp4',
                 videos: [{
                     id: '0',
                     nombre: 'RCP Completa',
@@ -114,19 +114,19 @@
                 secciones: [{
                     id: '0',
                     nombre: 'Alertant',
-                    segundo: '100.0'
+                    segundo: '0.0'
                 },{
                     id: '1',
                     nombre: 'Localització',
-                    segundo: '150.0'
+                    segundo: '10.0'
                 },{
                     id: '2',
                     nombre: 'Afectats',
-                    segundo: '200.0'
+                    segundo: '20.0'
                 },{
                     id: '3',
                     nombre: 'Múltiples Afectats',
-                    segundo: '300.0'
+                    segundo: '30.0'
                 },{
                     id: '4',
                     nombre: 'Recurs',
@@ -154,7 +154,7 @@
                 get: ({ currentTime_ }) => currentTime_,
                 set(time) {
                     this.$refs.video.currentTime = time
-                },
+                }
             }
         },
         mounted() {
