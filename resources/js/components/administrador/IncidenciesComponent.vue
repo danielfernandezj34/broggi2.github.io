@@ -452,9 +452,10 @@ export default ({
                 municipis_id:'',
                 usuaris_id:'',
                 pagina: "",
-                meta_incidencies: {},
                 paginas: []
-            }
+            },
+            meta_incidencies: {}
+
         }
 
     },
