@@ -215,7 +215,6 @@
                     }
                 }
 
-
                 var options = {
                         'title': 'Barcelona',
                         'width':0,
