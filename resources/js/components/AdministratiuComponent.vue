@@ -1,7 +1,7 @@
 <template>
     <div>
         <div :id="div_admin_recurs" class="float-sm-left col-md-6 col-sm-12">
-            <button :id="boto_admin_recurs_for" type="button" class="btn btn-outline-success float-md-right mr-sm-1 mr-md-3 mr-lg-5" @click="abrirModalPCR()"><h2><strong>Activar Formació</strong></h2></button>
+            <button :id="boto_admin_recurs_for" type="button" class="btn btn-outline-success float-md-right mr-sm-1 mr-md-3 mr-lg-5" @click="abrirModalPCR()"><h2><strong>Formació</strong></h2></button>
         </div>
         <div :id="div_admin_recurs" class="float-sm-right col-md-6 col-sm-12">
             <a href="./trucada"><button :id="boto_admin_recurs_tru" type="button" class="btn btn-outline-warning float-md-left ml-sm-1 ml-md-3 ml-lg-5" ><h2><strong>Gestionar Trucades</strong></h2></button></a>
@@ -11,7 +11,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="d-flex justify-content-center ml-3">
-                            <button class="btn text-white btn-sm ml-2 botonesAdministratiu"
+                            <button class="btn text-white btn-sm ml-2 btn-primary"
                                     :class="{ ventanaActiva: ventanaSeleccionada === ventana }"
                                     v-for="(ventana, index) in ventanas"
                                     :key="index"
@@ -59,13 +59,13 @@
                                         <h4>Formació per poder omplir el formulari de la trucada</h4>
                                     </div>
                                 </div>
-                                <div class="row d-flex justify-content-end ">
-                                    <div class="col-md-9 d-flex justify-content-end">
+                                <div class="row d-flex justify-content-end mb-5">
+                                    <div class="col-md-10 d-flex justify-content-end">
                                         <div>
                                             <video ref="video" controls type="video/mp4" :src="videoFormacio" id="video" @timeupdate="currentTime_ = $event.target.currentTime"></video>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <button class="btn btn-secondary btn-sm mx-4 my-2"
                                                 :class="{ ventanaActiva: seccionSeleccionada == seccion.id }"
                                                 v-for="(seccion, index) in secciones"
@@ -109,7 +109,7 @@
                 },{
                     id: '2',
                     nombre: 'Seqüència RCP',
-                    ruta: 'http://localhost/broggi2.github.io/public/img/SequenciaRCP.mp4'
+                    ruta: 'http://localhost/broggi2.github.io/public/img/formacioTrucada.mp4'
                 }],
                 secciones: [{
                     id: '0',
@@ -118,19 +118,15 @@
                 },{
                     id: '1',
                     nombre: 'Localització',
-                    segundo: '10.0'
+                    segundo: '95.0'
                 },{
                     id: '2',
                     nombre: 'Afectats',
-                    segundo: '20.0'
+                    segundo: '104.0'
                 },{
                     id: '3',
-                    nombre: 'Múltiples Afectats',
-                    segundo: '30.0'
-                },{
-                    id: '4',
                     nombre: 'Recurs',
-                    segundo: '50.0'
+                    segundo: '193.0'
                 }]
             }
         },
