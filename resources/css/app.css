@@ -429,15 +429,11 @@ button.page-link {
     width: 100%;
 }
 .ventanaActiva{
-    background-color: #df0d6a ;
+    background-color: #df0d6a !important;
 }
 
 #helpbox{
     float: right;
     position: relative;
     margin: -25px -20px 0 0;
-}
-.botonesAdministratiu{
-    background-color: #2C3E50 ;
-
 }

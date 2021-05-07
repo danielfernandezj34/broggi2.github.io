@@ -20,7 +20,7 @@
                         <div class="form-group row">
 
                             <div class="col-sm-6 col-6">
-                                <label for="telefon_alertant" class="col-form-label"><strong>Telèfon</strong>
+                                <label for="telefon_alertant" class="col-form-label"><strong>Telèfon *</strong>
                                     <div class="mt-2">
                                         <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                             type="button" :title="[helpbox[3].preguntaES, helpbox[3].preguntaEN]"></i>
@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="col-sm-6 col-6">
-                                <label for="tipus_alertant" class="col-form-label"><strong>Tipus alertant</strong>
+                                <label for="tipus_alertant" class="col-form-label"><strong>Tipus alertant *</strong>
                                     <div class="mt-2">
                                         <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                             type="button" :title="[helpbox[0].preguntaES, helpbox[0].preguntaEN]"></i>
@@ -53,7 +53,7 @@
                         <div v-if="alertant.tipus_alertants_id == 1" class="form-group row">
 
                             <div class="col-sm-9 col-9" >
-                                <label for="nom_hospital" class="col-form-label"><strong>Nom del centre Sanitari</strong>
+                                <label for="nom_hospital" class="col-form-label"><strong>Nom del centre Sanitari *</strong>
                                     <div class="mt-2">
                                         <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                         type="button" :title="[helpbox[14].preguntaES, helpbox[14].preguntaEN]"></i>
@@ -63,7 +63,12 @@
                             </div>
 
                             <div class="col-sm-9 col-9" >
-                                <label for="nom_metge" class="col-form-label"><strong>Nom del metge</strong></label>
+                                <label for="nom_metge" class="col-form-label"><strong>Nom del metge</strong>
+                                    <div class="mt-2">
+                                        <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
+                                        type="button" :title="[helpbox[15].preguntaES, helpbox[15].preguntaEN]"></i>
+                                    </div>
+                                </label>
                                 <input class="form-control" type="text" name="nom_metge" id="nom_metge" v-model="incidencia.nom_metge">
 
                             </div>
@@ -99,7 +104,7 @@
                         <div class="form-group row">
 
                         <div class="col-sm-6 col-6">
-                            <label for="tipus_accident" class="col-form-label"><strong>Tipus d'accident o d'incident</strong>
+                            <label for="tipus_accident" class="col-form-label"><strong>Tipus d'accident o d'incident *</strong>
                                 <div class="mt-2">
                                     <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                     type="button" :title="[helpbox[11].preguntaES, helpbox[11].preguntaEN]"></i>
@@ -111,7 +116,7 @@
                         </div>
 
                         <div class="col-sm-6 col-6">
-                            <label for="descripcio" class="col-form-label"><strong>Descripció d'accident o d'incident</strong>
+                            <label for="descripcio" class="col-form-label"><strong>Descripció d'incident</strong>
                                 <div class="mt-2">
                                     <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                     type="button" :title="[helpbox[13].preguntaES, helpbox[13].preguntaEN]"></i>
@@ -137,7 +142,7 @@
                         <div class="form-group row">
 
                             <div class="col-sm-7 col-7">
-                                <label for="municipi" class="col-form-label"><strong>Municipi</strong>
+                                <label for="municipi" class="col-form-label"><strong>Municipi *</strong>
                                     <div class="mt-2">
                                         <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                             type="button" :title="[helpbox[5].preguntaES, helpbox[5].preguntaEN]"></i>
@@ -153,7 +158,7 @@
 
                             <div class="col-sm-5 col-5">
 
-                                <label for="provincia" class="col-form-label"><strong>Provincies</strong>
+                                <label for="provincia" class="col-form-label"><strong>Provincia *</strong>
                                     <div class="mt-2">
                                         <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                             type="button" :title="[helpbox[4].preguntaES, helpbox[4].preguntaEN]"></i>
@@ -165,7 +170,7 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="comarca" class="col-form-label"><strong>Comarca</strong>
+                                <label for="comarca" class="col-form-label"><strong>Comarca *</strong>
                                     <div class="mt-2">
                                         <i class="far fa-question-square ml-4 float-sm-right" id="helpbox"
                                             type="button" :title="[helpbox[5].preguntaES, helpbox[5].preguntaEN]"></i>
@@ -266,7 +271,7 @@
                     <div class="form-group row">
 
                         <div class="col-4 col-sm-4">
-                            <label for="te_cip4" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal)</strong></label>
+                            <label for="te_cip4" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal) *</strong></label>
                             <div class="form-check form-check-inline">
                                 <input type="radio" class="form-check-input" name="cip_si4" id="cip_si4" value="1" v-model="afectat4.te_cip">
                                 <label for="cip_si4" class="form-check-label">Sí</label>
@@ -362,7 +367,7 @@
                     <div class="form-group row">
 
                         <div class="col-4 col-sm-4">
-                            <label for="te_cip3" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal)</strong></label>
+                            <label for="te_cip3" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal) *</strong></label>
                             <div class="form-check form-check-inline">
                                 <input type="radio" class="form-check-input" name="cip_si3" id="cip_si3" value="1" v-model="afectat3.te_cip">
                                 <label for="cip_si3" class="form-check-label">Sí</label>
@@ -461,7 +466,7 @@
                     <div class="form-group row">
 
                         <div class="col-4 col-sm-4">
-                            <label for="te_cip2" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal)</strong></label>
+                            <label for="te_cip2" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal) *</strong></label>
                             <div class="form-check form-check-inline">
                                 <input type="radio" class="form-check-input" name="cip_si2" id="cip_si2" value="1" v-model="afectat2.te_cip">
                                 <label for="cip_si2" class="form-check-label">Sí</label>
@@ -578,7 +583,7 @@
                     <div class="form-group row">
 
                         <div class="col-4 col-sm-4">
-                            <label for="te_cip" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal)</strong></label>
+                            <label for="te_cip" class="col-form-label"><strong>Té CIP? (Codi d'Identificació Personal) *</strong></label>
                             <div class="form-check form-check-inline">
                                 <input type="radio" class="form-check-input" name="cip_si" id="cip_si" value="1" v-model="afectat.te_cip">
                                 <label for="cip_si" class="form-check-label">Sí</label>
@@ -762,7 +767,7 @@ export default {
                 sexes : [],
                 alertants : [],
                 afectats : [],
-                ///////////////
+                helpbox: [],
                 comarcaSel : '',
                 nomComarca : '',
                 provinciaSel : '',

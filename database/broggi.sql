@@ -157,7 +157,7 @@ CREATE TABLE `helpbox` (
 
 LOCK TABLES `helpbox` WRITE;
 /*!40000 ALTER TABLE `helpbox` DISABLE KEYS */;
-INSERT INTO `helpbox` (`preguntaES`, `preguntaEN`) VALUES ("Quin tipus d\'alertat ets, VIP, centre medic, alertat accidental, l\'entorn de l\'afectat o el propi afectat?","What kind of informant are you, a VIP informant, a health center, an accidental informant, of the affected?"),("Quin és el seu nom?",'What is your name?'),('Quin és el seu cognom?','What is your surname?'),('Quin és el seu numero de telefon?','What is your phone number?'),('Quina és la seva provincia?','In which province are you?'),('Quin es el seu municipi?','In which municipality are you?'),('Quina es la teva adreça?','What is your address?'),('Tens una adreça complementaria?','Do you have a complementary address?'),('Quin és el seu DNI o TS/NSS','What is your DNI or TS/NSS?'),('Quina edat tens?','How old are you?'),('Ets home o dona?','Are you a man or a woman?'),("Quin és el tipus d\'accident?",'What is the type of accident or incident?'),("Quin és el numero de l\'afectat?",'What is the number of affected?'),('Pots descriure que ha pasat?','Can you describe what happened?');
+INSERT INTO `helpbox` (`preguntaES`, `preguntaEN`) VALUES ("Quin tipus d\'alertat ets, VIP, centre medic, alertat accidental, l\'entorn de l\'afectat o el propi afectat?","What kind of informant are you, a VIP informant, a health center, an accidental informant, of the affected?"),("Quin és el seu nom?",'What is your name?'),('Quin és el seu cognom?','What is your surname?'),('Quin és el seu numero de telefon?','What is your phone number?'),('Quina és la seva provincia?','In which province are you?'),('Quin es el seu municipi?','In which municipality are you?'),('Quina es la teva adreça?','What is your address?'),('Tens una adreça complementaria?','Do you have a complementary address?'),('Quin és el seu DNI o TS/NSS','What is your DNI or TS/NSS?'),('Quina edat tens?','How old are you?'),('Ets home o dona?','Are you a man or a woman?'),("Quin és el tipus d\'accident?",'What is the type of accident or incident?'),("Quin és el numero de l\'afectat?",'What is the number of affected?'),('Pots descriure que ha pasat?','Can you describe what happened?'),('Quin es el nom del centre sanitari?','What is the name of the health center?'),('Quin es el nom del metge?','What is the name of the doctor?'),('Pots descriure als afectats a grans trets?','Can you describe those affected broadly?');
 /*!40000 ALTER TABLE `helpbox` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -547,6 +547,8 @@ CREATE TABLE `usuaris` (
 --
 -- Dumping data for table `usuaris`
 --
+
+INSERT INTO incidencies_has_recursos VALUES (2,1,'0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',1,'1');
 
 LOCK TABLES `usuaris` WRITE;
 /*!40000 ALTER TABLE `usuaris` DISABLE KEYS */;
