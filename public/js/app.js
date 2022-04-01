@@ -1995,8 +1995,8 @@ __webpack_require__.r(__webpack_exports__);
       ventanaSeleccionada: 'PCR',
       videoSeleccionado: 0,
       seccionSeleccionada: 0,
-      videoFormacio: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
-      currentTime_: 0,
+      currentTime_: 10,
+      videoFormacio: 'http://localhost/broggi2.github.io/public/img/RCP.mp4',
       videos: [{
         id: '0',
         nombre: 'RCP Completa',
@@ -2008,28 +2008,24 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         id: '2',
         nombre: 'Seqüència RCP',
-        ruta: 'http://localhost/broggi2.github.io/public/img/SequenciaRCP.mp4'
+        ruta: 'http://localhost/broggi2.github.io/public/img/formacioTrucada.mp4'
       }],
       secciones: [{
         id: '0',
         nombre: 'Alertant',
-        segundo: '100.0'
+        segundo: '0.0'
       }, {
         id: '1',
         nombre: 'Localització',
-        segundo: '150.0'
+        segundo: '95.0'
       }, {
         id: '2',
         nombre: 'Afectats',
-        segundo: '200.0'
+        segundo: '104.0'
       }, {
         id: '3',
-        nombre: 'Múltiples Afectats',
-        segundo: '300.0'
-      }, {
-        id: '4',
         nombre: 'Recurs',
-        segundo: '50.0'
+        segundo: '193.0'
       }]
     };
   },
@@ -2827,8 +2823,9 @@ __webpack_require__.r(__webpack_exports__);
         'legend': {
           'position': 'none'
         },
-        'chartArea': {
-          width: '50%'
+        'hAxis': {
+          'format': '0',
+          'minValue': 0
         }
       };
       var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
@@ -2860,8 +2857,9 @@ __webpack_require__.r(__webpack_exports__);
         'legend': {
           'position': 'none'
         },
-        'chartArea': {
-          width: '50%'
+        'hAxis': {
+          'format': '0',
+          'minValue': 0
         }
       };
       var chart = new google.visualization.BarChart(document.getElementById('chart_div3'));
@@ -2893,8 +2891,9 @@ __webpack_require__.r(__webpack_exports__);
         'legend': {
           'position': 'none'
         },
-        'chartArea': {
-          width: '50%'
+        'hAxis': {
+          'format': '0',
+          'minValue': 0
         }
       };
       var chart = new google.visualization.BarChart(document.getElementById('chart_div4'));
@@ -2926,8 +2925,9 @@ __webpack_require__.r(__webpack_exports__);
         'legend': {
           'position': 'none'
         },
-        'chartArea': {
-          width: '50%'
+        'hAxis': {
+          'format': '0',
+          'minValue': 0
         }
       };
       var chart = new google.visualization.BarChart(document.getElementById('chart_div5'));
@@ -3644,9 +3644,9 @@ __webpack_require__.r(__webpack_exports__);
         municipis_id: '',
         usuaris_id: '',
         pagina: "",
-        meta_incidencies: {},
         paginas: []
-      }
+      },
+      meta_incidencies: {}
     };
   },
   methods: {
@@ -7322,178 +7322,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     user_id: {
@@ -7513,7 +7341,7 @@ __webpack_require__.r(__webpack_exports__);
       sexes: [],
       alertants: [],
       afectats: [],
-      ///////////////
+      helpbox: [],
       comarcaSel: '',
       nomComarca: '',
       provinciaSel: '',
@@ -7525,6 +7353,7 @@ __webpack_require__.r(__webpack_exports__);
       color4: '#2c3e50',
       tipusAfec: 1,
       descripcioAdicional: '',
+      telefonAlertant: false,
       telefonAfectat: '',
       telefonAfectat2: '',
       telefonAfectat3: '',
@@ -7547,7 +7376,12 @@ __webpack_require__.r(__webpack_exports__);
         tipus_incidencies_id: '',
         alertants_id: '',
         municipis_id: 0,
-        usuaris_id: ''
+        usuaris_id: '',
+        incidencies_has_recursos: [],
+        incidencies_has_afectats: {
+          incidencies_id: '',
+          afectats_id: ''
+        }
       },
       alertant: {
         id: '',
@@ -7863,6 +7697,7 @@ __webpack_require__.r(__webpack_exports__);
           this.alertant.adreca = this.alertants[i].adreca;
           this.alertant.municipis_id = this.alertants[i].municipis_id;
           this.alertant.tipus_alertants_id = this.alertants[i].tipus_alertants_id;
+          this.telefonAlertant = true;
         }
 
         i++;
@@ -7897,7 +7732,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     cercarAfectat: function cercarAfectat(telefon) {
-      var i = 0;
+      var i = 0; // debugger;
 
       while (this.afectats.length > i) {
         if (this.afectats[i].telefon == telefon) {
@@ -8041,30 +7876,49 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     crearIncidencia: function crearIncidencia() {
-      // debugger;
       var problema = false;
-      var data = new Date();
+      var data = new Date(); //debugger;
 
-      if (this.afectat.telefon != telefonAfectat) {
+      if (this.afectat.telefon != this.telefonAfectat) {
         this.crearAfectat();
+        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
+      } else {
+        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
       }
 
-      if (this.afectat2.telefon != telefonAfectat2) {
+      if (this.afectat2.telefon != this.telefonAfectat2) {
         if (this.afectat2.te_cip != '') {
           this.crearAfectat2();
+          this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+          this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
         }
+      } else {
+        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
       }
 
-      if (this.afectat3.telefon != telefonAfectat3) {
+      if (this.afectat3.telefon != this.telefonAfectat3) {
         if (this.afectat3.te_cip != '') {
           this.crearAfectat3();
+          this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+          this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
         }
+      } else {
+        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
       }
 
-      if (this.afectat4.telefon != telefonAfectat4) {
+      if (this.afectat4.telefon != this.telefonAfectat4) {
         if (this.afectat4.te_cip != '') {
           this.crearAfectat4();
+          this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+          this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
         }
+      } else {
+        this.incidencia.incidencies_has_afectats.incidencies_id = this.incidencia.id;
+        this.incidencia.incidencies_has_afectats.afectats_id = this.afectat.id;
       }
 
       this.crearAlertant(); //Campos de tabla incidencia rellenados con los valores que le faltaban
@@ -8086,7 +7940,30 @@ __webpack_require__.r(__webpack_exports__);
         this.incidencia.descripcio + ', DESCRIPCIO DELS AFECTATS: ' + this.descripcioAdicional;
       }
 
-      this.crearIncidencies_has_recursos();
+      if (this.incidencies_has_recursos.recursos_id != '') {
+        this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos);
+      }
+
+      if (this.incidencies_has_recursos2.recursos_id != '') {
+        this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos2);
+      }
+
+      if (this.incidencies_has_recursos3.recursos_id != '') {
+        this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos3);
+      }
+
+      if (this.incidencies_has_recursos4.recursos_id != '') {
+        this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos4);
+      }
+
+      if (this.incidencies_has_recursos5.recursos_id != '') {
+        this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos5);
+      }
+
+      if (this.incidencies_has_recursos6.recursos_id != '') {
+        this.incidencia.incidencies_has_recursos.push(this.incidencies_has_recursos6);
+      }
+
       var me = this;
       axios.post('/incidencies', me.incidencia).then(function (response) {
         console.log(response);
@@ -8168,76 +8045,80 @@ __webpack_require__.r(__webpack_exports__);
           me.errorMessage = error.response.data.error;
         });
       }
-    },
-    crearIncidencies_has_recursos: function crearIncidencies_has_recursos() {
-      var me = this;
+    } // crearIncidencies_has_recursos(){
+    //     var me = this;
+    //         this.incidencies_has_recursos.incidencies_id = this.incidencia.id;
+    //         axios
+    //             .post('/incidencies_has_recursos', me.incidencies_has_recursos)
+    //             .then(function(response){
+    //                 console.log(response);
+    //             }).catch(function(error){
+    //                 console.log(error.response.status);
+    //                 console.log(error.response.data);
+    //                 me.errorMessage = error.response.data.error;
+    //         })
+    //     }
+    //     if(this.incidencies_has_recursos2.recursos_id != ''){
+    //         this.incidencies_has_recursos2.incidencies_id = this.incidencia.id;
+    //         axios
+    //             .post('/incidencies_has_recursos', me.incidencies_has_recursos2)
+    //             .then(function(response){
+    //                 console.log(response);
+    //             }).catch(function(error){
+    //                 console.log(error.response.status);
+    //                 console.log(error.response.data);
+    //                 me.errorMessage = error.response.data.error;
+    //         })
+    //     }
+    //     if(this.incidencies_has_recursos3.recursos_id != ''){
+    //         this.incidencies_has_recursos3.incidencies_id = this.incidencia.id;
+    //         axios
+    //             .post('/incidencies_has_recursos', me.incidencies_has_recursos3)
+    //             .then(function(response){
+    //                 console.log(response);
+    //             }).catch(function(error){
+    //                 console.log(error.response.status);
+    //                 console.log(error.response.data);
+    //                 me.errorMessage = error.response.data.error;
+    //         })                }
+    //     if(this.incidencies_has_recursos4.recursos_id != ''){
+    //         this.incidencies_has_recursos4.incidencies_id = this.incidencia.id;
+    //         axios
+    //             .post('/incidencies_has_recursos', me.incidencies_has_recursos4)
+    //             .then(function(response){
+    //                 console.log(response);
+    //             }).catch(function(error){
+    //                 console.log(error.response.status);
+    //                 console.log(error.response.data);
+    //                 me.errorMessage = error.response.data.error;
+    //         })
+    //     }
+    //     if(this.incidencies_has_recursos5.recursos_id != ''){
+    //         this.incidencies_has_recursos5.incidencies_id = this.incidencia.id;
+    //         axios
+    //             .post('/incidencies_has_recursos', me.incidencies_has_recursos5)
+    //             .then(function(response){
+    //                 console.log(response);
+    //             }).catch(function(error){
+    //                 console.log(error.response.status);
+    //                 console.log(error.response.data);
+    //                 me.errorMessage = error.response.data.error;
+    //         })
+    //     }
+    //     if(this.incidencies_has_recursos6.recursos_id != ''){
+    //         this.incidencies_has_recursos6.incidencies_id = this.incidencia.id;
+    //         axios
+    //             .post('/incidencies_has_recursos', me.incidencies_has_recursos6)
+    //             .then(function(response){
+    //                 console.log(response);
+    //             }).catch(function(error){
+    //                 console.log(error.response.status);
+    //                 console.log(error.response.data);
+    //                 me.errorMessage = error.response.data.error;
+    //         })
+    //     }
+    // }
 
-      if (this.incidencies_has_recursos.recursos_id != '') {
-        this.incidencies_has_recursos.incidencies_id = this.incidencia.id;
-        axios.post('/incidencies_has_recursos', me.incidencies_has_recursos).then(function (response) {
-          console.log(response);
-        })["catch"](function (error) {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.errorMessage = error.response.data.error;
-        });
-      }
-
-      if (this.incidencies_has_recursos2.recursos_id != '') {
-        this.incidencies_has_recursos2.incidencies_id = this.incidencia.id;
-        axios.post('/incidencies_has_recursos', me.incidencies_has_recursos2).then(function (response) {
-          console.log(response);
-        })["catch"](function (error) {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.errorMessage = error.response.data.error;
-        });
-      }
-
-      if (this.incidencies_has_recursos3.recursos_id != '') {
-        this.incidencies_has_recursos3.incidencies_id = this.incidencia.id;
-        axios.post('/incidencies_has_recursos', me.incidencies_has_recursos3).then(function (response) {
-          console.log(response);
-        })["catch"](function (error) {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.errorMessage = error.response.data.error;
-        });
-      }
-
-      if (this.incidencies_has_recursos4.recursos_id != '') {
-        this.incidencies_has_recursos4.incidencies_id = this.incidencia.id;
-        axios.post('/incidencies_has_recursos', me.incidencies_has_recursos4).then(function (response) {
-          console.log(response);
-        })["catch"](function (error) {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.errorMessage = error.response.data.error;
-        });
-      }
-
-      if (this.incidencies_has_recursos5.recursos_id != '') {
-        this.incidencies_has_recursos5.incidencies_id = this.incidencia.id;
-        axios.post('/incidencies_has_recursos', me.incidencies_has_recursos5).then(function (response) {
-          console.log(response);
-        })["catch"](function (error) {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.errorMessage = error.response.data.error;
-        });
-      }
-
-      if (this.incidencies_has_recursos6.recursos_id != '') {
-        this.incidencies_has_recursos6.incidencies_id = this.incidencia.id;
-        axios.post('/incidencies_has_recursos', me.incidencies_has_recursos6).then(function (response) {
-          console.log(response);
-        })["catch"](function (error) {
-          console.log(error.response.status);
-          console.log(error.response.data);
-          me.errorMessage = error.response.data.error;
-        });
-      }
-    }
   },
   created: function created() {
     this.selectAll();
@@ -8257,10 +8138,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
 //
 //
 //
@@ -8713,11 +8590,11 @@ __webpack_require__.r(__webpack_exports__);
         tipus_incidencies_id: '',
         alertants_id: '',
         municipis_id: '',
-        usuaris_id: '',
-        pagina: "",
-        meta_incidencies: {},
-        paginas: []
-      }
+        usuaris_id: ''
+      },
+      pagina: "",
+      paginas: [],
+      meta_incidencies: {}
     };
   },
   methods: {
@@ -46444,7 +46321,7 @@ var render = function() {
                     "button",
                     {
                       key: index,
-                      staticClass: "btn btn-primary btn-sm ml-2",
+                      staticClass: "btn text-white btn-sm ml-2 btn-primary",
                       class: {
                         ventanaActiva: _vm.ventanaSeleccionada === ventana
                       },
@@ -46573,43 +46450,36 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "row d-flex justify-content-end" },
+                      { staticClass: "row d-flex justify-content-end mb-5" },
                       [
                         _c(
                           "div",
                           {
-                            staticClass: "col-md-9 d-flex justify-content-end"
+                            staticClass: "col-md-10 d-flex justify-content-end"
                           },
                           [
-                            _c(
-                              "div",
-                              {
-                                staticStyle: { height: "360px", width: "640px" }
-                              },
-                              [
-                                _c("video", {
-                                  ref: "video",
-                                  attrs: {
-                                    controls: "",
-                                    type: "video/mp4",
-                                    src: _vm.videoFormacio,
-                                    id: "video"
-                                  },
-                                  on: {
-                                    timeupdate: function($event) {
-                                      _vm.currentTime_ =
-                                        $event.target.currentTime
-                                    }
+                            _c("div", [
+                              _c("video", {
+                                ref: "video",
+                                attrs: {
+                                  controls: "",
+                                  type: "video/mp4",
+                                  src: _vm.videoFormacio,
+                                  id: "video"
+                                },
+                                on: {
+                                  timeupdate: function($event) {
+                                    _vm.currentTime_ = $event.target.currentTime
                                   }
-                                })
-                              ]
-                            )
+                                }
+                              })
+                            ])
                           ]
                         ),
                         _vm._v(" "),
                         _c(
                           "div",
-                          { staticClass: "col-md-3" },
+                          { staticClass: "col-md-2" },
                           _vm._l(_vm.secciones, function(seccion, index) {
                             return _c(
                               "button",
@@ -46623,7 +46493,7 @@ var render = function() {
                                 },
                                 on: {
                                   click: function($event) {
-                                    _vm.currentTime(seccion.segundo)
+                                    _vm.currentTime = seccion.segundo
                                     _vm.cambiarSeccion(index)
                                   }
                                 }
@@ -46656,7 +46526,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", [_c("strong", [_vm._v("Activar Formació")])])
+    return _c("h2", [_c("strong", [_vm._v("Formació")])])
   },
   function() {
     var _vm = this
@@ -47008,7 +46878,9 @@ var render = function() {
                         attrs: { "aria-label": "Previous" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_alertant.current_page - 1
+                            )
                           }
                         }
                       },
@@ -47063,7 +46935,9 @@ var render = function() {
                         attrs: { "aria-label": "Next" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_alertant.current_page + 1
+                            )
                           }
                         }
                       },
@@ -48508,7 +48382,9 @@ var render = function() {
                         attrs: { "aria-label": "Previous" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_helpbox.current_page - 1
+                            )
                           }
                         }
                       },
@@ -48561,7 +48437,9 @@ var render = function() {
                         attrs: { "aria-label": "Next" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_helpbox.current_page + 1
+                            )
                           }
                         }
                       },
@@ -48847,7 +48725,7 @@ var render = function() {
                   ? _c(
                       "button",
                       {
-                        staticClass: "btn btn-danger btn-sm",
+                        staticClass: "btn btn-success btn-sm",
                         attrs: { type: "button", id: "botonBorrar" },
                         on: {
                           click: function($event) {
@@ -48855,12 +48733,15 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Afegir")]
+                      [
+                        _c("i", { staticClass: "far fa-check" }),
+                        _vm._v(" Afegir")
+                      ]
                     )
                   : _c(
                       "button",
                       {
-                        staticClass: "btn btn-danger btn-sm",
+                        staticClass: "btn btn-success btn-sm",
                         attrs: { type: "button", id: "botonBorrar" },
                         on: {
                           click: function($event) {
@@ -48868,7 +48749,10 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Modificar")]
+                      [
+                        _c("i", { staticClass: "far fa-check" }),
+                        _vm._v(" Modificar")
+                      ]
                     )
               ])
             ])
@@ -49144,7 +49028,9 @@ var render = function() {
                         attrs: { "aria-label": "Previous" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_incidencies.current_page - 1
+                            )
                           }
                         }
                       },
@@ -49199,7 +49085,9 @@ var render = function() {
                         attrs: { "aria-label": "Next" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_incidencies.current_page + 1
+                            )
                           }
                         }
                       },
@@ -51991,7 +51879,9 @@ var render = function() {
                         attrs: { "aria-label": "Previous" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_recursos.current_page - 1
+                            )
                           }
                         }
                       },
@@ -52046,7 +51936,9 @@ var render = function() {
                         attrs: { "aria-label": "Next" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_recursos.current_page + 1
+                            )
                           }
                         }
                       },
@@ -52998,7 +52890,9 @@ var render = function() {
                         attrs: { "aria-label": "Previous" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_usuaris.current_page - 1
+                            )
                           }
                         }
                       },
@@ -53051,7 +52945,9 @@ var render = function() {
                         attrs: { "aria-label": "Next" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_usuaris.current_page + 1
+                            )
                           }
                         }
                       },
@@ -54380,7 +54276,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "centrarElements" } }, [
-      _c("h5", { staticClass: "card-title" }, [_vm._v("Usuaris")])
+      _c("h5", { staticClass: "card-title" }, [_vm._v("Taula d'Usuaris")])
     ])
   },
   function() {
@@ -59860,9 +59756,51 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
+              _vm.telefonAlertant == true
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        " col-sm-12 col-12 alert alert-success alert-dismissible fade show mt-2",
+                      attrs: { role: "alert" }
+                    },
+                    [
+                      _c("strong", [
+                        _vm._v("Alertant registrat anteriorment!")
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(0)
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-6 col-6" }, [
-                  _vm._m(0),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "telefon_alertant" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Telèfon *")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[3].preguntaES,
+                              _vm.helpbox[3].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -59911,7 +59849,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-6 col-6" }, [
-                  _vm._m(2),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "tipus_alertant" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Tipus alertant *")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[0].preguntaES,
+                              _vm.helpbox[0].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -59966,7 +59928,31 @@ var render = function() {
               _vm.alertant.tipus_alertants_id == 1
                 ? _c("div", { staticClass: "form-group row" }, [
                     _c("div", { staticClass: "col-sm-9 col-9" }, [
-                      _vm._m(3),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "nom_hospital" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Nom del centre Sanitari *")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-2" }, [
+                            _c("i", {
+                              staticClass:
+                                "far fa-question-square ml-4 float-sm-right",
+                              attrs: {
+                                id: "helpbox",
+                                type: "button",
+                                title: [
+                                  _vm.helpbox[14].preguntaES,
+                                  _vm.helpbox[14].preguntaEN
+                                ]
+                              }
+                            })
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -59997,7 +59983,31 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-9 col-9" }, [
-                      _vm._m(4),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "nom_metge" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Nom del metge")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-2" }, [
+                            _c("i", {
+                              staticClass:
+                                "far fa-question-square ml-4 float-sm-right",
+                              attrs: {
+                                id: "helpbox",
+                                type: "button",
+                                title: [
+                                  _vm.helpbox[15].preguntaES,
+                                  _vm.helpbox[15].preguntaEN
+                                ]
+                              }
+                            })
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -60032,7 +60042,31 @@ var render = function() {
                   ])
                 : _c("div", { staticClass: "form-group row" }, [
                     _c("div", { staticClass: "col-sm-6 col-6" }, [
-                      _vm._m(5),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "nom_alertant" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Nom")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-2" }, [
+                            _c("i", {
+                              staticClass:
+                                "far fa-question-square ml-4 float-sm-right",
+                              attrs: {
+                                id: "helpbox",
+                                type: "button",
+                                title: [
+                                  _vm.helpbox[1].preguntaES,
+                                  _vm.helpbox[1].preguntaEN
+                                ]
+                              }
+                            })
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -60062,7 +60096,31 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-6 col-6" }, [
-                      _vm._m(6),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "cognom_alertant" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Cognoms")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-2" }, [
+                            _c("i", {
+                              staticClass:
+                                "far fa-question-square ml-4 float-sm-right",
+                              attrs: {
+                                id: "helpbox",
+                                type: "button",
+                                title: [
+                                  _vm.helpbox[2].preguntaES,
+                                  _vm.helpbox[2].preguntaEN
+                                ]
+                              }
+                            })
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -60098,7 +60156,31 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-6 col-6" }, [
-                  _vm._m(7),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "tipus_accident" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Tipus d'accident o d'incident *")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[11].preguntaES,
+                              _vm.helpbox[11].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -60148,7 +60230,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-6 col-6" }, [
-                  _vm._m(8),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "descripcio" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Descripció d'incident")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[13].preguntaES,
+                              _vm.helpbox[13].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("textarea", {
                     directives: [
@@ -60187,12 +60293,33 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "card col-5 mt-2", attrs: { id: "card" } }, [
-          _vm._m(9),
+          _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "form-group row" }, [
               _c("div", { staticClass: "col-sm-7 col-7" }, [
-                _vm._m(10),
+                _c(
+                  "label",
+                  { staticClass: "col-form-label", attrs: { for: "municipi" } },
+                  [
+                    _c("strong", [_vm._v("Municipi *")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mt-2" }, [
+                      _c("i", {
+                        staticClass:
+                          "far fa-question-square ml-4 float-sm-right",
+                        attrs: {
+                          id: "helpbox",
+                          type: "button",
+                          title: [
+                            _vm.helpbox[5].preguntaES,
+                            _vm.helpbox[5].preguntaEN
+                          ]
+                        }
+                      })
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _vm.alertant.tipus_alertants_id == 1
                   ? _c("input", {
@@ -60276,7 +60403,31 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-5 col-5" }, [
-                _vm._m(11),
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-form-label",
+                    attrs: { for: "provincia" }
+                  },
+                  [
+                    _c("strong", [_vm._v("Provincia *")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mt-2" }, [
+                      _c("i", {
+                        staticClass:
+                          "far fa-question-square ml-4 float-sm-right",
+                        attrs: {
+                          id: "helpbox",
+                          type: "button",
+                          title: [
+                            _vm.helpbox[4].preguntaES,
+                            _vm.helpbox[4].preguntaEN
+                          ]
+                        }
+                      })
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -60309,7 +60460,28 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
               _c("div", { staticClass: "col-sm-6" }, [
-                _vm._m(12),
+                _c(
+                  "label",
+                  { staticClass: "col-form-label", attrs: { for: "comarca" } },
+                  [
+                    _c("strong", [_vm._v("Comarca *")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mt-2" }, [
+                      _c("i", {
+                        staticClass:
+                          "far fa-question-square ml-4 float-sm-right",
+                        attrs: {
+                          id: "helpbox",
+                          type: "button",
+                          title: [
+                            _vm.helpbox[5].preguntaES,
+                            _vm.helpbox[5].preguntaEN
+                          ]
+                        }
+                      })
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -60342,7 +60514,28 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
               _c("div", { staticClass: "col-sm-12 col-12" }, [
-                _vm._m(13),
+                _c(
+                  "label",
+                  { staticClass: "col-form-label", attrs: { for: "direccio" } },
+                  [
+                    _c("strong", [_vm._v("Adreça")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mt-2" }, [
+                      _c("i", {
+                        staticClass:
+                          "far fa-question-square ml-4 float-sm-right",
+                        attrs: {
+                          id: "helpbox",
+                          type: "button",
+                          title: [
+                            _vm.helpbox[6].preguntaES,
+                            _vm.helpbox[6].preguntaEN
+                          ]
+                        }
+                      })
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _vm.alertant.tipus_alertants_id == 1
                   ? _c("input", {
@@ -60371,33 +60564,55 @@ var render = function() {
                         }
                       }
                     })
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.alertant.adreca,
-                      expression: "alertant.adreca"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "direccio", id: "direccio" },
-                  domProps: { value: _vm.alertant.adreca },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                  : _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.alertant.adreca,
+                          expression: "alertant.adreca"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", name: "direccio", id: "direccio" },
+                      domProps: { value: _vm.alertant.adreca },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.alertant, "adreca", $event.target.value)
+                        }
                       }
-                      _vm.$set(_vm.alertant, "adreca", $event.target.value)
-                    }
-                  }
-                }),
+                    }),
                 _vm._v(" "),
                 _vm.alertant.tipus_alertants_id != 1
                   ? _c("div", [
-                      _vm._m(14),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "comp_direccio" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Adreça complementària")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-2" }, [
+                            _c("i", {
+                              staticClass:
+                                "far fa-question-square ml-4 float-sm-right",
+                              attrs: {
+                                id: "helpbox",
+                                type: "button",
+                                title: [
+                                  _vm.helpbox[6].preguntaES,
+                                  _vm.helpbox[6].preguntaEN
+                                ]
+                              }
+                            })
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -60467,7 +60682,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _vm._m(15)
+              _vm._m(3)
             ]),
             _vm._v(" "),
             _c(
@@ -60501,7 +60716,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(16)
+                _vm._m(4)
               ]
             )
           ]),
@@ -60517,7 +60732,25 @@ var render = function() {
               attrs: { id: "afectat4" }
             },
             [
-              _vm._m(17),
+              _vm.telefonAfectat4 != ""
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        " col-sm-12 col-12 alert alert-success alert-dismissible fade show mt-2",
+                      attrs: { role: "alert" }
+                    },
+                    [
+                      _c("strong", [
+                        _vm._v("¡Afectat registrat anteriorment!")
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(5)
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._m(6),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
@@ -60546,7 +60779,31 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(18),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "nom_afectat4" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Nom")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[1].preguntaES,
+                              _vm.helpbox[1].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -60576,7 +60833,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(19),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "cognom_afectat4" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Cognom")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[2].preguntaES,
+                              _vm.helpbox[2].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -60606,7 +60887,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(20),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "telefon_alertant4" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Telèfon")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[3].preguntaES,
+                              _vm.helpbox[3].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -60639,13 +60944,13 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(21)
+                  _vm._m(7)
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-4 col-sm-4" }, [
-                  _vm._m(22),
+                  _vm._m(8),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
                     _c("input", {
@@ -60753,7 +61058,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(23),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "edat_afectat4" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Edat")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[8].preguntaES,
+                              _vm.helpbox[8].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -60788,7 +61117,31 @@ var render = function() {
                   "div",
                   { staticClass: "col-sm-4 col-4" },
                   [
-                    _vm._m(24),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "genere4" }
+                      },
+                      [
+                        _c("strong", [_vm._v("Génere")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mt-2" }, [
+                          _c("i", {
+                            staticClass:
+                              "far fa-question-square ml-4 float-sm-right",
+                            attrs: {
+                              id: "helpbox",
+                              type: "button",
+                              title: [
+                                _vm.helpbox[10].preguntaES,
+                                _vm.helpbox[10].preguntaEN
+                              ]
+                            }
+                          })
+                        ])
+                      ]
+                    ),
                     _c("br"),
                     _vm._v(" "),
                     _vm._l(_vm.sexes, function(sexe) {
@@ -60889,7 +61242,25 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(25),
+              _vm.telefonAfectat3 != ""
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        " col-sm-12 col-12 alert alert-success alert-dismissible fade show mt-2",
+                      attrs: { role: "alert" }
+                    },
+                    [
+                      _c("strong", [
+                        _vm._v("¡Afectat registrat anteriorment!")
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(9)
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._m(10),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
@@ -60918,7 +61289,31 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(26),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "nom_afectat3" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Nom")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[1].preguntaES,
+                              _vm.helpbox[1].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -60948,7 +61343,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(27),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "cognom_afectat3" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Cognom")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[2].preguntaES,
+                              _vm.helpbox[2].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -60978,7 +61397,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(28),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "telefon_alertant3" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Telèfon")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[3].preguntaES,
+                              _vm.helpbox[3].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61011,13 +61454,13 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(29)
+                  _vm._m(11)
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-4 col-sm-4" }, [
-                  _vm._m(30),
+                  _vm._m(12),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
                     _c("input", {
@@ -61125,7 +61568,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(31),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "edat_afectat3" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Edat")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[8].preguntaES,
+                              _vm.helpbox[8].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61160,7 +61627,31 @@ var render = function() {
                   "div",
                   { staticClass: "col-sm-4 col-4" },
                   [
-                    _vm._m(32),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "genere3" }
+                      },
+                      [
+                        _c("strong", [_vm._v("Génere")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mt-2" }, [
+                          _c("i", {
+                            staticClass:
+                              "far fa-question-square ml-4 float-sm-right",
+                            attrs: {
+                              id: "helpbox",
+                              type: "button",
+                              title: [
+                                _vm.helpbox[10].preguntaES,
+                                _vm.helpbox[10].preguntaEN
+                              ]
+                            }
+                          })
+                        ])
+                      ]
+                    ),
                     _c("br"),
                     _vm._v(" "),
                     _vm._l(_vm.sexes, function(sexe) {
@@ -61261,7 +61752,25 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(33),
+              _vm.telefonAfectat2 != ""
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        " col-sm-12 col-12 alert alert-success alert-dismissible fade show mt-2",
+                      attrs: { role: "alert" }
+                    },
+                    [
+                      _c("strong", [
+                        _vm._v("¡Afectat registrat anteriorment!")
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(13)
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._m(14),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
@@ -61290,7 +61799,31 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(34),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "nom_afectat2" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Nom")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[1].preguntaES,
+                              _vm.helpbox[1].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61320,7 +61853,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(35),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "cognom_afectat2" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Cognoms")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[2].preguntaES,
+                              _vm.helpbox[2].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61350,7 +61907,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(36),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "telefon_alertant2" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Telèfon")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[3].preguntaES,
+                              _vm.helpbox[3].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61395,13 +61976,13 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(37)
+                  _vm._m(15)
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-4 col-sm-4" }, [
-                  _vm._m(38),
+                  _vm._m(16),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
                     _c("input", {
@@ -61521,7 +62102,31 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(39),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "edat_afectat2" }
+                    },
+                    [
+                      _c("strong", [_vm._v("Edat")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-2" }, [
+                        _c("i", {
+                          staticClass:
+                            "far fa-question-square ml-4 float-sm-right",
+                          attrs: {
+                            id: "helpbox",
+                            type: "button",
+                            title: [
+                              _vm.helpbox[8].preguntaES,
+                              _vm.helpbox[8].preguntaEN
+                            ]
+                          }
+                        })
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -61556,7 +62161,31 @@ var render = function() {
                   "div",
                   { staticClass: "col-sm-4 col-4" },
                   [
-                    _vm._m(40),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "genere2" }
+                      },
+                      [
+                        _c("strong", [_vm._v("Génere")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mt-2" }, [
+                          _c("i", {
+                            staticClass:
+                              "far fa-question-square ml-4 float-sm-right",
+                            attrs: {
+                              id: "helpbox",
+                              type: "button",
+                              title: [
+                                _vm.helpbox[10].preguntaES,
+                                _vm.helpbox[10].preguntaEN
+                              ]
+                            }
+                          })
+                        ])
+                      ]
+                    ),
                     _c("br"),
                     _vm._v(" "),
                     _vm._l(_vm.sexes, function(sexe) {
@@ -61626,11 +62255,11 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._m(41),
+                  _vm._m(17),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
                     _c("div", { staticClass: "col-12 col-sm-12" }, [
-                      _vm._m(42),
+                      _vm._m(18),
                       _vm._v(" "),
                       _c("textarea", {
                         directives: [
@@ -61704,6 +62333,24 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
+                  _vm.telefonAfectat != ""
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            " col-sm-12 col-12 alert alert-success alert-dismissible fade show mt-2",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _c("strong", [
+                            _vm._v("¡Afectat registrat anteriorment!")
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(19)
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
                     _c("div", { staticClass: "col-sm-4 col-4" }, [
                       _c("input", {
@@ -61731,7 +62378,31 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(43),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "nom_afectat" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Nom")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-2" }, [
+                            _c("i", {
+                              staticClass:
+                                "far fa-question-square ml-4 float-sm-right",
+                              attrs: {
+                                id: "helpbox",
+                                type: "button",
+                                title: [
+                                  _vm.helpbox[1].preguntaES,
+                                  _vm.helpbox[1].preguntaEN
+                                ]
+                              }
+                            })
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm.alertant.tipus_alertants_id == 2
                         ? _c("input", {
@@ -61796,7 +62467,31 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-4 col-4" }, [
-                      _vm._m(44),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "cognom_afectat" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Cognom")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-2" }, [
+                            _c("i", {
+                              staticClass:
+                                "far fa-question-square ml-4 float-sm-right",
+                              attrs: {
+                                id: "helpbox",
+                                type: "button",
+                                title: [
+                                  _vm.helpbox[2].preguntaES,
+                                  _vm.helpbox[2].preguntaEN
+                                ]
+                              }
+                            })
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm.alertant.tipus_alertants_id == 2
                         ? _c("input", {
@@ -61861,7 +62556,31 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-4 col-4" }, [
-                      _vm._m(45),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "telefon_alertant" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Telèfon")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-2" }, [
+                            _c("i", {
+                              staticClass:
+                                "far fa-question-square ml-4 float-sm-right",
+                              attrs: {
+                                id: "helpbox",
+                                type: "button",
+                                title: [
+                                  _vm.helpbox[3].preguntaES,
+                                  _vm.helpbox[3].preguntaEN
+                                ]
+                              }
+                            })
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm.alertant.tipus_alertants_id == 2
                         ? _c("input", {
@@ -61943,13 +62662,13 @@ var render = function() {
                             }
                           }),
                       _vm._v(" "),
-                      _vm._m(46)
+                      _vm._m(20)
                     ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
                     _c("div", { staticClass: "col-4 col-sm-4" }, [
-                      _vm._m(47),
+                      _vm._m(21),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -62085,7 +62804,31 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-4 col-4" }, [
-                      _vm._m(48),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "edat_afectat" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Edat")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-2" }, [
+                            _c("i", {
+                              staticClass:
+                                "far fa-question-square ml-4 float-sm-right",
+                              attrs: {
+                                id: "helpbox",
+                                type: "button",
+                                title: [
+                                  _vm.helpbox[8].preguntaES,
+                                  _vm.helpbox[8].preguntaEN
+                                ]
+                              }
+                            })
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -62120,7 +62863,31 @@ var render = function() {
                       "div",
                       { staticClass: "col-sm-4 col-4" },
                       [
-                        _vm._m(49),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-form-label",
+                            attrs: { for: "genere" }
+                          },
+                          [
+                            _c("strong", [_vm._v("Génere")]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mt-2" }, [
+                              _c("i", {
+                                staticClass:
+                                  "far fa-question-square ml-4 float-sm-right",
+                                attrs: {
+                                  id: "helpbox",
+                                  type: "button",
+                                  title: [
+                                    _vm.helpbox[10].preguntaES,
+                                    _vm.helpbox[10].preguntaEN
+                                  ]
+                                }
+                              })
+                            ])
+                          ]
+                        ),
                         _c("br"),
                         _vm._v(" "),
                         _vm._l(_vm.sexes, function(sexe) {
@@ -62185,7 +62952,7 @@ var render = function() {
         "div",
         { staticClass: "card mt-2 mb-2 col-11", attrs: { id: "card" } },
         [
-          _vm._m(50),
+          _vm._m(22),
           _vm._v(" "),
           _c(
             "div",
@@ -62201,9 +62968,9 @@ var render = function() {
             [
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(51),
+                  _vm._m(23),
                   _vm._v(" "),
-                  _vm._m(52),
+                  _vm._m(24),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -62250,9 +63017,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(53),
+                  _vm._m(25),
                   _vm._v(" "),
-                  _vm._m(54),
+                  _vm._m(26),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -62299,9 +63066,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(55),
+                  _vm._m(27),
                   _vm._v(" "),
-                  _vm._m(56),
+                  _vm._m(28),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -62350,7 +63117,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(57),
+                  _vm._m(29),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -62388,7 +63155,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(58),
+                  _vm._m(30),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -62426,7 +63193,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(59),
+                  _vm._m(31),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -62512,9 +63279,9 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(60),
+                  _vm._m(32),
                   _vm._v(" "),
-                  _vm._m(61),
+                  _vm._m(33),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -62561,9 +63328,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(62),
+                  _vm._m(34),
                   _vm._v(" "),
-                  _vm._m(63),
+                  _vm._m(35),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -62610,9 +63377,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(64),
+                  _vm._m(36),
                   _vm._v(" "),
-                  _vm._m(65),
+                  _vm._m(37),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -62661,7 +63428,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(66),
+                  _vm._m(38),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -62697,7 +63464,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(67),
+                  _vm._m(39),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -62735,7 +63502,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4 col-4" }, [
-                  _vm._m(68),
+                  _vm._m(40),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -62800,9 +63567,16 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "telefon_alertant" } },
-      [_c("strong", [_vm._v("Telèfon")])]
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
   },
   function() {
@@ -62819,129 +63593,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "tipus_alertant" } },
-      [_c("strong", [_vm._v("Tipus alertant")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "nom_hospital" } },
-      [_c("strong", [_vm._v("Nom del centre Sanitari")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "nom_metge" } },
-      [_c("strong", [_vm._v("Nom del metge")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "nom_alertant" } },
-      [_c("strong", [_vm._v("Nom")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "cognom_alertant" } },
-      [_c("strong", [_vm._v("Cognoms")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "tipus_accident" } },
-      [_c("strong", [_vm._v("Tipus d'accident o d'incident")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "descripcio" } },
-      [_c("strong", [_vm._v("Descripció d'accident o d'incident")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header bg-primary text-white" }, [
       _c("h3", { staticClass: "card-title" }, [_vm._v("Localització")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "municipi" } },
-      [_c("strong", [_vm._v("Municipi")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "provincia" } },
-      [_c("strong", [_vm._v("Provincies")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "comarca" } },
-      [_c("strong", [_vm._v("Comarca")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "direccio" } },
-      [_c("strong", [_vm._v("Adreça")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "comp_direccio" } },
-      [_c("strong", [_vm._v("Adreça complementària")])]
-    )
   },
   function() {
     var _vm = this
@@ -62967,37 +63621,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("h3", [_c("strong", [_vm._v("Afectat 4")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "nom_afectat4" } },
-      [_c("strong", [_vm._v("Nom")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "cognom_afectat4" } },
-      [_c("strong", [_vm._v("Cognom")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "telefon_alertant4" } },
-      [_c("strong", [_vm._v("Telèfon")])]
-    )
   },
   function() {
     var _vm = this
@@ -63016,7 +63657,7 @@ var staticRenderFns = [
     return _c(
       "label",
       { staticClass: "col-form-label", attrs: { for: "te_cip4" } },
-      [_c("strong", [_vm._v("Té CIP? (Codi d'Identificació Personal)")])]
+      [_c("strong", [_vm._v("Té CIP? (Codi d'Identificació Personal) *")])]
     )
   },
   function() {
@@ -63024,19 +63665,16 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "edat_afectat4" } },
-      [_c("strong", [_vm._v("Edat")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "genere4" } },
-      [_c("strong", [_vm._v("Génere")])]
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
   },
   function() {
@@ -63044,36 +63682,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h3", [_c("strong", [_vm._v("Afectat 3")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "nom_afectat3" } },
-      [_c("strong", [_vm._v("Nom")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "cognom_afectat3" } },
-      [_c("strong", [_vm._v("Cognom")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "telefon_alertant3" } },
-      [_c("strong", [_vm._v("Telèfon")])]
-    )
   },
   function() {
     var _vm = this
@@ -63092,7 +63700,7 @@ var staticRenderFns = [
     return _c(
       "label",
       { staticClass: "col-form-label", attrs: { for: "te_cip3" } },
-      [_c("strong", [_vm._v("Té CIP? (Codi d'Identificació Personal)")])]
+      [_c("strong", [_vm._v("Té CIP? (Codi d'Identificació Personal) *")])]
     )
   },
   function() {
@@ -63100,19 +63708,16 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "edat_afectat3" } },
-      [_c("strong", [_vm._v("Edat")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "genere3" } },
-      [_c("strong", [_vm._v("Génere")])]
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
   },
   function() {
@@ -63120,36 +63725,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h3", [_c("strong", [_vm._v("Afectat 2")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "nom_afectat2" } },
-      [_c("strong", [_vm._v("Nom")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "cognom_afectat2" } },
-      [_c("strong", [_vm._v("Cognoms")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "telefon_alertant2" } },
-      [_c("strong", [_vm._v("Telèfon")])]
-    )
   },
   function() {
     var _vm = this
@@ -63168,27 +63743,7 @@ var staticRenderFns = [
     return _c(
       "label",
       { staticClass: "col-form-label", attrs: { for: "te_cip2" } },
-      [_c("strong", [_vm._v("Té CIP? (Codi d'Identificació Personal)")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "edat_afectat2" } },
-      [_c("strong", [_vm._v("Edat")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "genere2" } },
-      [_c("strong", [_vm._v("Génere")])]
+      [_c("strong", [_vm._v("Té CIP? (Codi d'Identificació Personal) *")])]
     )
   },
   function() {
@@ -63216,29 +63771,16 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "nom_afectat" } },
-      [_c("strong", [_vm._v("Nom")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "cognom_afectat" } },
-      [_c("strong", [_vm._v("Cognom")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "telefon_alertant" } },
-      [_c("strong", [_vm._v("Telèfon")])]
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
   },
   function() {
@@ -63258,27 +63800,7 @@ var staticRenderFns = [
     return _c(
       "label",
       { staticClass: "col-form-label", attrs: { for: "te_cip" } },
-      [_c("strong", [_vm._v("Té CIP? (Codi d'Identificació Personal)")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "edat_afectat" } },
-      [_c("strong", [_vm._v("Edat")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-form-label", attrs: { for: "genere" } },
-      [_c("strong", [_vm._v("Génere")])]
+      [_c("strong", [_vm._v("Té CIP? (Codi d'Identificació Personal) *")])]
     )
   },
   function() {
@@ -63502,100 +64024,83 @@ var render = function() {
               _c(
                 "tbody",
                 _vm._l(_vm.incidencies, function(incidencia) {
-                  return _c(
-                    "tr",
-                    { key: incidencia.id },
-                    [
-                      _c("td", [_vm._v(_vm._s(incidencia.num_incident))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(incidencia.nom_metge))]),
-                      _vm._v(" "),
-                      _vm._l(_vm.tipusIncidencies, function(tipusIncidencia) {
-                        return _c("div", { key: tipusIncidencia.id }, [
-                          tipusIncidencia.id == incidencia.tipus_incidencies_id
-                            ? _c("td", [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(tipusIncidencia.tipus) +
-                                    "\n                            "
-                                )
-                              ])
-                            : _vm._e()
-                        ])
-                      }),
-                      _vm._v(" "),
-                      _vm._l(_vm.usuaris, function(usuari) {
-                        return _c("td", { key: usuari.id }, [
-                          usuari.id == incidencia.usuaris_id
-                            ? _c("div", [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(usuari.nom) +
-                                    " " +
-                                    _vm._s(usuari.cognoms) +
-                                    "\n                            "
-                                )
-                              ])
-                            : _vm._e()
-                        ])
-                      }),
-                      _vm._v(" "),
+                  return _c("tr", { key: incidencia.id }, [
+                    _c("td", [_vm._v(_vm._s(incidencia.num_incident))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(incidencia.nom_metge))]),
+                    _vm._v(" "),
+                    _c("div", [
                       _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary btn-sm",
-                            attrs: { type: "submit" },
-                            on: {
-                              click: function($event) {
-                                return _vm.mostrarIncidencia(incidencia)
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fas fa-eye" })]
-                        ),
-                        _vm._v(" "),
-                        _vm.user_id == incidencia.usuaris_id
-                          ? _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-secondary btn-sm ml-1",
-                                attrs: { type: "submit" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.editIncidencia(incidencia)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "far fa-edit" }),
-                                _vm._v(" Editar")
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.user_id == incidencia.usuaris_id
-                          ? _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger btn-sm ml-1",
-                                attrs: { type: "submit", id: "botones" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.confirmarDelete(incidencia)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "far fa-trash-alt" }),
-                                _vm._v(" Esborrar")
-                              ]
-                            )
-                          : _vm._e()
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(incidencia.tipus_incidencies.tipus) +
+                            "\n                            "
+                        )
                       ])
-                    ],
-                    2
-                  )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(incidencia.usuari.nom) +
+                          " " +
+                          _vm._s(incidencia.usuari.cognoms)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-sm",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.mostrarIncidencia(incidencia)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-eye" })]
+                      ),
+                      _vm._v(" "),
+                      _vm.user_id == incidencia.usuaris_id
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-secondary btn-sm ml-1",
+                              attrs: { type: "submit" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.editIncidencia(incidencia)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "far fa-edit" }),
+                              _vm._v(" Editar")
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.user_id == incidencia.usuaris_id
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger btn-sm ml-1",
+                              attrs: { type: "submit", id: "botones" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.confirmarDelete(incidencia)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "far fa-trash-alt" }),
+                              _vm._v(" Esborrar")
+                            ]
+                          )
+                        : _vm._e()
+                    ])
+                  ])
                 }),
                 0
               )
@@ -63630,7 +64135,9 @@ var render = function() {
                         attrs: { "aria-label": "Previous" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_incidencies.current_page - 1
+                            )
                           }
                         }
                       },
@@ -63685,7 +64192,9 @@ var render = function() {
                         attrs: { "aria-label": "Next" },
                         on: {
                           click: function($event) {
-                            return _vm.paginar(_vm.pagina)
+                            return _vm.paginar(
+                              _vm.meta_incidencies.current_page + 1
+                            )
                           }
                         }
                       },
